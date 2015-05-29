@@ -111,6 +111,7 @@ unsigned char *buf;
 int length,rows=0,cols=0;
 
  unsigned char *image;     /* The input image */
+int flag = 0, grow=0,gcol=0;
 void canny_main()  // loads image and calls canny
 {
 	char *infilename = NULL;  /* Name of the input image */
@@ -119,7 +120,7 @@ void canny_main()  // loads image and calls canny
     char composedfname[128];  /* Name of the output "direction" image */
     int i;
     unsigned char *edge;      /* The output edge image */
-    int rows, cols;           /* The dimensions of the image. */
+    //int rows, cols;           /* The dimensions of the image. */
     float sigma=2.5,              /* Standard deviation of the gaussian kernel. */
           tlow=0.5,               /* Fraction of the high threshold in hysteresis. */
           thigh=0.5;              /* High hysteresis threshold control. The actual
@@ -129,13 +130,11 @@ void canny_main()  // loads image and calls canny
 			        suppression. */
 	
 
-  //making copy of image from pool
-	//for (i = 0; i < rows*cols; i++)
-  //{
-    //image[i]=buf[i];
-  //}
+  
 	image=buf;
-
+ 
+  grow=rows;
+  gcol=cols;
 /****************************************************************************
     * Read in the image. This read function allocates memory for the image.
     ****************************************************************************/
@@ -378,12 +377,22 @@ Int Task_execute (Task_TransferInfo * info)
     //wait for semaphore
 	SEM_pend (&(info->notifySemObj), SYS_FOREVER);
 
+  SEM_pend (&(info->notifySemObj), SYS_FOREVER);
+
+  SEM_pend (&(info->notifySemObj), SYS_FOREVER);
+
+
 	//invalidate cache
     BCACHE_inv ((Ptr)buf, length, TRUE) ;
 
 	//call the functionality to be performed by dsp
 	  
-	canny_main();  
+	if(flag)
+  {
+    sum=gcol;
+    canny_main();  
+  }
+    
 	
 	   
 	//for(i=0;i<windowsize;i++) 
@@ -395,9 +404,9 @@ Int Task_execute (Task_TransferInfo * info)
 	//notify that we are done
     NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
 	//notify the result
-  NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)image[0]);
+    NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)sum);
 
-	//NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)cols);
+	NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)cols);
 	 
 
     return SYS_OK;
@@ -446,9 +455,10 @@ static Void Task_notify (Uint32 eventNo, Ptr arg, Ptr info)
     }
 	if (count==4) {
         cols = (int)info;
-       
+        flag=1;
+       //SEM_post(&(mpcsInfo->notifySemObj));
     }
 
-	 SEM_post(&(mpcsInfo->notifySemObj));
+	  SEM_post(&(mpcsInfo->notifySemObj));
     
 }
