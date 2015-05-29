@@ -117,7 +117,7 @@ void canny_main()  // loads image and calls canny
     char *dirfilename = NULL; /* Name of the output gradient direction image */
     char outfilename[128];    /* Name of the output "edge" image */
     char composedfname[128];  /* Name of the output "direction" image */
-   
+    int i;
     unsigned char *edge;      /* The output edge image */
     int rows, cols;           /* The dimensions of the image. */
     float sigma=2.5,              /* Standard deviation of the gaussian kernel. */
@@ -128,8 +128,14 @@ void canny_main()  // loads image and calls canny
 			        gradient image that passes non-maximal
 			        suppression. */
 	
-	//infilename = "klomp.pgm";
+
+  //making copy of image from pool
+	//for (i = 0; i < rows*cols; i++)
+  //{
+    //image[i]=buf[i];
+  //}
 	image=buf;
+
 /****************************************************************************
     * Read in the image. This read function allocates memory for the image.
     ****************************************************************************/
@@ -140,7 +146,7 @@ void canny_main()  // loads image and calls canny
         //exit(1);
     //}
 
-	canny(image, rows, cols, sigma, tlow, thigh, &edge, dirfilename);
+	//canny(image, rows, cols, sigma, tlow, thigh, &edge, dirfilename);
 }
 /*******************************************************************************
 * PROCEDURE: canny
@@ -377,7 +383,7 @@ Int Task_execute (Task_TransferInfo * info)
 
 	//call the functionality to be performed by dsp
 	  
-	//canny_main();  
+	canny_main();  
 	
 	   
 	//for(i=0;i<windowsize;i++) 
@@ -389,9 +395,9 @@ Int Task_execute (Task_TransferInfo * info)
 	//notify that we are done
     NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
 	//notify the result
-    NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)buf[0]);
+  NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)image[0]);
 
-	NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)cols);
+	//NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)cols);
 	 
 
     return SYS_OK;

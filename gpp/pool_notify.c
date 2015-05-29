@@ -415,14 +415,13 @@ void canny_main()  // loads image and calls canny
         fprintf(stderr, "Error reading the input image, %s.\n", infilename);
         exit(1);
     }
-   	printf("\n image value: %d\n",(Uint32)image[0]);
-	//pool_notify_BufferSize = rows * cols;
-	for (i = 0; i < rows*cols; i++)
+
+    //load image on pool
+    for (i = 0; i < rows*cols; i++)
     {
         pool_notify_DataBuf[i]=image[i];
     }
-    //pool_notify_DataBuf = image;
-	
+
 	
 	//canny(image, rows, cols, sigma, tlow, thigh, &edge, dirfilename);
 }
@@ -678,25 +677,15 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
 	#endif
 	
 	printf("   Computing the gaussian smoothing kernel.\n");
-    	//make_gaussian_kernel(sigma, &kernel, &windowsize);
+    //make_gaussian_kernel(sigma, &kernel, &windowsize);
 	
     //unit_init();
 
-	//test block start
-	/*
-	printf("\n pool_notify_DataBuf values till 10:\n");
-	for(i=0;i<10;i++)
-	{
-		printf(" %d \n",pool_notify_DataBuf[i]);
-	}
-	printf("\n\n number of elements in buffer:%d \n",(int)pool_notify_BufferSize);
-	//test block end
-	*/
-	
 	
     start = get_usec();
 	canny_main();
-	printf("\n image value in pool execute: %d\n",(Uint32)pool_notify_DataBuf[0]);
+
+
 	NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,rows);
 	NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,cols);
 	//#if !defined(DSP)
@@ -715,12 +704,13 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
                          AddrType_Usr) ;
     NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,1);
 
-	printf("\n\n HERE\n\n");
+	
     sem_wait(&sem);
 	#endif
 
     printf("Sum execution time %lld us.\n", get_usec()-start);
 
+    
 	//test block start
 	
 	//printf("\n pool_notify_DataBuf values after DSP has modified them:\n");
