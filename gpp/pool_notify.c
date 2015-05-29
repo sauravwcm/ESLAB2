@@ -193,8 +193,8 @@ NORMAL_API DSP_STATUS pool_notify_Create (	IN Char8 * dspExecutable,
     printf ("Entered pool_notify_Create ()\n") ;
 	#endif
  
- 	canny_main();
- 	printf("\n image value in pool create 1st: %d\n",(Uint32)pool_notify_DataBuf[0]);
+ 	//canny_main();
+ 	//printf("\n image value in pool create 1st: %d\n",(Uint32)pool_notify_DataBuf[0]);
     sem_init(&sem,0,0);
 
 	
@@ -236,7 +236,7 @@ NORMAL_API DSP_STATUS pool_notify_Create (	IN Char8 * dspExecutable,
         }
     }
 
-	printf("\n image value in pool create mid1: %d\n",(Uint32)pool_notify_DataBuf[0]);
+	//printf("\n image value in pool create mid1: %d\n",(Uint32)pool_notify_DataBuf[0]);
 	
     /*
      *  Allocate the data buffer to be used for the application.
@@ -247,7 +247,7 @@ NORMAL_API DSP_STATUS pool_notify_Create (	IN Char8 * dspExecutable,
                              (Void **) &pool_notify_DataBuf,
                              pool_notify_BufferSize) ;
 
-	printf("\n image value in pool create mid2: %d\n",(Uint32)pool_notify_DataBuf[0]);
+	//printf("\n image value in pool create mid2: %d\n",(Uint32)pool_notify_DataBuf[0]);
         /* Get the translated DSP address to be sent to the DSP. */
         if (DSP_SUCCEEDED (status)) 
 		{
@@ -326,7 +326,7 @@ NORMAL_API DSP_STATUS pool_notify_Create (	IN Char8 * dspExecutable,
     }
 
 	
- 	printf("\n image value in pool create 2nd: %d\n",(Uint32)pool_notify_DataBuf[0]);
+ 	//printf("\n image value in pool create 2nd: %d\n",(Uint32)pool_notify_DataBuf[0]);
     /*
      *  Send notifications to the DSP with information about the address of the
      *  control structure and data buffer to be used by the application.
@@ -395,7 +395,7 @@ void canny_main()  // loads image and calls canny
     char composedfname[128];  /* Name of the output "direction" image */
     unsigned char *image;     /* The input image */
     unsigned char *edge;      /* The output edge image */
-    
+    int i;
     float sigma=2.5,              /* Standard deviation of the gaussian kernel. */
           tlow=0.5,               /* Fraction of the high threshold in hysteresis. */
           thigh=0.5;              /* High hysteresis threshold control. The actual
@@ -417,7 +417,11 @@ void canny_main()  // loads image and calls canny
     }
    	printf("\n image value: %d\n",(Uint32)image[0]);
 	//pool_notify_BufferSize = rows * cols;
-	pool_notify_DataBuf = image;
+	for (i = 0; i < rows*cols; i++)
+    {
+        pool_notify_DataBuf[i]=image[i];
+    }
+    //pool_notify_DataBuf = image;
 	
 	
 	//canny(image, rows, cols, sigma, tlow, thigh, &edge, dirfilename);
@@ -691,7 +695,7 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
 	
 	
     start = get_usec();
-	//canny_main();
+	canny_main();
 	printf("\n image value in pool execute: %d\n",(Uint32)pool_notify_DataBuf[0]);
 	NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,rows);
 	NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,cols);
