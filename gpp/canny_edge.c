@@ -61,13 +61,7 @@
 #include <math.h>
 
 
-int read_pgm_image(char *infilename, unsigned char **image, int *rows,
-                   int *cols);
-int write_pgm_image(char *outfilename, unsigned char *image, int rows,
-                    int cols, char *comment, int maxval);
 
-void canny(unsigned char *image, int rows, int cols, float sigma,
-           float tlow, float thigh, unsigned char **edge, char *fname);
 short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma);
 void make_gaussian_kernel(float sigma, float **kernel, int *windowsize);
 void derrivative_x_y(short int *smoothedim, int rows, int cols,
@@ -82,68 +76,7 @@ double angle_radians(double x, double y);
 
 void non_max_supp(short *mag, short *gradx, short *grady, int nrows,
                   int ncols, unsigned char *result);
-void canny_main()
-{
-    char *infilename = NULL;  /* Name of the input image */
-    char *dirfilename = NULL; /* Name of the output gradient direction image */
-    char outfilename[128];    /* Name of the output "edge" image */
-    char composedfname[128];  /* Name of the output "direction" image */
-    unsigned char *image;     /* The input image */
-    unsigned char *edge;      /* The output edge image */
-    int rows, cols;           /* The dimensions of the image. */
-    float sigma=2.5,              /* Standard deviation of the gaussian kernel. */
-          tlow=0.5,               /* Fraction of the high threshold in hysteresis. */
-          thigh=0.5;              /* High hysteresis threshold control. The actual
-			        threshold is the (100 * thigh) percentage point
-			        in the histogram of the magnitude of the
-			        gradient image that passes non-maximal
-			        suppression. */
 
-    /****************************************************************************
-    * Get the command line arguments.
-    ****************************************************************************/
-    
-    infilename = "square.pgm";
-
-    /****************************************************************************
-    * Read in the image. This read function allocates memory for the image.
-    ****************************************************************************/
-    if(VERBOSE) printf("Reading the image %s.\n", infilename);
-    if(read_pgm_image(infilename, &image, &rows, &cols) == 0)
-    {
-        fprintf(stderr, "Error reading the input image, %s.\n", infilename);
-        exit(1);
-    }
-
-    /****************************************************************************
-    * Perform the edge detection. All of the work takes place here.
-    ****************************************************************************/
-    if(VERBOSE) printf("Starting Canny edge detection.\n");
-    if(dirfilename != NULL)
-    {
-        sprintf(composedfname, "%s_s_%3.2f_l_%3.2f_h_%3.2f.fim", infilename,
-                sigma, tlow, thigh);
-        dirfilename = composedfname;
-    }
-
-    canny(image, rows, cols, sigma, tlow, thigh, &edge, dirfilename);
-
-
-    /****************************************************************************
-    * Write out the edge image to a file.
-    ****************************************************************************/
-    sprintf(outfilename, "%s_s_%3.2f_l_%3.2f_h_%3.2f.pgm", infilename,
-            sigma, tlow, thigh);
-    if(VERBOSE) printf("Writing the edge iname in the file %s.\n", outfilename);
-    if(write_pgm_image(outfilename, edge, rows, cols, "", 255) == 0)
-    {
-        fprintf(stderr, "Error writing the edge image, %s.\n", outfilename);
-        exit(1);
-    }
-
-    free(image);
-    free(edge);
-}
 
 /*******************************************************************************
 * PROCEDURE: canny
@@ -161,7 +94,7 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
           *delta_y,        /* The first derivative image, y-direction. */
           *magnitude;      /* The magnitude of the gadient image.      */
     float *dir_radians=NULL;   /* Gradient direction image.                */
-
+    
     /****************************************************************************
     * Perform gaussian smoothing on the image using the input standard
     * deviation.
@@ -415,6 +348,7 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
           dot,            /* Dot product summing variable. */
           sum;            /* Sum of the kernel weights variable. */
 
+    
     /****************************************************************************
     * Create a 1-dimensional gaussian smoothing kernel.
     ****************************************************************************/

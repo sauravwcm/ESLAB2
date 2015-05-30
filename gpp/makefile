@@ -70,7 +70,7 @@ ALL_CFLAGS := $(INCLUDES)                   \
               -c                            \
               -mabi=aapcs-linux             \
               -O3                           \
-              -mfloat-abi=softfp	    \
+              -mfloat-abi=softfp	    	\
               $(CFLAGS)
 
 #   ----------------------------------------------------------------------------
