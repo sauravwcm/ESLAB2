@@ -6,6 +6,8 @@
 #include <sys.h>
 #include <tsk.h>
 #include <pool.h>
+#include <math.h>
+#include <stdlib.h>
 
 /*  ----------------------------------- DSP/BIOS LINK Headers       */
 #include <failure.h>
@@ -17,7 +19,13 @@
 #include <pool_notify_config.h>
 #include <task.h>
 
+#define VERBOSE 0
+
 extern Uint16 MPCSXFER_BufferSize ;
+
+void canny_dsp();
+void make_gaussian_kernel(float sigma, float **kernel, int *windowsize);
+
 
 
 static Void Task_notify (Uint32 eventNo, Ptr arg, Ptr info) ;
@@ -94,13 +102,47 @@ Int Task_create (Task_TransferInfo ** infoPtr)
 
     return status ;
 }
-
-unsigned char* buf;
+float *buf;
+//unsigned char* buf;
 int length;
+
+void canny_dsp()
+{
+  float *kernel, sigma=2.5;
+  int windowsize;
+
+  make_gaussian_kernel(sigma, &kernel, &windowsize);
+  buf[0] = kernel[0];
+}
+
+void make_gaussian_kernel(float sigma, float **kernel, int *windowsize)
+{
+    int i, center;
+    float x, fx, sum=0.0;
+
+    *windowsize = 1 + 2 * ceil(2.5 * sigma);
+    center = (*windowsize) / 2;
+
+    if((*kernel = (float *) malloc((*windowsize)* sizeof(float))) == NULL)
+    {
+        //fprintf(stderr, "Error callocing the gaussian kernel array.\n");
+        exit(1);
+    }
+
+    for(i=0; i<(*windowsize); i++)
+    {
+        x = (float)(i - center);
+        fx = pow(2.71828, -0.5*x*x/(sigma*sigma)) / (sigma * sqrt(6.2831853));
+        (*kernel)[i] = fx;
+        sum += fx;
+    }
+
+    for(i=0; i<(*windowsize); i++) (*kernel)[i] /= sum;
+}
+
 
 Int Task_execute (Task_TransferInfo * info)
 {
-    int sum;
 
     //wait for semaphore
 	SEM_pend (&(info->notifySemObj), SYS_FOREVER);
@@ -108,13 +150,15 @@ Int Task_execute (Task_TransferInfo * info)
 	//invalidate cache
     BCACHE_inv ((Ptr)buf, length, TRUE) ;
 
+    canny_dsp();
+    BCACHE_wbAll();
+
 	//call the functionality to be performed by dsp
    
 	//notify that we are done
     NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
 	//notify the result
     NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)1);
-
     return SYS_OK;
 }
 
@@ -150,7 +194,7 @@ static Void Task_notify (Uint32 eventNo, Ptr arg, Ptr info)
 
     count++;
     if (count==1) {
-        buf =(unsigned char*)info ;
+        buf =(float*)info ;
     }
     if (count==2) {
         length = (int)info;

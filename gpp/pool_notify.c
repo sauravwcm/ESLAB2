@@ -106,7 +106,8 @@ STATIC Uint32  pool_notify_NumIterations ;
  *          application.
  *  ============================================================================
  */
- unsigned char * pool_notify_DataBuf = NULL ;
+ float * pool_notify_DataBuf = NULL;
+ //unsigned char * pool_notify_DataBuf = NULL ;
 
 void canny_main();
 
@@ -406,8 +407,6 @@ void canny_main()
     {
         pool_notify_DataBuf[i] = image[i];
     }
-    printf("\n Image[0] at arm end (canny_main() ) = %d \n", (Uint16)image[0]);
-
 
     /****************************************************************************
     * Perform the edge detection. All of the work takes place here.
@@ -487,7 +486,7 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
     NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,1);
 
     sem_wait(&sem);
-    printf("\n pool_notify_DataBuf[0] at arm end (pool value) = %d \n", (Uint16)pool_notify_DataBuf[0]);
+    printf("Kernel[0] value calculated from DSP is = %f \n",pool_notify_DataBuf[0]);
 	#endif
 
    return status ;

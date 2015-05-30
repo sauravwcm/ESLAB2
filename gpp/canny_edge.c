@@ -340,7 +340,7 @@ void derrivative_x_y(short int *smoothedim, int rows, int cols,
 *******************************************************************************/
 short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma)
 {
-    int r, c, rr, cc,     /* Counter variables. */
+    int r, c, rr, cc, i,     /* Counter variables. */
         windowsize,        /* Dimension of the gaussian kernel. */
         center;            /* Half of the windowsize. */
     float *tempim,        /* Buffer for separable filter gaussian smoothing. */
@@ -348,12 +348,17 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
           dot,            /* Dot product summing variable. */
           sum;            /* Sum of the kernel weights variable. */
 
-    
+
     /****************************************************************************
     * Create a 1-dimensional gaussian smoothing kernel.
     ****************************************************************************/
     if(VERBOSE) printf("   Computing the gaussian smoothing kernel.\n");
     make_gaussian_kernel(sigma, &kernel, &windowsize);
+    
+    for (i = 0; i < windowsize; i++)
+    {
+        printf("Kernel value from ARM side =  %f \n", kernel[i]);
+    }
     center = windowsize / 2;
 
 
