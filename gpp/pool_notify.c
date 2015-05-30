@@ -20,8 +20,6 @@
 //#include <pool_notify_os.h>
 
 
-#include <math.h>
-
 #if defined (__cplusplus)
 extern "C" {
 #endif /* defined (__cplusplus) */
@@ -108,7 +106,7 @@ STATIC Uint32  pool_notify_NumIterations ;
  *          application.
  *  ============================================================================
  */
-unsigned char * pool_notify_DataBuf = NULL ;
+Uint16 * pool_notify_DataBuf = NULL ;
 
 
 /** ============================================================================
@@ -141,32 +139,6 @@ STATIC Void pool_notify_Notify (Uint32 eventNo, Pvoid arg, Pvoid info) ;
 
 sem_t sem;
 
-#define BOOSTBLURFACTOR 90.0
-#define VERBOSE 0
-
-int read_pgm_image(char *infilename, unsigned char **image, int *rows,
-                   int *cols);
-int write_pgm_image(char *outfilename, unsigned char *image, int rows,
-                    int cols, char *comment, int maxval);
-
-void canny(unsigned char *image, int rows, int cols, float sigma,
-           float tlow, float thigh, unsigned char **edge, char *fname);
-short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma);
-void make_gaussian_kernel(float sigma, float **kernel, int *windowsize);
-void derrivative_x_y(short int *smoothedim, int rows, int cols,
-        short int **delta_x, short int **delta_y);
-void magnitude_x_y(short int *delta_x, short int *delta_y, int rows, int cols,
-                   short int *magnitude);
-void apply_hysteresis(short int *mag, unsigned char *nms, int rows, int cols,
-                      float tlow, float thigh, unsigned char *edge);
-void radian_direction(short int *delta_x, short int *delta_y, int rows,
-                      int cols, float **dir_radians, int xdirtag, int ydirtag);
-double angle_radians(double x, double y);
-
-void non_max_supp(short *mag, short *gradx, short *grady, int nrows,
-                  int ncols, unsigned char *result);
-
-
 /** ============================================================================
  *  @func   pool_notify_Create
  *
@@ -176,7 +148,6 @@ void non_max_supp(short *mag, short *gradx, short *grady, int nrows,
  *  @modif  None
  *  ============================================================================
  */
- //Void *          dspDataBuf = NULL ;
 NORMAL_API DSP_STATUS pool_notify_Create (	IN Char8 * dspExecutable,
 											IN Char8 * strBufferSize,
 											IN Uint8   processorId)
@@ -193,11 +164,8 @@ NORMAL_API DSP_STATUS pool_notify_Create (	IN Char8 * dspExecutable,
     printf ("Entered pool_notify_Create ()\n") ;
 	#endif
  
- 	//canny_main();
- 	//printf("\n image value in pool create 1st: %d\n",(Uint32)pool_notify_DataBuf[0]);
     sem_init(&sem,0,0);
 
-	
     /*
      *  Create and initialize the proc object.
      */
@@ -236,8 +204,6 @@ NORMAL_API DSP_STATUS pool_notify_Create (	IN Char8 * dspExecutable,
         }
     }
 
-	//printf("\n image value in pool create mid1: %d\n",(Uint32)pool_notify_DataBuf[0]);
-	
     /*
      *  Allocate the data buffer to be used for the application.
      */
@@ -247,7 +213,6 @@ NORMAL_API DSP_STATUS pool_notify_Create (	IN Char8 * dspExecutable,
                              (Void **) &pool_notify_DataBuf,
                              pool_notify_BufferSize) ;
 
-	//printf("\n image value in pool create mid2: %d\n",(Uint32)pool_notify_DataBuf[0]);
         /* Get the translated DSP address to be sent to the DSP. */
         if (DSP_SUCCEEDED (status)) 
 		{
@@ -271,7 +236,6 @@ NORMAL_API DSP_STATUS pool_notify_Create (	IN Char8 * dspExecutable,
         }
     }
 
-	
     /*
      *  Register for notification that the DSP-side application setup is
      *  complete.
@@ -325,8 +289,6 @@ NORMAL_API DSP_STATUS pool_notify_Create (	IN Char8 * dspExecutable,
         sem_wait(&sem);
     }
 
-	
- 	//printf("\n image value in pool create 2nd: %d\n",(Uint32)pool_notify_DataBuf[0]);
     /*
      *  Send notifications to the DSP with information about the address of the
      *  control structure and data buffer to be used by the application.
@@ -367,8 +329,7 @@ void unit_init(void)
 
     // Initialize the array with something
     for(i=0;i<pool_notify_BufferSize;i++) {
-       //pool_notify_DataBuf[i] = i % 20 + i % 5;
-	pool_notify_DataBuf[i] = 2;
+       pool_notify_DataBuf[i] = i % 20 + i % 5;
     }
 }
 
@@ -385,272 +346,15 @@ long long get_usec(void)
   return r;
 }
 
-//canny main
-int rows, cols;           /* The dimensions of the image. */
-void canny_main()  // loads image and calls canny
+int sum_dsp(unsigned char* buf, int length) 
 {
-	char *infilename = NULL;  /* Name of the input image */
-    char *dirfilename = NULL; /* Name of the output gradient direction image */
-    char outfilename[128];    /* Name of the output "edge" image */
-    char composedfname[128];  /* Name of the output "direction" image */
-    unsigned char *image;     /* The input image */
-    unsigned char *edge;      /* The output edge image */
-    int i;
-    float sigma=2.5,              /* Standard deviation of the gaussian kernel. */
-          tlow=0.5,               /* Fraction of the high threshold in hysteresis. */
-          thigh=0.5;              /* High hysteresis threshold control. The actual
-			        threshold is the (100 * thigh) percentage point
-			        in the histogram of the magnitude of the
-			        gradient image that passes non-maximal
-			        suppression. */
-	
-	infilename = "klomp.pgm";
-
-/****************************************************************************
-    * Read in the image. This read function allocates memory for the image.
-    ****************************************************************************/
-     printf("Reading the image %s.\n", infilename);
-    if(read_pgm_image(infilename, &image, &rows, &cols) == 0)
-    {
-        fprintf(stderr, "Error reading the input image, %s.\n", infilename);
-        exit(1);
+    int a=0,i;
+    for(i=0;i<length;i++) 
+	{
+       a=a+buf[i];
     }
-
-    //load image on pool
-    for (i = 0; i < rows*cols; i++)
-    {
-        pool_notify_DataBuf[i]=image[i];
-    }
-
-	
-	//canny(image, rows, cols, sigma, tlow, thigh, &edge, dirfilename);
+    return a;
 }
-
-/*******************************************************************************
-* PROCEDURE: canny
-* PURPOSE: To perform canny edge detection.
-* NAME: Mike Heath
-* DATE: 2/15/96
-*******************************************************************************/
-void canny(unsigned char *image, int rows, int cols, float sigma,
-           float tlow, float thigh, unsigned char **edge, char *fname)
-{
-    FILE *fpdir=NULL;          /* File to write the gradient image to.     */
-    unsigned char *nms;        /* Points that are local maximal magnitude. */
-    short int *smoothedim,     /* The image after gaussian smoothing.      */
-          *delta_x,        /* The first devivative image, x-direction. */
-          *delta_y,        /* The first derivative image, y-direction. */
-          *magnitude;      /* The magnitude of the gadient image.      */
-    float *dir_radians=NULL;   /* Gradient direction image.                */
-
-    /****************************************************************************
-    * Perform gaussian smoothing on the image using the input standard
-    * deviation.
-    ****************************************************************************/
-     printf("Smoothing the image using a gaussian kernel.\n");
-    smoothedim = gaussian_smooth(image, rows, cols, sigma);
-
-/*
-	
-    /****************************************************************************
-    * Compute the first derivative in the x and y directions.
-    ****************************************************************************
-    if(VERBOSE) printf("Computing the X and Y first derivatives.\n");
-    derrivative_x_y(smoothedim, rows, cols, &delta_x, &delta_y);
-
-    /****************************************************************************
-    * This option to write out the direction of the edge gradient was added
-    * to make the information available for computing an edge quality figure
-    * of merit.
-    ****************************************************************************
-    if(fname != NULL)
-    {
-        /*************************************************************************
-        * Compute the direction up the gradient, in radians that are
-        * specified counteclockwise from the positive x-axis.
-        *************************************************************************
-        radian_direction(delta_x, delta_y, rows, cols, &dir_radians, -1, -1);
-
-        /*************************************************************************
-        * Write the gradient direction image out to a file.
-        *************************************************************************
-        if((fpdir = fopen(fname, "wb")) == NULL)
-        {
-            fprintf(stderr, "Error opening the file %s for writing.\n", fname);
-            exit(1);
-        }
-        fwrite(dir_radians, sizeof(float), rows*cols, fpdir);
-        fclose(fpdir);
-        free(dir_radians);
-    }
-
-    /****************************************************************************
-    * Compute the magnitude of the gradient.
-    ****************************************************************************/
-    /****************************************************************************
-    * Allocate an image to store the magnitude of the gradient.
-    ****************************************************************************
-    if((magnitude = (short *) malloc(rows*cols* sizeof(short))) == NULL)
-    {
-        fprintf(stderr, "Error allocating the magnitude image.\n");
-        exit(1);
-    }
-
-    if(VERBOSE) printf("Computing the magnitude of the gradient.\n");
-    magnitude_x_y(delta_x, delta_y, rows, cols, magnitude);
-
-    /****************************************************************************
-    * Perform non-maximal suppression.
-    ****************************************************************************
-    if(VERBOSE) printf("Doing the non-maximal suppression.\n");
-    if((nms = (unsigned char *) malloc(rows*cols*sizeof(unsigned char)))==NULL)
-    {
-        fprintf(stderr, "Error allocating the nms image.\n");
-        exit(1);
-    }
-    non_max_supp(magnitude, delta_x, delta_y, rows, cols, nms);
-
-    /****************************************************************************
-    * Use hysteresis to mark the edge pixels.
-    ****************************************************************************
-    if(VERBOSE) printf("Doing hysteresis thresholding.\n");
-    if( (*edge=(unsigned char *)malloc(rows*cols*sizeof(unsigned char))) == NULL )
-    {
-        fprintf(stderr, "Error allocating the edge image.\n");
-        exit(1);
-    }
-    apply_hysteresis(magnitude, nms, rows, cols, tlow, thigh, *edge);
-
-    /****************************************************************************
-    * Free all of the memory that we allocated except for the edge image that
-    * is still being used to store out result.
-    ****************************************************************************
-    free(smoothedim);
-    free(delta_x);
-    free(delta_y);
-    free(magnitude);
-    free(nms);
-*/
-}
-
-/*******************************************************************************
-* PROCEDURE: gaussian_smooth
-* PURPOSE: Blur an image with a gaussian filter.
-*******************************************************************************/
-short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma)
-{
-    int r, c, rr, cc,     /* Counter variables. */
-        windowsize,        /* Dimension of the gaussian kernel. */
-        center;            /* Half of the windowsize. */
-    float *tempim,        /* Buffer for separable filter gaussian smoothing. */
-          *kernel,        /* A one dimensional gaussian kernel. */
-          dot,            /* Dot product summing variable. */
-          sum;            /* Sum of the kernel weights variable. */
-
-    /****************************************************************************
-    * Create a 1-dimensional gaussian smoothing kernel.
-    ****************************************************************************/
-    printf("   Computing the gaussian smoothing kernel.\n");
-    make_gaussian_kernel(sigma, &kernel, &windowsize);
-    center = windowsize / 2;
-
-
-    /****************************************************************************
-    * Allocate a temporary buffer image and the smoothed image.
-    ****************************************************************************/
-    if((tempim = (float *) malloc(rows*cols* sizeof(float))) == NULL)
-    {
-        fprintf(stderr, "Error allocating the buffer image.\n");
-        exit(1);
-    }
-    short int* smoothedim;
-    if(((smoothedim) = (short int *) malloc(rows*cols*sizeof(short int))) == NULL)
-    {
-        fprintf(stderr, "Error allocating the smoothed image.\n");
-        exit(1);
-    }
-
-    /****************************************************************************
-    * Blur in the x - direction.
-    ****************************************************************************/
-    if(VERBOSE) printf("   Bluring the image in the X-direction.\n");
-    for(r=0; r<rows; r++)
-    {
-        for(c=0; c<cols; c++)
-        {
-            dot = 0.0;
-            sum = 0.0;
-            for(cc=(-center); cc<=center; cc++)
-            {
-                if(((c+cc) >= 0) && ((c+cc) < cols))
-                {
-                    dot += (float)image[r*cols+(c+cc)] * kernel[center+cc];
-                    sum += kernel[center+cc];
-                }
-            }
-            tempim[r*cols+c] = dot/sum;
-        }
-    }
-    
-    /****************************************************************************
-    * Blur in the y - direction.
-    ****************************************************************************/
-    if(VERBOSE) printf("   Bluring the image in the Y-direction.\n");
-    for(c=0; c<cols; c++)
-    {
-        for(r=0; r<rows; r++)
-        {
-            sum = 0.0;
-            dot = 0.0;
-            for(rr=(-center); rr<=center; rr++)
-            {
-                if(((r+rr) >= 0) && ((r+rr) < rows))
-                {
-                    dot += tempim[(r+rr)*cols+c] * kernel[center+rr];
-                    sum += kernel[center+rr];
-                }
-            }
-            smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR/sum + 0.5);
-        }
-    }
-    
-    free(tempim);
-    free(kernel);
-    return smoothedim;
-}
-
-//make gausian kernel
-void make_gaussian_kernel(float sigma, float **kernel, int *windowsize)
-{
-    int i, center;
-    float x, fx, sum=0.0;
-
-    *windowsize = 1 + 2 * ceil(2.5 * sigma);
-    center = (*windowsize) / 2;
-
-    if((*kernel = (float *) malloc((*windowsize)* sizeof(float))) == NULL)
-    {
-        fprintf(stderr, "Error callocing the gaussian kernel array.\n");
-        exit(1);
-    }
-
-    for(i=0; i<(*windowsize); i++)
-    {
-        x = (float)(i - center);
-        fx = pow(2.71828, -0.5*x*x/(sigma*sigma)) / (sigma * sqrt(6.2831853));
-        (*kernel)[i] = fx;
-        sum += fx;
-    }
-
-    for(i=0; i<(*windowsize); i++) (*kernel)[i] /= sum;
-
-    
-        printf("The filter coefficients are:\n");
-        for(i=0; i<(*windowsize); i++)
-            printf("kernel[%d] = %f\n", i, (*kernel)[i]);
-    
-}
-//
 
 /** ============================================================================
  *  @func   pool_notify_Execute
@@ -663,9 +367,7 @@ void make_gaussian_kernel(float sigma, float **kernel, int *windowsize)
 NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 processorId)
 {
     DSP_STATUS  status    = DSP_SOK ;
-	int i=0; // windowsize;	
-	//float sigma=2.5, *kernel;
-		
+
     long long start;
 
 	#if defined(DSP)
@@ -675,22 +377,15 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
 	#ifdef DEBUG
     printf ("Entered pool_notify_Execute ()\n") ;
 	#endif
-	
-	printf("   Computing the gaussian smoothing kernel.\n");
-    //make_gaussian_kernel(sigma, &kernel, &windowsize);
-	
-    //unit_init();
 
-	
+    unit_init();
+
     start = get_usec();
 	canny_main();
-
-
-	NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,rows);
-	NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,cols);
-	//#if !defined(DSP)
-    //printf("\n Result on ARM is %d \n", sum_dsp(pool_notify_DataBuf,pool_notify_BufferSize)); 
-	//#endif
+	printf("Sum execution time %lld us.\n", get_usec()-start);
+	#if !defined(DSP)
+    //printf(" Result is %d \n", sum_dsp(pool_notify_DataBuf,pool_notify_BufferSize));
+	#endif
 
 	#if defined(DSP)
     POOL_writeback (POOL_makePoolId(processorId, SAMPLE_POOL_ID),
@@ -704,24 +399,10 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
                          AddrType_Usr) ;
     NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,1);
 
-	
     sem_wait(&sem);
 	#endif
 
-    printf("Sum execution time %lld us.\n", get_usec()-start);
-
-    
-	//test block start
-	
-	//printf("\n pool_notify_DataBuf values after DSP has modified them:\n");
-	//for(i=0;i<windowsize;i++)
-	//{
-	//	printf(" %f \n",pool_notify_DataBuf[i]);
-	//}
-
-	//test block end
-
-    return status ;
+   return status ;
 }
 
 
