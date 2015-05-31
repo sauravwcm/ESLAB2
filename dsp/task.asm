@@ -1,6 +1,6 @@
 ;******************************************************************************
 ;* TMS320C6x C/C++ Codegen                                       Unix v6.1.17 *
-;* Date/Time created: Sun May 31 12:56:31 2015                                *
+;* Date/Time created: Sun May 31 13:37:00 2015                                *
 ;******************************************************************************
 	.compiler_opts --c64p_l1d_workaround=default --disable:=sploop --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
 
@@ -258,7 +258,7 @@ $C$DW$56	.dwtag  DW_TAG_variable, DW_AT_name("length")
 	.dwattr $C$DW$56, DW_AT_type(*$C$DW$T$10)
 	.dwattr $C$DW$56, DW_AT_external
 _count$1:	.usect	".far",4,4
-;	/data/usr/local/share/c6000/bin/opt6x /tmp/05125SJNPoa /tmp/05125q5acSa 
+;	/data/usr/local/share/c6000/bin/opt6x /tmp/03333t1sXXJ /tmp/03333nbyAzT 
 	.sect	".text"
 	.clink
 	.global	_make_gaussian_kernel
@@ -867,7 +867,7 @@ $C$L7:
            ; BRANCH OCCURS {B3}              ; |282| 
 
 $C$DW$90	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$90, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L6:1:1433069791")
+	.dwattr $C$DW$90, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L6:1:1433072220")
 	.dwattr $C$DW$90, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$90, DW_AT_TI_begin_line(0x10e)
 	.dwattr $C$DW$90, DW_AT_TI_end_line(0x10e)
@@ -878,7 +878,7 @@ $C$DW$91	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$92	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$92, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L4:1:1433069791")
+	.dwattr $C$DW$92, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L4:1:1433072220")
 	.dwattr $C$DW$92, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$92, DW_AT_TI_begin_line(0x119)
 	.dwattr $C$DW$92, DW_AT_TI_end_line(0x119)
@@ -892,7 +892,7 @@ $C$DW$94	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$95	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$95, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L2:1:1433069791")
+	.dwattr $C$DW$95, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L2:1:1433072220")
 	.dwattr $C$DW$95, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$95, DW_AT_TI_begin_line(0x111)
 	.dwattr $C$DW$95, DW_AT_TI_end_line(0x117)
@@ -2308,7 +2308,7 @@ $C$DW$L$_gaussian_smooth$61$B:
 $C$DW$L$_gaussian_smooth$61$E:
 
 $C$DW$152	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$152, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L32:1:1433069791")
+	.dwattr $C$DW$152, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L32:1:1433072220")
 	.dwattr $C$DW$152, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$152, DW_AT_TI_begin_line(0x100)
 	.dwattr $C$DW$152, DW_AT_TI_end_line(0x10e)
@@ -2319,7 +2319,7 @@ $C$DW$153	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$154	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$154, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L30:1:1433069791")
+	.dwattr $C$DW$154, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L30:1:1433072220")
 	.dwattr $C$DW$154, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$154, DW_AT_TI_begin_line(0xc9)
 	.dwattr $C$DW$154, DW_AT_TI_end_line(0xc9)
@@ -2330,7 +2330,7 @@ $C$DW$155	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$156	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$156, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L28:1:1433069791")
+	.dwattr $C$DW$156, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L28:1:1433072220")
 	.dwattr $C$DW$156, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$156, DW_AT_TI_begin_line(0xce)
 	.dwattr $C$DW$156, DW_AT_TI_end_line(0xce)
@@ -2341,7 +2341,7 @@ $C$DW$157	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$158	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$158, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L20:1:1433069791")
+	.dwattr $C$DW$158, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L20:1:1433072220")
 	.dwattr $C$DW$158, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$158, DW_AT_TI_begin_line(0xea)
 	.dwattr $C$DW$158, DW_AT_TI_end_line(0xfa)
@@ -2356,7 +2356,7 @@ $C$DW$161	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$161, DW_AT_high_pc($C$DW$L$_gaussian_smooth$52$E)
 
 $C$DW$162	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$162, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L21:2:1433069791")
+	.dwattr $C$DW$162, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L21:2:1433072220")
 	.dwattr $C$DW$162, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$162, DW_AT_TI_begin_line(0xec)
 	.dwattr $C$DW$162, DW_AT_TI_end_line(0xf9)
@@ -2377,7 +2377,7 @@ $C$DW$167	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$167, DW_AT_high_pc($C$DW$L$_gaussian_smooth$51$E)
 
 $C$DW$168	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$168, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L22:3:1433069791")
+	.dwattr $C$DW$168, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L22:3:1433072220")
 	.dwattr $C$DW$168, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$168, DW_AT_TI_begin_line(0xf0)
 	.dwattr $C$DW$168, DW_AT_TI_end_line(0xf7)
@@ -2404,7 +2404,7 @@ $C$DW$173	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$174	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$174, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L13:1:1433069791")
+	.dwattr $C$DW$174, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L13:1:1433072220")
 	.dwattr $C$DW$174, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$174, DW_AT_TI_begin_line(0xd4)
 	.dwattr $C$DW$174, DW_AT_TI_end_line(0xe4)
@@ -2419,7 +2419,7 @@ $C$DW$177	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$177, DW_AT_high_pc($C$DW$L$_gaussian_smooth$37$E)
 
 $C$DW$178	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$178, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L14:2:1433069791")
+	.dwattr $C$DW$178, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L14:2:1433072220")
 	.dwattr $C$DW$178, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$178, DW_AT_TI_begin_line(0xd6)
 	.dwattr $C$DW$178, DW_AT_TI_end_line(0xe3)
@@ -2437,7 +2437,7 @@ $C$DW$182	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$182, DW_AT_high_pc($C$DW$L$_gaussian_smooth$36$E)
 
 $C$DW$183	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$183, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L15:3:1433069791")
+	.dwattr $C$DW$183, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L15:3:1433072220")
 	.dwattr $C$DW$183, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$183, DW_AT_TI_begin_line(0xda)
 	.dwattr $C$DW$183, DW_AT_TI_end_line(0xe1)
@@ -2464,7 +2464,7 @@ $C$DW$188	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$189	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$189, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L11:1:1433069791")
+	.dwattr $C$DW$189, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L11:1:1433072220")
 	.dwattr $C$DW$189, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$189, DW_AT_TI_begin_line(0x119)
 	.dwattr $C$DW$189, DW_AT_TI_end_line(0x119)
@@ -2478,7 +2478,7 @@ $C$DW$191	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$192	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$192, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L9:1:1433069791")
+	.dwattr $C$DW$192, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L9:1:1433072220")
 	.dwattr $C$DW$192, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$192, DW_AT_TI_begin_line(0x111)
 	.dwattr $C$DW$192, DW_AT_TI_end_line(0x117)
@@ -2532,10 +2532,10 @@ $C$DW$196	.dwtag  DW_TAG_subprogram, DW_AT_name("canny_dsp")
 _canny_dsp:
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 9
-;** 154	-----------------------    smoothedim_dsp = gaussian_smooth(buf, 10, 320, 2.5F);
-;** 155	-----------------------    *buf = *smoothedim_dsp;
+;** 154	-----------------------    smoothedim_dsp = gaussian_smooth(buf, 60, 320, 2.5F);
+;** 155	-----------------------    *buf = smoothedim_dsp[1];
 ;** 156	-----------------------    C$1 = buf;
-;** 156	-----------------------    C$1[1] = (int)*smoothedim_dsp>>8;
+;** 156	-----------------------    C$1[1] = (int)smoothedim_dsp[1]>>8;
 ;** 159	-----------------------    NOTIFY_notify(1u, 0u, 5u, (unsigned)*C$1);
 ;** 160	-----------------------    NOTIFY_notify(1u, 0u, 5u, (unsigned)*(buf+1));
 ;**  	-----------------------    return;
@@ -2557,11 +2557,11 @@ $C$DW$197	.dwtag  DW_TAG_TI_branch
 
            LDW     .D1T1   *A10,A4           ; |154| 
            ZERO    .L2     B6
+           MVK     .S2     0x3c,B4           ; |154| 
            MVKH    .S2     0x40200000,B6
-           MV      .L1X    B3,A11            ; |113| 
 
-           ADDKPC  .S2     $C$RL101,B3,0     ; |154| 
-||         MVK     .L2     0xa,B4            ; |154| 
+           MV      .L1X    B3,A11            ; |113| 
+||         ADDKPC  .S2     $C$RL101,B3,0     ; |154| 
 ||         MVK     .S1     0x140,A6          ; |154| 
 
 $C$RL101:  ; CALL OCCURS {_gaussian_smooth} {0}  ; |154| 
@@ -2569,7 +2569,7 @@ $C$RL101:  ; CALL OCCURS {_gaussian_smooth} {0}  ; |154|
 ;          EXCLUSIVE CPU CYCLES: 29
            MV      .L1     A10,A3            ; |155| 
            LDW     .D1T1   *A3,A5            ; |155| 
-           LDBU    .D1T1   *A4,A3            ; |155| 
+           LDBU    .D1T1   *+A4(2),A3        ; |155| 
            ZERO    .L2     B4                ; |159| 
            NOP             3
 
@@ -2579,7 +2579,7 @@ $C$RL101:  ; CALL OCCURS {_gaussian_smooth} {0}  ; |154|
            LDW     .D1T1   *A3,A5            ; |156| 
            MVKL    .S1     _NOTIFY_notify,A3 ; |159| 
            MVKH    .S1     _NOTIFY_notify,A3 ; |159| 
-           LDH     .D1T1   *A4,A6            ; |156| 
+           LDH     .D1T1   *+A4(2),A6        ; |156| 
 $C$DW$198	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$198, DW_AT_low_pc(0x00)
 	.dwattr $C$DW$198, DW_AT_name("_NOTIFY_notify")
@@ -2754,10 +2754,10 @@ _Task_execute:
 ;          EXCLUSIVE CPU CYCLES: 9
 ;** 291	-----------------------    SEM_pend((struct _SEM_Obj *)info+4, 0xffffffffu);
 ;** 294	-----------------------    BCACHE_inv(*&buf, (unsigned)length, 1u);
-;** 154	-----------------------    smoothedim_dsp = gaussian_smooth(buf, 10, 320, 2.5F);  // [19]
-;** 155	-----------------------    *buf = *smoothedim_dsp;  // [19]
+;** 154	-----------------------    smoothedim_dsp = gaussian_smooth(buf, 60, 320, 2.5F);  // [19]
+;** 155	-----------------------    *buf = smoothedim_dsp[1];  // [19]
 ;** 156	-----------------------    C$1 = buf;  // [19]
-;** 156	-----------------------    C$1[1] = (int)*smoothedim_dsp>>8;  // [19]
+;** 156	-----------------------    C$1[1] = (int)smoothedim_dsp[1]>>8;  // [19]
 ;** 159	-----------------------    NOTIFY_notify(1u, 0u, 5u, (unsigned)*C$1);  // [19]
 ;** 160	-----------------------    NOTIFY_notify(1u, 0u, 5u, (unsigned)*(buf+1));  // [19]
 ;** 300	-----------------------    BCACHE_wbAll();
@@ -2781,7 +2781,7 @@ $C$DW$208	.dwtag  DW_TAG_TI_branch
 
 $C$RL105:  ; CALL OCCURS {_SEM_pend} {0}     ; |291| 
 ;** --------------------------------------------------------------------------*
-;          EXCLUSIVE CPU CYCLES: 72
+;          EXCLUSIVE CPU CYCLES: 71
            MVKL    .S1     _BCACHE_inv,A3    ; |294| 
 
            MVKH    .S1     _BCACHE_inv,A3    ; |294| 
@@ -2804,44 +2804,46 @@ $C$DW$209	.dwtag  DW_TAG_TI_branch
            ADDKPC  .S2     $C$RL106,B3,2     ; |294| 
            MVK     .L1     0x1,A6            ; |294| 
 $C$RL106:  ; CALL OCCURS {_BCACHE_inv} {0}   ; |294| 
-           MVKL    .S1     _gaussian_smooth,A3 ; |154| 
-           MVKH    .S1     _gaussian_smooth,A3 ; |154| 
-           MV      .L1     A10,A4
+           MVKL    .S2     _gaussian_smooth,B5 ; |154| 
+           MVKH    .S2     _gaussian_smooth,B5 ; |154| 
 $C$DW$210	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$210, DW_AT_low_pc(0x00)
 	.dwattr $C$DW$210, DW_AT_name("_gaussian_smooth")
 	.dwattr $C$DW$210, DW_AT_TI_call
-           CALL    .S2X    A3                ; |154| 
-           LDW     .D1T1   *A4,A4            ; |154| 
+
+           CALL    .S2     B5                ; |154| 
+||         MV      .L1     A10,A3
+
+           LDW     .D1T1   *A3,A4            ; |154| 
            ZERO    .L2     B6
            MVKH    .S2     0x40200000,B6
-           ADDKPC  .S2     $C$RL107,B3,0     ; |154| 
+           MVK     .S2     0x3c,B4           ; |154| 
 
-           MVK     .L2     0xa,B4            ; |154| 
+           ADDKPC  .S2     $C$RL107,B3,0     ; |154| 
 ||         MVK     .S1     0x140,A6          ; |154| 
 
 $C$RL107:  ; CALL OCCURS {_gaussian_smooth} {0}  ; |154| 
-           LDBU    .D1T1   *A4,A3            ; |155| 
+           LDBU    .D1T1   *+A4(2),A3        ; |155| 
            LDW     .D1T1   *A10,A5           ; |155| 
            MV      .L2X    A10,B4
-           MVKL    .S2     _NOTIFY_notify,B5 ; |159| 
-           MVKH    .S2     _NOTIFY_notify,B5 ; |159| 
            MVK     .L1     0x5,A6            ; |159| 
+           NOP             2
            STB     .D1T1   A3,*A5            ; |155| 
            LDW     .D2T2   *B4,B4            ; |156| 
-           LDH     .D1T1   *A4,A3            ; |156| 
-           MVK     .L1     0x1,A4            ; |159| 
-           NOP             1
+           MVKL    .S1     _NOTIFY_notify,A5 ; |159| 
+           MVKH    .S1     _NOTIFY_notify,A5 ; |159| 
+           LDH     .D1T1   *+A4(2),A3        ; |156| 
 $C$DW$211	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$211, DW_AT_low_pc(0x00)
 	.dwattr $C$DW$211, DW_AT_name("_NOTIFY_notify")
 	.dwattr $C$DW$211, DW_AT_TI_call
-           CALL    .S2     B5                ; |159| 
+           CALL    .S2X    A5                ; |159| 
            LDBU    .D2T2   *B4,B6            ; |159| 
-           SHR     .S1     A3,8,A3           ; |156| 
            ADDKPC  .S2     $C$RL108,B3,1     ; |159| 
+           SHR     .S1     A3,8,A3           ; |156| 
 
-           STB     .D2T1   A3,*+B4(1)        ; |156| 
+           MVK     .L1     0x1,A4            ; |159| 
+||         STB     .D2T1   A3,*+B4(1)        ; |156| 
 ||         ZERO    .L2     B4                ; |159| 
 
 $C$RL108:  ; CALL OCCURS {_NOTIFY_notify} {0}  ; |159| 
