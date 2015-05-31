@@ -129,6 +129,7 @@ void canny_dsp()
     buf[2*i]= (0x00ff) & smoothedim_dsp[i];
     buf[2*i +1]= (0x00ff) & (smoothedim_dsp[i] >>8);
   }
+  free(smoothedim_dsp);
 }
 
 /*******************************************************************************
@@ -248,7 +249,8 @@ void make_gaussian_kernel(float sigma, float **kernel, int *windowsize)
 Int Task_execute (Task_TransferInfo * info)
 {
     unsigned int i;
-
+    // short int *b = (short int*)malloc(sizeof(short int) * 57500);
+    // float f;
    
     //wait for semaphore
 	SEM_pend (&(info->notifySemObj), SYS_FOREVER);
@@ -257,11 +259,12 @@ Int Task_execute (Task_TransferInfo * info)
     BCACHE_inv ((Ptr)buf, length, TRUE) ;
     canny_dsp();
     BCACHE_wbAll();
-
+    // b[57500] = 1600;
 	//call the functionality to be performed by dsp
    
 	//notify that we are done
     NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
+    // NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)b[57500]);
 
 	  return SYS_OK;
 }

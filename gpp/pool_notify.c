@@ -419,6 +419,116 @@ void canny_main()
     free(edge);
     
 }
+
+/*******************************************************************************
+* PROCEDURE: canny
+* PURPOSE: To perform canny edge detection.
+* NAME: Mike Heath
+* DATE: 2/15/96
+*******************************************************************************/
+void canny(unsigned char *image, int rows, int cols, float sigma,
+           float tlow, float thigh, unsigned char **edge, char *fname)
+{
+    FILE *fpdir=NULL;          /* File to write the gradient image to.     */
+    unsigned char *nms;        /* Points that are local maximal magnitude. */
+    short int *smoothedim,     /* The image after gaussian smoothing.      */
+          *delta_x,        /* The first devivative image, x-direction. */
+          *delta_y,        /* The first derivative image, y-direction. */
+          *magnitude;      /* The magnitude of the gadient image.      */
+    float *dir_radians=NULL;   /* Gradient direction image.                */
+    
+    /****************************************************************************
+    * Perform gaussian smoothing on the image using the input standard
+    * deviation.
+    ****************************************************************************/
+    if(VERBOSE) printf("Smoothing the image using a gaussian kernel.\n");
+    smoothedim = gaussian_smooth(image, rows, cols, sigma);
+
+    /****************************************************************************
+    * Compute the first derivative in the x and y directions.
+    ****************************************************************************/
+    if(VERBOSE) printf("Computing the X and Y first derivatives.\n");
+    derrivative_x_y(smoothedim, rows, cols, &delta_x, &delta_y);
+    timeCheck();
+    printf("derrivative_x_y computed.\n");
+    /****************************************************************************
+    * This option to write out the direction of the edge gradient was added
+    * to make the information available for computing an edge quality figure
+    * of merit.
+    ****************************************************************************/
+    if(fname != NULL)
+    {
+        /*************************************************************************
+        * Compute the direction up the gradient, in radians that are
+        * specified counteclockwise from the positive x-axis.
+        *************************************************************************/
+        radian_direction(delta_x, delta_y, rows, cols, &dir_radians, -1, -1);
+        timeCheck();
+        printf("radian_direction computed.\n");
+        /*************************************************************************
+        * Write the gradient direction image out to a file.
+        *************************************************************************/
+        if((fpdir = fopen(fname, "wb")) == NULL)
+        {
+            fprintf(stderr, "Error opening the file %s for writing.\n", fname);
+            exit(1);
+        }
+        fwrite(dir_radians, sizeof(float), rows*cols, fpdir);
+        fclose(fpdir);
+        free(dir_radians);
+    }
+
+    /****************************************************************************
+    * Compute the magnitude of the gradient.
+    ****************************************************************************/
+    /****************************************************************************
+    * Allocate an image to store the magnitude of the gradient.
+    ****************************************************************************/
+    if((magnitude = (short *) malloc(rows*cols* sizeof(short))) == NULL)
+    {
+        fprintf(stderr, "Error allocating the magnitude image.\n");
+        exit(1);
+    }
+
+    if(VERBOSE) printf("Computing the magnitude of the gradient.\n");
+    magnitude_x_y(delta_x, delta_y, rows, cols, magnitude);
+    timeCheck();
+    printf("magnitude_x_y computed\n");
+    /****************************************************************************
+    * Perform non-maximal suppression.
+    ****************************************************************************/
+    if(VERBOSE) printf("Doing the non-maximal suppression.\n");
+    if((nms = (unsigned char *) malloc(rows*cols*sizeof(unsigned char)))==NULL)
+    {
+        fprintf(stderr, "Error allocating the nms image.\n");
+        exit(1);
+    }
+    non_max_supp(magnitude, delta_x, delta_y, rows, cols, nms);
+    timeCheck();
+    printf("non_max_supp computed\n");
+    /****************************************************************************
+    * Use hysteresis to mark the edge pixels.
+    ****************************************************************************/
+    if(VERBOSE) printf("Doing hysteresis thresholding.\n");
+    if( (*edge=(unsigned char *)malloc(rows*cols*sizeof(unsigned char))) == NULL )
+    {
+        fprintf(stderr, "Error allocating the edge image.\n");
+        exit(1);
+    }
+    apply_hysteresis(magnitude, nms, rows, cols, tlow, thigh, *edge);
+    timeCheck();
+    printf("apply_hysteresis computed.\n");
+    /****************************************************************************
+    * Free all of the memory that we allocated except for the edge image that
+    * is still being used to store out result.
+    ****************************************************************************/
+    free(smoothedim);
+    free(delta_x);
+    free(delta_y);
+    free(magnitude);
+    free(nms);
+}
+
 /** ============================================================================
  *  @func   pool_notify_Execute
  *

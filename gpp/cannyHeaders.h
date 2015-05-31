@@ -3,6 +3,8 @@ void sync(void);
 void timeCheck(void);
 void canny_main(void);
 
+void store_der(short int * delta_x);
+
 void canny(unsigned char *image, int rows, int cols, float sigma,
            float tlow, float thigh, unsigned char **edge, char *fname);
 int read_pgm_image(char *infilename, unsigned char **image, int *rows,

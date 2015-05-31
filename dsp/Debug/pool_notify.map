@@ -1,7 +1,7 @@
 ******************************************************************************
                TMS320C6x Linker Unix v6.1.17                   
 ******************************************************************************
->> Linked Sun May 31 20:51:52 2015
+>> Linked Sun May 31 21:53:05 2015
 
 OUTPUT FILE NAME:   <Debug/pool_notify.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 87e362c0
@@ -1308,8 +1308,8 @@ ffffffff   _RESET_VECTOR
 87e32b64   _TSK_startup
 87e36874   _TSK_timerSem
 87e27b44   _Task_create
-87e287ec   _Task_delete
-87e2874c   _Task_execute
+87e287f8   _Task_delete
+87e28758   _Task_execute
 87e33920   _UTL_doAbort
 87e33a00   _UTL_doError
 87e33840   _UTL_doPutc
@@ -1436,11 +1436,11 @@ ffffffff   ___pinit__
 87e2e220   _exit
 87e30980   _free
 87e2d500   _frexp
-87e27db4   _gaussian_smooth
+87e27dc0   _gaussian_smooth
 87e2d160   _ldexp
 87e369f8   _length
 87e2d980   _main
-87e28330   _make_gaussian_kernel
+87e2833c   _make_gaussian_kernel
 87e309a8   _malloc
 87e30ad8   _memalign
 87e2eac0   _memcpy
@@ -2031,10 +2031,10 @@ address    name
 87e278ec   _MPCS_leave
 87e27b44   _Task_create
 87e27cc8   _canny_dsp
-87e27db4   _gaussian_smooth
-87e28330   _make_gaussian_kernel
-87e2874c   _Task_execute
-87e287ec   _Task_delete
+87e27dc0   _gaussian_smooth
+87e2833c   _make_gaussian_kernel
+87e28758   _Task_execute
+87e287f8   _Task_delete
 87e28920   _pow
 87e29344   _SMAPOOL_init
 87e29368   _SMAPOOL_open
