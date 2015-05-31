@@ -106,8 +106,8 @@ STATIC Uint32  pool_notify_NumIterations ;
  *          application.
  *  ============================================================================
  */
- float * pool_notify_DataBuf = NULL;
- //unsigned char * pool_notify_DataBuf = NULL ;
+ //short int * pool_notify_DataBuf = NULL;
+ unsigned char * pool_notify_DataBuf = NULL ;
 
 void canny_main();
 
@@ -359,16 +359,6 @@ long long get_usec(void)
   return r;
 }
 
-int sum_dsp(unsigned char* buf, int length) 
-{
-    int a=0,i;
-    for(i=0;i<length;i++) 
-	{
-       a=a+buf[i];
-    }
-    return a;
-}
-
 void canny_main()
 {
     char *infilename = NULL;  /* Name of the input image */
@@ -407,7 +397,7 @@ void canny_main()
     {
         pool_notify_DataBuf[i] = image[i];
     }
-
+    printf("\nimage loaded to pool = %d \n", pool_notify_DataBuf[0]);
     /****************************************************************************
     * Perform the edge detection. All of the work takes place here.
     ****************************************************************************/
@@ -450,7 +440,8 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
     DSP_STATUS  status    = DSP_SOK ;
 
     long long start;
-    //int i;
+    int i, flag = 0;
+    short int test=0;
 	#if defined(DSP)
     unsigned char *buf_dsp;
 	#endif
@@ -459,18 +450,14 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
     printf ("Entered pool_notify_Execute ()\n") ;
 	#endif
 
-    unit_init();
+  unit_init();
 
-    start = get_usec();
-	//for (i = 0; i < 10; i++)
-    //{
-        canny_main();
-    //}
-
-    //avg = (get_usec()-start) / 10 ;
+  start = get_usec();
+  canny_main();
+    
 	printf("Sum execution time : %lld us.\n", get_usec()-start);
 	#if !defined(DSP)
-    //printf(" Result is %d \n", sum_dsp(pool_notify_DataBuf,pool_notify_BufferSize));
+  
 	#endif
 
 	#if defined(DSP)
@@ -486,9 +473,13 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
     NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,1);
 
     sem_wait(&sem);
-    printf("Kernel[0] value calculated from DSP is = %f \n",pool_notify_DataBuf[0]);
 	#endif
 
+    test= pool_notify_DataBuf[0]+(pool_notify_DataBuf[1] << 8);
+    //printf("pool_notify_DataBuf[1] value = %d \n", pool_notify_DataBuf[1]);
+    printf("test value = %d \n", test);
+    printf("pool_notify_DataBuf[0] value = %d \n", pool_notify_DataBuf[0]); 
+    printf("pool_notify_DataBuf[1] value = %d \n", pool_notify_DataBuf[1]);
    return status ;
 }
 

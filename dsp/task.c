@@ -20,12 +20,15 @@
 #include <task.h>
 
 #define VERBOSE 0
+#define BOOSTBLURFACTOR 90.0
 
 extern Uint16 MPCSXFER_BufferSize ;
 
+
+
 void canny_dsp();
 void make_gaussian_kernel(float sigma, float **kernel, int *windowsize);
-
+short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma);
 
 
 static Void Task_notify (Uint32 eventNo, Ptr arg, Ptr info) ;
@@ -102,18 +105,156 @@ Int Task_create (Task_TransferInfo ** infoPtr)
 
     return status ;
 }
-float *buf;
-//unsigned char* buf;
+//short int* buf;
+unsigned char * buf;
 int length;
 
 void canny_dsp()
-{
-  float *kernel, sigma=2.5;
-  int windowsize;
+{ 
+    unsigned int i=0;
+  float sigma=2.5;
+  unsigned char * image;
+  short int *smoothedim_dsp;
 
-  make_gaussian_kernel(sigma, &kernel, &windowsize);
-  buf[0] = kernel[0];
+  /*for (i = 0; i < 240*320; i++)
+  {
+    image[i]=((0xff) &  (buf[i] ));
+  }*/
+
+    //image[1]=((0xff) &  (buf[1] ));
+  image = buf;
+  /*for (i = 0; i < 6; i++)
+  {
+    image[i]= ((0xff) &  (buf[i] ));
+    //image[0]=((0xff) &  (buf[0] ));
+  }*/
+  /*for (i = 0; i < 10; i++)
+  {
+    
+   NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)image[i]);
+  }*/
+   //NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)image[3]);
+
+  
+  /*image[0]=((0xff) &  (buf[0] ));
+  image[1]=((0xff) &  (buf[1] ));
+  image[2]=((0xff) &  (buf[2] ));
+  image[3]=((0xff) &  (buf[3] ));
+  image[4]=((0xff) &  (buf[4] ));
+  image[5]=((0xff) &  (buf[5] ));
+
+*/
+  /*for (i = 0; i < 6; i++)
+  {
+    
+    NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)image[i]);
+    //image[i]= ((0xff) &  (buf[i] ));
+    //image[0]=((0xff) &  (buf[0] ));
+  }*/
+  smoothedim_dsp = gaussian_smooth(image, 10, 320, sigma);
+  buf[0]= (0x00ff) & smoothedim_dsp[0];
+  buf[1]= (0x00ff) & (smoothedim_dsp[0] >>8);
+
+
+  NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)buf[0]);
+  NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)buf[1]);
+  //NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)smoothedim_dsp[1]);
+  /*for (i = 0; i <60*320; i++)
+  {
+      buf[i] = (short int)smoothedim_dsp[i];
+  }*/
+  //buf[1] = smoothedim_dsp[1];    
+  
+
 }
+
+/*******************************************************************************
+* PROCEDURE: gaussian_smooth
+* PURPOSE: Blur an image with a gaussian filter.
+* NAME: Mike Heath
+* DATE: 2/15/96
+*******************************************************************************/
+short int * gaussian_smooth(unsigned char *image, int rows, int cols, float sigma)
+{
+    int r, c, rr, cc, i,     /* Counter variables. */
+        windowsize,        /* Dimension of the gaussian kernel. */
+        center;            /* Half of the windowsize. */
+    float *tempim,        /* Buffer for separable filter gaussian smoothing. */
+          *kernel,        /* A one dimensional gaussian kernel. */
+          dot,            /* Dot product summing variable. */
+          sum;            /* Sum of the kernel weights variable. */
+  short int* smoothedim;
+
+
+    /****************************************************************************
+    * Create a 1-dimensional gaussian smoothing kernel.
+    ****************************************************************************/
+    make_gaussian_kernel(sigma, &kernel, &windowsize);
+    
+    center = windowsize / 2;
+
+    /****************************************************************************
+    * Allocate a temporary buffer image and the smoothed image.
+    ****************************************************************************/
+    if((tempim = (float *) malloc(rows*cols* sizeof(float))) == NULL)
+    {
+        exit(1);
+    }
+    
+    if(((smoothedim) = (short int *) malloc(rows*cols*sizeof(short int))) == NULL)
+    {
+        exit(1);
+    }
+
+    /****************************************************************************
+    * Blur in the x - direction.
+    ****************************************************************************/
+    for(r=0; r<rows; r++)
+    {
+        for(c=0; c<cols; c++)
+        {
+            dot = 0.0;
+            sum = 0.0;
+            for(cc=(-center); cc<=center; cc++)
+            {
+                if(((c+cc) >= 0) && ((c+cc) < cols))
+                {
+                    dot += (float)image[r*cols+(c+cc)] * kernel[center+cc];
+                    sum += kernel[center+cc];
+                }
+            }
+            tempim[r*cols+c] = dot/sum;
+        }
+    }
+
+    
+    /****************************************************************************
+    * Blur in the y - direction.
+    ***************************************************************************/
+    for(c=0; c<cols; c++)
+    {
+        for(r=0; r<rows; r++)
+        {
+            sum = 0.0;
+            dot = 0.0;
+            for(rr=(-center); rr<=center; rr++)
+            {
+                if(((r+rr) >= 0) && ((r+rr) < rows))
+                {
+                    dot += tempim[(r+rr)*cols+c] * kernel[center+rr];
+                    sum += kernel[center+rr];
+                }
+            }
+            smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR/sum + 0.5);
+        }
+    }
+
+
+    free(tempim);
+    free(kernel);
+    return smoothedim;
+}
+
 
 void make_gaussian_kernel(float sigma, float **kernel, int *windowsize)
 {
@@ -143,7 +284,9 @@ void make_gaussian_kernel(float sigma, float **kernel, int *windowsize)
 
 Int Task_execute (Task_TransferInfo * info)
 {
+    unsigned int i;
 
+   
     //wait for semaphore
 	SEM_pend (&(info->notifySemObj), SYS_FOREVER);
 
@@ -151,6 +294,9 @@ Int Task_execute (Task_TransferInfo * info)
     BCACHE_inv ((Ptr)buf, length, TRUE) ;
 
     canny_dsp();
+    
+    //image[i]= ((0xff) &  (buf[i] ));
+    
     BCACHE_wbAll();
 
 	//call the functionality to be performed by dsp
@@ -159,6 +305,7 @@ Int Task_execute (Task_TransferInfo * info)
     NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
 	//notify the result
     NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)1);
+    
     return SYS_OK;
 }
 
@@ -194,7 +341,7 @@ static Void Task_notify (Uint32 eventNo, Ptr arg, Ptr info)
 
     count++;
     if (count==1) {
-        buf =(float*)info ;
+        buf =(unsigned char *)info ;
     }
     if (count==2) {
         length = (int)info;

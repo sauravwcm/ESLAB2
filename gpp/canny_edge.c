@@ -60,8 +60,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-
-
 short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma);
 void make_gaussian_kernel(float sigma, float **kernel, int *windowsize);
 void derrivative_x_y(short int *smoothedim, int rows, int cols,
@@ -101,6 +99,7 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
     ****************************************************************************/
     if(VERBOSE) printf("Smoothing the image using a gaussian kernel.\n");
     smoothedim = gaussian_smooth(image, rows, cols, sigma);
+    printf("smoothedim[1] value is = %d \n",smoothedim[0] );
 
     /****************************************************************************
     * Compute the first derivative in the x and y directions.
@@ -355,10 +354,6 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     if(VERBOSE) printf("   Computing the gaussian smoothing kernel.\n");
     make_gaussian_kernel(sigma, &kernel, &windowsize);
     
-    for (i = 0; i < windowsize; i++)
-    {
-        printf("Kernel value from ARM side =  %f \n", kernel[i]);
-    }
     center = windowsize / 2;
 
 
@@ -398,7 +393,6 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
             tempim[r*cols+c] = dot/sum;
         }
     }
-
 
     /****************************************************************************
     * Blur in the y - direction.
