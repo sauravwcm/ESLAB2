@@ -111,31 +111,53 @@ int length;
 
 void canny_dsp()
 { 
-    unsigned int i=0,j=0;
+    unsigned int i=0;
   float sigma=2.5;
   unsigned char * image;
   short int *smoothedim_dsp;
 
-  image = buf;
-  
-  smoothedim_dsp = gaussian_smooth(image, 60, 320, sigma); 
-  //on 60 rows "now write to pool and operate on next 60 rows"
-  
-  //buf is of type unsigned char. so copy smoothedim on 2 buf variables at a time
-  
-  for (i = 0,j=0; i < 10; i+=2,j++)
+  /*for (i = 0; i < 240*320; i++)
   {
-    buf[i]= (0x00ff) & smoothedim_dsp[j];
-    buf[i+1]= (0x00ff) & (smoothedim_dsp[j] >>8);
-  }
-  //buf[0]= (0x00ff) & smoothedim_dsp[70];
-  //buf[1]= (0x00ff) & (smoothedim_dsp[70] >>8);
+    image[i]=((0xff) &  (buf[i] ));
+  }*/
 
-  //smoothedim_dsp = gaussian_smooth(image, 60, 320, sigma);
+    //image[1]=((0xff) &  (buf[1] ));
+  image = buf;
+  /*for (i = 0; i < 6; i++)
+  {
+    image[i]= ((0xff) &  (buf[i] ));
+    //image[0]=((0xff) &  (buf[0] ));
+  }*/
+  /*for (i = 0; i < 10; i++)
+  {
+    
+   NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)image[i]);
+  }*/
+   //NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)image[3]);
+
+  
+  /*image[0]=((0xff) &  (buf[0] ));
+  image[1]=((0xff) &  (buf[1] ));
+  image[2]=((0xff) &  (buf[2] ));
+  image[3]=((0xff) &  (buf[3] ));
+  image[4]=((0xff) &  (buf[4] ));
+  image[5]=((0xff) &  (buf[5] ));
+
+*/
+  /*for (i = 0; i < 6; i++)
+  {
+    
+    NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)image[i]);
+    //image[i]= ((0xff) &  (buf[i] ));
+    //image[0]=((0xff) &  (buf[0] ));
+  }*/
+  smoothedim_dsp = gaussian_smooth(image, 60, 320, sigma);
+  buf[0]= (0x00ff) & smoothedim_dsp[1];
+  buf[1]= (0x00ff) & (smoothedim_dsp[1] >>8);
 
 
-  //NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)buf[0]);
-  //NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)buf[1]);
+  NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)buf[0]);
+  NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)buf[1]);
   //NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)smoothedim_dsp[1]);
   /*for (i = 0; i <60*320; i++)
   {
@@ -282,7 +304,7 @@ Int Task_execute (Task_TransferInfo * info)
 	//notify that we are done
     NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
 	//notify the result
-    //NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)1);
+    NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)1);
     
     return SYS_OK;
 }
