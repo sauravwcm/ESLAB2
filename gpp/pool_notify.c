@@ -397,7 +397,7 @@ void canny_main()
     {
         pool_notify_DataBuf[i] = image[i];
     }
-    printf("\nimage loaded to pool = %d \n", pool_notify_DataBuf[0]);
+    printf("\nimage loaded to pool \n pool[0] = %d \n\n", pool_notify_DataBuf[0]);
     /****************************************************************************
     * Perform the edge detection. All of the work takes place here.
     ****************************************************************************/
@@ -440,8 +440,8 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
     DSP_STATUS  status    = DSP_SOK ;
 
     long long start;
-    int i, flag = 0;
-    short int test=0;
+    int i,j, flag = 0;
+    short int test[5];
 	#if defined(DSP)
     unsigned char *buf_dsp;
 	#endif
@@ -475,11 +475,17 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
     sem_wait(&sem);
 	#endif
 
-    test= pool_notify_DataBuf[0]+(pool_notify_DataBuf[1] << 8);
+    //test= pool_notify_DataBuf[2]+(pool_notify_DataBuf[3] << 8);
+    for (i = 0,j=0; i < 10; i+=2,j++)
+    {
+      test[j]=pool_notify_DataBuf[i]+(pool_notify_DataBuf[i+1] << 8);
+    }
+
+    printf("test value = %d \n", test[3]);
     //printf("pool_notify_DataBuf[1] value = %d \n", pool_notify_DataBuf[1]);
-    printf("test value = %d \n", test);
-    printf("pool_notify_DataBuf[0] value = %d \n", pool_notify_DataBuf[0]); 
-    printf("pool_notify_DataBuf[1] value = %d \n", pool_notify_DataBuf[1]);
+    
+    //printf("pool_notify_DataBuf[0] value = %d \n", pool_notify_DataBuf[2]); 
+    //printf("pool_notify_DataBuf[1] value = %d \n", pool_notify_DataBuf[3]);
    return status ;
 }
 
