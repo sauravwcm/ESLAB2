@@ -440,8 +440,8 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
     DSP_STATUS  status    = DSP_SOK ;
 
     long long start;
-    int i, flag = 0;
-    short int test=0;
+    unsigned int i, flag = 0;
+    short int test[60*320];
 	#if defined(DSP)
     unsigned char *buf_dsp;
 	#endif
@@ -474,10 +474,13 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
 
     sem_wait(&sem);
 	#endif
-
-    test= pool_notify_DataBuf[0]+(pool_notify_DataBuf[1] << 8);
+    for (i = 0; i < (60*320); i++)
+    {
+      test[i]=pool_notify_DataBuf[2*i]+(pool_notify_DataBuf[2*i +1] << 8);
+    }
+    //test= pool_notify_DataBuf[0]+(pool_notify_DataBuf[1] << 8);
     //printf("pool_notify_DataBuf[1] value = %d \n", pool_notify_DataBuf[1]);
-    printf("test value = %d \n", test);
+    printf("test value = %d \n", test[1]);
     printf("pool_notify_DataBuf[0] value = %d \n", pool_notify_DataBuf[0]); 
     printf("pool_notify_DataBuf[1] value = %d \n", pool_notify_DataBuf[1]);
    return status ;

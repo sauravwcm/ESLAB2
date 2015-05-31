@@ -152,8 +152,13 @@ void canny_dsp()
     //image[0]=((0xff) &  (buf[0] ));
   }*/
   smoothedim_dsp = gaussian_smooth(image, 60, 320, sigma);
-  buf[0]= (0x00ff) & smoothedim_dsp[1];
-  buf[1]= (0x00ff) & (smoothedim_dsp[1] >>8);
+
+  for (i = 0; i < (60*320); i++)
+  {
+    buf[2*i]= (0x00ff) & smoothedim_dsp[i];
+    buf[2*i +1]= (0x00ff) & (smoothedim_dsp[i] >>8);
+  }
+  
 
 
   NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)buf[0]);

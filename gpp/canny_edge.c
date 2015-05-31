@@ -99,7 +99,7 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
     ****************************************************************************/
     if(VERBOSE) printf("Smoothing the image using a gaussian kernel.\n");
     smoothedim = gaussian_smooth(image, rows, cols, sigma);
-    printf("smoothedim[1] value is = %d \n",smoothedim[0] );
+    printf("smoothedim[1] value is = %d \n",smoothedim[1] );
 
     /****************************************************************************
     * Compute the first derivative in the x and y directions.
