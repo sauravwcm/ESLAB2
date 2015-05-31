@@ -14,6 +14,9 @@
 #include <loaderdefs.h>
 #endif
 
+#ifndef CANNYHEAD
+#include "cannyHeaders.h"
+#endif
 /*  ----------------------------------- Application Header              */
 #include <pool_notify.h>
 //#include <pool_notify_os.h>
@@ -107,20 +110,7 @@ STATIC Uint32  pool_notify_NumIterations ;
  *  ============================================================================
  */
  //short int * pool_notify_DataBuf = NULL;
- unsigned char * pool_notify_DataBuf = NULL ;
-
-void canny_main();
-
-void canny(unsigned char *image, int rows, int cols, float sigma,
-           float tlow, float thigh, unsigned char **edge, char *fname);
-int read_pgm_image(char *infilename, unsigned char **image, int *rows,
-                   int *cols);
-int write_pgm_image(char *outfilename, unsigned char *image, int rows,
-                    int cols, char *comment, int maxval);
-
-
-
-
+unsigned char * pool_notify_DataBuf = NULL ;
 
 /** ============================================================================
  *  @func   pool_notify_Notify
@@ -423,7 +413,8 @@ void canny_main()
         fprintf(stderr, "Error writing the edge image, %s.\n", outfilename);
         exit(1);
     }
-
+        
+    foo();
     free(image);
     free(edge);
 }
@@ -453,9 +444,7 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
   unit_init();
 
   start = get_usec();
-  canny_main();
     
-	printf("Sum execution time : %lld us.\n", get_usec()-start);
 	#if !defined(DSP)
   
 	#endif
@@ -472,17 +461,21 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
                          AddrType_Usr) ;
     NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,1);
 
+    canny_main();
+
     sem_wait(&sem);
 	#endif
+  printf("Sum execution time : %lld us.\n", get_usec()-start);
+
     for (i = 0; i < (60*320); i++)
     {
       test[i]=pool_notify_DataBuf[2*i]+(pool_notify_DataBuf[2*i +1] << 8);
     }
     //test= pool_notify_DataBuf[0]+(pool_notify_DataBuf[1] << 8);
     //printf("pool_notify_DataBuf[1] value = %d \n", pool_notify_DataBuf[1]);
-    printf("test value = %d \n", test[1]);
-    printf("pool_notify_DataBuf[0] value = %d \n", pool_notify_DataBuf[0]); 
-    printf("pool_notify_DataBuf[1] value = %d \n", pool_notify_DataBuf[1]);
+    // printf("test value = %d \n", test[1]);
+    // printf("pool_notify_DataBuf[0] value = %d \n", pool_notify_DataBuf[0]); 
+    // printf("pool_notify_DataBuf[1] value = %d \n", pool_notify_DataBuf[1]);
    return status ;
 }
 
@@ -507,6 +500,7 @@ NORMAL_API Void pool_notify_Delete (Uint8 processorId)
 	#ifdef DEBUG
     printf ("Entered pool_notify_Delete ()\n") ;
 	#endif
+
 
     /*
      *  Stop execution on DSP.
@@ -637,6 +631,10 @@ NORMAL_API Void pool_notify_Main (IN Char8 * dspExecutable, IN Char8 * strBuffer
     printf ("====================================================\n") ;
 }
 
+void foo() {
+    printf("Entered foo.\n");
+    sem_wait(&sem);
+}
 /** ----------------------------------------------------------------------------
  *  @func   pool_notify_Notify
  *
@@ -647,15 +645,21 @@ NORMAL_API Void pool_notify_Main (IN Char8 * dspExecutable, IN Char8 * strBuffer
  *  @modif  None
  *  ----------------------------------------------------------------------------
  */
+
 STATIC Void pool_notify_Notify (Uint32 eventNo, Pvoid arg, Pvoid info)
 {
+  static int count = 0;
 	#ifdef DEBUG
     printf("Notification %8d \n", (int)info);
 	#endif
+    count++;
     /* Post the semaphore. */
     if((int)info==0) 
 	{
         sem_post(&sem);
+        if(count == 1) printf("DSP is awake.\n");
+        if(count == 2) printf("ainvi in canny_main\n");
+        if(count == 3) printf("DSP Gaussian is complete.\n");
     } 
     else 
 	{

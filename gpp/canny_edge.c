@@ -60,21 +60,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma);
-void make_gaussian_kernel(float sigma, float **kernel, int *windowsize);
-void derrivative_x_y(short int *smoothedim, int rows, int cols,
-        short int **delta_x, short int **delta_y);
-void magnitude_x_y(short int *delta_x, short int *delta_y, int rows, int cols,
-                   short int *magnitude);
-void apply_hysteresis(short int *mag, unsigned char *nms, int rows, int cols,
-                      float tlow, float thigh, unsigned char *edge);
-void radian_direction(short int *delta_x, short int *delta_y, int rows,
-                      int cols, float **dir_radians, int xdirtag, int ydirtag);
-double angle_radians(double x, double y);
-
-void non_max_supp(short *mag, short *gradx, short *grady, int nrows,
-                  int ncols, unsigned char *result);
-
+#ifndef CANNYHEAD
+#include "cannyHeaders.h"
+#endif
 
 /*******************************************************************************
 * PROCEDURE: canny
@@ -346,6 +334,7 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
           *kernel,        /* A one dimensional gaussian kernel. */
           dot,            /* Dot product summing variable. */
           sum;            /* Sum of the kernel weights variable. */
+    short int* smoothedim;
 
 
     /****************************************************************************
@@ -365,7 +354,6 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
         fprintf(stderr, "Error allocating the buffer image.\n");
         exit(1);
     }
-    short int* smoothedim;
     if(((smoothedim) = (short int *) malloc(rows*cols*sizeof(short int))) == NULL)
     {
         fprintf(stderr, "Error allocating the smoothed image.\n");
