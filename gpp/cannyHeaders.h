@@ -1,5 +1,6 @@
 #define CANNYHEAD
-void foo(void);
+void sync(void);
+void timeCheck(void);
 void canny_main(void);
 
 void canny(unsigned char *image, int rows, int cols, float sigma,

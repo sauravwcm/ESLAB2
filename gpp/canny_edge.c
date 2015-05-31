@@ -55,6 +55,8 @@
 
 #define VERBOSE 0
 #define BOOSTBLURFACTOR 90.0
+#define PART 10
+extern unsigned char * pool_notify_DataBuf;
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -87,7 +89,6 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
     ****************************************************************************/
     if(VERBOSE) printf("Smoothing the image using a gaussian kernel.\n");
     smoothedim = gaussian_smooth(image, rows, cols, sigma);
-    printf("smoothedim[1] value is = %d \n",smoothedim[1] );
 
     /****************************************************************************
     * Compute the first derivative in the x and y directions.
@@ -364,7 +365,7 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     * Blur in the x - direction.
     ****************************************************************************/
     if(VERBOSE) printf("   Bluring the image in the X-direction.\n");
-    for(r=0; r<rows; r++)
+    for(r=0+PART; r<rows; r++)
     {
         for(c=0; c<cols; c++)
         {
@@ -388,7 +389,7 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     if(VERBOSE) printf("   Bluring the image in the Y-direction.\n");
     for(c=0; c<cols; c++)
     {
-        for(r=0; r<rows; r++)
+        for(r=0+PART; r<rows; r++)
         {
             sum = 0.0;
             dot = 0.0;
@@ -407,6 +408,12 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
 
     free(tempim);
     free(kernel);
+    timeCheck();
+    sync();
+    for (i = 0; i < (PART*320); i++)
+    {
+      smoothedim[i]=pool_notify_DataBuf[2*i]+(pool_notify_DataBuf[2*i +1] << 8);
+    }
     return smoothedim;
 }
 
