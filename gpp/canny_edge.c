@@ -55,7 +55,7 @@
 
 #define VERBOSE 0
 #define BOOSTBLURFACTOR 90.0
-#define PART 10
+#define PART 15
 extern unsigned char * pool_notify_DataBuf;
 
 #include <stdio.h>
@@ -95,7 +95,8 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
     ****************************************************************************/
     if(VERBOSE) printf("Computing the X and Y first derivatives.\n");
     derrivative_x_y(smoothedim, rows, cols, &delta_x, &delta_y);
-
+    timeCheck();
+    printf("derrivative_x_y computed.\n");
     /****************************************************************************
     * This option to write out the direction of the edge gradient was added
     * to make the information available for computing an edge quality figure
@@ -108,7 +109,8 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
         * specified counteclockwise from the positive x-axis.
         *************************************************************************/
         radian_direction(delta_x, delta_y, rows, cols, &dir_radians, -1, -1);
-
+        timeCheck();
+        printf("radian_direction computed.\n");
         /*************************************************************************
         * Write the gradient direction image out to a file.
         *************************************************************************/
@@ -136,7 +138,8 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
 
     if(VERBOSE) printf("Computing the magnitude of the gradient.\n");
     magnitude_x_y(delta_x, delta_y, rows, cols, magnitude);
-
+    timeCheck();
+    printf("magnitude_x_y computed\n");
     /****************************************************************************
     * Perform non-maximal suppression.
     ****************************************************************************/
@@ -147,7 +150,8 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
         exit(1);
     }
     non_max_supp(magnitude, delta_x, delta_y, rows, cols, nms);
-
+    timeCheck();
+    printf("non_max_supp computed\n");
     /****************************************************************************
     * Use hysteresis to mark the edge pixels.
     ****************************************************************************/
@@ -158,7 +162,8 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
         exit(1);
     }
     apply_hysteresis(magnitude, nms, rows, cols, tlow, thigh, *edge);
-
+    timeCheck();
+    printf("apply_hysteresis computed.\n");
     /****************************************************************************
     * Free all of the memory that we allocated except for the edge image that
     * is still being used to store out result.
@@ -191,7 +196,7 @@ void radian_direction(short int *delta_x, short int *delta_y, int rows,
     int r, c, pos;
     float *dirim=NULL;
     double dx, dy;
-
+    printf("radian_direction called\n");
     /****************************************************************************
     * Allocate an image to store the direction of the gradient.
     ****************************************************************************/
@@ -364,6 +369,7 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     /****************************************************************************
     * Blur in the x - direction.
     ****************************************************************************/
+    timeCheck();
     if(VERBOSE) printf("   Bluring the image in the X-direction.\n");
     for(r=0+PART; r<rows; r++)
     {
@@ -409,11 +415,15 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     free(tempim);
     free(kernel);
     timeCheck();
+    printf("ARM smoothedim created\n");
     sync();
     for (i = 0; i < (PART*320); i++)
     {
       smoothedim[i]=pool_notify_DataBuf[2*i]+(pool_notify_DataBuf[2*i +1] << 8);
     }
+
+    timeCheck();
+    printf("DSP done. Complete smoothedim created\n");
     return smoothedim;
 }
 

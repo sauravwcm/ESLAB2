@@ -8,6 +8,7 @@
 #include <pool.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /*  ----------------------------------- DSP/BIOS LINK Headers       */
 #include <failure.h>
@@ -19,8 +20,11 @@
 #include <pool_notify_config.h>
 #include <task.h>
 
+
 #define VERBOSE 0
 #define BOOSTBLURFACTOR 90.0
+
+#define PART 15     // SHOULD NOT BE GREATER THAN 60 (DSP MEMORY CONSTRAINTS).
 
 extern Uint16 MPCSXFER_BufferSize ;
 
@@ -105,72 +109,26 @@ Int Task_create (Task_TransferInfo ** infoPtr)
 
     return status ;
 }
-//short int* buf;
+
 unsigned char * buf;
 int length;
 
 void canny_dsp()
 { 
-    unsigned int i=0;
+  unsigned int i=0;
   float sigma=2.5;
   unsigned char * image;
   short int *smoothedim_dsp;
+  long long start;
 
-  /*for (i = 0; i < 240*320; i++)
-  {
-    image[i]=((0xff) &  (buf[i] ));
-  }*/
-
-    //image[1]=((0xff) &  (buf[1] ));
   image = buf;
-  /*for (i = 0; i < 6; i++)
-  {
-    image[i]= ((0xff) &  (buf[i] ));
-    //image[0]=((0xff) &  (buf[0] ));
-  }*/
-  /*for (i = 0; i < 10; i++)
-  {
-    
-   NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)image[i]);
-  }*/
-   //NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)image[3]);
+  smoothedim_dsp = gaussian_smooth(image, PART, 320, sigma);
 
-  
-  /*image[0]=((0xff) &  (buf[0] ));
-  image[1]=((0xff) &  (buf[1] ));
-  image[2]=((0xff) &  (buf[2] ));
-  image[3]=((0xff) &  (buf[3] ));
-  image[4]=((0xff) &  (buf[4] ));
-  image[5]=((0xff) &  (buf[5] ));
-
-*/
-  /*for (i = 0; i < 6; i++)
-  {
-    
-    NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)image[i]);
-    //image[i]= ((0xff) &  (buf[i] ));
-    //image[0]=((0xff) &  (buf[0] ));
-  }*/
-  smoothedim_dsp = gaussian_smooth(image, 60, 320, sigma);
-
-  for (i = 0; i < (60*320); i++)
+  for (i = 0; i < (PART*320); i++)
   {
     buf[2*i]= (0x00ff) & smoothedim_dsp[i];
     buf[2*i +1]= (0x00ff) & (smoothedim_dsp[i] >>8);
   }
-  
-
-
-  // NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)buf[0]);
-  // NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)buf[1]);
-  //NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)smoothedim_dsp[1]);
-  /*for (i = 0; i <60*320; i++)
-  {
-      buf[i] = (short int)smoothedim_dsp[i];
-  }*/
-  //buf[1] = smoothedim_dsp[1];    
-  
-
 }
 
 /*******************************************************************************
@@ -297,23 +255,15 @@ Int Task_execute (Task_TransferInfo * info)
 
 	//invalidate cache
     BCACHE_inv ((Ptr)buf, length, TRUE) ;
-
     canny_dsp();
-    
-    //image[i]= ((0xff) &  (buf[i] ));
-    
     BCACHE_wbAll();
 
 	//call the functionality to be performed by dsp
    
 	//notify that we are done
     NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
-    NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
 
-	//notify the result
-    // NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)1);
-    
-    return SYS_OK;
+	  return SYS_OK;
 }
 
 Int Task_delete (Task_TransferInfo * info)

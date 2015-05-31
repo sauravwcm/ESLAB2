@@ -350,6 +350,7 @@ long long get_usec(void)
   return r;
 }
 
+
 void canny_main()
 {
     char *infilename = NULL;  /* Name of the input image */
@@ -399,13 +400,12 @@ void canny_main()
                 sigma, tlow, thigh);
         dirfilename = composedfname;
     }
-
-    canny(image, rows, cols, sigma, tlow, thigh, &edge, dirfilename);
+     canny(image, rows, cols, sigma, tlow, thigh, &edge, dirfilename);
 
 
     /****************************************************************************
     * Write out the edge image to a file.
-    ****************************************************************************/
+    *****************************************************************************/
     sprintf(outfilename, "%s_s_%3.2f_l_%3.2f_h_%3.2f.pgm", infilename,
             sigma, tlow, thigh);
     if(VERBOSE) printf("Writing the edge iname in the file %s.\n", outfilename);
@@ -417,6 +417,7 @@ void canny_main()
         
     free(image);
     free(edge);
+    
 }
 /** ============================================================================
  *  @func   pool_notify_Execute
@@ -428,6 +429,24 @@ void canny_main()
  */
 NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 processorId)
 {
+  /*********************************************************************************/
+  char *infilename = NULL;  /* Name of the input image */
+    char *dirfilename = NULL; /* Name of the output gradient direction image */
+    char outfilename[128];    /* Name of the output "edge" image */
+    unsigned char *image;     /* The input image */
+    char composedfname[128];  /* Name of the output "direction" image */
+    unsigned char *edge;      /* The output edge image */
+    int rows, cols;           /* The dimensions of the image. */
+    float sigma=2.5,              /* Standard deviation of the gaussian kernel. */
+          tlow=0.5,               /* Fraction of the high threshold in hysteresis. */
+          thigh=0.5;              /* High hysteresis threshold control. The actual
+                    threshold is the (100 * thigh) percentage point
+                    in the histogram of the magnitude of the
+                    gradient image that passes non-maximal
+                    suppression. */
+
+    int i;
+  /********************************************************************************/
     DSP_STATUS  status    = DSP_SOK ;
 
 	#if defined(DSP)
@@ -441,25 +460,89 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
   #if !defined(DSP)
   
 	#endif
+  start = get_usec();
+  /****************************************************************************
+    * Get the command line arguments.
+    ****************************************************************************/
+    
+    infilename = "klomp.pgm";
+
+    /****************************************************************************
+    * Read in the image. This read function allocates memory for the image.
+    ****************************************************************************/
+    if(VERBOSE) printf("Reading the image %s.\n", infilename);
+    if(read_pgm_image(infilename, &image, &rows, &cols) == 0)
+    {
+        fprintf(stderr, "Error reading the input image, %s.\n", infilename);
+        exit(1);
+    }
+
+    for (i = 0; i < rows*cols; i++)
+    {
+        pool_notify_DataBuf[i] = image[i];
+    }
+    // NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,1);
+
+
+    /****************************************************************************
+    * Perform the edge detection. All of the work takes place here.
+    ****************************************************************************/
+    if(VERBOSE) printf("Starting Canny edge detection.\n");
+    if(dirfilename != NULL)
+    {
+        sprintf(composedfname, "%s_s_%3.2f_l_%3.2f_h_%3.2f.fim", infilename,
+                sigma, tlow, thigh);
+        dirfilename = composedfname;
+    }
 
 	#if defined(DSP)
     POOL_writeback (POOL_makePoolId(processorId, SAMPLE_POOL_ID),
                     pool_notify_DataBuf,
                     pool_notify_BufferSize);
-
+/*
     POOL_translateAddr ( POOL_makePoolId(processorId, SAMPLE_POOL_ID),
                          (void*)&buf_dsp,
                          AddrType_Dsp,
                          (Void *) pool_notify_DataBuf,
                          AddrType_Usr) ;
+  */  
     NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,1);
+    // printf("buf_dsp: %d\n", (int)buf_dsp[0]);
+
+    // canny_main();
+/********************************************************************************/
+
+
     
-    start = get_usec();
-    canny_main();
-    //sem_wait(&sem);
+
+
+     canny(image, rows, cols, sigma, tlow, thigh, &edge, dirfilename);
+
+
+    /****************************************************************************
+    * Write out the edge image to a file.
+    *****************************************************************************/
+    sprintf(outfilename, "%s_s_%3.2f_l_%3.2f_h_%3.2f.pgm", infilename,
+            sigma, tlow, thigh);
+    if(VERBOSE) printf("Writing the edge iname in the file %s.\n", outfilename);
+    if(write_pgm_image(outfilename, edge, rows, cols, "", 255) == 0)
+    {
+        fprintf(stderr, "Error writing the edge image, %s.\n", outfilename);
+        exit(1);
+    }
+        
+    free(image);
+    free(edge);
+    
+
+/********************************************************************************/    
+
+    
+    // sem_wait(&sem);
+    printf("Sum execution time : %lld us.\n", get_usec()-start);
+
 
 	#endif
-  printf("Sum execution time : %lld us.\n", get_usec()-start);
 
     
     //test= pool_notify_DataBuf[0]+(pool_notify_DataBuf[1] << 8);
@@ -664,7 +747,7 @@ STATIC Void pool_notify_Notify (Uint32 eventNo, Pvoid arg, Pvoid info)
     } 
     else 
 	{
-        printf(" Result on DSP is %d \n", (int)info);
+        printf(" Time on DSP is %d \n", (int)info);
     }
 }
 
