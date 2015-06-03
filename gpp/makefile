@@ -71,6 +71,7 @@ ALL_CFLAGS := $(INCLUDES)                   \
               -mabi=aapcs-linux             \
               -O3                           \
               -mfloat-abi=softfp	    	\
+              -mfpu=neon					\
               $(CFLAGS)
 
 #   ----------------------------------------------------------------------------

@@ -55,9 +55,9 @@
 
 #define VERBOSE 0
 #define BOOSTBLURFACTOR 90.0
-#define PART 15
+#define PART 60
 extern unsigned char * pool_notify_DataBuf;
-
+#include <arm_neon.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -158,7 +158,6 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
         exit(1);
     }
     apply_hysteresis(magnitude, nms, rows, cols, tlow, thigh, *edge);
-    timeCheck();
     printf("apply_hysteresis computed.\t"); timeCheck();
     /****************************************************************************
     * Free all of the memory that we allocated except for the edge image that
@@ -329,15 +328,17 @@ void derrivative_x_y(short int *smoothedim, int rows, int cols,
 *******************************************************************************/
 short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma)
 {
-    int r, c, rr, cc,     /* Counter variables. */
-        windowsize,       /* Dimension of the gaussian kernel. */
+    int r, c, rr, cc, i, x,     /* Counter variables. */
+        windowsize,      /* Dimension of the gaussian kernel. */
         center;           /* Half of the windowsize. */
     float *tempim,        /* Buffer for separable filter gaussian smoothing. */
           *kernel,        /* A one dimensional gaussian kernel. */
           dot,            /* Dot product summing variable. */
           sum;            /* Sum of the kernel weights variable. */
     short int* smoothedim;
-
+	//int count;
+	//float32x4_t  vec1, vec2;
+    //float32_t im[4],kr[4];
 
     /****************************************************************************
     * Create a 1-dimensional gaussian smoothing kernel.
@@ -383,6 +384,70 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
             }
             tempim[r*cols+c] = dot/sum;
         }
+        /*for (c = 0; c < center; c++)
+        {
+             dot = 0.0;
+            sum = 0.0;
+            for(cc=(-center); cc<=center; cc++)
+            {
+                if((c+cc) >= 0)
+                {
+                    dot += (float)image[r*cols+(c+cc)] * kernel[center+cc];
+                    sum += kernel[center+cc];
+                }
+            }
+            tempim[r*cols+c] = dot/sum;
+        }
+        for(c=center; c<cols-center; c++)
+        {
+            dot = 0.0;
+            sum = 0.0;
+            x = 0 ;   
+            for(cc=(-center); cc<=center; cc++)
+            {
+                
+                  
+                    if (x==4)
+                    {
+                        x=0;
+                    }
+                    for (count = 0; count < 4; count++)
+                    {
+                        vec1 = vmovq_n_f32(0);
+                        vec2 = vmovq_n_f32(0);
+                        im[count]= (float)image[r*cols+(c+cc+count+(4*x))];
+                        kr[count]= kernel[center+cc+count+(4*x)]; 
+                        x++;
+                    }
+                    vec1 = vld1q_f32 (im);
+                    vec2 = vld1q_f32 (kr);
+                    vec1 = vmulq_f32(vec1,vec2);
+
+                    vst1q_f32 (im, vec1);
+
+                    for (i= 0; i < 4; i++)
+                    {
+                        dot += im[i];   
+                    }
+                    sum += kernel[center+cc];
+                
+            }
+            tempim[r*cols+c] = dot/sum;
+        }
+        for (c = cols-center; c < cols; c++)
+        {
+            dot = 0.0;
+            sum = 0.0;
+            for(cc=(-center); cc<=center; cc++)
+            {
+                if((c+cc) < cols)
+                {
+                    dot += (float)image[r*cols+(c+cc)] * kernel[center+cc];
+                    sum += kernel[center+cc];
+                }
+            }
+            tempim[r*cols+c] = dot/sum;
+        }*/
     }
 
     /****************************************************************************

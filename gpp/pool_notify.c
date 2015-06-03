@@ -1,6 +1,6 @@
 #include<stdlib.h>
 #include<stdio.h>
-
+#include <arm_neon.h>
 #include <semaphore.h>
 /*  ----------------------------------- DSP/BIOS Link                   */
 #include <dsplink.h>
