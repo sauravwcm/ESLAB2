@@ -446,18 +446,15 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
 
                 for (count = 0; count < 4; count++)
                 {                     
-                    im[count]= (float)image[r*cols+(c+cc+count)]; //takes the last pixel extra
-                    
-
-                    if (cc==(center-4) && count ==3) //remove hard coding from cc
+                    im[count]= (float)image[r*cols+(c+cc+count)]; //takes the last pixel extra  
+                    if (cc>(center-4) && count ==3) 
                     {
                         kr[count]=0; 
                     }
                     else
                     {
                         kr[count]= kernel[count+cc+center];  
-                    }  
-
+                    }
                 }
                         
                 vec1 = vld1q_f32 (im);
