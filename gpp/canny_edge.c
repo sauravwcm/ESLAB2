@@ -333,11 +333,10 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     int r, c, rr, cc, i,count,     /* Counter variables. */
         windowsize,        /* Dimension of the gaussian kernel. */
         center;            /* Half of the windowsize. */
-    float *tempim,
-          *tempim1,          /* Buffer for separable filter gaussian smoothing. */
+    float *tempim,          /* Buffer for separable filter gaussian smoothing. */
           *kernel,        /* A one dimensional gaussian kernel. */
           dot,            /* Dot product summing variable. */
-          sum;            /* Sum of the kernel weights variable. */
+          sum, ksum;            /* Sum of the kernel weights variable. */
   short int* smoothedim;
 
     float32x4_t  vec1, vec2;
@@ -349,15 +348,14 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     ****************************************************************************/
     if(VERBOSE) printf("   Computing the gaussian smoothing kernel.\n");
     make_gaussian_kernel(sigma, &kernel, &windowsize);
-    /*printf("\n\n kernel values\n");
-    for (i = 0; i < windowsize; i++)
-    {
-        printf("%f \t", kernel[i]);
-    }
-    printf("\n---------------------------------------------\n");*/
-
+   
     center = windowsize / 2;
 
+    ksum = 0.0;
+    for (i = 0; i < windowsize; i++)           
+    {
+        ksum+=kernel[i];
+    }
 
     /****************************************************************************
     * Allocate a temporary buffer image and the smoothed image.
@@ -365,11 +363,6 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     if((tempim = (float *) malloc(rows*cols* sizeof(float))) == NULL)
     {
         fprintf(stderr, "Error allocating the buffer image.\n");
-        exit(1);
-    }
-
-     if((tempim1 = (float *) malloc(rows*cols* sizeof(float))) == NULL)
-    {
         exit(1);
     }
 
@@ -386,37 +379,9 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     if(VERBOSE) printf("   Bluring the image in the X-direction.\n");
     for(r=0+PART; r<rows; r++)
     {
-        for(c=0; c<cols; c++)
-        {
-            dot = 0.0;
-            sum = 0.0;
-            for(cc=(-center); cc<=center; cc++)
-            {
-                if(((c+cc) >= 0) && ((c+cc) < cols))
-                {
-                    dot += (float)image[r*cols+(c+cc)] * kernel[center+cc];
-                    /*printf("image index:%d \t",r*cols+(c+cc));
-                    printf("kernel index:%d \t\n\n",center+cc);*/
-                    sum += kernel[center+cc];
-                }
-            }
-            tempim[r*cols+c] = dot/sum;
-        }
-    }
-
-
-    printf("\n\n From Normanl \n");
-    printf(" tempim[323] :%f\n",tempim[323]);
-    printf(" tempim[1759] :%f\n",tempim[1759]);
-    printf(" tempim[698] :%f\n",tempim[698]);
-    printf(" tempim[76795] :%f\n\n",tempim[76795]);
-    printf(" tempim[18878] :%f\n\n",tempim[18878]);
-    /****************************************************************************/
-     for(r=0+PART; r<rows; r++)
-    {
         for (c = 0; c < center; c++)
         {
-             dot = 0.0;
+            dot = 0.0;
             sum = 0.0;
             for(cc=(-center); cc<=center; cc++)
             {
@@ -426,19 +391,13 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
                     sum += kernel[center+cc];
                 }
             }
-            tempim1[r*cols+c] = dot/sum;
+            tempim[r*cols+c] = dot/sum;
         }
 
-            sum = 0.0;
-        for (i = 0; i < windowsize; i++)
-        {
-            sum+=kernel[i];
-        }
-
+    
         for(c=center; c<cols-center; c++)
         {
-            dot = 0.0;
-               
+            dot = 0.0;   
             for(cc=(-center); cc<=center; cc+=4)  
             {
                 vec1 = vmovq_n_f32(0);
@@ -446,14 +405,88 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
 
                 for (count = 0; count < 4; count++)
                 {                     
-                    im[count]= (float)image[r*cols+(c+cc+count)]; //takes the last pixel extra  
-                    if (cc>(center-4) && count ==3) 
+                    im[count]= (float)image[r*cols+(c+cc+count)]; 
+                    
+                    if (cc<=(center-4) || count !=3) // restructure
                     {
-                        kr[count]=0; 
+                        kr[count]= kernel[count+cc+center];
                     }
                     else
                     {
-                        kr[count]= kernel[count+cc+center];  
+                        kr[count]=0; 
+                    }
+                }
+                        
+                vec1 = vld1q_f32 (im);
+                vec2 = vld1q_f32 (kr);
+                vec1 = vmulq_f32(vec1,vec2);
+
+                vst1q_f32 (im, vec1);
+                        
+                              
+                for (i= 0; i < 4; i++)              // sum on neon???
+                {
+                    dot += im[i];   
+                }
+                    
+            } 
+            tempim[r*cols+c] = dot/ksum;
+        }
+        for (c = cols-center; c < cols; c++)
+        {
+            dot = 0.0;
+            sum = 0.0;
+            for(cc=(-center); cc<=center; cc++)
+            {
+                if((c+cc) < cols)
+                {
+                    dot += (float)image[r*cols+(c+cc)] * kernel[center+cc];
+                    sum += kernel[center+cc];
+                }
+            }
+            tempim[r*cols+c] = dot/sum;
+        }
+    }
+    
+    /****************************************************************************
+    * Blur in the y - direction.
+    ****************************************************************************/
+    if(VERBOSE) printf("   Bluring the image in the Y-direction.\n");
+    for(c=0; c<cols; c++)
+    {
+        for (r = 0+PART; r < center; r++)
+        {
+            dot = 0.0;
+            sum = 0.0;
+            for(rr=(-center); rr<=center; rr++)
+            {
+                if((r+rr) >= 0)
+                {
+                    dot += tempim[(r+rr)*cols+c] * kernel[center+rr];
+                    sum += kernel[center+rr];
+                }
+            }
+            smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR/sum + 0.5);
+        }
+        for(r=center; r<rows-center; r++)
+        {
+            dot = 0.0;
+               
+            for(rr=(-center); rr<=center; rr+=4)  
+            {
+                vec1 = vmovq_n_f32(0);
+                vec2 = vmovq_n_f32(0);    
+
+                for (count = 0; count < 4; count++)
+                {                     
+                    im[count]= tempim[(r+rr+count)*cols+c]; //takes the last pixel extra  
+                    if (rr<=(center-4) || count !=3)         //restructure
+                    {
+                        kr[count]= kernel[count+rr+center];
+                    }
+                    else
+                    {
+                        kr[count]=0;
                     }
                 }
                         
@@ -468,62 +501,29 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
                 {
                     dot += im[i];   
                 }
-                        //sum += kernel[center+cc]; // within this central portion all values get added
+                    
             } 
-            tempim1[r*cols+c] = dot/sum;
+            smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR/ksum + 0.5);
         }
-        for (c = cols-center; c < cols; c++)
+        for (r = rows-center; r < rows; r++)
         {
             dot = 0.0;
             sum = 0.0;
-            for(cc=(-center); cc<=center; cc++)
-            {
-                if((c+cc) < cols)
-                {
-                    dot += (float)image[r*cols+(c+cc)] * kernel[center+cc];
-                    sum += kernel[center+cc];
-                }
-            }
-            tempim1[r*cols+c] = dot/sum;
-        }
-    }
-        
-    printf("\n\n From NEON execution \n");
-    printf(" tempim1[323] :%f\n",tempim1[323]);
-    printf(" tempim1[1759] :%f\n",tempim1[1759]);
-    printf(" tempim1[698] :%f\n",tempim1[698]);
-    printf(" tempim1[76795] :%f\n\n",tempim1[76795]);
-    printf(" tempim1[18878] :%f\n\n",tempim1[18878]);
-
-    /*****************************************************************************/
-
-    
-    /****************************************************************************
-    * Blur in the y - direction.
-    ****************************************************************************/
-    if(VERBOSE) printf("   Bluring the image in the Y-direction.\n");
-    for(c=0; c<cols; c++)
-    {
-        for(r=0+PART; r<rows; r++)
-        {
-            sum = 0.0;
-            dot = 0.0;
             for(rr=(-center); rr<=center; rr++)
             {
-                if(((r+rr) >= 0) && ((r+rr) < rows))
+                if((r+rr) < cols)
                 {
                     dot += tempim[(r+rr)*cols+c] * kernel[center+rr];
                     sum += kernel[center+rr];
                 }
             }
             smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR/sum + 0.5);
-        }
+        }    
     }
 
 
 
     free(tempim);
-    free(tempim1);
     free(kernel);
     
     printf("ARM smoothedim created\t"); timeCheck();

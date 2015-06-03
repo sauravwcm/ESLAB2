@@ -1,6 +1,6 @@
 ;******************************************************************************
 ;* TMS320C6x C/C++ Codegen                                       Unix v6.1.17 *
-;* Date/Time created: Wed Jun  3 22:03:48 2015                                *
+;* Date/Time created: Thu Jun  4 00:01:38 2015                                *
 ;******************************************************************************
 	.compiler_opts --c64p_l1d_workaround=default --disable:=sploop --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
 
@@ -236,7 +236,7 @@ $C$DW$51	.dwtag  DW_TAG_variable, DW_AT_name("length")
 	.dwattr $C$DW$51, DW_AT_type(*$C$DW$T$10)
 	.dwattr $C$DW$51, DW_AT_external
 _count$1:	.usect	".far",4,4
-;	/data/usr/local/share/c6000/bin/opt6x /tmp/02584p2IOxd /tmp/02584Rb0Hik 
+;	/data/usr/local/share/c6000/bin/opt6x /tmp/04318kpCoNu /tmp/04318K2lS39 
 	.sect	".text"
 	.clink
 	.global	_make_gaussian_kernel
@@ -657,7 +657,7 @@ $C$L7:
            ; BRANCH OCCURS {B3}              ; |277| 
 
 $C$DW$73	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$73, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L6:1:1433361828")
+	.dwattr $C$DW$73, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L6:1:1433368898")
 	.dwattr $C$DW$73, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$73, DW_AT_TI_begin_line(0x106)
 	.dwattr $C$DW$73, DW_AT_TI_end_line(0x106)
@@ -668,7 +668,7 @@ $C$DW$74	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$75	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$75, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L4:1:1433361828")
+	.dwattr $C$DW$75, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L4:1:1433368898")
 	.dwattr $C$DW$75, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$75, DW_AT_TI_begin_line(0x114)
 	.dwattr $C$DW$75, DW_AT_TI_end_line(0x114)
@@ -682,7 +682,7 @@ $C$DW$77	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$78	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$78, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L2:1:1433361828")
+	.dwattr $C$DW$78, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L2:1:1433368898")
 	.dwattr $C$DW$78, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$78, DW_AT_TI_begin_line(0x109)
 	.dwattr $C$DW$78, DW_AT_TI_end_line(0x112)
@@ -1908,7 +1908,7 @@ $C$DW$L$_gaussian_smooth$58$B:
 $C$DW$L$_gaussian_smooth$58$E:
 
 $C$DW$122	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$122, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L32:1:1433361828")
+	.dwattr $C$DW$122, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L32:1:1433368898")
 	.dwattr $C$DW$122, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$122, DW_AT_TI_begin_line(0xee)
 	.dwattr $C$DW$122, DW_AT_TI_end_line(0x106)
@@ -1919,7 +1919,7 @@ $C$DW$123	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$124	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$124, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L30:1:1433361828")
+	.dwattr $C$DW$124, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L30:1:1433368898")
 	.dwattr $C$DW$124, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$124, DW_AT_TI_begin_line(0xb6)
 	.dwattr $C$DW$124, DW_AT_TI_end_line(0xb6)
@@ -1930,7 +1930,7 @@ $C$DW$125	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$126	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$126, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L28:1:1433361828")
+	.dwattr $C$DW$126, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L28:1:1433368898")
 	.dwattr $C$DW$126, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$126, DW_AT_TI_begin_line(0xbc)
 	.dwattr $C$DW$126, DW_AT_TI_end_line(0xbc)
@@ -1941,7 +1941,7 @@ $C$DW$127	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$128	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$128, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L20:1:1433361828")
+	.dwattr $C$DW$128, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L20:1:1433368898")
 	.dwattr $C$DW$128, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$128, DW_AT_TI_begin_line(0xd8)
 	.dwattr $C$DW$128, DW_AT_TI_end_line(0xe8)
@@ -1956,7 +1956,7 @@ $C$DW$131	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$131, DW_AT_high_pc($C$DW$L$_gaussian_smooth$49$E)
 
 $C$DW$132	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$132, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L21:2:1433361828")
+	.dwattr $C$DW$132, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L21:2:1433368898")
 	.dwattr $C$DW$132, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$132, DW_AT_TI_begin_line(0xda)
 	.dwattr $C$DW$132, DW_AT_TI_end_line(0xe7)
@@ -1977,7 +1977,7 @@ $C$DW$137	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$137, DW_AT_high_pc($C$DW$L$_gaussian_smooth$48$E)
 
 $C$DW$138	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$138, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L22:3:1433361828")
+	.dwattr $C$DW$138, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L22:3:1433368898")
 	.dwattr $C$DW$138, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$138, DW_AT_TI_begin_line(0xde)
 	.dwattr $C$DW$138, DW_AT_TI_end_line(0xe5)
@@ -2004,7 +2004,7 @@ $C$DW$143	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$144	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$144, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L13:1:1433361828")
+	.dwattr $C$DW$144, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L13:1:1433368898")
 	.dwattr $C$DW$144, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$144, DW_AT_TI_begin_line(0xc2)
 	.dwattr $C$DW$144, DW_AT_TI_end_line(0xd2)
@@ -2019,7 +2019,7 @@ $C$DW$147	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$147, DW_AT_high_pc($C$DW$L$_gaussian_smooth$34$E)
 
 $C$DW$148	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$148, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L14:2:1433361828")
+	.dwattr $C$DW$148, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L14:2:1433368898")
 	.dwattr $C$DW$148, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$148, DW_AT_TI_begin_line(0xc4)
 	.dwattr $C$DW$148, DW_AT_TI_end_line(0xd1)
@@ -2037,7 +2037,7 @@ $C$DW$152	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$152, DW_AT_high_pc($C$DW$L$_gaussian_smooth$33$E)
 
 $C$DW$153	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$153, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L15:3:1433361828")
+	.dwattr $C$DW$153, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L15:3:1433368898")
 	.dwattr $C$DW$153, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$153, DW_AT_TI_begin_line(0xc8)
 	.dwattr $C$DW$153, DW_AT_TI_end_line(0xcf)
@@ -2064,7 +2064,7 @@ $C$DW$158	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$159	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$159, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L11:1:1433361828")
+	.dwattr $C$DW$159, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L11:1:1433368898")
 	.dwattr $C$DW$159, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$159, DW_AT_TI_begin_line(0x114)
 	.dwattr $C$DW$159, DW_AT_TI_end_line(0x114)
@@ -2078,7 +2078,7 @@ $C$DW$161	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$162	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$162, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L9:1:1433361828")
+	.dwattr $C$DW$162, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L9:1:1433368898")
 	.dwattr $C$DW$162, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$162, DW_AT_TI_begin_line(0x109)
 	.dwattr $C$DW$162, DW_AT_TI_end_line(0x112)
@@ -2486,7 +2486,7 @@ $C$DW$168	.dwtag  DW_TAG_TI_branch
            ; BRANCH OCCURS {B3}              ; |150| 
 
 $C$DW$169	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$169, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L38:1:1433361828")
+	.dwattr $C$DW$169, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L38:1:1433368898")
 	.dwattr $C$DW$169, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$169, DW_AT_TI_begin_line(0x91)
 	.dwattr $C$DW$169, DW_AT_TI_end_line(0x95)
@@ -2497,7 +2497,7 @@ $C$DW$170	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$171	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$171, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L34:1:1433361828")
+	.dwattr $C$DW$171, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L34:1:1433368898")
 	.dwattr $C$DW$171, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$171, DW_AT_TI_begin_line(0x91)
 	.dwattr $C$DW$171, DW_AT_TI_end_line(0x95)
@@ -3060,7 +3060,7 @@ $C$DW$186	.dwtag  DW_TAG_TI_branch
            ; BRANCH OCCURS {B3}              ; |299| 
 
 $C$DW$187	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$187, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L45:1:1433361828")
+	.dwattr $C$DW$187, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L45:1:1433368898")
 	.dwattr $C$DW$187, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$187, DW_AT_TI_begin_line(0x91)
 	.dwattr $C$DW$187, DW_AT_TI_end_line(0x95)
@@ -3071,7 +3071,7 @@ $C$DW$188	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$189	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$189, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L41:1:1433361828")
+	.dwattr $C$DW$189, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/task.asm:$C$L41:1:1433368898")
 	.dwattr $C$DW$189, DW_AT_TI_begin_file("task.c")
 	.dwattr $C$DW$189, DW_AT_TI_begin_line(0x91)
 	.dwattr $C$DW$189, DW_AT_TI_end_line(0x95)
