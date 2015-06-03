@@ -21,13 +21,31 @@
 #include <task.h>
 
 
+
 #define VERBOSE 0
 #define BOOSTBLURFACTOR 90.0
 
-#define PART 15     // SHOULD NOT BE GREATER THAN 60 (DSP MEMORY CONSTRAINTS).
+#define PART 1     // SHOULD NOT BE GREATER THAN 60 (DSP MEMORY CONSTRAINTS).
 
 extern Uint16 MPCSXFER_BufferSize ;
 
+
+/******************************************************************************/
+// float to fixed
+
+typedef int Fixed;
+
+#define FRACT_BITS 16
+#define FRACT_BITS_D2 8
+#define FIXED_ONE (1 << FRACT_BITS)
+#define INT2FIXED(x) ((x) << FRACT_BITS)
+#define FLOAT2FIXED(x) ((int)((x) * (1 << FRACT_BITS))) 
+#define FIXED2INT(x) ((x) >> FRACT_BITS)
+#define FIXED2DOUBLE(x) (((double)(x)) / (1 << FRACT_BITS))
+#define FIXED2FLOAT(x) (((float)(x)) / (1 << FRACT_BITS))
+#define MULT(x, y) ( ((x) >> FRACT_BITS_D2) * ((y)>> FRACT_BITS_D2) )
+
+/******************************************************************************/
 
 
 void canny_dsp();
@@ -139,10 +157,10 @@ void canny_dsp()
 *******************************************************************************/
 short int * gaussian_smooth(unsigned char *image, int rows, int cols, float sigma)
 {
-    int r, c, rr, cc, i,     /* Counter variables. */
+    int r, c, rr, cc,      /* Counter variables. */
         windowsize,        /* Dimension of the gaussian kernel. */
         center;            /* Half of the windowsize. */
-    float *tempim,        /* Buffer for separable filter gaussian smoothing. */
+    float *tempim,          /* Buffer for separable filter gaussian smoothing. */
           *kernel,        /* A one dimensional gaussian kernel. */
           dot,            /* Dot product summing variable. */
           sum;            /* Sum of the kernel weights variable. */
@@ -163,6 +181,7 @@ short int * gaussian_smooth(unsigned char *image, int rows, int cols, float sigm
     {
         exit(1);
     }
+   
     
     if(((smoothedim) = (short int *) malloc(rows*cols*sizeof(short int))) == NULL)
     {
@@ -224,6 +243,16 @@ void make_gaussian_kernel(float sigma, float **kernel, int *windowsize)
     int i, center;
     float x, fx, sum=0.0;
 
+    Fixed FX_x, FX_sigma,FX_c1,FX_c2, FX_inter ;
+
+    FX_sigma =  FLOAT2FIXED(2.5);
+
+    FX_c1    =  FLOAT2FIXED(2.71828);
+
+    FX_c2    =   FLOAT2FIXED(6.2831853) ;
+    
+    FX_inter = 
+
     *windowsize = 1 + 2 * ceil(2.5 * sigma);
     center = (*windowsize) / 2;
 
@@ -236,7 +265,10 @@ void make_gaussian_kernel(float sigma, float **kernel, int *windowsize)
     for(i=0; i<(*windowsize); i++)
     {
         x = (float)(i - center);
-        fx = pow(2.71828, -0.5*x*x/(sigma*sigma)) / (sigma * sqrt(6.2831853));
+        FX_x = i-center;
+
+
+        //fx = pow(2.71828, -0.5*x*x/(sigma*sigma)) / (sigma * sqrt(6.2831853));
         (*kernel)[i] = fx;
         sum += fx;
     }

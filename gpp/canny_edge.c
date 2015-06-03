@@ -55,12 +55,13 @@
 
 #define VERBOSE 0
 #define BOOSTBLURFACTOR 90.0
-#define PART 15
+#define PART 1
 extern unsigned char * pool_notify_DataBuf;
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "arm_neon.h"
 
 #include "cannyHeaders.h"
 
@@ -329,14 +330,18 @@ void derrivative_x_y(short int *smoothedim, int rows, int cols,
 *******************************************************************************/
 short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma)
 {
-    int r, c, rr, cc,     /* Counter variables. */
-        windowsize,       /* Dimension of the gaussian kernel. */
-        center;           /* Half of the windowsize. */
-    float *tempim,        /* Buffer for separable filter gaussian smoothing. */
+    int r, c, rr, cc, i,count,     /* Counter variables. */
+        windowsize,        /* Dimension of the gaussian kernel. */
+        center;            /* Half of the windowsize. */
+    float *tempim,
+          *tempim1,          /* Buffer for separable filter gaussian smoothing. */
           *kernel,        /* A one dimensional gaussian kernel. */
           dot,            /* Dot product summing variable. */
           sum;            /* Sum of the kernel weights variable. */
-    short int* smoothedim;
+  short int* smoothedim;
+
+    float32x4_t  vec1, vec2;
+    float32_t im[4],kr[4];
 
 
     /****************************************************************************
@@ -344,7 +349,13 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     ****************************************************************************/
     if(VERBOSE) printf("   Computing the gaussian smoothing kernel.\n");
     make_gaussian_kernel(sigma, &kernel, &windowsize);
-    
+    /*printf("\n\n kernel values\n");
+    for (i = 0; i < windowsize; i++)
+    {
+        printf("%f \t", kernel[i]);
+    }
+    printf("\n---------------------------------------------\n");*/
+
     center = windowsize / 2;
 
 
@@ -356,6 +367,12 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
         fprintf(stderr, "Error allocating the buffer image.\n");
         exit(1);
     }
+
+     if((tempim1 = (float *) malloc(rows*cols* sizeof(float))) == NULL)
+    {
+        exit(1);
+    }
+
     if(((smoothedim) = (short int *) malloc(rows*cols*sizeof(short int))) == NULL)
     {
         fprintf(stderr, "Error allocating the smoothed image.\n");
@@ -378,6 +395,8 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
                 if(((c+cc) >= 0) && ((c+cc) < cols))
                 {
                     dot += (float)image[r*cols+(c+cc)] * kernel[center+cc];
+                    /*printf("image index:%d \t",r*cols+(c+cc));
+                    printf("kernel index:%d \t\n\n",center+cc);*/
                     sum += kernel[center+cc];
                 }
             }
@@ -385,6 +404,103 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
         }
     }
 
+
+    printf("\n\n From Normanl \n");
+    printf(" tempim[323] :%f\n",tempim[323]);
+    printf(" tempim[1759] :%f\n",tempim[1759]);
+    printf(" tempim[698] :%f\n",tempim[698]);
+    printf(" tempim[76795] :%f\n\n",tempim[76795]);
+    printf(" tempim[18878] :%f\n\n",tempim[18878]);
+    /****************************************************************************/
+     for(r=0+PART; r<rows; r++)
+    {
+        for (c = 0; c < center; c++)
+        {
+             dot = 0.0;
+            sum = 0.0;
+            for(cc=(-center); cc<=center; cc++)
+            {
+                if((c+cc) >= 0)
+                {
+                    dot += (float)image[r*cols+(c+cc)] * kernel[center+cc];
+                    sum += kernel[center+cc];
+                }
+            }
+            tempim1[r*cols+c] = dot/sum;
+        }
+
+            sum = 0.0;
+        for (i = 0; i < windowsize; i++)
+        {
+            sum+=kernel[i];
+        }
+
+        for(c=center; c<cols-center; c++)
+        {
+            dot = 0.0;
+               
+            for(cc=(-center); cc<=center; cc+=4)  
+            {
+                vec1 = vmovq_n_f32(0);
+                vec2 = vmovq_n_f32(0);    
+
+                for (count = 0; count < 4; count++)
+                {                     
+                    im[count]= (float)image[r*cols+(c+cc+count)]; //takes the last pixel extra
+                    
+
+                    if (cc==(center-4) && count ==3) //remove hard coding from cc
+                    {
+                        kr[count]=0; 
+                    }
+                    else
+                    {
+                        kr[count]= kernel[count+cc+center];  
+                    }  
+
+                }
+                        
+                vec1 = vld1q_f32 (im);
+                vec2 = vld1q_f32 (kr);
+                vec1 = vmulq_f32(vec1,vec2);
+
+                vst1q_f32 (im, vec1);
+                        
+                              
+                for (i= 0; i < 4; i++)
+                {
+                    dot += im[i];   
+                }
+                        //sum += kernel[center+cc]; // within this central portion all values get added
+            } 
+            tempim1[r*cols+c] = dot/sum;
+        }
+        for (c = cols-center; c < cols; c++)
+        {
+            dot = 0.0;
+            sum = 0.0;
+            for(cc=(-center); cc<=center; cc++)
+            {
+                if((c+cc) < cols)
+                {
+                    dot += (float)image[r*cols+(c+cc)] * kernel[center+cc];
+                    sum += kernel[center+cc];
+                }
+            }
+            tempim1[r*cols+c] = dot/sum;
+        }
+    }
+        
+    printf("\n\n From NEON execution \n");
+    printf(" tempim1[323] :%f\n",tempim1[323]);
+    printf(" tempim1[1759] :%f\n",tempim1[1759]);
+    printf(" tempim1[698] :%f\n",tempim1[698]);
+    printf(" tempim1[76795] :%f\n\n",tempim1[76795]);
+    printf(" tempim1[18878] :%f\n\n",tempim1[18878]);
+
+    /*****************************************************************************/
+
+    
     /****************************************************************************
     * Blur in the y - direction.
     ****************************************************************************/
@@ -408,7 +524,9 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     }
 
 
+
     free(tempim);
+    free(tempim1);
     free(kernel);
     
     printf("ARM smoothedim created\t"); timeCheck();
