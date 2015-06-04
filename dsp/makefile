@@ -27,7 +27,7 @@ PROJNAME := pool_notify
 DEBUG :=
 CFLAGS := -I$(BASE_BSL)/dsp/include -DP__ROFILE -s -mw
 LDFLAGS := -i$(BASE_BSL)/dsp/lib
-CSRCS := task.c pool_notify_config.c dsp_main.c
+CSRCS := task.c pool_notify_config.c dsp_main.c dsp_fixed.c
 ASRCS :=
 BIOSTCF := pool_notify.tcf
 OBJS :=
@@ -61,7 +61,8 @@ BFLAGS := -Dconfig.importPath="$(BASE_SABIOS)/packages; \
 #   ----------------------------------------------------------------------------
 #   All common compiler and linker flags
 #   ----------------------------------------------------------------------------
-ALL_CFLAGS := -q -pdr -pdv -pden -ml3 -mv6400+ --disable:sploop $(CFLAGS)
+#ALL_CFLAGS := -q -pdr -pdv -pden -ml3 -mv6400+ --disable:sploop $(CFLAGS)
+ALL_CFLAGS := -q -pdr -pdv -pden -ml3 -mv6400+ $(CFLAGS)
 ALL_LDFLAGS := -z -c -q -x $(LDFLAGS)
 
 #   ----------------------------------------------------------------------------

@@ -1,8 +1,8 @@
 ;******************************************************************************
 ;* TMS320C6x C/C++ Codegen                                       Unix v6.1.17 *
-;* Date/Time created: Thu Jun  4 00:01:39 2015                                *
+;* Date/Time created: Thu Jun  4 19:47:48 2015                                *
 ;******************************************************************************
-	.compiler_opts --c64p_l1d_workaround=default --disable:=sploop --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
+	.compiler_opts --c64p_l1d_workaround=default --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
 
 ;******************************************************************************
 ;* GLOBAL FILE PARAMETERS                                                     *
@@ -92,7 +92,7 @@ $C$DW$5	.dwtag  DW_TAG_variable, DW_AT_name("POOL_config")
 	.dwattr $C$DW$5, DW_AT_location[DW_OP_addr _POOL_config]
 	.dwattr $C$DW$5, DW_AT_type(*$C$DW$T$55)
 	.dwattr $C$DW$5, DW_AT_external
-;	/data/usr/local/share/c6000/bin/opt6x /tmp/0432413icZj /tmp/04324XI2qDD 
+;	/data/usr/local/share/c6000/bin/opt6x /tmp/08276aEx6MH /tmp/08276SEiO2M 
 ;*****************************************************************************
 ;* UNDEFINED EXTERNAL REFERENCES                                             *
 ;*****************************************************************************

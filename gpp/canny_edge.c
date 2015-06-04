@@ -52,19 +52,44 @@
 *                     defined in radians counterclockwise from the x direction.
 *                     (Mike Heath)
 *******************************************************************************/
+#include "cannyHeaders.h"
+#define FIXEDPT_WBITS 16
+
+//Fixed point library
+#include "fixedptc.h"
+#define FIXED			fixedpt
+#define FLOAT2FX(x)		fixedpt_rconst(x)
+#define INT2FX(x)		fixedpt_fromint(x)
+#define FX2INT(x)		fixedpt_toint(x)
+#define FX2FLOAT(x)		fixedpt_tofloat(x)
+#define SQRT(x)			fixedpt_sqrt(x)
+#define MUL(x, y)		fixedpt_xmul(x, y) 
+#define DIV(x, y)		fixedpt_xdiv(x, y)
+#define POW(x, y)		fixedpt_pow(x, y)
+#define EXP(x)			fixedpt_exp(x)
 
 #define VERBOSE 0
 #define BOOSTBLURFACTOR 90.0
-#define PART 1
-extern unsigned char * pool_notify_DataBuf;
-
+#define PART 60
+extern FIXED * pool_notify_DataBuf;
+#include <arm_neon.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "arm_neon.h"
-
 #include "cannyHeaders.h"
 
+
+// approximative quadword float inverse square root
+static inline float32x4_t invsqrtv(float32x4_t x) {
+    float32x4_t sqrt_reciprocal = vrsqrteq_f32(x);
+    
+    return vrsqrtsq_f32(x * sqrt_reciprocal, sqrt_reciprocal) * sqrt_reciprocal;
+}
+        
+// approximative quadword float square root
+static inline float32x4_t sqrtv(float32x4_t x) {
+    return x * invsqrtv(x);
+}
 /*******************************************************************************
 * PROCEDURE: canny
 * PURPOSE: To perform canny edge detection.
@@ -95,7 +120,7 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
     if(VERBOSE) printf("Computing the X and Y first derivatives.\n");
     derrivative_x_y(smoothedim, rows, cols, &delta_x, &delta_y);
     
-    printf("derrivative_x_y computed.\t"); timeCheck();
+   // printf("derrivative_x_y computed.\t"); timeCheck();
     /****************************************************************************
     * This option to write out the direction of the edge gradient was added
     * to make the information available for computing an edge quality figure
@@ -136,7 +161,7 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
 
     if(VERBOSE) printf("Computing the magnitude of the gradient.\n");
     magnitude_x_y(delta_x, delta_y, rows, cols, magnitude);
-    printf("magnitude_x_y computed.\t"); timeCheck();
+    //printf("magnitude_x_y computed.\t"); timeCheck();
     /****************************************************************************
     * Perform non-maximal suppression.
     ****************************************************************************/
@@ -148,7 +173,7 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
     }
     non_max_supp(magnitude, delta_x, delta_y, rows, cols, nms);
     
-    printf("non_max_supp computed\t"); timeCheck();
+    //printf("non_max_supp computed\t"); timeCheck();
     /****************************************************************************
     * Use hysteresis to mark the edge pixels.
     ****************************************************************************/
@@ -159,8 +184,7 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
         exit(1);
     }
     apply_hysteresis(magnitude, nms, rows, cols, tlow, thigh, *edge);
-    timeCheck();
-    printf("apply_hysteresis computed.\t"); timeCheck();
+    //printf("apply_hysteresis computed.\t"); timeCheck();
     /****************************************************************************
     * Free all of the memory that we allocated except for the edge image that
     * is still being used to store out result.
@@ -258,17 +282,50 @@ double angle_radians(double x, double y)
 void magnitude_x_y(short int *delta_x, short int *delta_y, int rows, int cols,
                    short int *magnitude)
 {
-    int r, c, pos, sq1, sq2;
+    int i=0;
 
-    for(r=0,pos=0; r<rows; r++)
+    float32x4_t vec1,vec2;
+    float32_t *dxptr, *dyptr;
+
+    if((dxptr = (float32_t *) malloc(rows*cols* sizeof(float32_t))) == NULL)
     {
-        for(c=0; c<cols; c++,pos++)
-        {
-            sq1 = (int)delta_x[pos] * (int)delta_x[pos];
-            sq2 = (int)delta_y[pos] * (int)delta_y[pos];
-            magnitude[pos] = (short)(0.5 + sqrt((float)sq1 + (float)sq2));
-        }
+        fprintf(stderr, "Error allocating the buffer image.\n");
+        exit(1);
     }
+    if((dyptr = (float32_t *) malloc(rows*cols* sizeof(float32_t))) == NULL)
+    {
+        fprintf(stderr, "Error allocating the buffer image.\n");
+        exit(1);
+    }
+
+    for (i = 0; i < rows*cols; i++)
+    {
+       dxptr[i] = (float32_t)delta_x[i];
+       dyptr[i] = (float32_t)delta_y[i];
+    }
+
+    for (i = 0; i < rows*cols; i+=4)
+    {            
+        vec1= vld1q_f32 (dxptr+i); 
+        vec2= vld1q_f32 (dyptr+i);
+        
+        vec1= vmulq_f32(vec1,vec1);
+        vec2= vmulq_f32(vec2,vec2);
+
+        vec1= vaddq_f32(vec1,vec2);
+
+        vec2= vmovq_n_f32(0.5);     
+        vec1=sqrtv(vec1);
+        vec1= vaddq_f32(vec1,vec2);
+        vst1q_f32 (dxptr+i, vec1);
+
+    }
+    for (i = 0; i < rows*cols; i++)
+    {
+        magnitude[i]=(short)dxptr[i];
+    }
+    free(dxptr);
+    free(dyptr);
 }
 
 
@@ -322,6 +379,8 @@ void derrivative_x_y(short int *smoothedim, int rows, int cols,
    }
 }
 
+
+
 /*******************************************************************************
 * PROCEDURE: gaussian_smooth
 * PURPOSE: Blur an image with a gaussian filter.
@@ -330,17 +389,30 @@ void derrivative_x_y(short int *smoothedim, int rows, int cols,
 *******************************************************************************/
 short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma)
 {
-    int r, c, rr, cc, i,count,     /* Counter variables. */
+    int r, c, rr, cc, i,     /* Counter variables. */
         windowsize,        /* Dimension of the gaussian kernel. */
         center;            /* Half of the windowsize. */
     float *tempim,          /* Buffer for separable filter gaussian smoothing. */
           *kernel,        /* A one dimensional gaussian kernel. */
-          dot,            /* Dot product summing variable. */
-          sum, ksum;            /* Sum of the kernel weights variable. */
+          dot, dot1,            /* Dot product summing variable. */
+          sum;            /* Sum of the kernel weights variable. */
   short int* smoothedim;
 
     float32x4_t  vec1, vec2;
-    float32_t im[4],kr[4];
+    float32_t im[4];
+
+    float32_t *imptr, *krptr;
+
+    if((imptr = (float32_t *) malloc(rows*cols* sizeof(float32_t))) == NULL)
+    {
+        fprintf(stderr, "Error allocating the buffer image.\n");
+        exit(1);
+    }
+
+    for (i = 0; i < rows*cols; i++)
+    {
+        imptr[i] = (float32_t)image[i];
+    }
 
 
     /****************************************************************************
@@ -349,13 +421,8 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     if(VERBOSE) printf("   Computing the gaussian smoothing kernel.\n");
     make_gaussian_kernel(sigma, &kernel, &windowsize);
    
+    krptr=(float32_t*)kernel;
     center = windowsize / 2;
-
-    ksum = 0.0;
-    for (i = 0; i < windowsize; i++)           
-    {
-        ksum+=kernel[i];
-    }
 
     /****************************************************************************
     * Allocate a temporary buffer image and the smoothed image.
@@ -375,9 +442,9 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     /****************************************************************************
     * Blur in the x - direction.
     ****************************************************************************/
-    timeCheck();
+    //timeCheck();
     if(VERBOSE) printf("   Bluring the image in the X-direction.\n");
-    for(r=0+PART; r<rows; r++)
+    for(r=0+PART-center; r<rows; r++)   //PART number of rows smoothed on DSP
     {
         for (c = 0; c < center; c++)
         {
@@ -393,45 +460,26 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
             }
             tempim[r*cols+c] = dot/sum;
         }
-
     
         for(c=center; c<cols-center; c++)
         {
             dot = 0.0;   
             for(cc=(-center); cc<=center; cc+=4)  
             {
-                vec1 = vmovq_n_f32(0);
-                vec2 = vmovq_n_f32(0);    
-
-                for (count = 0; count < 4; count++)
-                {                     
-                    im[count]= (float)image[r*cols+(c+cc+count)]; 
-                    
-                    if (cc<=(center-4) || count !=3) // restructure
-                    {
-                        kr[count]= kernel[count+cc+center];
-                    }
-                    else
-                    {
-                        kr[count]=0; 
-                    }
-                }
-                        
-                vec1 = vld1q_f32 (im);
-                vec2 = vld1q_f32 (kr);
+                vec1 = vld1q_f32 (imptr+r*cols+(c+cc));  
+                vec2 = vld1q_f32 (krptr+cc+center);
                 vec1 = vmulq_f32(vec1,vec2);
-
                 vst1q_f32 (im, vec1);
-                        
-                              
-                for (i= 0; i < 4; i++)              // sum on neon???
+                                  
+                for (i= 0; i < 4; i++)
                 {
                     dot += im[i];   
                 }
                     
             } 
-            tempim[r*cols+c] = dot/ksum;
+            tempim[r*cols+c] = dot;
         }
+
         for (c = cols-center; c < cols; c++)
         {
             dot = 0.0;
@@ -447,64 +495,50 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
             tempim[r*cols+c] = dot/sum;
         }
     }
-    
+    printf("tempin: %f\t%f\t%f\t%f\n\n \n",tempim[49800], tempim[49801], tempim[49802], tempim[49803]);
+    float32_t kr[4];
     /****************************************************************************
     * Blur in the y - direction.
     ****************************************************************************/
     if(VERBOSE) printf("   Bluring the image in the Y-direction.\n");
     for(c=0; c<cols; c++)
     {
-        for (r = 0+PART; r < center; r++)
-        {
-            dot = 0.0;
-            sum = 0.0;
-            for(rr=(-center); rr<=center; rr++)
-            {
-                if((r+rr) >= 0)
-                {
-                    dot += tempim[(r+rr)*cols+c] * kernel[center+rr];
-                    sum += kernel[center+rr];
-                }
-            }
-            smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR/sum + 0.5);
-        }
-        for(r=center; r<rows-center; r++)
+
+        
+        for(r=0+PART; r<rows-center; r++)
         {
             dot = 0.0;
                
             for(rr=(-center); rr<=center; rr+=4)  
             {
-                vec1 = vmovq_n_f32(0);
-                vec2 = vmovq_n_f32(0);    
+                if(c==200 && r==150 && rr==5)
+                printf("tempim in first \t \t: %f\t%f\t%f\t%f\n",tempim[(r+rr)*cols+c], tempim[(r+rr)*cols+c+1], tempim[(r+rr)*cols+c+2], tempim[(r+rr)*cols+c+3]);
 
-                for (count = 0; count < 4; count++)
-                {                     
-                    im[count]= tempim[(r+rr+count)*cols+c]; //takes the last pixel extra  
-                    if (rr<=(center-4) || count !=3)         //restructure
-                    {
-                        kr[count]= kernel[count+rr+center];
-                    }
-                    else
-                    {
-                        kr[count]=0;
-                    }
-                }
-                        
-                vec1 = vld1q_f32 (im);
-                vec2 = vld1q_f32 (kr);
+                vec1 = vld1q_f32 (tempim+(r+rr)*cols+c);
+
+                vst1q_f32(im,vec1);    
+                if(c==200 && r==150 && rr==5)
+                printf("tempin in first from vec\t \t: %f\t%f\t%f\t%f\n\n\n",im[0],im[1],im[2],im[3]);
+
+                vec2 = vld1q_f32 (krptr+rr+center);  
+               
                 vec1 = vmulq_f32(vec1,vec2);
+                
 
-                vst1q_f32 (im, vec1);
-                        
-                              
                 for (i= 0; i < 4; i++)
                 {
                     dot += im[i];   
                 }
                     
             } 
-            smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR/ksum + 0.5);
+            //smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR + 0.5);
         }
+        if (c==210)
+        {
+            printf("dot: 1st part new code: %f\n",dot );
+        }
+        
+
         for (r = rows-center; r < rows; r++)
         {
             dot = 0.0;
@@ -517,15 +551,85 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
                     sum += kernel[center+rr];
                 }
             }
-            smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR/sum + 0.5);
+            //smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR/sum + 0.5);
+        }
+            
+        for(r=0+PART; r<rows-center; r++)
+        {
+            dot1 = 0.0;
+               
+            for(rr=(-center); rr<=center; rr+=4)  
+            {                
+                im[0]= tempim[(r+rr)*cols+c];   
+                im[1]= tempim[(r+rr+1)*cols+c];
+                im[2]= tempim[(r+rr+2)*cols+c];
+                im[3]= tempim[(r+rr+3)*cols+c];
+
+                kr[0]=  kernel[rr+center];
+                kr[1]=  kernel[1+rr+center];
+                kr[2]=  kernel[2+rr+center];
+
+                if (rr<=(center-4))
+                {
+                    kr[3]=  kernel[rr+center+3];
+                }
+                else
+                {
+                    kr[3]=0;
+                }    
+                
+                if(c==200 && r==150 && rr==5)
+                printf("tempin from second \t \t: %f\t%f\t%f\t%f\n",tempim[(r+rr)*cols+c], tempim[(r+rr)*cols+c+1], tempim[(r+rr)*cols+c+2], tempim[(r+rr)*cols+c+3]);
+
+                vec1 = vld1q_f32 (im); 
+
+                vst1q_f32(im,vec1);    
+                if(c==200 && r==150 && rr==5)
+                printf("tempin from second from vec \t\t: %f\t%f\t%f\t%f\n\n\n",im[0],im[1],im[2],im[3]);
+            
+                 
+                vec2 = vld1q_f32 (kr);                
+
+                vec1 = vmulq_f32(vec1,vec2);
+
+                vst1q_f32 (im, vec1);
+
+                                    
+                for (i= 0; i < 4; i++)
+                {
+                    dot1 += im[i];   
+                }
+                    
+            } 
+            smoothedim[r*cols+c] = (short int)(dot1*BOOSTBLURFACTOR + 0.5);
+        }
+            if(c==210)
+            printf("dot1: 1st part old code: %f\n",dot1 );
+        for (r = rows-center; r < rows; r++)
+        {
+            dot1 = 0.0;
+            sum = 0.0;
+            for(rr=(-center); rr<=center; rr++)
+            {
+                if((r+rr) < cols)
+                {
+                    dot1 += tempim[(r+rr)*cols+c] * kernel[center+rr];
+                    sum += kernel[center+rr];
+                }
+            }
+            smoothedim[r*cols+c] = (short int)(dot1*BOOSTBLURFACTOR/sum + 0.5);
         }    
     }
 
-
+    /*int xxx =0 ;                   
+    for (xxx =64010 ; xxx < 64030; xxx++)
+    {
+        printf("smoothedim[%d] : %d \n",xxx,smoothedim[xxx]);
+    }*/
 
     free(tempim);
     free(kernel);
-    
+    free(imptr);
     printf("ARM smoothedim created\t"); timeCheck();
     sync();															// Wait for DSP
     comb_smoothedim(smoothedim, cols);								// Combine smoothedim created by DSP and ARM
@@ -538,7 +642,9 @@ void comb_smoothedim(short int * smoothedim, int cols)
 	int i;
 	for (i = 0; i < (PART*320); i++)
     {
-      smoothedim[i]=pool_notify_DataBuf[2*i]+(pool_notify_DataBuf[2*i +1] << 8);
+    	smoothedim[i] = (short int)FX2INT(pool_notify_DataBuf[i]);
+    	//printf("smoothedim -- %d\n", smoothedim[i]);
+      //smoothedim[i]=pool_notify_DataBuf[2*i]+(pool_notify_DataBuf[2*i +1] << 8);
     }
 }
 /*******************************************************************************

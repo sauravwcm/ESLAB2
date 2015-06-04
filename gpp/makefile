@@ -72,7 +72,6 @@ ALL_CFLAGS := $(INCLUDES)                   \
               -O3                           \
               -mfloat-abi=softfp	    	\
               -mfpu=neon					\
-              -ftree-vectorize				\
               $(CFLAGS)
 
 #   ----------------------------------------------------------------------------

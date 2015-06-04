@@ -1,8 +1,8 @@
 ;******************************************************************************
 ;* TMS320C6x C/C++ Codegen                                       Unix v6.1.17 *
-;* Date/Time created: Thu Jun  4 00:01:39 2015                                *
+;* Date/Time created: Thu Jun  4 19:47:50 2015                                *
 ;******************************************************************************
-	.compiler_opts --c64p_l1d_workaround=default --disable:=sploop --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
+	.compiler_opts --c64p_l1d_workaround=default --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
 
 ;******************************************************************************
 ;* GLOBAL FILE PARAMETERS                                                     *
@@ -32,7 +32,7 @@ $C$DW$CU	.dwtag  DW_TAG_compile_unit
 	.dwattr $C$DW$CU, DW_AT_producer("TMS320C6x C/C++ Codegen Unix v6.1.17 Copyright (c) 1996-2010 Texas Instruments Incorporated")
 	.dwattr $C$DW$CU, DW_AT_TI_version(0x01)
 	.dwattr $C$DW$CU, DW_AT_comp_dir("/home/ubuntu/esLAB/mod_pool_notify/dsp")
-;	/data/usr/local/share/c6000/bin/opt6x /tmp/04336zXXbEx /tmp/04336JB7qCi 
+;	/data/usr/local/share/c6000/bin/opt6x /tmp/08294ILwgCF /tmp/08294aSyhvG 
 
 ;******************************************************************************
 ;* TYPE INFORMATION                                                           *
