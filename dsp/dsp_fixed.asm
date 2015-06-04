@@ -1,6 +1,6 @@
 ;******************************************************************************
 ;* TMS320C6x C/C++ Codegen                                       Unix v6.1.17 *
-;* Date/Time created: Thu Jun  4 19:47:49 2015                                *
+;* Date/Time created: Thu Jun  4 23:55:56 2015                                *
 ;******************************************************************************
 	.compiler_opts --c64p_l1d_workaround=default --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
 
@@ -91,7 +91,7 @@ $C$DW$11	.dwtag  DW_TAG_variable, DW_AT_name("$P$T0$1")
 	.dwattr $C$DW$11, DW_AT_TI_symbol_name("_$P$T0$1")
 	.dwattr $C$DW$11, DW_AT_type(*$C$DW$T$40)
 	.dwattr $C$DW$11, DW_AT_location[DW_OP_addr _$P$T0$1]
-;	/data/usr/local/share/c6000/bin/opt6x /tmp/08288AJyar3 /tmp/08288qSlbZP 
+;	/data/usr/local/share/c6000/bin/opt6x /tmp/12835e20Qnd /tmp/12835cviWOj 
 	.sect	".text"
 	.clink
 	.global	_make_gaussian_kernel
@@ -1066,7 +1066,7 @@ $C$DW$34	.dwtag  DW_TAG_TI_branch
            ; BRANCH OCCURS {B3}              ; |135| 
 
 $C$DW$35	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$35, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L13:1:1433440069")
+	.dwattr $C$DW$35, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L13:1:1433454956")
 	.dwattr $C$DW$35, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$35, DW_AT_TI_begin_line(0x7c)
 	.dwattr $C$DW$35, DW_AT_TI_end_line(0x7c)
@@ -1077,7 +1077,7 @@ $C$DW$36	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$37	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$37, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L11:1:1433440069")
+	.dwattr $C$DW$37, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L11:1:1433454956")
 	.dwattr $C$DW$37, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$37, DW_AT_TI_begin_line(0x86)
 	.dwattr $C$DW$37, DW_AT_TI_end_line(0x86)
@@ -1091,7 +1091,7 @@ $C$DW$39	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$40	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$40, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L2:1:1433440069")
+	.dwattr $C$DW$40, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L2:1:1433454956")
 	.dwattr $C$DW$40, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$40, DW_AT_TI_begin_line(0x7e)
 	.dwattr $C$DW$40, DW_AT_TI_end_line(0x84)
@@ -1130,7 +1130,7 @@ $C$DW$51	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$51, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$27$E)
 
 $C$DW$52	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$52, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L6:2:1433440069")
+	.dwattr $C$DW$52, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L6:2:1433454956")
 	.dwattr $C$DW$52, DW_AT_TI_begin_file("fixedptc.h")
 	.dwattr $C$DW$52, DW_AT_TI_begin_line(0xf6)
 	.dwattr $C$DW$52, DW_AT_TI_end_line(0xf9)
@@ -1141,7 +1141,7 @@ $C$DW$53	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$54	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$54, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L8:2:1433440069")
+	.dwattr $C$DW$54, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L8:2:1433454956")
 	.dwattr $C$DW$54, DW_AT_TI_begin_file("fixedptc.h")
 	.dwattr $C$DW$54, DW_AT_TI_begin_line(0xfe)
 	.dwattr $C$DW$54, DW_AT_TI_end_line(0xff)
@@ -2232,7 +2232,7 @@ $C$DW$L$_gaussian_smooth$34$B:
 $C$DW$L$_gaussian_smooth$34$E:
 
 $C$DW$69	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$69, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L34:1:1433440069")
+	.dwattr $C$DW$69, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L34:1:1433454956")
 	.dwattr $C$DW$69, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$69, DW_AT_TI_begin_line(0x31)
 	.dwattr $C$DW$69, DW_AT_TI_end_line(0x6e)
@@ -2243,7 +2243,7 @@ $C$DW$70	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$71	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$71, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L24:1:1433440069")
+	.dwattr $C$DW$71, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L24:1:1433454956")
 	.dwattr $C$DW$71, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$71, DW_AT_TI_begin_line(0x51)
 	.dwattr $C$DW$71, DW_AT_TI_end_line(0x68)
@@ -2258,7 +2258,7 @@ $C$DW$74	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$74, DW_AT_high_pc($C$DW$L$_gaussian_smooth$29$E)
 
 $C$DW$75	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$75, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L25:2:1433440069")
+	.dwattr $C$DW$75, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L25:2:1433454956")
 	.dwattr $C$DW$75, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$75, DW_AT_TI_begin_line(0x55)
 	.dwattr $C$DW$75, DW_AT_TI_end_line(0x67)
@@ -2279,7 +2279,7 @@ $C$DW$80	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$80, DW_AT_high_pc($C$DW$L$_gaussian_smooth$28$E)
 
 $C$DW$81	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$81, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L27:3:1433440069")
+	.dwattr $C$DW$81, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L27:3:1433454956")
 	.dwattr $C$DW$81, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$81, DW_AT_TI_begin_line(0x5b)
 	.dwattr $C$DW$81, DW_AT_TI_end_line(0x62)
@@ -2294,7 +2294,7 @@ $C$DW$82	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$83	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$83, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L15:1:1433440069")
+	.dwattr $C$DW$83, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L15:1:1433454956")
 	.dwattr $C$DW$83, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$83, DW_AT_TI_begin_line(0x37)
 	.dwattr $C$DW$83, DW_AT_TI_end_line(0x4c)
@@ -2309,7 +2309,7 @@ $C$DW$86	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$86, DW_AT_high_pc($C$DW$L$_gaussian_smooth$16$E)
 
 $C$DW$87	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$87, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L16:2:1433440069")
+	.dwattr $C$DW$87, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L16:2:1433454956")
 	.dwattr $C$DW$87, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$87, DW_AT_TI_begin_line(0x3b)
 	.dwattr $C$DW$87, DW_AT_TI_end_line(0x4b)
@@ -2330,7 +2330,7 @@ $C$DW$92	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$92, DW_AT_high_pc($C$DW$L$_gaussian_smooth$15$E)
 
 $C$DW$93	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$93, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L18:3:1433440069")
+	.dwattr $C$DW$93, DW_AT_name("/home/ubuntu/esLAB/mod_pool_notify/dsp/dsp_fixed.asm:$C$L18:3:1433454956")
 	.dwattr $C$DW$93, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$93, DW_AT_TI_begin_line(0x41)
 	.dwattr $C$DW$93, DW_AT_TI_end_line(0x48)

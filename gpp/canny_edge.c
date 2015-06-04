@@ -394,7 +394,7 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
         center;            /* Half of the windowsize. */
     float *tempim,          /* Buffer for separable filter gaussian smoothing. */
           *kernel,        /* A one dimensional gaussian kernel. */
-          dot, dot1,            /* Dot product summing variable. */
+          dot,            /* Dot product summing variable. */
           sum;            /* Sum of the kernel weights variable. */
   short int* smoothedim;
 
@@ -495,8 +495,6 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
             tempim[r*cols+c] = dot/sum;
         }
     }
-    printf("tempin: %f\t%f\t%f\t%f\n\n \n",tempim[49800], tempim[49801], tempim[49802], tempim[49803]);
-    float32_t kr[4];
     /****************************************************************************
     * Blur in the y - direction.
     ****************************************************************************/
@@ -504,26 +502,17 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     for(c=0; c<cols; c++)
     {
 
-        
         for(r=0+PART; r<rows-center; r++)
         {
             dot = 0.0;
                
             for(rr=(-center); rr<=center; rr+=4)  
             {
-                if(c==200 && r==150 && rr==5)
-                printf("tempim in first \t \t: %f\t%f\t%f\t%f\n",tempim[(r+rr)*cols+c], tempim[(r+rr)*cols+c+1], tempim[(r+rr)*cols+c+2], tempim[(r+rr)*cols+c+3]);
-
                 vec1 = vld1q_f32 (tempim+(r+rr)*cols+c);
-
-                vst1q_f32(im,vec1);    
-                if(c==200 && r==150 && rr==5)
-                printf("tempin in first from vec\t \t: %f\t%f\t%f\t%f\n\n\n",im[0],im[1],im[2],im[3]);
-
                 vec2 = vld1q_f32 (krptr+rr+center);  
                
                 vec1 = vmulq_f32(vec1,vec2);
-                
+                vst1q_f32 (im, vec1);
 
                 for (i= 0; i < 4; i++)
                 {
@@ -531,14 +520,9 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
                 }
                     
             } 
-            //smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR + 0.5);
+            smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR + 0.5);
         }
-        if (c==210)
-        {
-            printf("dot: 1st part new code: %f\n",dot );
-        }
-        
-
+    
         for (r = rows-center; r < rows; r++)
         {
             dot = 0.0;
@@ -551,81 +535,11 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
                     sum += kernel[center+rr];
                 }
             }
-            //smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR/sum + 0.5);
+            smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR/sum + 0.5);
         }
-            
-        for(r=0+PART; r<rows-center; r++)
-        {
-            dot1 = 0.0;
-               
-            for(rr=(-center); rr<=center; rr+=4)  
-            {                
-                im[0]= tempim[(r+rr)*cols+c];   
-                im[1]= tempim[(r+rr+1)*cols+c];
-                im[2]= tempim[(r+rr+2)*cols+c];
-                im[3]= tempim[(r+rr+3)*cols+c];
-
-                kr[0]=  kernel[rr+center];
-                kr[1]=  kernel[1+rr+center];
-                kr[2]=  kernel[2+rr+center];
-
-                if (rr<=(center-4))
-                {
-                    kr[3]=  kernel[rr+center+3];
-                }
-                else
-                {
-                    kr[3]=0;
-                }    
-                
-                if(c==200 && r==150 && rr==5)
-                printf("tempin from second \t \t: %f\t%f\t%f\t%f\n",tempim[(r+rr)*cols+c], tempim[(r+rr)*cols+c+1], tempim[(r+rr)*cols+c+2], tempim[(r+rr)*cols+c+3]);
-
-                vec1 = vld1q_f32 (im); 
-
-                vst1q_f32(im,vec1);    
-                if(c==200 && r==150 && rr==5)
-                printf("tempin from second from vec \t\t: %f\t%f\t%f\t%f\n\n\n",im[0],im[1],im[2],im[3]);
-            
-                 
-                vec2 = vld1q_f32 (kr);                
-
-                vec1 = vmulq_f32(vec1,vec2);
-
-                vst1q_f32 (im, vec1);
-
-                                    
-                for (i= 0; i < 4; i++)
-                {
-                    dot1 += im[i];   
-                }
-                    
-            } 
-            smoothedim[r*cols+c] = (short int)(dot1*BOOSTBLURFACTOR + 0.5);
-        }
-            if(c==210)
-            printf("dot1: 1st part old code: %f\n",dot1 );
-        for (r = rows-center; r < rows; r++)
-        {
-            dot1 = 0.0;
-            sum = 0.0;
-            for(rr=(-center); rr<=center; rr++)
-            {
-                if((r+rr) < cols)
-                {
-                    dot1 += tempim[(r+rr)*cols+c] * kernel[center+rr];
-                    sum += kernel[center+rr];
-                }
-            }
-            smoothedim[r*cols+c] = (short int)(dot1*BOOSTBLURFACTOR/sum + 0.5);
-        }    
+         
     }
 
-    /*int xxx =0 ;                   
-    for (xxx =64010 ; xxx < 64030; xxx++)
-    {
-        printf("smoothedim[%d] : %d \n",xxx,smoothedim[xxx]);
-    }*/
 
     free(tempim);
     free(kernel);
