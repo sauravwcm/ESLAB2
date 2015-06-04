@@ -392,12 +392,13 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     int r, c, rr, cc, i,     /* Counter variables. */
         windowsize,        /* Dimension of the gaussian kernel. */
         center;            /* Half of the windowsize. */
-    float *tempim,          /* Buffer for separable filter gaussian smoothing. */
-          *kernel,        /* A one dimensional gaussian kernel. */
-          dot,            /* Dot product summing variable. */
+    // float *tempim,          /* Buffer for separable filter gaussian smoothing. */
+       float  *kernel;        /* A one dimensional gaussian kernel. */
+        float32_t  dot,            /* Dot product summing variable. */
           sum;            /* Sum of the kernel weights variable. */
   short int* smoothedim;
 
+    float32_t * tempim;
     float32x4_t  vec1, vec2;
     float32_t im[4];
 
@@ -427,7 +428,7 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     /****************************************************************************
     * Allocate a temporary buffer image and the smoothed image.
     ****************************************************************************/
-    if((tempim = (float *) malloc(rows*cols* sizeof(float))) == NULL)
+    if((tempim = (float32_t *) malloc(rows*cols* sizeof(float32_t))) == NULL)
     {
         fprintf(stderr, "Error allocating the buffer image.\n");
         exit(1);
@@ -454,7 +455,7 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
             {
                 if((c+cc) >= 0)
                 {
-                    dot += (float)image[r*cols+(c+cc)] * kernel[center+cc];
+                    dot += imptr[r*cols+(c+cc)] * kernel[center+cc];
                     sum += kernel[center+cc];
                 }
             }
