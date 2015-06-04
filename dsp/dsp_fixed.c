@@ -12,8 +12,8 @@
 #define FX2INT(x)		fixedpt_toint(x)
 #define FX2FLOAT(x)		fixedpt_tofloat(x)
 #define SQRT(x)			fixedpt_sqrt(x)
-#define MUL(x, y)		fixedpt_mul(x, y) 
-#define DIV(x, y)		fixedpt_div(x, y)
+#define MUL(x, y)		fixedpt_xmul(x, y) 
+#define DIV(x, y)		fixedpt_xdiv(x, y)
 #define POW(x, y)		fixedpt_pow(x, y)
 #define EXP(x)			fixedpt_exp(x)
 
@@ -24,95 +24,88 @@
 #define _CONST2			fixedpt_rconst(6.2831853)
 #define _SQRTVAL		fixedpt_sqrt(_CONST2)	
 #define _SIGMASQR		MUL(_SIGMA, _SIGMA)
-#define _SIGMA_M_SQRT		MUL(_SIGMASQR, _SQRTVAL)
+#define _SIGMA_M_SQRT	MUL(_SIGMASQR, _SQRTVAL)
 
+#define PART 85
 
-/*
-long long get_usec(void);
-
-long long start;
-
-long long get_usec(void)
-{
-	long long r;
-	struct timeval t;
-	gettimeofday(&t,NULL);
-	r=t.tv_sec*1000000+t.tv_usec;
-	return r;
-}
-*/
+extern FIXED* buf;
+void notify_gpp(int ID); 
 void make_gaussian_kernel(FIXED **kernel, int *windowsize);
 
-short int * gaussian_smooth(unsigned char *image, int rows, int cols)
+void gaussian_smooth(FIXED *image, int rows, int cols)
 {
 	int r, c, rr, cc, windowsize, center;
 	FIXED *tempim, *kernel;
 	FIXED dot, sum;
-	short int* smoothedim;
-
-	//int i;
-
-	//printf("TIME KERNEL_START: %lld\n", get_usec() - start);
+	//short int* smoothedim;
+	short int temp;
+	
+	//notify_gpp(image[3]); 
 	make_gaussian_kernel(&kernel, &windowsize);
-	//printf("TIME KERNEL_END: %lld\n", get_usec() - start);
+
 	center = windowsize / 2;
 	
 	//Allocate memory to tempim
 	if((tempim	= (FIXED *) 	malloc(rows*cols* sizeof(FIXED)))	== NULL) exit(1);
-	if((smoothedim	= (short int *) malloc(rows*cols* sizeof(short int)))	== NULL) exit(1);
+	//if((smoothedim	= (short int *) malloc(rows*cols* sizeof(short int)))	== NULL) exit(1);
 	
 	//Blurring in X-direction
+	#pragma MUST_ITERATE(0, PART, 2)
+	#pragma UNROLL(2)
 	for(r=0; r<rows; r++)
 	{
+			#pragma MUST_ITERATE(0, 320, 2)
+			#pragma UNROLL(2)
         	for(c=0; c<cols; c++)
-            	{
+       		 {
                 	dot = 0;
-			sum = 0;
+					sum = 0;
+				#pragma MUST_ITERATE(0, 15, 2)	
+				#pragma UNROLL(2)
 	        	for(cc=(-center); cc<=center; cc++)
-	        	{
+	        		{
 			        if(((c+cc) >= 0) && ((c+cc) < cols))
 	        	        {
-	        	                dot += MUL(INT2FX(image[r*cols+(c+cc)]), kernel[center+cc]);
-			                sum += kernel[center+cc];
-//					printf("dot -- %f | sum -- %f\n", FX2FLOAT(dot), FX2FLOAT(sum));
+	        	                dot += MUL(image[r*cols+(c+cc)], kernel[center+cc]);
+			                	sum += kernel[center+cc];
 	        	        }
                 	}
 
 		       tempim[r*cols+c] = DIV(dot,sum);
-		}
+			}
 	}
 	
-//	for(i = 0; i < rows*cols; i++)
-//		printf("tempim -- %f\n", FX2FLOAT(tempim[i]));
-
 	//Blurring in Y-direction
+	#pragma MUST_ITERATE(0, 320, 2)
+	#pragma UNROLL(2)
 	for(c=0; c<cols; c++)
 	{
+		#pragma MUST_ITERATE(0, PART, 2)
+		#pragma UNROLL(2)
 		for(r=0; r<rows; r++)
 		{
 			sum = 0;
 			dot = 0;
+				#pragma MUST_ITERATE(0, 15, 2)
+				#pragma UNROLL(2)
 		        for(rr=(-center); rr<=center; rr++)
 		        {
-			        if(((r+rr) >= 0) && ((r+rr) < rows))
+			        if(((r+rr) >= 0) /*&& ((r+rr) < rows)*/)
 			        {
 				        dot += MUL(tempim[(r+rr)*cols+c], kernel[center+rr]);
-					sum += kernel[center+rr];
+						sum += kernel[center+rr];
+					}
 				}
-			}
-			
-			smoothedim[r*cols+c] = (short int)(FX2INT(MUL(dot, DIV(_BOOSTBLURFACTOR, sum)) + FIXEDPT_ONE_HALF));
+			buf[r*cols+c] = MUL(dot, DIV(_BOOSTBLURFACTOR, sum)) + FIXEDPT_ONE_HALF;
+			//smoothedim[r*cols+c] = (short int)(FX2INT(MUL(dot, DIV(_BOOSTBLURFACTOR, sum)) + FIXEDPT_ONE_HALF));
+			//buf[2*(r*cols+c)]	= (0x00ff) & temp;
+    		//buf[2*(r*cols+c) +1]= (0x00ff) & (temp >>8);
 		}
 	}
-
-//	for(i = 0; i < 15; i++)
-//		printf("kernel -- %f\n", FX2FLOAT(kernel[i]));
 	
-
+	//notify_gpp(buf[883]);
 	free(tempim);
 	free(kernel);
-
-	return smoothedim;
 
 }
 

@@ -19,25 +19,24 @@
 /*  ----------------------------------- Sample Headers              */
 #include <pool_notify_config.h>
 #include <task.h>
+//unsigned char * buf;
+void notify_gpp(int ID); 
 
 
 #define VERBOSE 0
 
-#define PART 60     // SHOULD NOT BE GREATER THAN 60 (DSP MEMORY CONSTRAINTS).
+#define PART 85     // SHOULD NOT BE GREATER THAN 60 (DSP MEMORY CONSTRAINTS).
 
 // Fixed point Arithmetic
 #define FIXEDPT_WBITS   16
 #include "fixedptc.h"
 #define FIXED fixedpt
+FIXED * buf;
+int length;
+//short int * gaussian_smooth(unsigned char *image, int rows, int cols);
+void gaussian_smooth(FIXED *image, int rows, int cols);
 
-short int * gaussian_smooth(unsigned char *image, int rows, int cols);
-
-
-extern Uint16 MPCSXFER_BufferSize ;
-
-
-void canny_dsp();
-
+extern Uint16 MPCSXFER_BufferSize;
 
 static Void Task_notify (Uint32 eventNo, Ptr arg, Ptr info) ;
 
@@ -114,46 +113,24 @@ Int Task_create (Task_TransferInfo ** infoPtr)
     return status ;
 }
 
-unsigned char * buf;
-int length;
-
-void canny_dsp()
-{ 
-  unsigned int i=0;
-  float sigma=2.5;
-  unsigned char * image;
-  short int *smoothedim_dsp;
-  long long start;
-
-  image = buf;
-  smoothedim_dsp = gaussian_smooth(image, PART, 320);
-
-  for (i = 0; i < (PART*320); i++)
-  {
-    buf[2*i]= (0x00ff) & smoothedim_dsp[i];
-    buf[2*i +1]= (0x00ff) & (smoothedim_dsp[i] >>8);
-  }
-}
 
 Int Task_execute (Task_TransferInfo * info)
 {
-    unsigned int i;
-
    
     //wait for semaphore
 	SEM_pend (&(info->notifySemObj), SYS_FOREVER);
 
 	//invalidate cache
     BCACHE_inv ((Ptr)buf, length, TRUE) ;
-    canny_dsp();
-    BCACHE_wbAll();
+    //call the functionality to be performed by dsp
+    gaussian_smooth(buf, PART, 320);
 
-	//call the functionality to be performed by dsp
+    BCACHE_wbAll();
    
 	//notify that we are done
     NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
 
-	  return SYS_OK;
+    return SYS_OK;
 }
 
 Int Task_delete (Task_TransferInfo * info)
@@ -188,7 +165,7 @@ static Void Task_notify (Uint32 eventNo, Ptr arg, Ptr info)
 
     count++;
     if (count==1) {
-        buf =(unsigned char *)info ;
+        buf =(FIXED *)info ;
     }
     if (count==2) {
         length = (int)info;
@@ -196,3 +173,10 @@ static Void Task_notify (Uint32 eventNo, Ptr arg, Ptr info)
 
     SEM_post(&(mpcsInfo->notifySemObj));
 }
+
+void notify_gpp(int ID) 
+{
+	    NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)ID);
+}	    
+
+

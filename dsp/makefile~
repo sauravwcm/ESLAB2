@@ -61,8 +61,7 @@ BFLAGS := -Dconfig.importPath="$(BASE_SABIOS)/packages; \
 #   ----------------------------------------------------------------------------
 #   All common compiler and linker flags
 #   ----------------------------------------------------------------------------
-#ALL_CFLAGS := -q -pdr -pdv -pden -ml3 -mv6400+ --disable:sploop $(CFLAGS)
-ALL_CFLAGS := -q -pdr -pdv -pden -ml3 -mv6400+ $(CFLAGS)
+ALL_CFLAGS := -q -pdr -pdv -pden -ml3 -mv6400+ --disable:sploop $(CFLAGS)
 ALL_LDFLAGS := -z -c -q -x $(LDFLAGS)
 
 #   ----------------------------------------------------------------------------

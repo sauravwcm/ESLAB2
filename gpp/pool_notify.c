@@ -19,6 +19,21 @@
 #include <pool_notify.h>
 //#include <pool_notify_os.h>
 
+#include "cannyHeaders.h"
+#define FIXEDPT_WBITS 16
+
+//Fixed point library
+#include "fixedptc.h"
+#define FIXED			fixedpt
+#define FLOAT2FX(x)		fixedpt_rconst(x)
+#define INT2FX(x)		fixedpt_fromint(x)
+#define FX2INT(x)		fixedpt_toint(x)
+#define FX2FLOAT(x)		fixedpt_tofloat(x)
+#define SQRT(x)			fixedpt_sqrt(x)
+#define MUL(x, y)		fixedpt_xmul(x, y) 
+#define DIV(x, y)		fixedpt_xdiv(x, y)
+#define POW(x, y)		fixedpt_pow(x, y)
+#define EXP(x)			fixedpt_exp(x)
 
 #if defined (__cplusplus)
 extern "C" {
@@ -109,7 +124,7 @@ STATIC Uint32  pool_notify_NumIterations ;
  *  ============================================================================
  */
  //short int * pool_notify_DataBuf = NULL;
-unsigned char * pool_notify_DataBuf = NULL ;
+FIXED * pool_notify_DataBuf = NULL ;
 
 /** ============================================================================
  *  @func   pool_notify_Notify
@@ -151,7 +166,6 @@ sem_t sem;
  *  ============================================================================
  */
  
-#include "cannyHeaders.h"
 
 
 NORMAL_API DSP_STATUS pool_notify_Create (	IN Char8 * dspExecutable,
@@ -402,13 +416,15 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
 	//Load image into pool buffer
     for (i = 0; i < rows*cols; i++)
     {
-        pool_notify_DataBuf[i] = image[i];
+        pool_notify_DataBuf[i] = INT2FX(image[i]);
+        //printf("image -- %d\n", pool_notify_DataBuf[i]);
     }
 
 	#if defined(DSP)
 	
 	// Write buffer to pool buffer
-	arm_writeback(processorId); 
+	arm_writeback(processorId);
+
 /*
     POOL_translateAddr ( POOL_makePoolId(processorId, SAMPLE_POOL_ID),
                          (void*)&buf_dsp,

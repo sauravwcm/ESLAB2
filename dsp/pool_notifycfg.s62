@@ -5,7 +5,7 @@
 ;; INPUT pool_notify.cdb
 
 ;; CONFIGURATION/VERSION INFORMATION
-	.asg "Wed Jun  3 23:05:51 2015", VERS$DATE
+	.asg "Thu Jun  4 16:52:50 2015", VERS$DATE
 
 ;; PROLOGUE
 	.include pool_notifycfg.h62

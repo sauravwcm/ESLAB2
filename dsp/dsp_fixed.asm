@@ -1,6 +1,6 @@
 ;******************************************************************************
 ;* TMS320C6x C/C++ Codegen                                       Unix v6.1.17 *
-;* Date/Time created: Wed Jun  3 23:05:53 2015                                *
+;* Date/Time created: Thu Jun  4 16:52:52 2015                                *
 ;******************************************************************************
 	.compiler_opts --c64p_l1d_workaround=default --disable:=sploop --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
 
@@ -41,7 +41,7 @@ $C$DW$1	.dwtag  DW_TAG_subprogram, DW_AT_name("modf")
 $C$DW$2	.dwtag  DW_TAG_formal_parameter
 	.dwattr $C$DW$2, DW_AT_type(*$C$DW$T$17)
 $C$DW$3	.dwtag  DW_TAG_formal_parameter
-	.dwattr $C$DW$3, DW_AT_type(*$C$DW$T$55)
+	.dwattr $C$DW$3, DW_AT_type(*$C$DW$T$53)
 	.dwendtag $C$DW$1
 
 
@@ -72,6 +72,11 @@ $C$DW$9	.dwtag  DW_TAG_formal_parameter
 	.dwattr $C$DW$9, DW_AT_type(*$C$DW$T$10)
 	.dwendtag $C$DW$8
 
+$C$DW$10	.dwtag  DW_TAG_variable, DW_AT_name("buf")
+	.dwattr $C$DW$10, DW_AT_TI_symbol_name("_buf")
+	.dwattr $C$DW$10, DW_AT_type(*$C$DW$T$29)
+	.dwattr $C$DW$10, DW_AT_declaration
+	.dwattr $C$DW$10, DW_AT_external
 	.sect	".const:_$P$T0$1"
 	.clink
 	.align	8
@@ -82,34 +87,34 @@ _$P$T0$1:
 	.field  	0,32			; _$P$T0$1[3] @ 96
 	.field  	0,32			; _$P$T0$1[4] @ 128
 
-$C$DW$10	.dwtag  DW_TAG_variable, DW_AT_name("$P$T0$1")
-	.dwattr $C$DW$10, DW_AT_TI_symbol_name("_$P$T0$1")
-	.dwattr $C$DW$10, DW_AT_type(*$C$DW$T$42)
-	.dwattr $C$DW$10, DW_AT_location[DW_OP_addr _$P$T0$1]
-;	/data/usr/local/share/c6000/bin/opt6x /tmp/04165YVoXxI /tmp/04165UXCAjP 
+$C$DW$11	.dwtag  DW_TAG_variable, DW_AT_name("$P$T0$1")
+	.dwattr $C$DW$11, DW_AT_TI_symbol_name("_$P$T0$1")
+	.dwattr $C$DW$11, DW_AT_type(*$C$DW$T$40)
+	.dwattr $C$DW$11, DW_AT_location[DW_OP_addr _$P$T0$1]
+;	/data/usr/local/share/c6000/bin/opt6x /tmp/03567rhGpgC /tmp/03567NHxKsw 
 	.sect	".text"
 	.clink
 	.global	_make_gaussian_kernel
 
-$C$DW$11	.dwtag  DW_TAG_subprogram, DW_AT_name("make_gaussian_kernel")
-	.dwattr $C$DW$11, DW_AT_low_pc(_make_gaussian_kernel)
-	.dwattr $C$DW$11, DW_AT_high_pc(0x00)
-	.dwattr $C$DW$11, DW_AT_TI_symbol_name("_make_gaussian_kernel")
-	.dwattr $C$DW$11, DW_AT_external
-	.dwattr $C$DW$11, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$11, DW_AT_TI_begin_line(0x78)
-	.dwattr $C$DW$11, DW_AT_TI_begin_column(0x06)
-	.dwattr $C$DW$11, DW_AT_frame_base[DW_OP_breg31 96]
-	.dwattr $C$DW$11, DW_AT_TI_skeletal
-	.dwpsn	file "dsp_fixed.c",line 121,column 1,is_stmt,address _make_gaussian_kernel
-$C$DW$12	.dwtag  DW_TAG_formal_parameter, DW_AT_name("kernel")
-	.dwattr $C$DW$12, DW_AT_TI_symbol_name("_kernel")
-	.dwattr $C$DW$12, DW_AT_type(*$C$DW$T$30)
-	.dwattr $C$DW$12, DW_AT_location[DW_OP_reg4]
-$C$DW$13	.dwtag  DW_TAG_formal_parameter, DW_AT_name("windowsize")
-	.dwattr $C$DW$13, DW_AT_TI_symbol_name("_windowsize")
+$C$DW$12	.dwtag  DW_TAG_subprogram, DW_AT_name("make_gaussian_kernel")
+	.dwattr $C$DW$12, DW_AT_low_pc(_make_gaussian_kernel)
+	.dwattr $C$DW$12, DW_AT_high_pc(0x00)
+	.dwattr $C$DW$12, DW_AT_TI_symbol_name("_make_gaussian_kernel")
+	.dwattr $C$DW$12, DW_AT_external
+	.dwattr $C$DW$12, DW_AT_TI_begin_file("dsp_fixed.c")
+	.dwattr $C$DW$12, DW_AT_TI_begin_line(0x71)
+	.dwattr $C$DW$12, DW_AT_TI_begin_column(0x06)
+	.dwattr $C$DW$12, DW_AT_frame_base[DW_OP_breg31 96]
+	.dwattr $C$DW$12, DW_AT_TI_skeletal
+	.dwpsn	file "dsp_fixed.c",line 114,column 1,is_stmt,address _make_gaussian_kernel
+$C$DW$13	.dwtag  DW_TAG_formal_parameter, DW_AT_name("kernel")
+	.dwattr $C$DW$13, DW_AT_TI_symbol_name("_kernel")
 	.dwattr $C$DW$13, DW_AT_type(*$C$DW$T$31)
-	.dwattr $C$DW$13, DW_AT_location[DW_OP_reg20]
+	.dwattr $C$DW$13, DW_AT_location[DW_OP_reg4]
+$C$DW$14	.dwtag  DW_TAG_formal_parameter, DW_AT_name("windowsize")
+	.dwattr $C$DW$14, DW_AT_TI_symbol_name("_windowsize")
+	.dwattr $C$DW$14, DW_AT_type(*$C$DW$T$32)
+	.dwattr $C$DW$14, DW_AT_location[DW_OP_reg20]
 
 ;******************************************************************************
 ;* FUNCTION NAME: make_gaussian_kernel                                        *
@@ -130,34 +135,34 @@ _make_gaussian_kernel:
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 9
 ;** 180	-----------------------    if ( modf(6.25, &y) > 0.0 ) goto g3;  // [5]
-;** 180	-----------------------    R$19 = y;  // [5]
+;** 180	-----------------------    R$12 = y;  // [5]
 ;** 180	-----------------------    goto g4;  // [5]
            MVKL    .S1     _modf,A3          ; |180| 
 
            MVKH    .S1     _modf,A3          ; |180| 
-||         STW     .D2T1   A11,*SP--(8)      ; |121| 
+||         STW     .D2T1   A11,*SP--(8)      ; |114| 
 
-           STW     .D2T1   A10,*SP--(8)      ; |121| 
-$C$DW$14	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$14, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$14, DW_AT_name("_modf")
-	.dwattr $C$DW$14, DW_AT_TI_call
+           STW     .D2T1   A10,*SP--(8)      ; |114| 
+$C$DW$15	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$15, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$15, DW_AT_name("_modf")
+	.dwattr $C$DW$15, DW_AT_TI_call
 
            CALL    .S2X    A3                ; |180| 
-||         STDW    .D2T2   B13:B12,*SP--     ; |121| 
+||         STDW    .D2T2   B13:B12,*SP--     ; |114| 
 
-           STDW    .D2T2   B11:B10,*SP--     ; |121| 
-           STDW    .D2T1   A15:A14,*SP--     ; |121| 
-           STDW    .D2T1   A13:A12,*SP--     ; |121| 
+           STDW    .D2T2   B11:B10,*SP--     ; |114| 
+           STDW    .D2T1   A15:A14,*SP--     ; |114| 
+           STDW    .D2T1   A13:A12,*SP--     ; |114| 
 
-           STW     .D2T2   B3,*SP--(48)      ; |121| 
+           STW     .D2T2   B3,*SP--(48)      ; |114| 
 ||         ZERO    .L1     A5
 
            ADDKPC  .S2     $C$RL0,B3,0       ; |180| 
 ||         ADD     .L2     8,SP,B4           ; |180| 
-||         MV      .D2     B4,B11            ; |121| 
+||         MV      .D2     B4,B11            ; |114| 
 ||         ZERO    .L1     A4                ; |180| 
-||         MV      .D1     A4,A10            ; |121| 
+||         MV      .D1     A4,A10            ; |114| 
 ||         MVKH    .S1     0x40190000,A5
 
 $C$RL0:    ; CALL OCCURS {_modf} {0}         ; |180| 
@@ -165,10 +170,10 @@ $C$RL0:    ; CALL OCCURS {_modf} {0}         ; |180|
 ;          EXCLUSIVE CPU CYCLES: 8
            MVKL    .S2     __cmpd,B6         ; |180| 
            MVKH    .S2     __cmpd,B6         ; |180| 
-$C$DW$15	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$15, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$15, DW_AT_name("__cmpd")
-	.dwattr $C$DW$15, DW_AT_TI_call
+$C$DW$16	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$16, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$16, DW_AT_name("__cmpd")
+	.dwattr $C$DW$16, DW_AT_TI_call
            CALL    .S2     B6                ; |180| 
            ADDKPC  .S2     $C$RL1,B3,3       ; |180| 
            ZERO    .L2     B5:B4             ; |180| 
@@ -187,123 +192,123 @@ $C$RL1:    ; CALL OCCURS {__cmpd} {0}        ; |180|
 ||         LDDW    .D2T2   *+SP(8),B7:B6     ; |180| 
 
            SET     .S2     B5,0x14,0x1d,B5
-|| [!A0]   MVKL    .S1     __addd,A3         ; |125| 
+|| [!A0]   MVKL    .S1     __addd,A3         ; |118| 
 
-   [!A0]   MVKH    .S1     __addd,A3         ; |125| 
-$C$DW$16	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$16, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$16, DW_AT_name("__addd")
-	.dwattr $C$DW$16, DW_AT_TI_call
-   [ A0]   CALL    .S2X    A3                ; |180| 
+   [!A0]   MVKH    .S1     __addd,A3         ; |118| 
 $C$DW$17	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$17, DW_AT_low_pc(0x04)
+	.dwattr $C$DW$17, DW_AT_low_pc(0x00)
 	.dwattr $C$DW$17, DW_AT_name("__addd")
 	.dwattr $C$DW$17, DW_AT_TI_call
+   [ A0]   CALL    .S2X    A3                ; |180| 
+$C$DW$18	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$18, DW_AT_low_pc(0x04)
+	.dwattr $C$DW$18, DW_AT_name("__addd")
+	.dwattr $C$DW$18, DW_AT_TI_call
 
            MV      .L1X    B8,A4             ; |180| 
-|| [!A0]   CALL    .S2X    A3                ; |125| 
+|| [!A0]   CALL    .S2X    A3                ; |118| 
 
            MV      .L1X    B9,A5             ; |180| 
            ; BRANCHCC OCCURS {$C$L1}         ; |180| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 3
 ;**	-----------------------g3:
-;** 180	-----------------------    R$19 = y+1.0;  // [5]
+;** 180	-----------------------    R$12 = y+1.0;  // [5]
            ADDKPC  .S2     $C$RL2,B3,2       ; |180| 
 $C$RL2:    ; CALL OCCURS {__addd} {0}        ; |180| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 5
-           MVKL    .S1     __addd,A3         ; |125| 
-           MVKH    .S1     __addd,A3         ; |125| 
+           MVKL    .S1     __addd,A3         ; |118| 
+           MVKH    .S1     __addd,A3         ; |118| 
            MV      .L2X    A4,B6             ; |180| 
-$C$DW$18	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$18, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$18, DW_AT_name("__addd")
-	.dwattr $C$DW$18, DW_AT_TI_call
-           CALL    .S2X    A3                ; |125| 
+$C$DW$19	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$19, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$19, DW_AT_name("__addd")
+	.dwattr $C$DW$19, DW_AT_TI_call
+           CALL    .S2X    A3                ; |118| 
            MV      .L2X    A5,B7             ; |180| 
 ;** --------------------------------------------------------------------------*
 $C$L1:    
 ;          EXCLUSIVE CPU CYCLES: 4
 ;**	-----------------------g4:
-;** 125	-----------------------    *windowsize = C$26 = (int)(R$19+R$19+1.0);
-;** 130	-----------------------    T$20 = malloc((unsigned)(C$26*4));
-;** 130	-----------------------    U$27 = T$20;
-;** 130	-----------------------    *kernel = U$27;
-;** 130	-----------------------    if ( U$27 == NULL ) goto g22;
-           MV      .L1X    B6,A4             ; |125| 
-           MV      .L1X    B7,A5             ; |125| 
-           MV      .L2     B6,B4             ; |125| 
+;** 118	-----------------------    *windowsize = C$19 = (int)(R$12+R$12+1.0);
+;** 123	-----------------------    T$13 = malloc((unsigned)(C$19*4));
+;** 123	-----------------------    U$27 = T$13;
+;** 123	-----------------------    *kernel = U$27;
+;** 123	-----------------------    if ( U$27 == NULL ) goto g22;
+           MV      .L1X    B6,A4             ; |118| 
+           MV      .L1X    B7,A5             ; |118| 
+           MV      .L2     B6,B4             ; |118| 
 
-           ADDKPC  .S2     $C$RL3,B3,0       ; |125| 
-||         MV      .L2     B7,B5             ; |125| 
+           ADDKPC  .S2     $C$RL3,B3,0       ; |118| 
+||         MV      .L2     B7,B5             ; |118| 
 
-$C$RL3:    ; CALL OCCURS {__addd} {0}        ; |125| 
+$C$RL3:    ; CALL OCCURS {__addd} {0}        ; |118| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 26
-           MVKL    .S2     __addd,B6         ; |125| 
-           MVKH    .S2     __addd,B6         ; |125| 
-$C$DW$19	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$19, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$19, DW_AT_name("__addd")
-	.dwattr $C$DW$19, DW_AT_TI_call
-           CALL    .S2     B6                ; |125| 
-           ZERO    .L2     B5
-           SET     .S2     B5,0x14,0x1d,B5
-           ADDKPC  .S2     $C$RL4,B3,1       ; |125| 
-           ZERO    .L2     B4                ; |125| 
-$C$RL4:    ; CALL OCCURS {__addd} {0}        ; |125| 
-           MVKL    .S1     __fixdi,A3        ; |125| 
-           MVKH    .S1     __fixdi,A3        ; |125| 
-           NOP             1
+           MVKL    .S2     __addd,B6         ; |118| 
+           MVKH    .S2     __addd,B6         ; |118| 
 $C$DW$20	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$20, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$20, DW_AT_name("__fixdi")
+	.dwattr $C$DW$20, DW_AT_name("__addd")
 	.dwattr $C$DW$20, DW_AT_TI_call
-           CALL    .S2X    A3                ; |125| 
-           ADDKPC  .S2     $C$RL5,B3,4       ; |125| 
-$C$RL5:    ; CALL OCCURS {__fixdi} {0}       ; |125| 
-           MVKL    .S1     _malloc,A3        ; |130| 
-           MVKH    .S1     _malloc,A3        ; |130| 
-           MV      .L1     A4,A11            ; |125| 
+           CALL    .S2     B6                ; |118| 
+           ZERO    .L2     B5
+           SET     .S2     B5,0x14,0x1d,B5
+           ADDKPC  .S2     $C$RL4,B3,1       ; |118| 
+           ZERO    .L2     B4                ; |118| 
+$C$RL4:    ; CALL OCCURS {__addd} {0}        ; |118| 
+           MVKL    .S1     __fixdi,A3        ; |118| 
+           MVKH    .S1     __fixdi,A3        ; |118| 
+           NOP             1
 $C$DW$21	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$21, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$21, DW_AT_name("_malloc")
+	.dwattr $C$DW$21, DW_AT_name("__fixdi")
 	.dwattr $C$DW$21, DW_AT_TI_call
-           CALL    .S2X    A3                ; |130| 
-           ADDKPC  .S2     $C$RL6,B3,3       ; |130| 
+           CALL    .S2X    A3                ; |118| 
+           ADDKPC  .S2     $C$RL5,B3,4       ; |118| 
+$C$RL5:    ; CALL OCCURS {__fixdi} {0}       ; |118| 
+           MVKL    .S1     _malloc,A3        ; |123| 
+           MVKH    .S1     _malloc,A3        ; |123| 
+           MV      .L1     A4,A11            ; |118| 
+$C$DW$22	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$22, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$22, DW_AT_name("_malloc")
+	.dwattr $C$DW$22, DW_AT_TI_call
+           CALL    .S2X    A3                ; |123| 
+           ADDKPC  .S2     $C$RL6,B3,3       ; |123| 
 
-           STW     .D2T1   A11,*B11          ; |125| 
-||         SHL     .S1     A11,2,A4          ; |130| 
+           STW     .D2T1   A11,*B11          ; |118| 
+||         SHL     .S1     A11,2,A4          ; |123| 
 
-$C$RL6:    ; CALL OCCURS {_malloc} {0}       ; |130| 
+$C$RL6:    ; CALL OCCURS {_malloc} {0}       ; |123| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 7
 
-           MV      .L1     A4,A0             ; |130| 
-||         MVKL    .S1     _exit,A3          ; |131| 
+           MV      .L1     A4,A0             ; |123| 
+||         MVKL    .S1     _exit,A3          ; |124| 
 
-   [!A0]   B       .S2     $C$L12            ; |130| 
-||         MVKH    .S1     _exit,A3          ; |131| 
+   [!A0]   B       .S2     $C$L12            ; |123| 
+||         MVKH    .S1     _exit,A3          ; |124| 
 
-           STW     .D1T1   A0,*A10           ; |130| 
-$C$DW$22	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$22, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$22, DW_AT_name("_exit")
-	.dwattr $C$DW$22, DW_AT_TI_call
+           STW     .D1T1   A0,*A10           ; |123| 
+$C$DW$23	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$23, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$23, DW_AT_name("_exit")
+	.dwattr $C$DW$23, DW_AT_TI_call
 
-   [!A0]   CALL    .S2X    A3                ; |131| 
-|| [ A0]   LDW     .D2T2   *B11,B5           ; |133| 
+   [!A0]   CALL    .S2X    A3                ; |124| 
+|| [ A0]   LDW     .D2T2   *B11,B5           ; |126| 
 
-           MVK     .L1     0x1,A4            ; |131| 
-           ZERO    .L1     A14               ; |123| 
-           STW     .D2T1   A0,*+SP(36)       ; |130| 
-           ; BRANCHCC OCCURS {$C$L12}        ; |130| 
+           MVK     .L1     0x1,A4            ; |124| 
+           ZERO    .L1     A14               ; |116| 
+           STW     .D2T1   A0,*+SP(36)       ; |123| 
+           ; BRANCHCC OCCURS {$C$L12}        ; |123| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 8
-;** 133	-----------------------    U$12 = *windowsize;
-;** 123	-----------------------    sum = 0;
-;** 133	-----------------------    if ( U$12 <= 0 ) goto g18;
+;** 126	-----------------------    U$12 = *windowsize;
+;** 116	-----------------------    sum = 0;
+;** 126	-----------------------    if ( U$12 <= 0 ) goto g18;
 
            MVKL    .S2     __negll,B4
 ||         SHRU    .S1     A11,31,A3
@@ -311,35 +316,35 @@ $C$DW$22	.dwtag  DW_TAG_TI_branch
 ||         MV      .D1     A0,A15
 ||         MV      .L2X    A14,B10
 
-           CMPGT   .L2     B5,0,B0           ; |133| 
+           CMPGT   .L2     B5,0,B0           ; |126| 
 ||         ADD     .L1     A11,A3,A3
 ||         MVKL    .S2     0x32440,B13
 ||         SET     .S1     A13,0x10,0x10,A13
 
-   [!B0]   B       .S2     $C$L10            ; |133| 
+   [!B0]   B       .S2     $C$L10            ; |126| 
 ||         SHR     .S1     A3,1,A4
 
            MVKH    .S2     __negll,B4
-$C$DW$23	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$23, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$23, DW_AT_name("__negll")
-	.dwattr $C$DW$23, DW_AT_TI_call
+$C$DW$24	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$24, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$24, DW_AT_name("__negll")
+	.dwattr $C$DW$24, DW_AT_TI_call
    [ B0]   CALL    .S2     B4
            SHL     .S1     A4,0x10,A4
            SHR     .S1     A4,31,A5
            MVKH    .S2     0x32440,B13
-           ; BRANCHCC OCCURS {$C$L10}        ; |133| 
+           ; BRANCHCC OCCURS {$C$L10}        ; |126| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 2
 ;**  	-----------------------    K$48 = 409600LL;
 ;**  	-----------------------    K$69 = 32768;
 ;**  	-----------------------    K$71 = (-65536);
 ;**  	-----------------------    K$154 = 65536;
-;**  	-----------------------    U$39 = -(long long)(int)((long long)(((unsigned)C$26>>31)+C$26>>1)<<16);
+;**  	-----------------------    U$39 = -(long long)(int)((long long)(((unsigned)C$19>>31)+C$19>>1)<<16);
 ;**  	-----------------------    K$169 = 411775;
 ;**  	-----------------------    K$175 = 205888;
 ;**  	-----------------------    U$200 = U$27;
-;** 133	-----------------------    i = 0;
+;** 126	-----------------------    i = 0;
 ;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
            ADDKPC  .S2     $C$RL7,B3,1
 $C$RL7:    ; CALL OCCURS {__negll} {0} 
@@ -347,98 +352,98 @@ $C$RL7:    ; CALL OCCURS {__negll} {0}
 ;          EXCLUSIVE CPU CYCLES: 8
            MV      .L1     A4,A10
 
-           SHR     .S1     A10,31,A4         ; |136| 
-||         MV      .L1     A10,A3            ; |136| 
+           SHR     .S1     A10,31,A4         ; |129| 
+||         MV      .L1     A10,A3            ; |129| 
 
-           MPY32SU .M1     A4,A3,A7:A6       ; |136| 
-           MPY32SU .M1     A4,A3,A9:A8       ; |136| 
+           MPY32SU .M1     A4,A3,A7:A6       ; |129| 
+           MPY32SU .M1     A4,A3,A9:A8       ; |129| 
 
            MV      .L1     A5,A12
-||         MPY32U  .M1     A3,A3,A5:A4       ; |136| 
+||         MPY32U  .M1     A3,A3,A5:A4       ; |129| 
 
-           MVKL    .S2     __divlli,B6       ; |136| 
-           MVKH    .S2     __divlli,B6       ; |136| 
-	.dwpsn	file "dsp_fixed.c",line 133,column 0,is_stmt
+           MVKL    .S2     __divlli,B6       ; |129| 
+           MVKH    .S2     __divlli,B6       ; |129| 
+	.dwpsn	file "dsp_fixed.c",line 126,column 0,is_stmt
 
            ZERO    .L2     B5
-||         ADD     .L1     A8,A6,A3          ; |136| 
+||         ADD     .L1     A8,A6,A3          ; |129| 
 
 ;** --------------------------------------------------------------------------*
 ;**   BEGIN LOOP $C$L2
 ;** --------------------------------------------------------------------------*
 $C$L2:    
 $C$DW$L$_make_gaussian_kernel$12$B:
-	.dwpsn	file "dsp_fixed.c",line 134,column 0,is_stmt
+	.dwpsn	file "dsp_fixed.c",line 127,column 0,is_stmt
 ;          EXCLUSIVE CPU CYCLES: 9
 ;**	-----------------------g7:
-;** 136	-----------------------    C$25 = (int)U$39;
-;** 136	-----------------------    fp = -((long long)(int)(((long long)(int)(C$25*C$25>>16)<<16)/K$48)<<15)>>16;
+;** 129	-----------------------    C$18 = (int)U$39;
+;** 129	-----------------------    fp = -((long long)(int)(((long long)(int)(C$18*C$18>>16)<<16)/K$48)<<15)>>16;
 ;** 320	-----------------------    EXP_P = $P$T0$1;  // [3]
 ;** 328	-----------------------    if ( !fp ) goto g11;  // [3]
 
-           ADD     .L1     A5,A3,A4          ; |136| 
-||         MV      .S1     A4,A3             ; |136| 
+           ADD     .L1     A5,A3,A4          ; |129| 
+||         MV      .S1     A4,A3             ; |129| 
 
-           SHL     .S1     A4,0x10,A4        ; |136| 
-           SHRU    .S2X    A3,0x10,B4        ; |136| 
-$C$DW$24	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$24, DW_AT_low_pc(0x04)
-	.dwattr $C$DW$24, DW_AT_name("__divlli")
-	.dwattr $C$DW$24, DW_AT_TI_call
+           SHL     .S1     A4,0x10,A4        ; |129| 
+           SHRU    .S2X    A3,0x10,B4        ; |129| 
+$C$DW$25	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$25, DW_AT_low_pc(0x04)
+	.dwattr $C$DW$25, DW_AT_name("__divlli")
+	.dwattr $C$DW$25, DW_AT_TI_call
 
-           OR      .L2X    A4,B4,B4          ; |136| 
-||         CALL    .S2     B6                ; |136| 
+           OR      .L2X    A4,B4,B4          ; |129| 
+||         CALL    .S2     B6                ; |129| 
 
-           SHR     .S2     B4,31,B31         ; |136| 
+           SHR     .S2     B4,31,B31         ; |129| 
 
-           MV      .L1X    B4,A3             ; |136| 
-||         SHL     .S2     B31,0x10,B4       ; |136| 
+           MV      .L1X    B4,A3             ; |129| 
+||         SHL     .S2     B31,0x10,B4       ; |129| 
 
-           SHRU    .S1     A3,0x10,A5        ; |136| 
-||         ADDKPC  .S2     $C$RL8,B3,0       ; |136| 
+           SHRU    .S1     A3,0x10,A5        ; |129| 
+||         ADDKPC  .S2     $C$RL8,B3,0       ; |129| 
 
-           OR      .L1X    A5,B4,A5          ; |136| 
+           OR      .L1X    A5,B4,A5          ; |129| 
 ||         MVKL    .S2     0x64000,B4
-||         SHL     .S1     A3,0x10,A4        ; |136| 
+||         SHL     .S1     A3,0x10,A4        ; |129| 
 
            MVKH    .S2     0x64000,B4
-$C$RL8:    ; CALL OCCURS {__divlli} {0}      ; |136| 
+$C$RL8:    ; CALL OCCURS {__divlli} {0}      ; |129| 
 $C$DW$L$_make_gaussian_kernel$12$E:
 ;** --------------------------------------------------------------------------*
 $C$DW$L$_make_gaussian_kernel$13$B:
 ;          EXCLUSIVE CPU CYCLES: 9
-           MVKL    .S1     __negll,A6        ; |136| 
-           MVKH    .S1     __negll,A6        ; |136| 
-           MV      .L1     A4,A3             ; |136| 
-$C$DW$25	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$25, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$25, DW_AT_name("__negll")
-	.dwattr $C$DW$25, DW_AT_TI_call
-           CALL    .S2X    A6                ; |136| 
-           SHRU    .S2X    A3,0x11,B5        ; |136| 
-           SHR     .S1     A4,31,A4          ; |136| 
+           MVKL    .S1     __negll,A6        ; |129| 
+           MVKH    .S1     __negll,A6        ; |129| 
+           MV      .L1     A4,A3             ; |129| 
+$C$DW$26	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$26, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$26, DW_AT_name("__negll")
+	.dwattr $C$DW$26, DW_AT_TI_call
+           CALL    .S2X    A6                ; |129| 
+           SHRU    .S2X    A3,0x11,B5        ; |129| 
+           SHR     .S1     A4,31,A4          ; |129| 
 
-           SHL     .S2X    A3,0xf,B4         ; |136| 
-||         SHL     .S1     A4,0xf,A3         ; |136| 
+           SHL     .S2X    A3,0xf,B4         ; |129| 
+||         SHL     .S1     A4,0xf,A3         ; |129| 
 
-           OR      .L1X    B5,A3,A5          ; |136| 
+           OR      .L1X    B5,A3,A5          ; |129| 
 
-           ADDKPC  .S2     $C$RL9,B3,0       ; |136| 
-||         MV      .L1X    B4,A4             ; |136| 
+           ADDKPC  .S2     $C$RL9,B3,0       ; |129| 
+||         MV      .L1X    B4,A4             ; |129| 
 
-$C$RL9:    ; CALL OCCURS {__negll} {0}       ; |136| 
+$C$RL9:    ; CALL OCCURS {__negll} {0}       ; |129| 
 $C$DW$L$_make_gaussian_kernel$13$E:
 ;** --------------------------------------------------------------------------*
 $C$DW$L$_make_gaussian_kernel$14$B:
 ;          EXCLUSIVE CPU CYCLES: 11
 
-           SHRU    .S1     A4,0x10,A3        ; |136| 
+           SHRU    .S1     A4,0x10,A3        ; |129| 
 ||         MVKL    .S2     _$P$T0$1,B4
 ||         ADD     .D2     SP,16,B8          ; |320| 
 
-           SHL     .S2X    A5,0x10,B31       ; |136| 
+           SHL     .S2X    A5,0x10,B31       ; |129| 
 
-           OR      .L2X    B31,A3,B0         ; |136| 
+           OR      .L2X    B31,A3,B0         ; |129| 
 ||         MVKH    .S2     _$P$T0$1,B4
 
            LDW     .D2T2   *+B4(16),B9       ; |320| 
@@ -471,11 +476,11 @@ $C$DW$L$_make_gaussian_kernel$15$B:
 ;** 343	-----------------------    ILP$s32x2$002 = _memd8((void *)(&EXP_P+4));  // [3]
 ;** 343	-----------------------    ILP$s32x2$003 = ((int (*)[2])EXP_P)[1];  // [3]
 ;** 343	-----------------------    ILP$s32x2$004 = _memd8((void *)(&EXP_P+12));  // [3]
-;** 343	-----------------------    C$23 = (long long)fp;  // [3]
-;** 343	-----------------------    C$24 = (int)(C$23*C$23>>16);  // [3]
-;** 343	-----------------------    xp = (int)(((long long)(int)(C$23*2LL)<<16)/(long long)((int)((long long)((int)_loll((unsigned long long)ILP$s32x2$001)+(int)((long long)((int)_loll((unsigned long long)ILP$s32x2$002)+(int)((long long)((int)_loll((unsigned long long)ILP$s32x2$003)+(int)((long long)((int)_loll((unsigned long long)ILP$s32x2$004)+(int)((long long)(int)_hill((unsigned long long)ILP$s32x2$004)*C$24>>16))*C$24>>16))*C$24>>16))*C$24>>16))*C$24>>16)-fp+K$149))+K$154;  // [3]
+;** 343	-----------------------    C$16 = (long long)fp;  // [3]
+;** 343	-----------------------    C$17 = (int)(C$16*C$16>>16);  // [3]
+;** 343	-----------------------    xp = (int)(((long long)(int)(C$16*2LL)<<16)/(long long)((int)((long long)((int)_loll((unsigned long long)ILP$s32x2$001)+(int)((long long)((int)_loll((unsigned long long)ILP$s32x2$002)+(int)((long long)((int)_loll((unsigned long long)ILP$s32x2$003)+(int)((long long)((int)_loll((unsigned long long)ILP$s32x2$004)+(int)((long long)(int)_hill((unsigned long long)ILP$s32x2$004)*C$17>>16))*C$17>>16))*C$17>>16))*C$17>>16))*C$17>>16)-fp+K$149))+K$154;  // [3]
 ;** 345	-----------------------    (k < 0) ? (k = K$154>>(-k>>16)) : (k = K$154<<(k>>16));  // [3]
-;** 135	-----------------------    R$6 = (int)((long long)k*(long long)xp>>16);  // [0]
+;** 135	-----------------------    R$1 = (int)((long long)k*(long long)xp>>16);  // [0]
 ;** 135	-----------------------    goto g12;  // [0]
 
            ZERO    .S1     A30
@@ -602,10 +607,10 @@ $C$DW$L$_make_gaussian_kernel$15$B:
            SUB     .L1X    A4,B16,A4         ; |343| 
 ||         SHL     .S2     B28,0x10,B4       ; |343| 
 
-$C$DW$26	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$26, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$26, DW_AT_name("__divlli")
-	.dwattr $C$DW$26, DW_AT_TI_call
+$C$DW$27	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$27, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$27, DW_AT_name("__divlli")
+	.dwattr $C$DW$27, DW_AT_TI_call
            CALL    .S2     B6                ; |343| 
 
            ADD     .L1     A3,A4,A6          ; |343| 
@@ -653,7 +658,7 @@ $C$L3:
 $C$DW$L$_make_gaussian_kernel$17$B:
 ;          EXCLUSIVE CPU CYCLES: 3
 ;**	-----------------------g11:
-;** 329	-----------------------    R$6 = K$154;  // [3]
+;** 329	-----------------------    R$1 = K$154;  // [3]
 
            MVKL    .S1     0x6487f,A4
 ||         MVK     .L2     0x1,B0
@@ -823,10 +828,10 @@ $C$DW$L$_make_gaussian_kernel$23$B:
 ;**  	-----------------------    #pragma MUST_ITERATE(1, 18446744073709551615, 1)
 ;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
            NOP             1
-$C$DW$27	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$27, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$27, DW_AT_name("__divlli")
-	.dwattr $C$DW$27, DW_AT_TI_call
+$C$DW$28	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$28, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$28, DW_AT_name("__divlli")
+	.dwattr $C$DW$28, DW_AT_TI_call
            CALL    .S2X    A3                ; |254| 
            NOP             2
            ZERO    .L1     A4
@@ -872,10 +877,10 @@ $C$DW$L$_make_gaussian_kernel$25$B:
 || [ A0]   MV      .L2     B12,B4            ; |254| 
 || [ A0]   B       .S1     $C$L8             ; |254| 
 
-$C$DW$28	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$28, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$28, DW_AT_name("__divlli")
-	.dwattr $C$DW$28, DW_AT_TI_call
+$C$DW$29	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$29, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$29, DW_AT_name("__divlli")
+	.dwattr $C$DW$29, DW_AT_TI_call
    [ A0]   CALL    .S2X    A3                ; |254| 
    [ A0]   SHR     .S2     B12,31,B5         ; |254| 
    [ A0]   MVK     .L1     0x6,A5
@@ -888,100 +893,100 @@ $C$L9:
 $C$DW$L$_make_gaussian_kernel$26$B:
 ;          EXCLUSIVE CPU CYCLES: 12
 ;**	-----------------------g17:
-;** 137	-----------------------    *U$200++ = C$22 = (int)(((long long)R$6<<16)/(long long)(int)((long long)l*25LL>>2));
-;** 138	-----------------------    sum += C$22;
-;** 133	-----------------------    U$39 += 65536LL;
-;** 133	-----------------------    U$12 = *windowsize;
-;** 133	-----------------------    if ( U$12 > (++i) ) goto g7;
-           MVK     .S2     25,B4             ; |137| 
-           MPYLI   .M2     B4,B12,B5:B4      ; |137| 
-           MVKL    .S2     __divlli,B6       ; |137| 
-           MVKH    .S2     __divlli,B6       ; |137| 
-           SHRU    .S2X    A11,0x10,B31      ; |137| 
-           SHRU    .S2     B4,0x2,B4         ; |137| 
-$C$DW$29	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$29, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$29, DW_AT_name("__divlli")
-	.dwattr $C$DW$29, DW_AT_TI_call
-           CALL    .S2     B6                ; |137| 
-           SHL     .S1X    B5,0x1e,A4        ; |137| 
-           OR      .L1X    A4,B4,A5          ; |137| 
-           SHR     .S1     A11,31,A3         ; |137| 
+;** 130	-----------------------    *U$200++ = C$15 = (int)(((long long)R$1<<16)/(long long)(int)((long long)l*25LL>>2));
+;** 131	-----------------------    sum += C$15;
+;** 126	-----------------------    U$39 += 65536LL;
+;** 126	-----------------------    U$12 = *windowsize;
+;** 126	-----------------------    if ( U$12 > (++i) ) goto g7;
+           MVK     .S2     25,B4             ; |130| 
+           MPYLI   .M2     B4,B12,B5:B4      ; |130| 
+           MVKL    .S2     __divlli,B6       ; |130| 
+           MVKH    .S2     __divlli,B6       ; |130| 
+           SHRU    .S2X    A11,0x10,B31      ; |130| 
+           SHRU    .S2     B4,0x2,B4         ; |130| 
+$C$DW$30	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$30, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$30, DW_AT_name("__divlli")
+	.dwattr $C$DW$30, DW_AT_TI_call
+           CALL    .S2     B6                ; |130| 
+           SHL     .S1X    B5,0x1e,A4        ; |130| 
+           OR      .L1X    A4,B4,A5          ; |130| 
+           SHR     .S1     A11,31,A3         ; |130| 
 
-           SHL     .S1     A3,0x10,A31       ; |137| 
-||         SHR     .S2X    A5,31,B5          ; |137| 
+           SHL     .S1     A3,0x10,A31       ; |130| 
+||         SHR     .S2X    A5,31,B5          ; |130| 
 
-           MV      .L2X    A5,B4             ; |137| 
-||         OR      .L1X    B31,A31,A5        ; |137| 
-||         SHL     .S1     A11,0x10,A4       ; |137| 
-||         ADDKPC  .S2     $C$RL12,B3,0      ; |137| 
+           MV      .L2X    A5,B4             ; |130| 
+||         OR      .L1X    B31,A31,A5        ; |130| 
+||         SHL     .S1     A11,0x10,A4       ; |130| 
+||         ADDKPC  .S2     $C$RL12,B3,0      ; |130| 
 
-$C$RL12:   ; CALL OCCURS {__divlli} {0}      ; |137| 
+$C$RL12:   ; CALL OCCURS {__divlli} {0}      ; |130| 
 $C$DW$L$_make_gaussian_kernel$26$E:
 ;** --------------------------------------------------------------------------*
 $C$DW$L$_make_gaussian_kernel$27$B:
 ;          EXCLUSIVE CPU CYCLES: 13
 
-           ADDU    .L1     A13,A10,A11:A10   ; |133| 
-||         ADD     .S1     A4,A14,A14        ; |138| 
-||         STW     .D1T1   A4,*A15++         ; |137| 
+           ADDU    .L1     A13,A10,A11:A10   ; |126| 
+||         ADD     .S1     A4,A14,A14        ; |131| 
+||         STW     .D1T1   A4,*A15++         ; |130| 
 
-           LDW     .D2T2   *B11,B5           ; |133| 
-||         SHR     .S1     A10,31,A4         ; |136| 
-||         MV      .L1     A10,A3            ; |136| 
+           LDW     .D2T2   *B11,B5           ; |126| 
+||         SHR     .S1     A10,31,A4         ; |129| 
+||         MV      .L1     A10,A3            ; |129| 
 
-           MPY32SU .M1     A4,A3,A9:A8       ; |136| 
-           MPY32SU .M1     A4,A3,A7:A6       ; |136| 
-           ADD     .L2     1,B10,B10         ; |133| 
-           ADD     .L1     A12,A11,A12       ; |133| 
-           CMPGT   .L2     B5,B10,B0         ; |133| 
+           MPY32SU .M1     A4,A3,A9:A8       ; |129| 
+           MPY32SU .M1     A4,A3,A7:A6       ; |129| 
+           ADD     .L2     1,B10,B10         ; |126| 
+           ADD     .L1     A12,A11,A12       ; |126| 
+           CMPGT   .L2     B5,B10,B0         ; |126| 
 
-   [ B0]   BNOP    .S1     $C$L2,4           ; |133| 
-|| [ B0]   MPY32U  .M1     A3,A3,A5:A4       ; |136| 
-|| [ B0]   MVKL    .S2     __divlli,B6       ; |136| 
+   [ B0]   BNOP    .S1     $C$L2,4           ; |126| 
+|| [ B0]   MPY32U  .M1     A3,A3,A5:A4       ; |129| 
+|| [ B0]   MVKL    .S2     __divlli,B6       ; |129| 
 || [ B0]   ZERO    .L2     B5
-||         ADD     .L1     A8,A6,A3          ; |136| 
+||         ADD     .L1     A8,A6,A3          ; |129| 
 
-	.dwpsn	file "dsp_fixed.c",line 139,column 0,is_stmt
-   [ B0]   MVKH    .S2     __divlli,B6       ; |136| 
-           ; BRANCHCC OCCURS {$C$L2}         ; |133| 
+	.dwpsn	file "dsp_fixed.c",line 132,column 0,is_stmt
+   [ B0]   MVKH    .S2     __divlli,B6       ; |129| 
+           ; BRANCHCC OCCURS {$C$L2}         ; |126| 
 $C$DW$L$_make_gaussian_kernel$27$E:
 ;** --------------------------------------------------------------------------*
 $C$L10:    
 ;          EXCLUSIVE CPU CYCLES: 7
 ;**	-----------------------g18:
-;** 141	-----------------------    if ( U$12 <= 0 ) goto g21;
+;** 134	-----------------------    if ( U$12 <= 0 ) goto g21;
 ;**  	-----------------------    U$200 = U$27;
 ;**  	-----------------------    U$208 = (long long)sum;
-;** 141	-----------------------    i = 0;
+;** 134	-----------------------    i = 0;
 ;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
 
-           CMPGT   .L2     B5,0,B0           ; |141| 
+           CMPGT   .L2     B5,0,B0           ; |134| 
 ||         LDW     .D2T1   *+SP(36),A10
 ||         SHR     .S2X    A14,31,B12
-||         ZERO    .L1     A11               ; |141| 
+||         ZERO    .L1     A11               ; |134| 
 
-   [!B0]   BNOP    .S2     $C$L14,2          ; |141| 
-|| [ B0]   MVKL    .S1     __divlli,A6       ; |141| 
+   [!B0]   BNOP    .S2     $C$L14,2          ; |134| 
+|| [ B0]   MVKL    .S1     __divlli,A6       ; |134| 
 ||         MV      .L2X    A14,B10
 
-   [ B0]   MVKH    .S1     __divlli,A6       ; |141| 
-   [ B0]   LDW     .D1T1   *A10,A3           ; |141| 
-   [!B0]   LDW     .D2T2   *++SP(48),B3      ; |142| 
-           ; BRANCHCC OCCURS {$C$L14}        ; |141| 
+   [ B0]   MVKH    .S1     __divlli,A6       ; |134| 
+   [ B0]   LDW     .D1T1   *A10,A3           ; |134| 
+   [!B0]   LDW     .D2T2   *++SP(48),B3      ; |135| 
+           ; BRANCHCC OCCURS {$C$L14}        ; |134| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 4
-           MV      .L2     B12,B5            ; |141| 
+           MV      .L2     B12,B5            ; |134| 
            NOP             1
-$C$DW$30	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$30, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$30, DW_AT_name("__divlli")
-	.dwattr $C$DW$30, DW_AT_TI_call
-           CALL    .S2X    A6                ; |141| 
-	.dwpsn	file "dsp_fixed.c",line 141,column 0,is_stmt
+$C$DW$31	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$31, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$31, DW_AT_name("__divlli")
+	.dwattr $C$DW$31, DW_AT_TI_call
+           CALL    .S2X    A6                ; |134| 
+	.dwpsn	file "dsp_fixed.c",line 134,column 0,is_stmt
 
-           MV      .L1     A3,A4             ; |141| 
-||         SHR     .S1     A3,31,A3          ; |141| 
+           MV      .L1     A3,A4             ; |134| 
+||         SHR     .S1     A3,31,A3          ; |134| 
 
 ;*----------------------------------------------------------------------------*
 ;*   SOFTWARE PIPELINE INFORMATION
@@ -991,75 +996,75 @@ $C$L11:
 $C$DW$L$_make_gaussian_kernel$30$B:
 ;          EXCLUSIVE CPU CYCLES: 4
 ;**	-----------------------g20:
-;** 141	-----------------------    A$27 = ((long long)*U$200<<16)/U$208;
-;** 141	-----------------------    *U$200++ = A$27;
-;** 141	-----------------------    if ( *windowsize > (++i) ) goto g20;
-           SHL     .S1     A3,0x10,A3        ; |141| 
-           SHRU    .S2X    A4,0x10,B4        ; |141| 
-           SHL     .S1     A4,0x10,A4        ; |141| 
+;** 134	-----------------------    A$20 = ((long long)*U$200<<16)/U$208;
+;** 134	-----------------------    *U$200++ = A$20;
+;** 134	-----------------------    if ( *windowsize > (++i) ) goto g20;
+           SHL     .S1     A3,0x10,A3        ; |134| 
+           SHRU    .S2X    A4,0x10,B4        ; |134| 
+           SHL     .S1     A4,0x10,A4        ; |134| 
 
-           ADDKPC  .S2     $C$RL13,B3,0      ; |141| 
-||         OR      .L1X    B4,A3,A5          ; |141| 
-||         MV      .L2     B10,B4            ; |141| 
+           ADDKPC  .S2     $C$RL13,B3,0      ; |134| 
+||         OR      .L1X    B4,A3,A5          ; |134| 
+||         MV      .L2     B10,B4            ; |134| 
 
-$C$RL13:   ; CALL OCCURS {__divlli} {0}      ; |141| 
+$C$RL13:   ; CALL OCCURS {__divlli} {0}      ; |134| 
 $C$DW$L$_make_gaussian_kernel$30$E:
 ;** --------------------------------------------------------------------------*
 $C$DW$L$_make_gaussian_kernel$31$B:
 ;          EXCLUSIVE CPU CYCLES: 13
-           STW     .D1T1   A4,*A10++         ; |141| 
-           LDW     .D2T2   *B11,B4           ; |141| 
-           ADD     .L1     1,A11,A11         ; |141| 
+           STW     .D1T1   A4,*A10++         ; |134| 
+           LDW     .D2T2   *B11,B4           ; |134| 
+           ADD     .L1     1,A11,A11         ; |134| 
            NOP             3
-           CMPGT   .L2X    B4,A11,B0         ; |141| 
+           CMPGT   .L2X    B4,A11,B0         ; |134| 
 
-   [ B0]   LDW     .D1T1   *A10,A3           ; |141| 
-|| [ B0]   B       .S2     $C$L11            ; |141| 
-|| [ B0]   MVKL    .S1     __divlli,A6       ; |141| 
-|| [ B0]   MV      .L2     B12,B5            ; |141| 
+   [ B0]   LDW     .D1T1   *A10,A3           ; |134| 
+|| [ B0]   B       .S2     $C$L11            ; |134| 
+|| [ B0]   MVKL    .S1     __divlli,A6       ; |134| 
+|| [ B0]   MV      .L2     B12,B5            ; |134| 
 
-   [!B0]   LDW     .D2T2   *++SP(48),B3      ; |142| 
-|| [ B0]   MVKH    .S1     __divlli,A6       ; |141| 
+   [!B0]   LDW     .D2T2   *++SP(48),B3      ; |135| 
+|| [ B0]   MVKH    .S1     __divlli,A6       ; |134| 
 
-   [!B0]   LDDW    .D2T1   *++SP,A13:A12     ; |142| 
-   [!B0]   LDDW    .D2T1   *++SP,A15:A14     ; |142| 
-$C$DW$31	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$31, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$31, DW_AT_name("__divlli")
-	.dwattr $C$DW$31, DW_AT_TI_call
+   [!B0]   LDDW    .D2T1   *++SP,A13:A12     ; |135| 
+   [!B0]   LDDW    .D2T1   *++SP,A15:A14     ; |135| 
+$C$DW$32	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$32, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$32, DW_AT_name("__divlli")
+	.dwattr $C$DW$32, DW_AT_TI_call
 
-   [ B0]   CALL    .S2X    A6                ; |141| 
-|| [!B0]   LDDW    .D2T2   *++SP,B11:B10     ; |142| 
+   [ B0]   CALL    .S2X    A6                ; |134| 
+|| [!B0]   LDDW    .D2T2   *++SP,B11:B10     ; |135| 
 
-           MV      .L1     A3,A4             ; |141| 
-|| [ B0]   SHR     .S1     A3,31,A3          ; |141| 
-|| [!B0]   LDDW    .D2T2   *++SP,B13:B12     ; |142| 
+           MV      .L1     A3,A4             ; |134| 
+|| [ B0]   SHR     .S1     A3,31,A3          ; |134| 
+|| [!B0]   LDDW    .D2T2   *++SP,B13:B12     ; |135| 
 
-           ; BRANCHCC OCCURS {$C$L11}        ; |141| 
+           ; BRANCHCC OCCURS {$C$L11}        ; |134| 
 $C$DW$L$_make_gaussian_kernel$31$E:
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 6
 ;**	-----------------------g21:
 ;**  	-----------------------    return;
-$C$DW$32	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$32, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$32, DW_AT_TI_return
+$C$DW$33	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$33, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$33, DW_AT_TI_return
 
-           RET     .S2     B3                ; |142| 
-||         LDW     .D2T1   *++SP(8),A10      ; |142| 
+           RET     .S2     B3                ; |135| 
+||         LDW     .D2T1   *++SP(8),A10      ; |135| 
 
-           LDW     .D2T1   *++SP(8),A11      ; |142| 
+           LDW     .D2T1   *++SP(8),A11      ; |135| 
            NOP             4
-           ; BRANCH OCCURS {B3}              ; |142| 
+           ; BRANCH OCCURS {B3}              ; |135| 
 ;** --------------------------------------------------------------------------*
 $C$L12:    
 ;          EXCLUSIVE CPU CYCLES: 2
 ;**	-----------------------g22:
-;** 131	-----------------------    exit(1);
+;** 124	-----------------------    exit(1);
 ;***	; the preceding call never returns
 ;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
-           ADDKPC  .S2     $C$RL14,B3,1      ; |131| 
-$C$RL14:   ; CALL OCCURS {_exit} {0}         ; |131| 
+           ADDKPC  .S2     $C$RL14,B3,1      ; |124| 
+$C$RL14:   ; CALL OCCURS {_exit} {0}         ; |124| 
 ;*----------------------------------------------------------------------------*
 ;*   SOFTWARE PIPELINE INFORMATION
 ;*      Disqualified loop: Bad loop structure
@@ -1068,152 +1073,151 @@ $C$L13:
 $C$DW$L$_make_gaussian_kernel$34$B:
 ;          EXCLUSIVE CPU CYCLES: 6
 ;**	-----------------------g23:
-;** 131	-----------------------    goto g23;
-           BNOP    .S1     $C$L13,5          ; |131| 
-           ; BRANCH OCCURS {$C$L13}          ; |131| 
+;** 124	-----------------------    goto g23;
+           BNOP    .S1     $C$L13,5          ; |124| 
+           ; BRANCH OCCURS {$C$L13}          ; |124| 
 $C$DW$L$_make_gaussian_kernel$34$E:
 ;** --------------------------------------------------------------------------*
 $C$L14:    
 ;          EXCLUSIVE CPU CYCLES: 10
-           LDDW    .D2T1   *++SP,A13:A12     ; |142| 
-           LDDW    .D2T1   *++SP,A15:A14     ; |142| 
-           LDDW    .D2T2   *++SP,B11:B10     ; |142| 
-           LDDW    .D2T2   *++SP,B13:B12     ; |142| 
-$C$DW$33	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$33, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$33, DW_AT_TI_return
+           LDDW    .D2T1   *++SP,A13:A12     ; |135| 
+           LDDW    .D2T1   *++SP,A15:A14     ; |135| 
+           LDDW    .D2T2   *++SP,B11:B10     ; |135| 
+           LDDW    .D2T2   *++SP,B13:B12     ; |135| 
+$C$DW$34	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$34, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$34, DW_AT_TI_return
 
-           RET     .S2     B3                ; |142| 
-||         LDW     .D2T1   *++SP(8),A10      ; |142| 
+           RET     .S2     B3                ; |135| 
+||         LDW     .D2T1   *++SP(8),A10      ; |135| 
 
-           LDW     .D2T1   *++SP(8),A11      ; |142| 
-	.dwpsn	file "dsp_fixed.c",line 142,column 1,is_stmt
+           LDW     .D2T1   *++SP(8),A11      ; |135| 
+	.dwpsn	file "dsp_fixed.c",line 135,column 1,is_stmt
            NOP             4
-           ; BRANCH OCCURS {B3}              ; |142| 
+           ; BRANCH OCCURS {B3}              ; |135| 
 
-$C$DW$34	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$34, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L13:1:1433365554")
-	.dwattr $C$DW$34, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$34, DW_AT_TI_begin_line(0x83)
-	.dwattr $C$DW$34, DW_AT_TI_end_line(0x83)
-$C$DW$35	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$35, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$34$B)
-	.dwattr $C$DW$35, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$34$E)
-	.dwendtag $C$DW$34
+$C$DW$35	.dwtag  DW_TAG_TI_loop
+	.dwattr $C$DW$35, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L13:1:1433429572")
+	.dwattr $C$DW$35, DW_AT_TI_begin_file("dsp_fixed.c")
+	.dwattr $C$DW$35, DW_AT_TI_begin_line(0x7c)
+	.dwattr $C$DW$35, DW_AT_TI_end_line(0x7c)
+$C$DW$36	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$36, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$34$B)
+	.dwattr $C$DW$36, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$34$E)
+	.dwendtag $C$DW$35
 
 
-$C$DW$36	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$36, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L11:1:1433365554")
-	.dwattr $C$DW$36, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$36, DW_AT_TI_begin_line(0x8d)
-	.dwattr $C$DW$36, DW_AT_TI_end_line(0x8d)
-$C$DW$37	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$37, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$30$B)
-	.dwattr $C$DW$37, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$30$E)
+$C$DW$37	.dwtag  DW_TAG_TI_loop
+	.dwattr $C$DW$37, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L11:1:1433429572")
+	.dwattr $C$DW$37, DW_AT_TI_begin_file("dsp_fixed.c")
+	.dwattr $C$DW$37, DW_AT_TI_begin_line(0x86)
+	.dwattr $C$DW$37, DW_AT_TI_end_line(0x86)
 $C$DW$38	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$38, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$31$B)
-	.dwattr $C$DW$38, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$31$E)
-	.dwendtag $C$DW$36
+	.dwattr $C$DW$38, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$30$B)
+	.dwattr $C$DW$38, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$30$E)
+$C$DW$39	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$39, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$31$B)
+	.dwattr $C$DW$39, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$31$E)
+	.dwendtag $C$DW$37
 
 
-$C$DW$39	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$39, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L2:1:1433365554")
-	.dwattr $C$DW$39, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$39, DW_AT_TI_begin_line(0x85)
-	.dwattr $C$DW$39, DW_AT_TI_end_line(0x8b)
-$C$DW$40	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$40, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$12$B)
-	.dwattr $C$DW$40, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$12$E)
+$C$DW$40	.dwtag  DW_TAG_TI_loop
+	.dwattr $C$DW$40, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L2:1:1433429572")
+	.dwattr $C$DW$40, DW_AT_TI_begin_file("dsp_fixed.c")
+	.dwattr $C$DW$40, DW_AT_TI_begin_line(0x7e)
+	.dwattr $C$DW$40, DW_AT_TI_end_line(0x84)
 $C$DW$41	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$41, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$23$B)
-	.dwattr $C$DW$41, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$23$E)
+	.dwattr $C$DW$41, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$12$B)
+	.dwattr $C$DW$41, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$12$E)
 $C$DW$42	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$42, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$13$B)
-	.dwattr $C$DW$42, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$13$E)
+	.dwattr $C$DW$42, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$23$B)
+	.dwattr $C$DW$42, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$23$E)
 $C$DW$43	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$43, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$14$B)
-	.dwattr $C$DW$43, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$14$E)
+	.dwattr $C$DW$43, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$13$B)
+	.dwattr $C$DW$43, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$13$E)
 $C$DW$44	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$44, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$15$B)
-	.dwattr $C$DW$44, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$15$E)
+	.dwattr $C$DW$44, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$14$B)
+	.dwattr $C$DW$44, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$14$E)
 $C$DW$45	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$45, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$16$B)
-	.dwattr $C$DW$45, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$16$E)
+	.dwattr $C$DW$45, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$15$B)
+	.dwattr $C$DW$45, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$15$E)
 $C$DW$46	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$46, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$17$B)
-	.dwattr $C$DW$46, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$17$E)
+	.dwattr $C$DW$46, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$16$B)
+	.dwattr $C$DW$46, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$16$E)
 $C$DW$47	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$47, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$18$B)
-	.dwattr $C$DW$47, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$18$E)
+	.dwattr $C$DW$47, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$17$B)
+	.dwattr $C$DW$47, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$17$E)
 $C$DW$48	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$48, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$22$B)
-	.dwattr $C$DW$48, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$22$E)
+	.dwattr $C$DW$48, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$18$B)
+	.dwattr $C$DW$48, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$18$E)
 $C$DW$49	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$49, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$26$B)
-	.dwattr $C$DW$49, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$26$E)
+	.dwattr $C$DW$49, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$22$B)
+	.dwattr $C$DW$49, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$22$E)
 $C$DW$50	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$50, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$27$B)
-	.dwattr $C$DW$50, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$27$E)
+	.dwattr $C$DW$50, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$26$B)
+	.dwattr $C$DW$50, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$26$E)
+$C$DW$51	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$51, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$27$B)
+	.dwattr $C$DW$51, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$27$E)
 
-$C$DW$51	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$51, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L6:2:1433365554")
-	.dwattr $C$DW$51, DW_AT_TI_begin_file("fixedptc.h")
-	.dwattr $C$DW$51, DW_AT_TI_begin_line(0xf6)
-	.dwattr $C$DW$51, DW_AT_TI_end_line(0xf9)
-$C$DW$52	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$52, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$20$B)
-	.dwattr $C$DW$52, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$20$E)
-	.dwendtag $C$DW$51
+$C$DW$52	.dwtag  DW_TAG_TI_loop
+	.dwattr $C$DW$52, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L6:2:1433429572")
+	.dwattr $C$DW$52, DW_AT_TI_begin_file("fixedptc.h")
+	.dwattr $C$DW$52, DW_AT_TI_begin_line(0xf6)
+	.dwattr $C$DW$52, DW_AT_TI_end_line(0xf9)
+$C$DW$53	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$53, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$20$B)
+	.dwattr $C$DW$53, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$20$E)
+	.dwendtag $C$DW$52
 
 
-$C$DW$53	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$53, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L8:2:1433365554")
-	.dwattr $C$DW$53, DW_AT_TI_begin_file("fixedptc.h")
-	.dwattr $C$DW$53, DW_AT_TI_begin_line(0xfe)
-	.dwattr $C$DW$53, DW_AT_TI_end_line(0xff)
-$C$DW$54	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$54, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$24$B)
-	.dwattr $C$DW$54, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$24$E)
+$C$DW$54	.dwtag  DW_TAG_TI_loop
+	.dwattr $C$DW$54, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L8:2:1433429572")
+	.dwattr $C$DW$54, DW_AT_TI_begin_file("fixedptc.h")
+	.dwattr $C$DW$54, DW_AT_TI_begin_line(0xfe)
+	.dwattr $C$DW$54, DW_AT_TI_end_line(0xff)
 $C$DW$55	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$55, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$25$B)
-	.dwattr $C$DW$55, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$25$E)
-	.dwendtag $C$DW$53
+	.dwattr $C$DW$55, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$24$B)
+	.dwattr $C$DW$55, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$24$E)
+$C$DW$56	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$56, DW_AT_low_pc($C$DW$L$_make_gaussian_kernel$25$B)
+	.dwattr $C$DW$56, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$25$E)
+	.dwendtag $C$DW$54
 
-	.dwendtag $C$DW$39
+	.dwendtag $C$DW$40
 
-	.dwattr $C$DW$11, DW_AT_TI_end_file("dsp_fixed.c")
-	.dwattr $C$DW$11, DW_AT_TI_end_line(0x8e)
-	.dwattr $C$DW$11, DW_AT_TI_end_column(0x01)
-	.dwendtag $C$DW$11
+	.dwattr $C$DW$12, DW_AT_TI_end_file("dsp_fixed.c")
+	.dwattr $C$DW$12, DW_AT_TI_end_line(0x87)
+	.dwattr $C$DW$12, DW_AT_TI_end_column(0x01)
+	.dwendtag $C$DW$12
 
 	.sect	".text"
 	.clink
 	.global	_gaussian_smooth
 
-$C$DW$56	.dwtag  DW_TAG_subprogram, DW_AT_name("gaussian_smooth")
-	.dwattr $C$DW$56, DW_AT_low_pc(_gaussian_smooth)
-	.dwattr $C$DW$56, DW_AT_high_pc(0x00)
-	.dwattr $C$DW$56, DW_AT_TI_symbol_name("_gaussian_smooth")
-	.dwattr $C$DW$56, DW_AT_external
-	.dwattr $C$DW$56, DW_AT_type(*$C$DW$T$36)
-	.dwattr $C$DW$56, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$56, DW_AT_TI_begin_line(0x2e)
-	.dwattr $C$DW$56, DW_AT_TI_begin_column(0x0d)
-	.dwattr $C$DW$56, DW_AT_frame_base[DW_OP_breg31 80]
-	.dwattr $C$DW$56, DW_AT_TI_skeletal
-	.dwpsn	file "dsp_fixed.c",line 47,column 1,is_stmt,address _gaussian_smooth
-$C$DW$57	.dwtag  DW_TAG_formal_parameter, DW_AT_name("image")
-	.dwattr $C$DW$57, DW_AT_TI_symbol_name("_image")
-	.dwattr $C$DW$57, DW_AT_type(*$C$DW$T$34)
-	.dwattr $C$DW$57, DW_AT_location[DW_OP_reg4]
-$C$DW$58	.dwtag  DW_TAG_formal_parameter, DW_AT_name("rows")
-	.dwattr $C$DW$58, DW_AT_TI_symbol_name("_rows")
-	.dwattr $C$DW$58, DW_AT_type(*$C$DW$T$10)
-	.dwattr $C$DW$58, DW_AT_location[DW_OP_reg20]
-$C$DW$59	.dwtag  DW_TAG_formal_parameter, DW_AT_name("cols")
-	.dwattr $C$DW$59, DW_AT_TI_symbol_name("_cols")
+$C$DW$57	.dwtag  DW_TAG_subprogram, DW_AT_name("gaussian_smooth")
+	.dwattr $C$DW$57, DW_AT_low_pc(_gaussian_smooth)
+	.dwattr $C$DW$57, DW_AT_high_pc(0x00)
+	.dwattr $C$DW$57, DW_AT_TI_symbol_name("_gaussian_smooth")
+	.dwattr $C$DW$57, DW_AT_external
+	.dwattr $C$DW$57, DW_AT_TI_begin_file("dsp_fixed.c")
+	.dwattr $C$DW$57, DW_AT_TI_begin_line(0x23)
+	.dwattr $C$DW$57, DW_AT_TI_begin_column(0x06)
+	.dwattr $C$DW$57, DW_AT_frame_base[DW_OP_breg31 80]
+	.dwattr $C$DW$57, DW_AT_TI_skeletal
+	.dwpsn	file "dsp_fixed.c",line 36,column 1,is_stmt,address _gaussian_smooth
+$C$DW$58	.dwtag  DW_TAG_formal_parameter, DW_AT_name("image")
+	.dwattr $C$DW$58, DW_AT_TI_symbol_name("_image")
+	.dwattr $C$DW$58, DW_AT_type(*$C$DW$T$29)
+	.dwattr $C$DW$58, DW_AT_location[DW_OP_reg4]
+$C$DW$59	.dwtag  DW_TAG_formal_parameter, DW_AT_name("rows")
+	.dwattr $C$DW$59, DW_AT_TI_symbol_name("_rows")
 	.dwattr $C$DW$59, DW_AT_type(*$C$DW$T$10)
-	.dwattr $C$DW$59, DW_AT_location[DW_OP_reg6]
+	.dwattr $C$DW$59, DW_AT_location[DW_OP_reg20]
+$C$DW$60	.dwtag  DW_TAG_formal_parameter, DW_AT_name("cols")
+	.dwattr $C$DW$60, DW_AT_TI_symbol_name("_cols")
+	.dwattr $C$DW$60, DW_AT_type(*$C$DW$T$10)
+	.dwattr $C$DW$60, DW_AT_location[DW_OP_reg6]
 
 ;******************************************************************************
 ;* FUNCTION NAME: gaussian_smooth                                             *
@@ -1233,326 +1237,363 @@ $C$DW$59	.dwtag  DW_TAG_formal_parameter, DW_AT_name("cols")
 _gaussian_smooth:
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 9
-;** 56	-----------------------    make_gaussian_kernel(&kernel, &windowsize);
-;** 58	-----------------------    center = ((unsigned)windowsize>>31)+windowsize>>1;
-;** 61	-----------------------    K$14 = rows*cols;
-;** 61	-----------------------    tempim = malloc((unsigned)(K$14*4));
-;** 61	-----------------------    if ( tempim == NULL ) goto g28;
-           STW     .D2T1   A11,*SP--(8)      ; |47| 
+;** 44	-----------------------    make_gaussian_kernel(&kernel, &windowsize);
+;** 46	-----------------------    center = ((unsigned)windowsize>>31)+windowsize>>1;
+;** 49	-----------------------    tempim = malloc((unsigned)(rows*cols*4));
+;** 49	-----------------------    if ( tempim == NULL ) goto g33;
+           STW     .D2T1   A11,*SP--(8)      ; |36| 
 
-           STW     .D2T1   A10,*SP--(8)      ; |47| 
-||         MVKL    .S2     _make_gaussian_kernel,B5 ; |56| 
+           STW     .D2T1   A10,*SP--(8)      ; |36| 
+||         MVKL    .S2     _make_gaussian_kernel,B5 ; |44| 
 
-           STDW    .D2T2   B13:B12,*SP--     ; |47| 
-||         MVKH    .S2     _make_gaussian_kernel,B5 ; |56| 
+           STDW    .D2T2   B13:B12,*SP--     ; |36| 
+||         MVKH    .S2     _make_gaussian_kernel,B5 ; |44| 
 
-$C$DW$60	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$60, DW_AT_low_pc(0x04)
-	.dwattr $C$DW$60, DW_AT_name("_make_gaussian_kernel")
-	.dwattr $C$DW$60, DW_AT_TI_call
-
-           STDW    .D2T2   B11:B10,*SP--     ; |47| 
-||         CALL    .S2     B5                ; |56| 
-
-           STDW    .D2T1   A15:A14,*SP--     ; |47| 
-           STDW    .D2T1   A13:A12,*SP--     ; |47| 
-           STW     .D2T2   B3,*SP--(32)      ; |47| 
-           ADDKPC  .S2     $C$RL15,B3,0      ; |56| 
-
-           MV      .L1     A4,A13            ; |47| 
-||         ADD     .S1X    8,SP,A4           ; |56| 
-||         MV      .L2     B4,B12            ; |47| 
-||         ADD     .S2     4,SP,B4           ; |56| 
-||         MV      .D1     A6,A10            ; |47| 
-
-$C$RL15:   ; CALL OCCURS {_make_gaussian_kernel} {0}  ; |56| 
-;** --------------------------------------------------------------------------*
-;          EXCLUSIVE CPU CYCLES: 9
-           MVKL    .S1     _malloc,A3        ; |61| 
-           MVKH    .S1     _malloc,A3        ; |61| 
-           MPY32   .M1X    A10,B12,A11       ; |61| 
 $C$DW$61	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$61, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$61, DW_AT_name("_malloc")
+	.dwattr $C$DW$61, DW_AT_name("_make_gaussian_kernel")
 	.dwattr $C$DW$61, DW_AT_TI_call
-           CALL    .S2X    A3                ; |61| 
-           LDW     .D2T2   *+SP(4),B10       ; |58| 
-           ADDKPC  .S2     $C$RL16,B3,2      ; |61| 
-           SHL     .S1     A11,2,A4          ; |61| 
-$C$RL16:   ; CALL OCCURS {_malloc} {0}       ; |61| 
+
+           CALL    .S2     B5                ; |44| 
+||         STDW    .D2T2   B11:B10,*SP--     ; |36| 
+
+           STDW    .D2T1   A15:A14,*SP--     ; |36| 
+           STDW    .D2T1   A13:A12,*SP--     ; |36| 
+           STW     .D2T2   B3,*SP--(32)      ; |36| 
+           MV      .L2X    A4,B12            ; |36| 
+
+           ADDKPC  .S2     $C$RL15,B3,0      ; |44| 
+||         ADD     .L1X    8,SP,A4           ; |44| 
+||         ADD     .L2     4,SP,B4           ; |44| 
+||         MV      .D2     B4,B11            ; |36| 
+||         MV      .S1     A6,A10            ; |36| 
+
+$C$RL15:   ; CALL OCCURS {_make_gaussian_kernel} {0}  ; |44| 
 ;** --------------------------------------------------------------------------*
-;          EXCLUSIVE CPU CYCLES: 7
+;          EXCLUSIVE CPU CYCLES: 10
+           MV      .L1X    B11,A3            ; |36| 
 
-           MV      .L1     A4,A0             ; |61| 
-||         MVKL    .S1     _exit,A3          ; |61| 
-||         SHRU    .S2     B10,31,B5         ; |58| 
-||         ADD     .D1     A11,A11,A4        ; |62| 
+           MPY32   .M1     A10,A3,A4         ; |49| 
+||         MVKL    .S1     _malloc,A3        ; |49| 
 
-   [!A0]   B       .S2     $C$L39            ; |61| 
-||         MVKH    .S1     _exit,A3          ; |61| 
-||         ADD     .L2     B10,B5,B5         ; |58| 
-||         STW     .D2T1   A0,*+SP(12)       ; |62| 
-
-           MVKL    .S2     _malloc,B4        ; |62| 
-           SHR     .S2     B5,1,B13          ; |58| 
+           MVKH    .S1     _malloc,A3        ; |49| 
+           LDW     .D2T2   *+SP(4),B10       ; |46| 
 $C$DW$62	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$62, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$62, DW_AT_name("_exit")
+	.dwattr $C$DW$62, DW_AT_name("_malloc")
 	.dwattr $C$DW$62, DW_AT_TI_call
-   [!A0]   CALL    .S2X    A3                ; |61| 
-           MVKH    .S2     _malloc,B4        ; |62| 
-$C$DW$63	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$63, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$63, DW_AT_name("_malloc")
-	.dwattr $C$DW$63, DW_AT_TI_call
-   [ A0]   CALL    .S2     B4                ; |62| 
-           ; BRANCHCC OCCURS {$C$L39}        ; |61| 
-;** --------------------------------------------------------------------------*
-;          EXCLUSIVE CPU CYCLES: 5
-;** 62	-----------------------    smoothedim = malloc((unsigned)(K$14*2));
-;** 62	-----------------------    if ( smoothedim == NULL ) goto g26;
-           ADDKPC  .S2     $C$RL17,B3,4      ; |62| 
-$C$RL17:   ; CALL OCCURS {_malloc} {0}       ; |62| 
+           CALL    .S2X    A3                ; |49| 
+           ADDKPC  .S2     $C$RL16,B3,3      ; |49| 
+
+           SHL     .S1     A4,2,A4           ; |49| 
+||         STW     .D2T2   B11,*+SP(12)      ; |36| 
+
+$C$RL16:   ; CALL OCCURS {_malloc} {0}       ; |49| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 7
 
-           MV      .L1     A4,A0             ; |62| 
-||         MVKL    .S1     _exit,A3          ; |62| 
+           MV      .L1     A4,A0             ; |49| 
+||         MVKL    .S1     _exit,A3          ; |49| 
+||         SHRU    .S2     B10,31,B4         ; |46| 
+||         CMPGT   .L2     B11,0,B0          ; |55| 
+||         MVK     .D1     0x1,A4            ; |49| 
 
-   [!A0]   BNOP    .S2     $C$L37,1          ; |62| 
-||         MVKH    .S1     _exit,A3          ; |62| 
+   [!A0]   BNOP    .S2     $C$L39,1          ; |49| 
+||         MVKH    .S1     _exit,A3          ; |49| 
 
-$C$DW$64	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$64, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$64, DW_AT_name("_exit")
-	.dwattr $C$DW$64, DW_AT_TI_call
-   [!A0]   CALL    .S2X    A3                ; |62| 
-           CMPGT   .L2     B12,0,B0          ; |65| 
-           MVK     .L1     0x1,A4            ; |62| 
-           STW     .D2T1   A0,*+SP(16)       ; |62| 
-           ; BRANCHCC OCCURS {$C$L37}        ; |62| 
+$C$DW$63	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$63, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$63, DW_AT_name("_exit")
+	.dwattr $C$DW$63, DW_AT_TI_call
+   [!A0]   CALL    .S2X    A3                ; |49| 
+           STW     .D2T1   A0,*+SP(16)       ; |46| 
+           ADD     .L2     B10,B4,B4         ; |46| 
+           SHR     .S2     B4,1,B11          ; |46| 
+           ; BRANCHCC OCCURS {$C$L39}        ; |49| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 6
-;** 65	-----------------------    if ( rows <= 0 ) goto g14;
-;** 67	-----------------------    L$1 = rows;
-;** 65	-----------------------    r = 0;
-;**  	-----------------------    #pragma MUST_ITERATE(1, 18446744073709551615, 1)
+;** 55	-----------------------    if ( rows <= 0 ) goto g17;
+;** 59	-----------------------    L$1 = rows;
+;** 55	-----------------------    r = 0;
+;**  	-----------------------    #pragma MUST_ITERATE(2, 84, 2)
+;**  	-----------------------    #pragma UNROLL(2)
 ;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
 
-   [!B0]   BNOP    .S1     $C$L25,4          ; |65| 
-||         MV      .L2     B12,B4            ; |67| 
-|| [ B0]   CMPGT   .L1     A10,0,A0          ; |67| 
-||         ZERO    .D1     A15               ; |65| 
+   [!B0]   BNOP    .S1     $C$L26,5          ; |55| 
+|| [ B0]   CMPGT   .L1     A10,0,A0          ; |59| 
+||         LDW     .D2T1   *+SP(12),A12
+||         ZERO    .D1     A15               ; |55| 
 
-           STW     .D2T2   B4,*+SP(20)       ; |67| 
-           ; BRANCHCC OCCURS {$C$L25}        ; |65| 
+           ; BRANCHCC OCCURS {$C$L26}        ; |55| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 4
 
-   [!A0]   BNOP    .S1     $C$L24,2          ; |67| 
-|| [ A0]   NEG     .L2     B13,B11
-||         LDW     .D2T1   *+SP(12),A3
+   [!A0]   BNOP    .S1     $C$L25,2          ; |59| 
+||         LDW     .D2T1   *+SP(16),A4       ; |61| 
+|| [ A0]   NEG     .L2     B11,B13
+||         MPY32   .M1     A10,A15,A3
 
-	.dwpsn	file "dsp_fixed.c",line 65,column 0,is_stmt
-   [ A0]   CMPGT   .L2     B11,B13,B0        ; |71| 
+	.dwpsn	file "dsp_fixed.c",line 55,column 0,is_stmt
+   [ A0]   CMPGT   .L2     B13,B11,B0        ; |65| 
 ;** --------------------------------------------------------------------------*
 ;**   BEGIN LOOP $C$L15
 ;** --------------------------------------------------------------------------*
 $C$L15:    
-$C$DW$L$_gaussian_smooth$8$B:
-	.dwpsn	file "dsp_fixed.c",line 66,column 0,is_stmt
+$C$DW$L$_gaussian_smooth$6$B:
+	.dwpsn	file "dsp_fixed.c",line 56,column 0,is_stmt
 ;          EXCLUSIVE CPU CYCLES: 2
-;**	-----------------------g5:
-;** 67	-----------------------    if ( cols <= 0 ) goto g13;
+;**	-----------------------g4:
+;** 59	-----------------------    if ( cols <= 0 ) goto g16;
            NOP             2
-           ; BRANCHCC OCCURS {$C$L24}        ; |67| 
-$C$DW$L$_gaussian_smooth$8$E:
+           ; BRANCHCC OCCURS {$C$L25}        ; |59| 
+$C$DW$L$_gaussian_smooth$6$E:
 ;** --------------------------------------------------------------------------*
-$C$DW$L$_gaussian_smooth$9$B:
+$C$DW$L$_gaussian_smooth$7$B:
 ;          EXCLUSIVE CPU CYCLES: 5
-;**  	-----------------------    U$35 = -center;
-;**  	-----------------------    U$51 = r*cols;
-;**  	-----------------------    U$86 = &tempim[U$51];
-;** 69	-----------------------    L$2 = cols;
-;** 67	-----------------------    c = 0;
-;**  	-----------------------    #pragma MUST_ITERATE(1, 18446744073709551615, 1)
+;**  	-----------------------    U$29 = -center;
+;**  	-----------------------    C$16 = r*cols;
+;**  	-----------------------    U$53 = C$16*4;
+;**  	-----------------------    U$98 = &tempim[C$16];
+;** 61	-----------------------    L$2 = cols;
+;** 59	-----------------------    c = 0;
+;**  	-----------------------    #pragma MUST_ITERATE(2, 320, 2)
+;**  	-----------------------    #pragma UNROLL(2)
 ;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
 
-           MPY32   .M1     A10,A15,A12
-|| [!B0]   LDW     .D2T2   *+SP(8),B6
-||         MVK     .L2     1,B7
-||         MV      .L1X    B0,A0             ; |69| branch predicate copy
-||         MV      .S2     B0,B1             ; guard predicate rewrite
-||         ZERO    .S1     A11               ; |67| 
+           MV      .L1X    B0,A0             ; |65| branch predicate copy
+|| [!B0]   ZERO    .S1     A7
+||         MVK     .L2     1,B4
+||         MV      .S2     B0,B2             ; guard predicate rewrite
+|| [!B0]   LDW     .D2T2   *+SP(8),B19
+||         ADDAW   .D1     A4,A3,A14
 
-           ADDAH   .D2     B7,B13,B2
-|| [ A0]   MVKL    .S2     __divlli,B7       ; |67| 
-||         MV      .L2X    A10,B10           ; |69| 
-||         MV      .L1X    B11,A19           ; |69| 
+           ADDAH   .D2     B4,B11,B4
+|| [!B0]   ZERO    .L2     B6
+|| [!B0]   ZERO    .S2     B7
+|| [ B0]   B       .S1     $C$L23            ; |65| 
+||         ZERO    .L1     A13               ; |59| 
+||         MV      .D1     A10,A11           ; |61| 
 
-   [ B0]   B       .S1     $C$L23            ; |71| 
-||         CMPGT   .L2     B2,3,B0
-|| [ A0]   MVKH    .S2     __divlli,B7       ; |67| 
-||         ZERO    .D2     B4                ; |70| 
+   [!B0]   ZERO    .L2     B18
+||         SHR     .S2     B4,1,B0
+|| [ A0]   ZERO    .D2     B4                ; |61| 
 
-   [ B1]   ZERO    .L2     B0                ; nullify predicate
-||         ZERO    .S2     B5                ; |70| 
+   [!B2]   CMPGT   .L2     B0,2,B1
+|| [ B2]   ZERO    .D2     B1                ; nullify predicate
+||         SHL     .S2X    A3,2,B10
+|| [ A0]   ZERO    .L1     A3                ; |61| 
 
-	.dwpsn	file "dsp_fixed.c",line 67,column 0,is_stmt
-           ADDAW   .D1     A3,A12,A14
-$C$DW$L$_gaussian_smooth$9$E:
+	.dwpsn	file "dsp_fixed.c",line 59,column 0,is_stmt
+           MV      .L2     B13,B16           ; |61| 
+$C$DW$L$_gaussian_smooth$7$E:
 ;** --------------------------------------------------------------------------*
 ;**   BEGIN LOOP $C$L16
 ;** --------------------------------------------------------------------------*
 $C$L16:    
-$C$DW$L$_gaussian_smooth$10$B:
-	.dwpsn	file "dsp_fixed.c",line 68,column 0,is_stmt
-;          EXCLUSIVE CPU CYCLES: 3
-;**	-----------------------g7:
-;** 69	-----------------------    cc = U$35;
-;** 69	-----------------------    dot = 0;
-;** 70	-----------------------    sum = 0;
-;** 71	-----------------------    if ( cc > center ) goto g12;
-   [ B0]   B       .S1     $C$L18
-$C$DW$65	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$65, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$65, DW_AT_name("__divlli")
-	.dwattr $C$DW$65, DW_AT_TI_call
-   [ A0]   CALL    .S2     B7                ; |67| 
-   [ A0]   SHR     .S2     B5,31,B6          ; |67| 
-           ; BRANCHCC OCCURS {$C$L23}        ; |71| 
-$C$DW$L$_gaussian_smooth$10$E:
+$C$DW$L$_gaussian_smooth$8$B:
+	.dwpsn	file "dsp_fixed.c",line 60,column 0,is_stmt
+;          EXCLUSIVE CPU CYCLES: 2
+;**	-----------------------g6:
+;** 61	-----------------------    cc = U$29;
+;** 65	-----------------------    if ( cc > center ) goto g14;
+   [ B1]   BNOP    .S1     $C$L18,1
+           ; BRANCHCC OCCURS {$C$L23}        ; |65| 
+$C$DW$L$_gaussian_smooth$8$E:
 ;** --------------------------------------------------------------------------*
-$C$DW$L$_gaussian_smooth$11$B:
-;          EXCLUSIVE CPU CYCLES: 3
+$C$DW$L$_gaussian_smooth$9$B:
+;          EXCLUSIVE CPU CYCLES: 4
 ;**  	-----------------------    v$1 = kernel;
-;**  	-----------------------    L$3 = center*2+1;
-;**  	-----------------------    #pragma MUST_ITERATE(1, 18446744073709551615, 1)
-;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
-   [ B0]   ADD     .L1     A19,A11,A4        ; |73| 
-   [ B0]   CMPLT   .L1     A4,A10,A3         ; |73| 
-   [ B0]   CMPLT   .L2X    A4,0,B7           ; |73| (P) <0,2> 
+;**  	-----------------------    L$3 = center*2+1>>1;
+;**  	-----------------------    I$6 = I$5 = I$4 = I$3 = 0;
+;**  	-----------------------    #pragma MUST_ITERATE(1, 7, 1)
+;**  	-----------------------    #pragma UNROLL(1)
+;**  	-----------------------    // LOOP BELOW UNROLLED BY FACTOR(2)
+;**  	-----------------------    #pragma LOOP_FLAGS(4103u)
+
+   [ B1]   MV      .L1X    B16,A4
+|| [ B1]   MV      .L2     B12,B4
+|| [ B1]   MV      .S2     B11,B9
+
+   [ B1]   SHL     .S1     A4,2,A5           ; |69| (P) <0,0> 
+|| [ B1]   ADD     .L1     A4,A13,A31        ; |67| 
+|| [ B1]   MV      .D1X    B10,A6
+
+   [ B1]   MV      .L1X    B11,A3
+|| [ B1]   ADDAW   .D1     A6,A4,A8          ; |69| (P) <0,2> 
+
+   [ B1]   ADDAW   .D1     A5,A3,A9          ; |69| (P) <0,1> 
+|| [ B1]   CMPLT   .L1     A31,0,A5          ; |67| (P) <0,3> 
+|| [ B1]   ADD     .S1X    B4,A8,A21         ; |69| (P) <0,4> 
+
            ; BRANCHCC OCCURS {$C$L18} {0} 
-$C$DW$L$_gaussian_smooth$11$E:
+$C$DW$L$_gaussian_smooth$9$E:
 ;** --------------------------------------------------------------------------*
 ;**   BEGIN LOOP $C$L17
 ;** --------------------------------------------------------------------------*
 $C$L17:    
-$C$DW$L$_gaussian_smooth$12$B:
-	.dwpsn	file "dsp_fixed.c",line 72,column 0,is_stmt
-;          EXCLUSIVE CPU CYCLES: 19
-;**	-----------------------g9:
-;** 73	-----------------------    C$20 = c+cc;
-;** 73	-----------------------    if ( !((C$20 >= 0)&(C$20 < cols)) ) goto g11;
-;** 75	-----------------------    C$19 = v$1[cc+center];
-;** 75	-----------------------    dot += (int)((long long)(int)((long long)image[C$20+U$51]<<16)*(long long)C$19>>16);
-;** 76	-----------------------    sum += C$19;
-;**	-----------------------g11:
-;** 71	-----------------------    ++cc;
-;** 71	-----------------------    if ( L$3 = L$3-1 ) goto g9;
+$C$DW$L$_gaussian_smooth$10$B:
+	.dwpsn	file "dsp_fixed.c",line 66,column 0,is_stmt
+;          EXCLUSIVE CPU CYCLES: 20
+;**	-----------------------g8:
+;** 67	-----------------------    U$44 = c+cc;
+;** 67	-----------------------    if ( !((U$44 >= 0)&(U$44 < cols)) ) goto g10;
+;** 69	-----------------------    C$15 = v$1[cc+center];
+;** 69	-----------------------    I$3 = (int)(I$3+((long long)*(cc*4+U$53+image)*(long long)C$15>>16));
+;** 70	-----------------------    I$5 += C$15;
+;**	-----------------------g10:
+;** 65	-----------------------    if ( !((U$44 > (-2))&(U$44+1 < cols)) ) goto g12;
+;** 69	-----------------------    C$14 = v$1[center+cc+1];
+;** 69	-----------------------    I$4 = (int)(I$4+((long long)*(cc*4+U$53+image+4)*(long long)C$14>>16));
+;** 70	-----------------------    I$6 += C$14;
+;**	-----------------------g12:
+;** 65	-----------------------    cc += 2;
+;** 65	-----------------------    if ( !__builtin_expect((long)!(L$3 = L$3-1), 0L) ) goto g8;
+;**  	-----------------------    sum = I$5+I$6;
 
-           ADD     .L1     A19,A11,A3        ; |73| 
-||         SHL     .S2X    A19,2,B7          ; |75| 
+           ADD     .L1X    B16,A13,A3        ; |67| 
+||         SHL     .S2     B11,2,B5          ; |69| 
+||         ADDAW   .D2     B10,B16,B4        ; |69| 
 
-           CMPLT   .L1     A3,0,A4           ; |73| 
+           ADD     .S1     1,A3,A5           ; |65| 
+||         CMPGT   .L1     A3,-2,A4          ; |65| 
+||         ADDAW   .D2     B5,B16,B5         ; |69| 
+||         SHL     .S2     B16,2,B8          ; |69| 
+||         MV      .D1X    B16,A6
+||         ADD     .L2     B12,B4,B4         ; |69| 
 
-           XOR     .S1     1,A4,A4           ; |73| 
-||         CMPLT   .L1     A3,A10,A5         ; |73| 
-||         ADD     .D1     A12,A3,A3         ; |75| 
+           CMPLT   .L2X    A3,0,B9           ; |67| 
+||         CMPLT   .L1     A5,A10,A5         ; |65| 
+||         MV      .S1X    B10,A8
+||         ADD     .S2     B19,B5,B5         ; |69| 
+||         ADDAW   .D2     B8,B11,B8         ; |69| 
 
-           AND     .L1     A5,A4,A0          ; |73| 
+           XOR     .L2     1,B9,B9           ; |67| 
+||         AND     .S1     A5,A4,A0          ; |65| 
+||         CMPLT   .L1     A3,A10,A4         ; |67| 
+||         ADDAW   .D1     A8,A6,A31         ; |69| 
 
-   [ A0]   ADDAW   .D2     B7,B13,B7         ; |75| 
-|| [ A0]   LDBU    .D1T1   *+A3[A13],A3      ; |75| 
+   [ A0]   LDW     .D2T2   *+B5(4),B17       ; |69| 
+||         ADD     .L2     B19,B8,B5         ; |69| 
+||         ADD     .L1X    B12,A31,A3        ; |69| 
 
-   [ A0]   ADD     .L2     B6,B7,B7          ; |75| 
-   [ A0]   LDW     .D2T2   *B7,B7            ; |75| 
-           ADD     .L1     1,A19,A19         ; |71| 
-           SUB     .L2     B2,1,B2           ; |71| 
-   [ A0]   SHL     .S1     A3,0x10,A3        ; |75| 
+           AND     .L1X    A4,B9,A1          ; |67| 
+|| [ A0]   LDW     .D2T2   *+B4(4),B4        ; |69| 
+
+   [ A1]   LDW     .D2T2   *B5,B8            ; |69| 
+|| [ A1]   LDW     .D1T1   *A3,A3            ; |69| 
+
+           SUB     .L2     B0,1,B0           ; |65| 
+           ADD     .L2     2,B16,B16         ; |65| Define a twin register
+   [ A0]   ADD     .L2     B17,B6,B6         ; |70| 
+   [ A0]   MPY32   .M2     B17,B4,B5:B4      ; |69| 
+   [ A1]   MPY32   .M1X    B8,A3,A5:A4       ; |69| 
+   [ A1]   ADD     .L2     B8,B7,B7          ; |70| 
            NOP             1
-   [ A0]   MPY32   .M1X    B7,A3,A5:A4       ; |75| 
-   [ A0]   ADD     .L2     B7,B4,B4          ; |76| 
-   [ B2]   B       .S1     $C$L17            ; |71| 
-   [!B2]   B       .S1     $C$L22
-   [ A0]   SHRU    .S1     A4,0x10,A3        ; |75| 
-   [ A0]   SHL     .S2X    A5,0x10,B8        ; |75| 
-   [ A0]   OR      .L2X    B8,A3,B8          ; |75| 
-	.dwpsn	file "dsp_fixed.c",line 79,column 0,is_stmt
-   [ A0]   ADD     .L2     B8,B5,B5          ; |75| 
-           ; BRANCHCC OCCURS {$C$L17}        ; |71| 
-$C$DW$L$_gaussian_smooth$12$E:
+
+   [ B0]   B       .S1     $C$L17            ; |65| 
+|| [ A0]   SHRU    .S2     B4,0x10,B4        ; |69| 
+
+   [!B0]   B       .S2     $C$L22
+|| [ A1]   SHRU    .S1     A4,0x10,A4        ; |69| 
+
+   [ A0]   SHL     .S1X    B5,0x10,A3        ; |69| 
+|| [ A1]   SHL     .S2X    A5,0x10,B5        ; |69| 
+
+   [ A0]   OR      .L1X    A3,B4,A3          ; |69| 
+|| [ A1]   OR      .L2X    B5,A4,B4          ; |69| 
+
+   [ A1]   ADDU    .L2     B4,B18,B5:B4      ; |69| 
+|| [ A0]   ADDU    .L1     A3,A7,A5:A4       ; |69| 
+
+	.dwpsn	file "dsp_fixed.c",line 72,column 0,is_stmt
+
+   [ A1]   MV      .L2     B4,B18            ; |69| 
+|| [ A0]   MV      .L1     A4,A7             ; |69| 
+
+           ; BRANCHCC OCCURS {$C$L17}        ; |65| 
+$C$DW$L$_gaussian_smooth$10$E:
 ;** --------------------------------------------------------------------------*
-$C$DW$L$_gaussian_smooth$13$B:
+$C$DW$L$_gaussian_smooth$11$B:
 ;          EXCLUSIVE CPU CYCLES: 1
-           MVKL    .S2     __divlli,B7       ; |67| 
+
+           B       .S1     $C$L24
+||         ADD     .L2     B6,B7,B4
+
            ; BRANCH OCCURS {$C$L22}  
-$C$DW$L$_gaussian_smooth$13$E:
+$C$DW$L$_gaussian_smooth$11$E:
 ;** --------------------------------------------------------------------------*
 $C$L18:    
-$C$DW$L$_gaussian_smooth$14$B:
-;          EXCLUSIVE CPU CYCLES: 7
+$C$DW$L$_gaussian_smooth$12$B:
+;          EXCLUSIVE CPU CYCLES: 9
 
-           MV      .L1X    B13,A18
-||         SHL     .S1     A19,2,A6          ; |75| (P) <0,4> 
-||         ADD     .D1     1,A19,A8          ; |71| (P) <0,4> Define a twin register
-||         XOR     .L2     1,B7,B7           ; |73| (P) <0,4> 
+           ADD     .L2X    1,A31,B20         ; |65| (P) <0,5> 
+||         CMPLT   .L1     A31,A10,A30       ; |67| 
+||         SHL     .S2     B9,2,B21          ; |69| (P) <0,2> 
+||         XOR     .S1     1,A5,A8           ; |67| (P) <0,4> 
+||         MV      .D1X    B7,A19
+||         MV      .D2     B10,B7
+
+           CMPLT   .L2X    B20,A10,B20       ; |65| 
+||         AND     .L1     A30,A8,A0         ; |67| (P) <0,6> 
+||         ADDAW   .D2     B21,B16,B21       ; |69| (P) <0,3> 
+||         ADD     .S1X    B19,A9,A29        ; |69| (P) <0,7> 
+||         ADD     .D1     2,A4,A4           ; |65| (P) <0,7> Define a twin register
 ||         DINT                              ; interrupts off
 
-           ADDAW   .D1     A6,A18,A30        ; |75| (P) <0,5> 
-||         ADD     .L1     A8,A11,A31        ; |73| 
-||         AND     .L2X    A3,B7,B1          ; |73| (P) <0,5> 
-||         ADD     .S1     A12,A4,A4         ; |75| 
+           CMPGT   .L2X    A31,-2,B5         ; |65| (P) <0,4> 
+|| [ A0]   LDW     .D1T1   *A29,A16          ; |69| (P) <0,8> 
+||         ADD     .S2     B19,B21,B30       ; |69| (P) <0,8> 
+||         ADDAW   .D2     B7,B16,B31        ; |69| (P) <0,6> 
+||         MV      .L1X    B18,A18
+||         SHL     .S1     A4,2,A28          ; |69| (P) <1,0> 
 
-           MV      .S1     A13,A20
-||         ADD     .D1X    B6,A30,A6         ; |75| 
-||         CMPLT   .L1     A31,A10,A29       ; |73| 
+           AND     .L2     B20,B5,B1         ; |65| (P) <0,8> 
+||         MV      .S2X    A7,B8
+||         MV      .L1X    B18,A5
+||         ADD     .D2     B4,B31,B18        ; |69| (P) <0,9> 
+||         ADD     .S1     A4,A13,A17        ; |67| 
+||         ADDAW   .D1     A28,A3,A9         ; |69| (P) <1,1> 
 
-   [ B1]   LDBU    .D1T1   *+A4[A20],A5      ; |75| (P) <0,6> 
-||         CMPLT   .L2X    A31,0,B7          ; |73| (P) <1,2> 
-||         SHL     .S1     A8,2,A28          ; |75| (P) <1,4> 
-||         ADD     .L1     1,A8,A9           ; |71| (P) <1,4> Define a twin register
+           MV      .L2X    A7,B17
+|| [ A0]   LDW     .D1T1   *A21,A7           ; |69| (P) <0,7>  ^ 
+||         CMPLT   .L1     A17,0,A8          ; |67| (P) <1,3> 
+||         SUB     .S1X    B0,3,A1
 
-   [ B1]   LDW     .D1T1   *A6,A7            ; |75| (P) <0,8>  ^ 
-||         MV      .L1X    B6,A8
-||         XOR     .L2     1,B7,B6           ; |73| (P) <1,4> 
-||         ADD     .S1     A12,A31,A4        ; |75| 
-
-           ADDAW   .D1     A28,A18,A3        ; |75| (P) <1,5> 
-||         ADD     .L1     A9,A11,A16        ; |73| 
-
-           AND     .L2X    A29,B6,B1         ; |73| (P) <1,5> 
-||         MV      .S2     B1,B6             ; |73| (P) <0,10> Split a long life
-
-$C$DW$L$_gaussian_smooth$14$E:
+   [ B1]   LDW     .D2T2   *+B30(4),B25      ; |69| (P) <0,9> 
+   [ B1]   LDW     .D2T2   *+B18(4),B24      ; |69| (P) <0,10>  ^ 
+           ADDAW   .D1     A6,A4,A27         ; |69| (P) <1,2> 
+           MV      .L2X    A10,B5
+$C$DW$L$_gaussian_smooth$12$E:
 ;*----------------------------------------------------------------------------*
 ;*   SOFTWARE PIPELINE INFORMATION
 ;*
-;*      Loop source line                 : 71
-;*      Loop opening brace source line   : 72
-;*      Loop closing brace source line   : 79
+;*      Loop source line                 : 65
+;*      Loop opening brace source line   : 66
+;*      Loop closing brace source line   : 72
+;*      Loop Unroll Multiple             : 2x
 ;*      Known Minimum Trip Count         : 1                    
+;*      Known Maximum Trip Count         : 7                    
 ;*      Known Max Trip Count Factor      : 1
-;*      Loop Carried Dependency Bound(^) : 5
-;*      Unpartitioned Resource Bound     : 4
-;*      Partitioned Resource Bound(*)    : 5
+;*      Loop Carried Dependency Bound(^) : 7
+;*      Unpartitioned Resource Bound     : 7
+;*      Partitioned Resource Bound(*)    : 8
 ;*      Resource Partition:
 ;*                                A-side   B-side
-;*      .L units                     1        1     
-;*      .S units                     3        2     
-;*      .D units                     3        0     
-;*      .M units                     1        0     
-;*      .X cross paths               1        3     
-;*      .T address paths             2        0     
+;*      .L units                     3        3     
+;*      .S units                     4        3     
+;*      .D units                     4        4     
+;*      .M units                     1        1     
+;*      .X cross paths               3        2     
+;*      .T address paths             2        2     
 ;*      Long read paths              0        0     
-;*      Long write paths             0        0     
+;*      Long write paths             1        1     
 ;*      Logical  ops (.LS)           0        0     (.L or .S unit)
-;*      Addition ops (.LSD)          7        5     (.L or .S or .D unit)
-;*      Bound(.L .S .LS)             2        2     
-;*      Bound(.L .S .D .LS .LSD)     5*       3     
+;*      Addition ops (.LSD)         11       10     (.L or .S or .D unit)
+;*      Bound(.L .S .LS)             4        3     
+;*      Bound(.L .S .D .LS .LSD)     8*       7     
 ;*
 ;*      Searching for software pipeline schedule at ...
-;*         ii = 5  Schedule found with 5 iterations in parallel
+;*         ii = 8  Schedule found with 4 iterations in parallel
 ;*
 ;*      Register Usage Table:
 ;*          +-----------------------------------------------------------------+
@@ -1560,11 +1601,14 @@ $C$DW$L$_gaussian_smooth$14$E:
 ;*          |00000000001111111111222222222233|00000000001111111111222222222233|
 ;*          |01234567890123456789012345678901|01234567890123456789012345678901|
 ;*          |--------------------------------+--------------------------------|
-;*       0: |   * *****      ******* **      |*** *                           |
-;*       1: |   *******      **********      |*** **                          |
-;*       2: |   *** ***      ********        |*** ***                         |
-;*       3: |   *******      ********        |*** ***                         |
-;*       4: |   *******      ********        |*** **                          |
+;*       0: |**********      *****           |**  ******      *****   **      |
+;*       1: |**********      **** *          |**  ******      ****    **      |
+;*       2: |**********      *******         |**  ******      ******  **      |
+;*       3: |**********      *******         |**  ******      ** **** **      |
+;*       4: |***** ****      *******         |**  ******      ***** * ***     |
+;*       5: |***** ****      ******          |**  ******      ****  *****     |
+;*       6: |******** *      **** *          |**  **** *      ***** *****     |
+;*       7: |*********       ****            |*   **** *      ***** * ***     |
 ;*          +-----------------------------------------------------------------+
 ;*
 ;*      Done
@@ -1578,482 +1622,611 @@ $C$DW$L$_gaussian_smooth$14$E:
 ;*
 ;*      Minimum required memory pad   : 0 bytes
 ;*
-;*      Minimum safe trip count       : 4
+;*      Minimum safe trip count       : 3 (after unrolling)
 ;*
 ;*
 ;*      Mem bank conflicts/iter(est.) : { min 0.000, est 0.000, max 0.000 }
 ;*      Mem bank perf. penalty (est.) : 0.0%
 ;*
 ;*
-;*      Total cycles (est.)         : 17 + trip_cnt * 5        
+;*      Total cycles (est.)         : 17 + trip_cnt * 8 = Between 25 and 73        
 ;*----------------------------------------------------------------------------*
 ;*       SETUP CODE
 ;*
-;*                  SUB             B2,1,B2
+;*                  SUB             A1,1,A1
+;*                  MV              A4,B16
+;*                  MV              A3,B9
+;*                  MV              A6,B7
+;*                  MV              B17,B8
+;*                  MV              A18,A5
 ;*
 ;*        SINGLE SCHEDULED ITERATION
 ;*
-;*        $C$C216:
-;*   0              ADD     .S1     A19,A17,A3        ; |73| 
-;*   1              NOP             1
-;*   2              CMPLT   .L1     A3,A21,A23        ; |73| 
-;*     ||           CMPLT   .L2X    A3,0,B5           ; |73| 
-;*   3              ADD     .L1     A22,A3,A4         ; |75| 
-;*   4              XOR     .L2     1,B5,B5           ; |73| 
-;*     ||           SHL     .S1     A19,2,A6          ; |75| 
-;*     ||           ADD     .L1     1,A19,A19         ; |71| Define a twin register
-;*   5              AND     .S2X    A23,B5,B1         ; |73| 
-;*     ||           ADDAW   .D1     A6,A18,A23        ; |75| 
-;*   6              ADD     .L1     A8,A23,A6         ; |75| 
-;*     ||   [ B1]   LDBU    .D1T1   *+A4[A20],A5      ; |75| 
-;*   7              NOP             1
-;*   8      [ B1]   LDW     .D1T1   *A6,A7            ; |75|  ^ 
-;*   9              NOP             1
-;*  10              MV      .L2     B1,B5             ; |73| Split a long life
-;*  11              MV      .L2     B5,B4             ; |73| Split a long life
-;*  12              SHL     .S1     A5,0x10,A4        ; |75| 
-;*  13              MPY32   .M1     A7,A4,A25:A24     ; |75|  ^ 
-;*  14              NOP             2
-;*  16              MV      .D2     B4,B0             ; |73|  ^ Split a long life
-;*     ||   [ B2]   BDEC    .S2     $C$C216,B2        ; |71| 
-;*  17      [ B0]   ADD     .D1     A7,A9,A9          ; |76|  ^ 
-;*  18              SHRU    .S1     A24,0x10,A3       ; |75| 
-;*     ||           SHL     .S2X    A25,0x10,B6       ; |75|  ^ 
-;*  19              NOP             1
-;*  20              OR      .L1X    B6,A3,A6          ; |75|  ^ 
-;*  21      [ B0]   ADD     .S1     A6,A16,A16        ; |75|  ^ 
-;*  22              ; BRANCHCC OCCURS {$C$C216}       ; |71| 
+;*        $C$C198:
+;*   0              SHL     .S1     A4,2,A20          ; |69| 
+;*   1              ADDAW   .D1     A20,A3,A9         ; |69| 
+;*   2              ADD     .L1     A4,A17,A20        ; |67| 
+;*     ||           ADDAW   .D1     A6,A4,A8          ; |69| 
+;*     ||           SHL     .S2     B9,2,B18          ; |69| 
+;*   3              CMPLT   .L1     A20,0,A21         ; |67| 
+;*     ||           ADDAW   .D2     B18,B16,B22       ; |69| 
+;*   4              XOR     .D1     1,A21,A8          ; |67| 
+;*     ||           ADD     .S1X    B4,A8,A21         ; |69| 
+;*     ||           CMPGT   .L2X    A20,-2,B26        ; |65| 
+;*   5              CMPLT   .L1X    A20,B5,A20        ; |67| 
+;*     ||           ADD     .S2X    1,A20,B23         ; |65| 
+;*   6              AND     .D1     A20,A8,A0         ; |67| 
+;*     ||           ADDAW   .D2     B7,B16,B18        ; |69| 
+;*   7              ADD     .S1X    B19,A9,A8         ; |69| 
+;*     ||   [ A0]   LDW     .D1T1   *A21,A7           ; |69|  ^ 
+;*     ||           CMPLT   .L2     B23,B5,B20        ; |65| 
+;*     ||           ADD     .L1     2,A4,A4           ; |65| Define a twin register
+;*   8      [ A0]   LDW     .D1T1   *A8,A16           ; |69| 
+;*     ||           AND     .D2     B20,B26,B1        ; |65| 
+;*     ||           ADD     .L2     B19,B22,B20       ; |69| 
+;*   9      [ B1]   LDW     .D2T2   *+B20(4),B25      ; |69| 
+;*     ||           ADD     .L2     B4,B18,B18        ; |69| 
+;*  10      [ B1]   LDW     .D2T2   *+B18(4),B24      ; |69|  ^ 
+;*     ||           ADD     .L2     2,B16,B16         ; |65| 
+;*  11              NOP             2
+;*  13              MV      .S1     A0,A2             ; |67|  ^ Split a long life
+;*     ||           MPY32   .M1     A16,A7,A9:A8      ; |69|  ^ 
+;*  14      [ A0]   ADD     .S1     A16,A19,A19       ; |70| 
+;*     ||   [ B1]   ADD     .S2     B25,B6,B6         ; |70| 
+;*  15              MV      .D2     B1,B0             ; |65|  ^ Split a long life
+;*     ||           MPY32   .M2     B25,B24,B21:B20   ; |69|  ^ 
+;*  16              NOP             1
+;*  17              SHL     .S1     A9,0x10,A21       ; |69|  ^ 
+;*  18              SHRU    .S1     A8,0x10,A22       ; |69|  ^ 
+;*  19              OR      .D1     A21,A22,A22       ; |69|  ^ 
+;*     ||           SHRU    .S2     B20,0x10,B20      ; |69|  ^ 
+;*     ||   [ A1]   BDEC    .S1     $C$C198,A1        ; |65| 
+;*  20              ADDU    .L1     A22,A5,A23:A22    ; |69|  ^ 
+;*     ||           SHL     .S2     B21,0x10,B18      ; |69|  ^ 
+;*  21      [ A2]   MV      .D1     A22,A18           ; |69|  ^ 
+;*     ||           OR      .L2     B18,B20,B18       ; |69|  ^ 
+;*  22              MV      .L1     A18,A5            ; |69| Split a long life
+;*     ||           ADDU    .L2     B18,B8,B21:B20    ; |69|  ^ 
+;*  23      [ B0]   MV      .S2     B20,B17           ; |69|  ^ 
+;*  24              MV      .S2     B17,B8            ; |69| Split a long life
+;*  25              ; BRANCHCC OCCURS {$C$C198}       ; |65| 
 ;*----------------------------------------------------------------------------*
 $C$L19:    ; PIPED LOOP PROLOG
-;          EXCLUSIVE CPU CYCLES: 6
+;          EXCLUSIVE CPU CYCLES: 4
 
-           MV      .L1     A10,A21
-||         MV      .L2     B6,B7             ; |73| (P) <0,11> Split a long life
-||         ADD     .S1     A8,A3,A6          ; |75| (P) <1,6> 
-|| [ B1]   LDBU    .D1T1   *+A4[A20],A5      ; |75| (P) <1,6> 
+           SHL     .S2     B9,2,B29          ; |69| (P) <1,2> 
+||         ADD     .L2     2,B16,B16         ; |65| (P) <0,10> 
+||         XOR     .S1     1,A8,A8           ; |67| (P) <1,4> 
+||         MV      .D1     A0,A2             ; |67| (P) <0,13>  ^ Split a long life
+||         MPY32   .M1     A16,A7,A9:A8      ; |69| (P) <0,13>  ^ 
+||         CMPLT   .L1X    A17,B5,A20        ; |67| (P) <1,5> 
+||         ADD     .D2X    1,A17,B23         ; |65| (P) <1,5> 
 
-           MV      .D1     A12,A22
-||         SHL     .S1     A5,0x10,A4        ; |75| (P) <0,12> 
-||         CMPLT   .L1     A16,A21,A3        ; |73| (P) <2,2> 
-||         CMPLT   .L2X    A16,0,B6          ; |73| (P) <2,2> 
+           CMPGT   .L2X    A17,-2,B26        ; |65| (P) <1,4> 
+||         ADD     .L1X    B4,A27,A21        ; |69| (P) <1,4> 
+|| [ B1]   ADD     .S2     B25,B6,B6         ; |70| (P) <0,14> 
+|| [ A0]   ADD     .S1     A16,A19,A19       ; |70| (P) <0,14> 
+||         ADDAW   .D2     B7,B16,B18        ; |69| (P) <1,6> 
+||         AND     .D1     A20,A8,A0         ; |67| (P) <1,6> 
 
-           MPY32   .M1     A7,A4,A25:A24     ; |75| (P) <0,13>  ^ 
-|| [ B1]   LDW     .D1T1   *A6,A7            ; |75| (P) <1,8>  ^ 
-||         ADD     .L1     A22,A16,A4        ; |75| (P) <2,3> 
+           ADDAW   .D2     B29,B16,B22       ; |69| (P) <1,3> 
+||         MV      .S2     B1,B0             ; |65| (P) <0,15>  ^ Split a long life
+||         MPY32   .M2     B25,B24,B21:B20   ; |69| (P) <0,15>  ^ 
+||         ADD     .L1     2,A4,A4           ; |65| (P) <1,7> Define a twin register
+||         ADD     .S1X    B19,A9,A8         ; |69| (P) <1,7> 
+||         CMPLT   .L2     B23,B5,B20        ; |65| (P) <1,7> 
+|| [ A0]   LDW     .D1T1   *A21,A7           ; |69| (P) <1,7>  ^ 
 
-           MV      .L1     A11,A17
-||         ADD     .D1     1,A9,A19          ; |71| (P) <2,4> Define a twin register
-||         SHL     .S1     A9,2,A6           ; |75| (P) <2,4> 
-||         XOR     .L2     1,B6,B6           ; |73| (P) <2,4> 
+	.dwpsn	file "dsp_fixed.c",line 65,column 0,is_stmt
 
-           SUB     .L2     B2,4,B2
-||         MV      .L1X    B5,A16
-||         MV      .S2     B1,B5             ; |73| (P) <1,10> Split a long life
-||         ADDAW   .D1     A6,A18,A23        ; |75| (P) <2,5> 
-||         AND     .D2X    A3,B6,B1          ; |73| (P) <2,5> 
-||         ADD     .S1     A19,A17,A3        ; |73| (P) <3,0> 
-
-	.dwpsn	file "dsp_fixed.c",line 71,column 0,is_stmt
-
-           MV      .L1X    B4,A9
-|| [ B2]   BDEC    .S2     $C$L20,B2         ; |71| (P) <0,16> 
-||         MV      .L2     B7,B0             ; |73| (P) <0,16>  ^ Split a long life
-||         MV      .D2     B5,B4             ; |73| (P) <1,11> Split a long life
-||         ADD     .S1     A8,A23,A6         ; |75| (P) <2,6> 
-|| [ B1]   LDBU    .D1T1   *+A4[A20],A5      ; |75| (P) <2,6> 
+           MV      .L1     A13,A17
+||         ADD     .L2     B19,B22,B20       ; |69| (P) <1,8> 
+||         AND     .S2     B20,B26,B1        ; |65| (P) <1,8> 
+|| [ A0]   LDW     .D1T1   *A8,A16           ; |69| (P) <1,8> 
+||         SHL     .S1     A4,2,A20          ; |69| (P) <2,0> 
 
 ;** --------------------------------------------------------------------------*
 $C$L20:    ; PIPED LOOP KERNEL
-$C$DW$L$_gaussian_smooth$16$B:
+$C$DW$L$_gaussian_smooth$14$B:
+	.dwpsn	file "dsp_fixed.c",line 66,column 0,is_stmt
+;          EXCLUSIVE CPU CYCLES: 8
+
+           SHL     .S1     A9,0x10,A21       ; |69| <0,17>  ^ 
+||         ADD     .L2     B4,B18,B18        ; |69| <1,9> 
+|| [ B1]   LDW     .D2T2   *+B20(4),B25      ; |69| <1,9> 
+||         ADDAW   .D1     A20,A3,A9         ; |69| <2,1> 
+
+           SHRU    .S1     A8,0x10,A22       ; |69| <0,18>  ^ 
+||         ADD     .L2     2,B16,B16         ; |65| <1,10> 
+|| [ B1]   LDW     .D2T2   *+B18(4),B24      ; |69| <1,10>  ^ 
+||         SHL     .S2     B9,2,B18          ; |69| <2,2> 
+||         ADDAW   .D1     A6,A4,A8          ; |69| <2,2> 
+||         ADD     .L1     A4,A17,A20        ; |67| <2,2> 
+
+           SHRU    .S2     B20,0x10,B20      ; |69| <0,19>  ^ 
+|| [ A1]   BDEC    .S1     $C$L20,A1         ; |65| <0,19> 
+||         OR      .D1     A21,A22,A22       ; |69| <0,19>  ^ 
+||         ADDAW   .D2     B18,B16,B22       ; |69| <2,3> 
+||         CMPLT   .L1     A20,0,A21         ; |67| <2,3> 
+
+           SHL     .S2     B21,0x10,B18      ; |69| <0,20>  ^ 
+||         ADDU    .L1     A22,A5,A23:A22    ; |69| <0,20>  ^ 
+||         ADD     .S1X    B4,A8,A21         ; |69| <2,4> 
+||         XOR     .D1     1,A21,A8          ; |67| <2,4> 
+||         CMPGT   .L2X    A20,-2,B26        ; |65| <2,4> 
+
+   [ A2]   MV      .D1     A22,A18           ; |69| <0,21>  ^ 
+||         OR      .L2     B18,B20,B18       ; |69| <0,21>  ^ 
+||         MV      .S1     A0,A2             ; |67| <1,13>  ^ Split a long life
+||         MPY32   .M1     A16,A7,A9:A8      ; |69| <1,13>  ^ 
+||         CMPLT   .L1X    A20,B5,A20        ; |67| <2,5> 
+||         ADD     .S2X    1,A20,B23         ; |65| <2,5> 
+
+           MV      .L1     A18,A5            ; |69| <0,22> Split a long life
+||         ADDU    .L2     B18,B8,B21:B20    ; |69| <0,22>  ^ 
+|| [ B1]   ADD     .S2     B25,B6,B6         ; |70| <1,14> 
+|| [ A0]   ADD     .S1     A16,A19,A19       ; |70| <1,14> 
+||         ADDAW   .D2     B7,B16,B18        ; |69| <2,6> 
+||         AND     .D1     A20,A8,A0         ; |67| <2,6> 
+
+   [ B0]   MV      .S2     B20,B17           ; |69| <0,23>  ^ 
+||         MV      .D2     B1,B0             ; |65| <1,15>  ^ Split a long life
+||         MPY32   .M2     B25,B24,B21:B20   ; |69| <1,15>  ^ 
+||         ADD     .L1     2,A4,A4           ; |65| <2,7> Define a twin register
+||         ADD     .S1X    B19,A9,A8         ; |69| <2,7> 
+||         CMPLT   .L2     B23,B5,B20        ; |65| <2,7> 
+|| [ A0]   LDW     .D1T1   *A21,A7           ; |69| <2,7>  ^ 
+
 	.dwpsn	file "dsp_fixed.c",line 72,column 0,is_stmt
-;          EXCLUSIVE CPU CYCLES: 5
 
-   [ B0]   ADD     .D1     A7,A9,A9          ; |76| <0,17>  ^ 
-||         SHL     .S1     A5,0x10,A4        ; |75| <1,12> 
-||         CMPLT   .L1     A3,A21,A23        ; |73| <3,2> 
-||         CMPLT   .L2X    A3,0,B5           ; |73| <3,2> 
+           MV      .S2     B17,B8            ; |69| <0,24> Split a long life
+||         ADD     .L2     B19,B22,B20       ; |69| <2,8> 
+||         AND     .D2     B20,B26,B1        ; |65| <2,8> 
+|| [ A0]   LDW     .D1T1   *A8,A16           ; |69| <2,8> 
+||         SHL     .S1     A4,2,A20          ; |69| <3,0> 
 
-           SHRU    .S1     A24,0x10,A3       ; |75| <0,18> 
-||         SHL     .S2X    A25,0x10,B6       ; |75| <0,18>  ^ 
-||         MPY32   .M1     A7,A4,A25:A24     ; |75| <1,13>  ^ 
-|| [ B1]   LDW     .D1T1   *A6,A7            ; |75| <2,8>  ^ 
-||         ADD     .L1     A22,A3,A4         ; |75| <3,3> 
+$C$DW$L$_gaussian_smooth$14$E:
+;** --------------------------------------------------------------------------*
+$C$L21:    ; PIPED LOOP EPILOG
+;          EXCLUSIVE CPU CYCLES: 1
 
-           ADD     .L1     1,A19,A19         ; |71| <3,4> Define a twin register
-||         SHL     .S1     A19,2,A6          ; |75| <3,4> 
-||         XOR     .L2     1,B5,B5           ; |73| <3,4> 
+           MV      .L1     A17,A13
+||         MV      .L2     B1,B2             ; |65| (E) <3,15>  ^ Split a long life
+||         MV      .D1     A0,A1             ; |67| (E) <3,13>  ^ Split a long life
+||         SHL     .S1     A9,0x10,A4        ; |69| (E) <2,17>  ^ 
+||         ADD     .S2     B4,B18,B18        ; |69| (E) <3,9> 
+|| [ B1]   LDW     .D2T2   *+B20(4),B25      ; |69| (E) <3,9> 
 
-           OR      .L1X    B6,A3,A6          ; |75| <0,20>  ^ 
-||         MV      .L2     B1,B5             ; |73| <2,10> Split a long life
-||         ADDAW   .D1     A6,A18,A23        ; |75| <3,5> 
-||         AND     .S2X    A23,B5,B1         ; |73| <3,5> 
-||         ADD     .S1     A19,A17,A3        ; |73| <4,0> 
+;** --------------------------------------------------------------------------*
+$C$DW$L$_gaussian_smooth$16$B:
+;          EXCLUSIVE CPU CYCLES: 16
+   [ B1]   LDW     .D2T2   *+B18(4),B24      ; |69| (E) <3,10>  ^ 
+           SHRU    .S2     B20,0x10,B20      ; |69| (E) <2,19>  ^ 
 
-	.dwpsn	file "dsp_fixed.c",line 79,column 0,is_stmt
+           MV      .L2     B4,B12
+||         SHL     .S2     B21,0x10,B4       ; |69| (E) <2,20>  ^ 
 
-   [ B0]   ADD     .S1     A6,A16,A16        ; |75| <0,21>  ^ 
-|| [ B2]   BDEC    .S2     $C$L20,B2         ; |71| <1,16> 
-||         MV      .D2     B4,B0             ; |73| <1,16>  ^ Split a long life
-||         MV      .L2     B5,B4             ; |73| <2,11> Split a long life
-||         ADD     .L1     A8,A23,A6         ; |75| <3,6> 
-|| [ B1]   LDBU    .D1T1   *+A4[A20],A5      ; |75| <3,6> 
+           OR      .L2     B4,B20,B4         ; |69| (E) <2,21>  ^ 
+           ADDU    .L2     B4,B8,B21:B20     ; |69| (E) <2,22>  ^ 
+
+   [ B0]   MV      .L2     B20,B17           ; |69| (E) <2,23>  ^ 
+||         MPY32   .M2     B25,B24,B21:B20   ; |69| (E) <3,15>  ^ 
+||         SHRU    .S1     A8,0x10,A22       ; |69| (E) <2,18>  ^ 
+||         MPY32   .M1     A16,A7,A9:A8      ; |69| (E) <3,13>  ^ 
+
+           OR      .L1     A4,A22,A22        ; |69| (E) <2,19>  ^ 
+           ADDU    .L1     A22,A5,A23:A22    ; |69| (E) <2,20>  ^ 
+           MV      .L2X    A3,B11
+
+           SHL     .S1     A9,0x10,A3        ; |69| (E) <3,17>  ^ 
+||         SHRU    .S2     B20,0x10,B20      ; |69| (E) <3,19>  ^ 
+
+   [ A2]   MV      .L1     A22,A18           ; |69| (E) <2,21>  ^ 
+||         SHRU    .S1     A8,0x10,A22       ; |69| (E) <3,18>  ^ 
+||         MV      .D1X    B5,A10
+||         SHL     .S2     B21,0x10,B5       ; |69| (E) <3,20>  ^ 
+
+           OR      .L2     B5,B20,B5         ; |69| (E) <3,21>  ^ 
+||         OR      .L1     A3,A22,A22        ; |69| (E) <3,19>  ^ 
+||         MV      .S2     B17,B4            ; |69| (E) <2,24> Split a long life
+||         MV      .S1     A18,A5            ; |69| (E) <2,22> Split a long life
+
+           ADDU    .L2     B5,B4,B21:B20     ; |69| (E) <3,22>  ^ 
+||         ADDU    .L1     A22,A5,A23:A22    ; |69| (E) <3,20>  ^ 
+|| [ A0]   ADD     .S1     A16,A19,A19       ; |70| (E) <3,14> 
+
+   [ B2]   MV      .L2     B20,B17           ; |69| (E) <3,23>  ^ 
+|| [ A1]   MV      .L1     A22,A18           ; |69| (E) <3,21>  ^ 
+||         MV      .S2X    A6,B10
+
+           MV      .L2X    A19,B7
+|| [ B1]   ADD     .S2     B25,B6,B6         ; |70| (E) <3,14> 
+
+           MV      .L1X    B17,A7
+||         MV      .L2X    A18,B18
+||         ADD     .D2     B6,B7,B4
+||         RINT                              ; interrupts on
+||         B       .S1     $C$L24
 
 $C$DW$L$_gaussian_smooth$16$E:
 ;** --------------------------------------------------------------------------*
-$C$L21:    ; PIPED LOOP EPILOG
-;          EXCLUSIVE CPU CYCLES: 6
-
-           MV      .L1     A17,A11
-|| [ B0]   ADD     .D1     A7,A9,A9          ; |76| (E) <2,17>  ^ 
-||         SHL     .S1     A5,0x10,A3        ; |75| (E) <3,12> 
-
-           MV      .L1     A20,A13
-||         SHRU    .S1     A24,0x10,A3       ; |75| (E) <2,18> 
-||         SHL     .S2X    A25,0x10,B5       ; |75| (E) <2,18>  ^ 
-||         MPY32   .M1     A7,A3,A25:A24     ; |75| (E) <3,13>  ^ 
-|| [ B1]   LDW     .D1T1   *A6,A7            ; |75| (E) <4,8>  ^ 
-
-           MV      .L1     A21,A10
-||         MV      .S1     A22,A12
-||         MV      .L2X    A18,B13
-
-           OR      .L1X    B5,A3,A6          ; |75| (E) <2,20>  ^ 
-||         MV      .L2     B1,B5             ; |73| (E) <4,10> Split a long life
-
-   [ B0]   ADD     .L1     A6,A16,A16        ; |75| (E) <2,21>  ^ 
-||         MV      .L2     B4,B0             ; |73| (E) <3,16>  ^ Split a long life
-||         MV      .S2     B5,B4             ; |73| (E) <4,11> Split a long life
-
-           RINT                              ; interrupts on
-||         MV      .L2     B4,B2             ; |73| (E) <4,16>  ^ Split a long life
-|| [ B0]   ADD     .L1     A7,A9,A9          ; |76| (E) <3,17>  ^ 
-||         SHL     .S1     A5,0x10,A3        ; |75| (E) <4,12> 
-
-;** --------------------------------------------------------------------------*
-$C$DW$L$_gaussian_smooth$18$B:
-;          EXCLUSIVE CPU CYCLES: 11
-
-           SHL     .S2X    A25,0x10,B4       ; |75| (E) <3,18>  ^ 
-||         MPY32   .M1     A7,A3,A25:A24     ; |75| (E) <4,13>  ^ 
-||         SHRU    .S1     A24,0x10,A3       ; |75| (E) <3,18> 
-
-   [ B2]   ADD     .L1     A7,A9,A9          ; |76| (E) <4,17>  ^ 
-           OR      .L1X    B4,A3,A6          ; |75| (E) <3,20>  ^ 
-   [ B0]   ADD     .L1     A6,A16,A16        ; |75| (E) <3,21>  ^ 
-           SHRU    .S1     A24,0x10,A3       ; |75| (E) <4,18> 
-           SHL     .S2X    A25,0x10,B5       ; |75| (E) <4,18>  ^ 
-           MV      .L2X    A9,B4
-           OR      .L1X    B5,A3,A6          ; |75| (E) <4,20>  ^ 
-   [ B2]   ADD     .L1     A6,A16,A16        ; |75| (E) <4,21>  ^ 
-           MVKL    .S2     __divlli,B7       ; |67| 
-           MV      .L2X    A16,B5
-$C$DW$L$_gaussian_smooth$18$E:
-;** --------------------------------------------------------------------------*
 $C$L22:    
-$C$DW$L$_gaussian_smooth$19$B:
-;          EXCLUSIVE CPU CYCLES: 3
-           MVKH    .S2     __divlli,B7       ; |67| 
-$C$DW$66	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$66, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$66, DW_AT_name("__divlli")
-	.dwattr $C$DW$66, DW_AT_TI_call
-           CALL    .S2     B7                ; |67| 
-           SHR     .S2     B5,31,B6          ; |67| 
-$C$DW$L$_gaussian_smooth$19$E:
+$C$DW$L$_gaussian_smooth$17$B:
+;          EXCLUSIVE CPU CYCLES: 5
+;**  	-----------------------    dot = I$3+I$4;
+;**  	-----------------------    goto g15;
+           MVKL    .S2     __divlli,B6       ; |59| 
+           MVKH    .S2     __divlli,B6       ; |59| 
+$C$DW$64	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$64, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$64, DW_AT_name("__divlli")
+	.dwattr $C$DW$64, DW_AT_TI_call
+           CALL    .S2     B6                ; |59| 
+           ADD     .L1X    A7,B18,A3
+           SHR     .S1     A3,31,A4          ; |59| 
+           ; BRANCH OCCURS {$C$L24}  
+$C$DW$L$_gaussian_smooth$17$E:
 ;** --------------------------------------------------------------------------*
 $C$L23:    
+$C$DW$L$_gaussian_smooth$18$B:
+;**	-----------------------g14:
+;** 61	-----------------------    dot = 0;
+;** 62	-----------------------    sum = 0;
+$C$DW$L$_gaussian_smooth$18$E:
+;** --------------------------------------------------------------------------*
+$C$DW$L$_gaussian_smooth$19$B:
+;          EXCLUSIVE CPU CYCLES: 5
+           MVKL    .S2     __divlli,B6       ; |59| 
+           MVKH    .S2     __divlli,B6       ; |59| 
+$C$DW$65	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$65, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$65, DW_AT_name("__divlli")
+	.dwattr $C$DW$65, DW_AT_TI_call
+           CALL    .S2     B6                ; |59| 
+           SHR     .S1     A3,31,A4          ; |59| 
+           NOP             1
+$C$DW$L$_gaussian_smooth$19$E:
+;** --------------------------------------------------------------------------*
+$C$L24:    
 $C$DW$L$_gaussian_smooth$20$B:
-;          EXCLUSIVE CPU CYCLES: 4
-;**	-----------------------g12:
-;** 67	-----------------------    *U$86++ = ((long long)dot<<16)/(long long)sum;
-;** 67	-----------------------    ++c;
-;** 67	-----------------------    if ( L$2 = L$2-1 ) goto g7;
-           SHRU    .S1X    B5,0x10,A5        ; |67| 
-           SHL     .S2     B6,0x10,B6        ; |67| 
+;          EXCLUSIVE CPU CYCLES: 3
+;**	-----------------------g15:
+;** 59	-----------------------    *U$98++ = ((long long)dot<<16)/(long long)sum;
+;** 59	-----------------------    U$53 += 4;
+;** 59	-----------------------    ++c;
+;** 59	-----------------------    if ( L$2 = L$2-1 ) goto g6;
 
-           SHL     .S1X    B5,0x10,A4        ; |67| 
-||         ADDKPC  .S2     $C$RL18,B3,0      ; |67| 
+           SHRU    .S2X    A3,0x10,B7        ; |59| 
+||         SHL     .S1     A4,0x10,A4        ; |59| 
 
-           OR      .L1X    A5,B6,A5          ; |67| 
-||         SHR     .S2     B4,31,B5          ; |67| 
+           SHR     .S2     B4,31,B5          ; |59| 
 
-$C$RL18:   ; CALL OCCURS {__divlli} {0}      ; |67| 
+           OR      .L1X    B7,A4,A5          ; |59| 
+||         SHL     .S1     A3,0x10,A4        ; |59| 
+||         ADDKPC  .S2     $C$RL17,B3,0      ; |59| 
+
+$C$RL17:   ; CALL OCCURS {__divlli} {0}      ; |59| 
 $C$DW$L$_gaussian_smooth$20$E:
 ;** --------------------------------------------------------------------------*
 $C$DW$L$_gaussian_smooth$21$B:
 ;          EXCLUSIVE CPU CYCLES: 7
 
-           SUB     .L1X    B10,1,A0          ; |67| 
-||         CMPGT   .L2     B11,B13,B0        ; |71| 
-||         MVK     .S2     1,B7
-||         ADD     .S1     1,A11,A11         ; |67| 
-||         STW     .D1T1   A4,*A14++         ; |67| 
-||         SUB     .D2     B10,1,B10         ; |67| 
+           SUB     .L1     A11,1,A0          ; |59| 
+||         CMPGT   .L2     B13,B11,B0        ; |65| 
+||         ADD     .S1     1,A13,A13         ; |59| 
+||         ADD     .S2     4,B10,B10         ; |59| 
+||         STW     .D1T1   A4,*A14++         ; |59| 
 
-   [ A0]   B       .S1     $C$L16            ; |67| 
-|| [!A0]   ZERO    .L2     B0                ; |70| nullify predicate
-|| [ A0]   MV      .L1X    B11,A19           ; |69| 
-|| [ A0]   ZERO    .S2     B5                ; |70| 
-||         MV      .D1     A0,A1             ; guard predicate rewrite
-||         ADDAH   .D2     B7,B13,B2
+   [ A0]   B       .S1     $C$L16            ; |59| 
+|| [!A0]   ZERO    .L2     B0                ; |61| nullify predicate
+|| [ A0]   MVK     .S2     1,B4
+||         MV      .L1     A0,A1             ; guard predicate rewrite
+|| [ A0]   MV      .D2     B0,B2             ; guard predicate rewrite
+||         SUB     .D1     A11,1,A11         ; |59| 
 
-   [!B0]   LDW     .D2T2   *+SP(8),B6
-|| [ A0]   ZERO    .L2     B4                ; |70| 
-|| [ A0]   MV      .S2     B0,B1             ; guard predicate rewrite
+   [ A0]   ADDAH   .D2     B4,B11,B4
+|| [!B0]   ZERO    .L1     A7
+|| [!B0]   ZERO    .L2     B6
+|| [!B0]   ZERO    .S2     B7
 
-           MV      .L1X    B0,A0             ; |69| branch predicate copy
+   [ B0]   B       .S1     $C$L23            ; |65| 
+|| [!B0]   ZERO    .L2     B18
+|| [!B0]   LDW     .D2T2   *+SP(8),B19
+|| [ A0]   MV      .S2     B13,B16           ; |61| 
+|| [ A0]   MV      .L1X    B0,A0             ; |65| branch predicate copy
 
-   [ B0]   B       .S1     $C$L23            ; |71| 
-|| [ A0]   MVKL    .S2     __divlli,B7       ; |67| 
-|| [ A1]   CMPGT   .L2     B2,3,B0
+   [ A0]   ZERO    .L2     B4                ; |61| 
+|| [ B2]   ZERO    .D2     B1                ; nullify predicate
+|| [ A1]   SHR     .S2     B4,1,B0
 
-   [ B1]   ZERO    .L2     B0                ; nullify predicate
-	.dwpsn	file "dsp_fixed.c",line 82,column 0,is_stmt
-   [ A0]   MVKH    .S2     __divlli,B7       ; |67| 
-           ; BRANCHCC OCCURS {$C$L16}        ; |67| 
+   [ A0]   ZERO    .L1     A3                ; |61| 
+	.dwpsn	file "dsp_fixed.c",line 75,column 0,is_stmt
+   [!B2]   CMPGT   .L2     B0,2,B1
+           ; BRANCHCC OCCURS {$C$L16}        ; |59| 
 $C$DW$L$_gaussian_smooth$21$E:
 ;** --------------------------------------------------------------------------*
-$C$L24:    
+$C$L25:    
 $C$DW$L$_gaussian_smooth$22$B:
-;          EXCLUSIVE CPU CYCLES: 12
-;**	-----------------------g13:
-;** 65	-----------------------    ++r;
-;** 65	-----------------------    if ( L$1 = L$1-1 ) goto g5;
-           LDW     .D2T2   *+SP(20),B4
-           ADD     .L1     1,A15,A15         ; |65| 
-           NOP             3
+;          EXCLUSIVE CPU CYCLES: 7
+;**	-----------------------g16:
+;** 55	-----------------------    ++r;
+;** 55	-----------------------    if ( L$1 = L$1-1 ) goto g4;
 
-           SUB     .L1X    B4,1,A0           ; |65| 
-||         SUB     .L2     B4,1,B4           ; |65| 
+           SUB     .L1     A12,1,A0          ; |55| 
+||         ADD     .S1     1,A15,A15         ; |55| 
+||         SUB     .D1     A12,1,A12         ; |55| 
 
-   [ A0]   B       .S1     $C$L15            ; |65| 
+   [ A0]   B       .S1     $C$L15            ; |55| 
 ||         MV      .D1     A0,A1             ; guard predicate rewrite
-|| [ A0]   CMPGT   .L1     A10,0,A0          ; |67| 
-||         STW     .D2T2   B4,*+SP(20)       ; |65| 
+|| [ A0]   CMPGT   .L1     A10,0,A0          ; |59| 
 
    [!A1]   MVK     .L1     0x1,A0            ; nullify predicate
-|| [ A1]   LDW     .D2T1   *+SP(12),A3
+|| [ A1]   LDW     .D2T1   *+SP(16),A4       ; |61| 
+|| [ A1]   MPY32   .M1     A10,A15,A3
 
-   [!A0]   BNOP    .S1     $C$L24,2          ; |67| 
-|| [ A0]   NEG     .L2     B13,B11
+   [!A0]   BNOP    .S1     $C$L25,2          ; |59| 
+|| [ A0]   NEG     .L2     B11,B13
 
-	.dwpsn	file "dsp_fixed.c",line 83,column 0,is_stmt
-   [ A0]   CMPGT   .L2     B11,B13,B0        ; |71| 
-           ; BRANCHCC OCCURS {$C$L15}        ; |65| 
+	.dwpsn	file "dsp_fixed.c",line 76,column 0,is_stmt
+   [ A0]   CMPGT   .L2     B13,B11,B0        ; |65| 
+           ; BRANCHCC OCCURS {$C$L15}        ; |55| 
 $C$DW$L$_gaussian_smooth$22$E:
 ;** --------------------------------------------------------------------------*
-$C$L25:    
-;          EXCLUSIVE CPU CYCLES: 7
-;**	-----------------------g14:
-;** 89	-----------------------    if ( cols <= 0 ) goto g25;
-;** 91	-----------------------    L$4 = cols;
-;**  	-----------------------    H$17 = L$4*2;
-;** 89	-----------------------    c = 0;
-;**  	-----------------------    #pragma MUST_ITERATE(1, 18446744073709551615, 1)
-;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
-
-           CMPGT   .L1     A10,0,A0          ; |89| 
-||         MV      .S2X    A10,B4            ; |91| 
-||         ZERO    .S1     A12               ; |89| 
-||         ADD     .D1     A10,A10,A15
-||         CMPGT   .L2     B12,0,B0          ; |91| 
-
-   [!A0]   BNOP    .S1     $C$L36,5          ; |89| 
-||         STW     .D2T2   B4,*+SP(20)       ; |91| 
-
-           ; BRANCHCC OCCURS {$C$L36}        ; |89| 
-;** --------------------------------------------------------------------------*
-;          EXCLUSIVE CPU CYCLES: 5
-
-   [!B0]   BNOP    .S1     $C$L35,2          ; |91| 
-||         LDW     .D2T1   *+SP(16),A3
-||         MV      .L1X    B0,A0             ; guard predicate rewrite
-|| [ B0]   NEG     .L2     B13,B11
-|| [ B0]   ZERO    .D1     A13               ; |91| 
-|| [ B0]   MV      .S2     B12,B10           ; |93| 
-
-           CMPGT   .L2     B11,B13,B0        ; |95| 
-	.dwpsn	file "dsp_fixed.c",line 89,column 0,is_stmt
-   [ A0]   MV      .L2     B11,B7            ; |93| 
-;** --------------------------------------------------------------------------*
-;**   BEGIN LOOP $C$L26
-;** --------------------------------------------------------------------------*
 $C$L26:    
-$C$DW$L$_gaussian_smooth$25$B:
-	.dwpsn	file "dsp_fixed.c",line 90,column 0,is_stmt
-;          EXCLUSIVE CPU CYCLES: 1
-;**	-----------------------g16:
-;** 91	-----------------------    if ( rows <= 0 ) goto g24;
-           NOP             1
-           ; BRANCHCC OCCURS {$C$L35}        ; |91| 
-$C$DW$L$_gaussian_smooth$25$E:
-;** --------------------------------------------------------------------------*
-$C$DW$L$_gaussian_smooth$26$B:
-;          EXCLUSIVE CPU CYCLES: 2
-;**  	-----------------------    K$122 = 386547056640LL;
-;**  	-----------------------    K$129 = 32768;
-;**  	-----------------------    U$35 = -center;
-;**  	-----------------------    U$136 = &smoothedim[c];
-;** 93	-----------------------    L$5 = rows;
-;** 91	-----------------------    r = 0;
-;**  	-----------------------    #pragma MUST_ITERATE(1, 18446744073709551615, 1)
+;          EXCLUSIVE CPU CYCLES: 7
+;**	-----------------------g17:
+;** 81	-----------------------    if ( cols <= 0 ) goto g32;
+;** 85	-----------------------    L$4 = cols;
+;**  	-----------------------    H$11 = L$4*4;
+;** 81	-----------------------    c = 0;
+;**  	-----------------------    #pragma MUST_ITERATE(2, 320, 2)
+;**  	-----------------------    #pragma UNROLL(2)
 ;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
 
-           MVK     .L2     1,B4
-|| [ B0]   B       .S2     $C$L34            ; |95| 
-||         ADDAH   .D1     A3,A12,A14
-||         MVKL    .S1     __divlli,A3       ; |91| 
-||         ZERO    .L1     A11               ; |94| 
-|| [!B0]   LDW     .D2T2   *+SP(8),B19
+           CMPGT   .L1     A10,0,A0          ; |81| 
+||         MV      .S1     A10,A3
+||         STW     .D2T1   A10,*+SP(20)      ; |85| 
+||         ZERO    .D1     A15               ; |81| 
 
-	.dwpsn	file "dsp_fixed.c",line 91,column 0,is_stmt
+   [!A0]   BNOP    .S2     $C$L38,2          ; |81| 
+|| [ A0]   LDW     .D2T2   *+SP(12),B4
+||         SHL     .S1     A3,2,A3
 
-           ADDAH   .D2     B4,B13,B1
-||         ZERO    .L2     B20               ; |94| 
-|| [!B0]   ADD     .L1X    B7,A13,A18
-||         MV      .S2     B0,B2             ; guard predicate rewrite
-
-$C$DW$L$_gaussian_smooth$26$E:
+           MV      .L2X    A3,B10
+   [ A0]   MVKL    .S1     _buf,A3
+   [ A0]   MVKH    .S1     _buf,A3
+           ; BRANCHCC OCCURS {$C$L38}        ; |81| 
 ;** --------------------------------------------------------------------------*
 ;**   BEGIN LOOP $C$L27
 ;** --------------------------------------------------------------------------*
 $C$L27:    
-$C$DW$L$_gaussian_smooth$27$B:
-	.dwpsn	file "dsp_fixed.c",line 92,column 0,is_stmt
-;          EXCLUSIVE CPU CYCLES: 4
-;**	-----------------------g18:
-;** 93	-----------------------    rr = U$35;
-;** 93	-----------------------    sum = 0;
-;** 94	-----------------------    dot = 0;
-;** 95	-----------------------    if ( rr > center ) goto g23;
+$C$DW$L$_gaussian_smooth$24$B:
+	.dwpsn	file "dsp_fixed.c",line 82,column 0,is_stmt
+;          EXCLUSIVE CPU CYCLES: 7
+;**	-----------------------g19:
+;** 85	-----------------------    if ( rows <= 0 ) goto g31;
+           CMPGT   .L2     B4,0,B0           ; |85| 
 
-           MV      .L1X    B0,A0             ; |94| branch predicate copy
-||         CMPGT   .L2     B1,3,B0
-||         MVKH    .S1     __divlli,A3       ; |91| 
+   [!B0]   BNOP    .S1     $C$L37,1          ; |85| 
+|| [ B0]   LDW     .D1T1   *A3,A4
+||         MV      .L2     B0,B1             ; guard predicate rewrite
+|| [ B0]   NEG     .S2     B11,B13
+|| [ B0]   MV      .D2     B4,B12
+|| [ B0]   ZERO    .L1     A12
 
-   [ B2]   ZERO    .L2     B0                ; nullify predicate
-   [ B0]   B       .S1     $C$L29
-$C$DW$67	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$67, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$67, DW_AT_name("__divlli")
-	.dwattr $C$DW$67, DW_AT_TI_call
-   [ A0]   CALL    .S2X    A3                ; |91| 
-           ; BRANCHCC OCCURS {$C$L34}        ; |95| 
-$C$DW$L$_gaussian_smooth$27$E:
+   [ B0]   SHL     .S1     A15,2,A11
+   [ B0]   MVK     .L2     1,B4
+           CMPGT   .L2     B13,B11,B0        ; |91| 
+   [ B1]   MV      .L2     B13,B7            ; |87| 
+           ; BRANCHCC OCCURS {$C$L37}        ; |85| 
+$C$DW$L$_gaussian_smooth$24$E:
 ;** --------------------------------------------------------------------------*
-$C$DW$L$_gaussian_smooth$28$B:
-;          EXCLUSIVE CPU CYCLES: 4
-;**  	-----------------------    v$1 = kernel;
-;**  	-----------------------    U$96 = r+rr;
-;**  	-----------------------    L$6 = center*2+1;
-;**  	-----------------------    #pragma MUST_ITERATE(1, 18446744073709551615, 1)
+$C$DW$L$_gaussian_smooth$25$B:
+;          EXCLUSIVE CPU CYCLES: 2
+;**  	-----------------------    U$29 = -center;
+;**  	-----------------------    U$52 = c*4;
+;**  	-----------------------    K$154 = 386547056640LL;
+;**  	-----------------------    K$161 = 32768;
+;**  	-----------------------    U$163 = c*4+buf;
+;**  	-----------------------    L$5 = rows;
+;** 85	-----------------------    r = 0;
+;**  	-----------------------    #pragma MUST_ITERATE(2, 84, 2)
+;**  	-----------------------    #pragma UNROLL(2)
 ;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
 
-   [ B0]   CMPLT   .L2X    A18,B12,B4        ; |97| 
-|| [ B0]   LDW     .D2T1   *+SP(12),A16
+   [ B0]   B       .S1     $C$L35            ; |91| 
+||         ADDAH   .D2     B4,B11,B4
+||         ADDAW   .D1     A4,A15,A13
+|| [!B0]   ZERO    .L1     A6
+|| [!B0]   ZERO    .L2     B9
+|| [!B0]   ZERO    .S2     B8
 
-   [ B0]   MV      .L1     A10,A17
-   [ B0]   MPY32   .M1     A17,A18,A3        ; |99| (P) <0,0> 
-   [ B0]   MVD     .M2     B4,B9             ; |97| (P) <0,2> Split a long life
-           ; BRANCHCC OCCURS {$C$L29} {0} 
-$C$DW$L$_gaussian_smooth$28$E:
+	.dwpsn	file "dsp_fixed.c",line 85,column 0,is_stmt
+
+   [!B0]   ZERO    .L2     B22
+|| [!B0]   ADD     .L1X    B7,A12,A16
+|| [!B0]   LDW     .D2T2   *+SP(8),B21
+
+$C$DW$L$_gaussian_smooth$25$E:
 ;** --------------------------------------------------------------------------*
 ;**   BEGIN LOOP $C$L28
 ;** --------------------------------------------------------------------------*
 $C$L28:    
-$C$DW$L$_gaussian_smooth$29$B:
-	.dwpsn	file "dsp_fixed.c",line 96,column 0,is_stmt
-;          EXCLUSIVE CPU CYCLES: 20
-;**	-----------------------g20:
-;** 97	-----------------------    if ( !((U$96 >= 0)&(U$96 < rows)) ) goto g22;
-;** 99	-----------------------    C$18 = v$1[rr+center];
-;** 99	-----------------------    dot += (int)((long long)tempim[U$96*cols+c]*(long long)C$18>>16);
-;** 100	-----------------------    sum += C$18;
-;**	-----------------------g22:
-;** 95	-----------------------    ++U$96;
-;** 95	-----------------------    ++rr;
-;** 95	-----------------------    if ( L$6 = L$6-1 ) goto g20;
+$C$DW$L$_gaussian_smooth$26$B:
+	.dwpsn	file "dsp_fixed.c",line 86,column 0,is_stmt
+;          EXCLUSIVE CPU CYCLES: 4
+;**	-----------------------g21:
+;** 87	-----------------------    rr = U$29;
+;** 91	-----------------------    if ( rr > center ) goto g29;
 
-           MPY32   .M1     A10,A18,A3        ; |99| 
-||         LDW     .D2T1   *+SP(12),A31      ; |99| 
-||         CMPLT   .L1     A18,0,A4          ; |97| 
-||         SHL     .S2     B7,2,B4           ; |99| 
-||         CMPLT   .L2X    A18,B12,B5        ; |97| 
+           SHR     .S1X    B4,1,A2
+|| [ B0]   ZERO    .L1     A14               ; |87| 
+|| [ B0]   ZERO    .L2     B4                ; |87| 
 
-           XOR     .L1     1,A4,A5           ; |97| 
-||         ADDAW   .D2     B4,B13,B4         ; |99| 
-
-           ADD     .L2     B19,B4,B4         ; |99| 
-           AND     .L2X    B5,A5,B0          ; |97| 
-
-           SHL     .S1     A3,2,A3           ; |99| 
-|| [ B0]   LDW     .D2T2   *B4,B6            ; |99| 
-
-           ADDAW   .D1     A3,A12,A4         ; |99| 
-           ADD     .L1     A31,A4,A3         ; |99| 
-   [ B0]   LDW     .D1T1   *A3,A3            ; |99| 
-           ADD     .L1     1,A18,A18         ; |95| 
-           ADD     .L2     1,B7,B7           ; |95| 
-           SUB     .L2     B1,1,B1           ; |95| 
-   [ B0]   ADD     .L2     B6,B20,B20        ; |100| 
-   [ B0]   MPY32   .M2X    B6,A3,B5:B4       ; |99| 
-           NOP             1
-   [ B1]   B       .S1     $C$L28            ; |95| 
-   [!B1]   B       .S1     $C$L33
-   [ B0]   SHRU    .S2     B4,0x10,B4        ; |99| 
-   [ B0]   SHL     .S1X    B5,0x10,A3        ; |99| 
-   [ B0]   OR      .L1X    A3,B4,A3          ; |99| 
-	.dwpsn	file "dsp_fixed.c",line 102,column 0,is_stmt
-   [ B0]   ADD     .L1     A3,A11,A11        ; |99| 
-           ; BRANCHCC OCCURS {$C$L28}        ; |95| 
-$C$DW$L$_gaussian_smooth$29$E:
+           CMPGT   .L1     A2,2,A0
+   [ B0]   ZERO    .L1     A0                ; nullify predicate
+   [ A0]   B       .S1     $C$L30
+           ; BRANCHCC OCCURS {$C$L35}        ; |91| 
+$C$DW$L$_gaussian_smooth$26$E:
 ;** --------------------------------------------------------------------------*
-$C$DW$L$_gaussian_smooth$30$B:
-;          EXCLUSIVE CPU CYCLES: 1
-           MVKL    .S1     __divlli,A3       ; |91| 
-           ; BRANCH OCCURS {$C$L33}  
-$C$DW$L$_gaussian_smooth$30$E:
+$C$DW$L$_gaussian_smooth$27$B:
+;          EXCLUSIVE CPU CYCLES: 5
+;**  	-----------------------    v$1 = kernel;
+;**  	-----------------------    U$114 = r+rr;
+;**  	-----------------------    L$6 = center*2+1>>1;
+;**  	-----------------------    I$10 = I$9 = I$8 = I$7 = 0;
+;**  	-----------------------    #pragma MUST_ITERATE(1, 7, 1)
+;**  	-----------------------    #pragma UNROLL(1)
+;**  	-----------------------    // LOOP BELOW UNROLLED BY FACTOR(2)
+;**  	-----------------------    #pragma LOOP_FLAGS(4103u)
+           NOP             5
+           ; BRANCHCC OCCURS {$C$L30} {0} 
+$C$DW$L$_gaussian_smooth$27$E:
+;** --------------------------------------------------------------------------*
+;**   BEGIN LOOP $C$L29
 ;** --------------------------------------------------------------------------*
 $C$L29:    
-$C$DW$L$_gaussian_smooth$31$B:
-;          EXCLUSIVE CPU CYCLES: 2
+$C$DW$L$_gaussian_smooth$28$B:
+	.dwpsn	file "dsp_fixed.c",line 92,column 0,is_stmt
+;          EXCLUSIVE CPU CYCLES: 21
+;**	-----------------------g23:
+;** 93	-----------------------    if ( U$114 < 0 ) goto g25;
+;** 95	-----------------------    C$13 = v$1[rr+center];
+;** 95	-----------------------    I$7 = (int)(I$7+((long long)*(U$114*cols*4+U$52+tempim)*(long long)C$13>>16));
+;** 96	-----------------------    I$9 += C$13;
+;**	-----------------------g25:
+;** 91	-----------------------    if ( U$114 <= (-2) ) goto g27;
+;** 95	-----------------------    C$12 = v$1[center+rr+1];
+;** 95	-----------------------    I$8 = (int)(I$8+((long long)*((U$114+1)*cols*4+U$52+tempim)*(long long)C$12>>16));
+;** 96	-----------------------    I$10 += C$12;
+;**	-----------------------g27:
+;** 91	-----------------------    U$114 += 2;
+;** 91	-----------------------    rr += 2;
+;** 91	-----------------------    if ( !__builtin_expect((long)!(L$6 = L$6-1), 0L) ) goto g23;
+;**  	-----------------------    sum = I$9+I$10;
 
-           SHL     .S2     B7,2,B4           ; |99| (P) <0,3> 
-||         MV      .S1     A12,A9
-||         CMPLT   .L1     A18,0,A5          ; |97| (P) <0,0> 
-||         ADD     .D1     1,A18,A4          ; |95| (P) <0,3>  ^ 
-||         MV      .L2     B13,B6
+           ADD     .S1     1,A16,A4          ; |95| 
+||         LDW     .D2T1   *+SP(16),A31      ; |95| 
+||         MPY32   .M1     A10,A16,A3        ; |95| 
+||         SHL     .S2     B7,2,B4           ; |95| 
+||         CMPLT   .L1     A16,0,A0          ; |93| 
+||         CMPGT   .L2X    A16,-2,B0         ; |91| 
 
-           DINT                              ; interrupts off
-$C$DW$L$_gaussian_smooth$31$E:
+           MPY32   .M1     A10,A4,A4         ; |95| 
+||         ADDAW   .D2     B4,B11,B5         ; |95| 
+||         SHL     .S2     B11,2,B31         ; |95| 
+
+           ADD     .L2     B21,B5,B5         ; |95| 
+||         ADDAW   .D2     B31,B7,B4         ; |95| 
+
+   [!A0]   LDW     .D2T2   *B5,B18           ; |95| 
+||         ADD     .L2     B21,B4,B4         ; |95| 
+
+           ADDAW   .D1     A11,A3,A5         ; |95| 
+|| [ B0]   LDW     .D2T2   *+B4(4),B6        ; |95| 
+
+           ADD     .L1     A31,A5,A5         ; |95| 
+||         ADDAW   .D1     A11,A4,A4         ; |95| 
+
+           ADD     .L1     A31,A4,A3         ; |95| 
+|| [!A0]   LDW     .D1T1   *A5,A4            ; |95| 
+
+   [ B0]   LDW     .D1T1   *A3,A3            ; |95| 
+           SUB     .L1     A2,1,A2           ; |91| 
+           ADD     .L1     2,A16,A16         ; |91| 
+           ADD     .L2     2,B7,B7           ; |91| 
+   [!A0]   MPY32   .M2X    B18,A4,B17:B16    ; |95| 
+   [ B0]   MPY32   .M2X    B6,A3,B5:B4       ; |95| 
+   [!A0]   ADD     .L2     B18,B8,B8         ; |96| 
+   [ B0]   ADD     .L2     B6,B9,B9          ; |96| 
+   [ A2]   B       .S1     $C$L29            ; |91| 
+
+   [!A0]   SHL     .S1X    B17,0x10,A4       ; |95| 
+|| [ B0]   SHRU    .S2     B4,0x10,B4        ; |95| 
+
+   [ B0]   SHL     .S1X    B5,0x10,A3        ; |95| 
+|| [!A0]   SHRU    .S2     B16,0x10,B5       ; |95| 
+
+   [!A2]   B       .S1     $C$L34
+|| [ B0]   OR      .L1X    A3,B4,A3          ; |95| 
+|| [!A0]   OR      .L2X    A4,B5,B4          ; |95| 
+
+   [ B0]   ADDU    .L1     A3,A6,A5:A4       ; |95| 
+|| [!A0]   ADDU    .L2     B4,B22,B5:B4      ; |95| 
+
+	.dwpsn	file "dsp_fixed.c",line 98,column 0,is_stmt
+
+   [ B0]   MV      .L1     A4,A6             ; |95| 
+|| [!A0]   MV      .L2     B4,B22            ; |95| 
+
+           ; BRANCHCC OCCURS {$C$L29}        ; |91| 
+$C$DW$L$_gaussian_smooth$28$E:
+;** --------------------------------------------------------------------------*
+$C$DW$L$_gaussian_smooth$29$B:
+;          EXCLUSIVE CPU CYCLES: 3
+
+           BNOP    .S1     $C$L36,1
+||         ADD     .L2     B9,B8,B4
+
+           ADD     .L1X    A6,B22,A14
+           ; BRANCH OCCURS {$C$L34}  
+$C$DW$L$_gaussian_smooth$29$E:
+;** --------------------------------------------------------------------------*
+$C$L30:    
+$C$DW$L$_gaussian_smooth$30$B:
+;          EXCLUSIVE CPU CYCLES: 1
+
+           MV      .L1     A10,A8
+||         DINT                              ; interrupts off
+
+$C$DW$L$_gaussian_smooth$30$E:
 ;*----------------------------------------------------------------------------*
 ;*   SOFTWARE PIPELINE INFORMATION
 ;*
-;*      Loop source line                 : 95
-;*      Loop opening brace source line   : 96
-;*      Loop closing brace source line   : 102
+;*      Loop source line                 : 91
+;*      Loop opening brace source line   : 92
+;*      Loop closing brace source line   : 98
+;*      Loop Unroll Multiple             : 2x
 ;*      Known Minimum Trip Count         : 1                    
+;*      Known Maximum Trip Count         : 7                    
 ;*      Known Max Trip Count Factor      : 1
 ;*      Loop Carried Dependency Bound(^) : 2
-;*      Unpartitioned Resource Bound     : 4
-;*      Partitioned Resource Bound(*)    : 4
+;*      Unpartitioned Resource Bound     : 6
+;*      Partitioned Resource Bound(*)    : 6
 ;*      Resource Partition:
 ;*                                A-side   B-side
-;*      .L units                     1        1     
-;*      .S units                     3        2     
-;*      .D units                     2        2     
-;*      .M units                     1        1     
-;*      .X cross paths               2        3     
-;*      .T address paths             1        1     
+;*      .L units                     2        2     
+;*      .S units                     3        4     
+;*      .D units                     4        4     
+;*      .M units                     2        2     
+;*      .X cross paths               3        4     
+;*      .T address paths             2        2     
 ;*      Long read paths              0        0     
-;*      Long write paths             0        0     
+;*      Long write paths             1        1     
 ;*      Logical  ops (.LS)           0        0     (.L or .S unit)
-;*      Addition ops (.LSD)          5        4     (.L or .S or .D unit)
-;*      Bound(.L .S .LS)             2        2     
-;*      Bound(.L .S .D .LS .LSD)     4*       3     
+;*      Addition ops (.LSD)          6        7     (.L or .S or .D unit)
+;*      Bound(.L .S .LS)             3        3     
+;*      Bound(.L .S .D .LS .LSD)     5        6*    
 ;*
 ;*      Searching for software pipeline schedule at ...
-;*         ii = 4  Schedule found with 5 iterations in parallel
+;*         ii = 6  Too many predicates live on one side
+;*                   Regs Live Always   :  5/5  (A/B-side)
+;*                   Max Regs Live      : 15/19
+;*                   Max Cond Regs Live :  4/3 
+;*         ii = 6  Too many predicates live on one side
+;*                   Regs Live Always   :  5/5  (A/B-side)
+;*                   Max Regs Live      : 15/19
+;*                   Max Cond Regs Live :  4/3 
+;*         ii = 6  Too many predicates live on one side
+;*                   Regs Live Always   :  5/5  (A/B-side)
+;*                   Max Regs Live      : 15/19
+;*                   Max Cond Regs Live :  5/3 
+;*         ii = 6  Did not find schedule
+;*         ii = 7  Too many predicates live on one side
+;*                   Regs Live Always   :  5/5  (A/B-side)
+;*                   Max Regs Live      : 14/17
+;*                   Max Cond Regs Live :  4/3 
+;*         ii = 7  Schedule found with 4 iterations in parallel
 ;*
 ;*      Register Usage Table:
 ;*          +-----------------------------------------------------------------+
@@ -2061,10 +2234,13 @@ $C$DW$L$_gaussian_smooth$31$E:
 ;*          |00000000001111111111222222222233|00000000001111111111222222222233|
 ;*          |01234567890123456789012345678901|01234567890123456789012345678901|
 ;*          |--------------------------------+--------------------------------|
-;*       0: |*  **  ***      ***             |**  * ***       *****           |
-;*       1: |*  *** ***      ***             |**  * ****      ******          |
-;*       2: |*  *******      ***             |**  ******      *******         |
-;*       3: |*  *** ***      ***             |***  *****      *****           |
+;*       0: |****  ****      *               |**   *****      *******   *     |
+;*       1: |****  ****      *               |**  * ****      *******  **     |
+;*       2: |***** ****      *               |**  ******      *******  ***    |
+;*       3: |**** *****      *               |**  ******      ************    |
+;*       4: |**********      *               |**  ******      *************   |
+;*       5: |**********      *               |**  ******      ********  ***   |
+;*       6: |***** ****      *               |**  ******      ********* *     |
 ;*          +-----------------------------------------------------------------+
 ;*
 ;*      Done
@@ -2078,542 +2254,573 @@ $C$DW$L$_gaussian_smooth$31$E:
 ;*
 ;*      Minimum required memory pad   : 0 bytes
 ;*
-;*      Minimum safe trip count       : 4
+;*      Minimum safe trip count       : 3 (after unrolling)
 ;*
 ;*
-;*      Mem bank conflicts/iter(est.) : { min 0.000, est 0.125, max 1.000 }
-;*      Mem bank perf. penalty (est.) : 3.0%
+;*      Mem bank conflicts/iter(est.) : { min 0.000, est 0.250, max 2.000 }
+;*      Mem bank perf. penalty (est.) : 3.4%
 ;*
-;*      Effective ii                : { min 4.00, est 4.12, max 5.00 }
+;*      Effective ii                : { min 7.00, est 7.25, max 9.00 }
 ;*
 ;*
-;*      Total cycles (est.)         : 16 + trip_cnt * 4        
+;*      Total cycles (est.)         : 16 + trip_cnt * 7 = Between 23 and 65        
 ;*----------------------------------------------------------------------------*
 ;*       SETUP CODE
 ;*
-;*                  SUB             A0,1,A0
+;*                  SUB             A2,1,A2
 ;*
 ;*        SINGLE SCHEDULED ITERATION
 ;*
-;*        $C$C122:
-;*   0              CMPLT   .L1     A18,0,A4          ; |97| 
-;*     ||           MPY32   .M1     A17,A18,A3        ; |99| 
-;*   1              CMPLT   .L2X    A18,B8,B22        ; |97|  ^ 
-;*   2              MVD     .M2     B22,B4            ; |97| Split a long life
-;*   3              SHL     .S2     B7,2,B4           ; |99| 
-;*     ||           ADD     .S1     1,A18,A18         ; |95|  ^ 
-;*   4              XOR     .D1     1,A4,A5           ; |97| 
-;*     ||           ADDAW   .D2     B4,B6,B4          ; |99| 
-;*     ||           SHL     .S1     A3,2,A3           ; |99| 
-;*   5              ADD     .S2     B19,B4,B5         ; |99| 
-;*     ||           ADDAW   .D1     A3,A9,A3          ; |99| 
-;*   6              AND     .S2X    B4,A5,B2          ; |97| 
-;*     ||           ADD     .D1     A16,A3,A3         ; |99| 
-;*     ||           ADD     .L2     1,B7,B7           ; |95| 
-;*   7              ROTL    .M2     B2,0,B0           ; |97| Split a long life
-;*     ||   [ B2]   LDW     .D2T2   *B5,B18           ; |99| 
-;*     ||   [ B2]   LDW     .D1T1   *A3,A7            ; |99| 
-;*   8              NOP             1
-;*   9              MVD     .M2     B0,B9             ; |97| Split a long life
-;*  10              NOP             2
-;*  12      [ B0]   MPY32   .M2X    B18,A7,B17:B16    ; |99| 
-;*     ||   [ B0]   ADD     .L2     B18,B20,B20       ; |100| 
-;*  13              NOP             1
-;*  14      [ A0]   BDEC    .S1     $C$C122,A0        ; |95| 
-;*  15              MV      .L2     B9,B1             ; |97| Split a long life
-;*  16      [ B1]   SHRU    .S2     B16,0x10,B21      ; |99| 
-;*  17      [ B1]   SHL     .S1X    B17,0x10,A6       ; |99| 
-;*  18      [ B1]   OR      .L1X    A6,B21,A5         ; |99| 
-;*  19      [ B1]   ADD     .L1     A5,A8,A8          ; |99| 
-;*  20              ; BRANCHCC OCCURS {$C$C122}       ; |95| 
+;*        $C$C135:
+;*   0              MPY32   .M1     A8,A16,A3         ; |95| 
+;*   1              NOP             1
+;*   2              SHL     .S2     B6,2,B25          ; |95| 
+;*     ||           ADD     .L1     1,A16,A3          ; |95| 
+;*   3              SHL     .S2     B7,2,B5           ; |95| 
+;*     ||           CMPGT   .L2X    A16,-2,B27        ; |91|  ^ 
+;*     ||           MPY32   .M1     A8,A3,A3          ; |95| 
+;*   4              ADDAW   .D2     B5,B6,B5          ; |95| 
+;*     ||           ADDAW   .D1     A9,A3,A3          ; |95| 
+;*   5              CMPLT   .L1     A16,0,A1          ; |93| 
+;*     ||           ADD     .L2     B21,B5,B5         ; |95| 
+;*     ||           ADD     .D1     A7,A3,A3          ; |95| 
+;*     ||           ADDAW   .D2     B25,B7,B28        ; |95| 
+;*   6      [!A1]   LDW     .D2T2   *B5,B20           ; |95| 
+;*     ||   [!A1]   LDW     .D1T1   *A3,A4            ; |95| 
+;*     ||           ADD     .L1     2,A16,A16         ; |91|  ^ 
+;*   7              MV      .S2     B27,B0            ; |91| Split a long life
+;*     ||           ADD     .D2     B21,B28,B5        ; |95| 
+;*     ||           ADDAW   .D1     A9,A3,A3          ; |95| 
+;*   8              ADD     .L1     A7,A3,A3          ; |95| 
+;*   9      [ B0]   LDW     .D2T2   *+B5(4),B26       ; |95| 
+;*     ||   [ B0]   LDW     .D1T1   *A3,A5            ; |95| 
+;*     ||           ADD     .L2     2,B7,B7           ; |91| 
+;*  10              NOP             1
+;*  11      [!A1]   MPY32   .M2X    B20,A4,B19:B18    ; |95| 
+;*  12              MVD     .M1     A1,A0             ; |93| Split a long life
+;*     ||           MVD     .M2     B0,B1             ; |91| Split a long life
+;*  13              MVD     .M2     B20,B4            ; |95| Split a long life
+;*  14      [ B0]   MPY32   .M2X    B26,A5,B17:B16    ; |95| 
+;*  15              MVD     .M2     B26,B23           ; |95| Split a long life
+;*  16              NOP             1
+;*  17      [ A2]   BDEC    .S1     $C$C135,A2        ; |91| 
+;*  18      [!A0]   SHL     .S1X    B19,0x10,A5       ; |95| 
+;*     ||   [ B1]   SHRU    .S2     B16,0x10,B24      ; |95| 
+;*  19      [!A0]   SHRU    .S2     B18,0x10,B25      ; |95| 
+;*     ||   [ B1]   SHL     .S1X    B17,0x10,A4       ; |95| 
+;*  20      [!A0]   OR      .L2X    A5,B25,B5         ; |95| 
+;*     ||   [ B1]   OR      .S1X    A4,B24,A4         ; |95| 
+;*  21      [!A0]   ADDU    .L2     B5,B22,B25:B24    ; |95|  ^ 
+;*     ||   [ B1]   ADDU    .L1     A4,A6,A5:A4       ; |95|  ^ 
+;*  22      [!A0]   MV      .D2     B24,B22           ; |95|  ^ 
+;*     ||   [!A0]   ADD     .S2     B4,B8,B8          ; |96| 
+;*     ||   [ B1]   MV      .S1     A4,A6             ; |95|  ^ 
+;*     ||   [ B1]   ADD     .L2     B23,B9,B9         ; |96| 
+;*  23              ; BRANCHCC OCCURS {$C$C135}       ; |91| 
 ;*----------------------------------------------------------------------------*
-$C$L30:    ; PIPED LOOP PROLOG
-;          EXCLUSIVE CPU CYCLES: 12
+$C$L31:    ; PIPED LOOP PROLOG
+;          EXCLUSIVE CPU CYCLES: 16
 
-           MV      .L2     B12,B8
-||         ADDAW   .D2     B4,B6,B4          ; |99| (P) <0,4> 
-||         XOR     .D1     1,A5,A3           ; |97| (P) <0,4> 
-||         SHL     .S1     A3,2,A6           ; |99| (P) <0,4> 
-||         CMPLT   .L1     A4,0,A5           ; |97| (P) <1,0> 
-||         MPY32   .M1     A17,A4,A3         ; |99| (P) <1,0> 
+           LDW     .D2T1   *+SP(16),A7
+||         MPY32   .M1     A8,A16,A3         ; |95| (P) <0,0> 
 
-           ADD     .S2     B19,B4,B5         ; |99| (P) <0,5> 
-||         ADDAW   .D1     A6,A9,A6          ; |99| (P) <0,5> 
-||         CMPLT   .L2X    A4,B8,B4          ; |97| (P) <1,1>  ^ 
+           MV      .L2     B11,B6
 
-           ADD     .L2     1,B7,B4           ; |95| (P) <0,6> 
-||         AND     .S2X    B9,A3,B2          ; |97| (P) <0,6> 
-||         ADD     .L1     A16,A6,A3         ; |99| (P) <0,6> 
-||         MVD     .M2     B4,B9             ; |97| (P) <1,2> Split a long life
+           SHL     .S2     B6,2,B5           ; |95| (P) <0,2> 
+||         ADD     .L1     1,A16,A3          ; |95| (P) <0,2> 
 
-           ROTL    .M2     B2,0,B0           ; |97| (P) <0,7> Split a long life
-|| [ B2]   LDW     .D1T1   *A3,A7            ; |99| (P) <0,7> 
-|| [ B2]   LDW     .D2T2   *B5,B18           ; |99| (P) <0,7> 
-||         SHL     .S2     B4,2,B5           ; |99| (P) <1,3> 
-||         ADD     .L1     1,A4,A4           ; |95| (P) <1,3>  ^ 
+           MV      .L1     A11,A9
+||         CMPGT   .L2X    A16,-2,B4         ; |91| (P) <0,3>  ^ 
+||         SHL     .S2     B7,2,B16          ; |95| (P) <0,3> 
+||         MPY32   .M1     A8,A3,A3          ; |95| (P) <0,3> 
 
-           ADDAW   .D2     B5,B6,B5          ; |99| (P) <1,4> 
-||         XOR     .D1     1,A5,A3           ; |97| (P) <1,4> 
-||         SHL     .S1     A3,2,A6           ; |99| (P) <1,4> 
-||         CMPLT   .L1     A4,0,A5           ; |97| (P) <2,0> 
-||         MPY32   .M1     A17,A4,A3         ; |99| (P) <2,0> 
+           ADDAW   .D2     B16,B6,B16        ; |95| (P) <0,4> 
+||         ADDAW   .D1     A9,A3,A3          ; |95| (P) <0,4> 
 
-           MVD     .M2     B0,B4             ; |97| (P) <0,9> Split a long life
-||         ADD     .S2     B19,B5,B5         ; |99| (P) <1,5> 
-||         ADDAW   .D1     A6,A9,A6          ; |99| (P) <1,5> 
-||         CMPLT   .L2X    A4,B8,B7          ; |97| (P) <2,1>  ^ 
+           CMPLT   .L1     A16,0,A1          ; |93| (P) <0,5> 
+||         ADDAW   .D2     B5,B7,B16         ; |95| (P) <0,5> 
+||         ADD     .L2     B21,B16,B5        ; |95| (P) <0,5> 
+||         ADD     .S1     A7,A3,A3          ; |95| (P) <0,5> 
 
-           ADD     .L2     1,B4,B7           ; |95| (P) <1,6> 
-||         AND     .S2X    B9,A3,B2          ; |97| (P) <1,6> 
-||         ADD     .L1     A16,A6,A3         ; |99| (P) <1,6> 
-||         MVD     .M2     B7,B9             ; |97| (P) <2,2> Split a long life
+           ADD     .L1     2,A16,A5          ; |91| (P) <0,6>  ^ 
+|| [!A1]   LDW     .D2T2   *B5,B20           ; |95| (P) <0,6> 
+|| [!A1]   LDW     .D1T1   *A3,A4            ; |95| (P) <0,6> 
 
-           ROTL    .M2     B2,0,B0           ; |97| (P) <1,7> Split a long life
-|| [ B2]   LDW     .D1T1   *A3,A7            ; |99| (P) <1,7> 
-|| [ B2]   LDW     .D2T2   *B5,B18           ; |99| (P) <1,7> 
-||         SHL     .S2     B7,2,B4           ; |99| (P) <2,3> 
-||         ADD     .L1     1,A4,A6           ; |95| (P) <2,3>  ^ 
+           MV      .L2     B4,B0             ; |91| (P) <0,7> Split a long life
+||         ADD     .S2     B21,B16,B5        ; |95| (P) <0,7> 
+||         ADDAW   .D1     A9,A3,A3          ; |95| (P) <0,7> 
+||         MPY32   .M1     A8,A5,A3          ; |95| (P) <1,0> 
 
-   [ B0]   ADD     .L2     B18,B20,B20       ; |100| (P) <0,12> 
-|| [ B0]   MPY32   .M2X    B18,A7,B17:B16    ; |99| (P) <0,12> 
-||         ADDAW   .D2     B4,B6,B5          ; |99| (P) <2,4> 
-||         XOR     .D1     1,A5,A5           ; |97| (P) <2,4> 
-||         SHL     .S1     A3,2,A3           ; |99| (P) <2,4> 
-||         CMPLT   .L1     A6,0,A4           ; |97| (P) <3,0> 
-||         MPY32   .M1     A17,A6,A3         ; |99| (P) <3,0> 
+           ADD     .L1     A7,A3,A3          ; |95| (P) <0,8> 
 
-           SUB     .L1X    B1,4,A0
-||         MVD     .M2     B0,B9             ; |97| (P) <1,9> Split a long life
-||         ADD     .S2     B19,B5,B5         ; |99| (P) <2,5> 
-||         ADDAW   .D1     A3,A9,A3          ; |99| (P) <2,5> 
-||         CMPLT   .L2X    A6,B8,B22         ; |97| (P) <3,1>  ^ 
+           ADD     .L2     2,B7,B7           ; |91| (P) <0,9> 
+|| [ B0]   LDW     .D2T2   *+B5(4),B26       ; |95| (P) <0,9> 
+|| [ B0]   LDW     .D1T1   *A3,A5            ; |95| (P) <0,9> 
+||         SHL     .S2     B6,2,B25          ; |95| (P) <1,2> 
+||         ADD     .L1     1,A5,A3           ; |95| (P) <1,2> 
 
-   [ A0]   BDEC    .S1     $C$L31,A0         ; |95| (P) <0,14> 
-||         ADD     .L2     1,B7,B7           ; |95| (P) <2,6> 
-||         AND     .S2X    B9,A5,B2          ; |97| (P) <2,6> 
-||         ADD     .L1     A16,A3,A3         ; |99| (P) <2,6> 
-||         MVD     .M2     B22,B4            ; |97| (P) <3,2> Split a long life
+           CMPGT   .L2X    A5,-2,B27         ; |91| (P) <1,3>  ^ 
+||         SHL     .S2     B7,2,B4           ; |95| (P) <1,3> 
+||         MPY32   .M1     A8,A3,A3          ; |95| (P) <1,3> 
 
-	.dwpsn	file "dsp_fixed.c",line 95,column 0,is_stmt
+   [!A1]   MPY32   .M2X    B20,A4,B19:B18    ; |95| (P) <0,11> 
+||         ADDAW   .D2     B4,B6,B4          ; |95| (P) <1,4> 
+||         ADDAW   .D1     A9,A3,A3          ; |95| (P) <1,4> 
 
-           MV      .L1     A11,A8
-||         MV      .L2     B4,B1             ; |97| (P) <0,15> Split a long life
-||         ROTL    .M2     B2,0,B0           ; |97| (P) <2,7> Split a long life
-|| [ B2]   LDW     .D1T1   *A3,A7            ; |99| (P) <2,7> 
-|| [ B2]   LDW     .D2T2   *B5,B18           ; |99| (P) <2,7> 
-||         SHL     .S2     B7,2,B4           ; |99| (P) <3,3> 
-||         ADD     .S1     1,A6,A18          ; |95| (P) <3,3>  ^ 
+           MVD     .M1     A1,A0             ; |93| (P) <0,12> Split a long life
+||         MVD     .M2     B0,B1             ; |91| (P) <0,12> Split a long life
+||         CMPLT   .L1     A5,0,A1           ; |93| (P) <1,5> 
+||         ADDAW   .D2     B25,B7,B28        ; |95| (P) <1,5> 
+||         ADD     .L2     B21,B4,B5         ; |95| (P) <1,5> 
+||         ADD     .S1     A7,A3,A3          ; |95| (P) <1,5> 
+
+           MVD     .M2     B20,B4            ; |95| (P) <0,13> Split a long life
+||         ADD     .L1     2,A5,A16          ; |91| (P) <1,6>  ^ 
+|| [!A1]   LDW     .D2T2   *B5,B20           ; |95| (P) <1,6> 
+|| [!A1]   LDW     .D1T1   *A3,A4            ; |95| (P) <1,6> 
+
+   [ B0]   MPY32   .M2X    B26,A5,B17:B16    ; |95| (P) <0,14> 
+||         MV      .L2     B27,B0            ; |91| (P) <1,7> Split a long life
+||         ADD     .S2     B21,B28,B5        ; |95| (P) <1,7> 
+||         ADDAW   .D1     A9,A3,A3          ; |95| (P) <1,7> 
+||         MPY32   .M1     A8,A16,A3         ; |95| (P) <2,0> 
+
+	.dwpsn	file "dsp_fixed.c",line 91,column 0,is_stmt
+
+           SUB     .L1     A2,3,A2
+||         MVD     .M2     B26,B23           ; |95| (P) <0,15> Split a long life
+||         ADD     .S1     A7,A3,A3          ; |95| (P) <1,8> 
 
 ;** --------------------------------------------------------------------------*
-$C$L31:    ; PIPED LOOP KERNEL
-$C$DW$L$_gaussian_smooth$33$B:
-	.dwpsn	file "dsp_fixed.c",line 96,column 0,is_stmt
-;          EXCLUSIVE CPU CYCLES: 4
-
-   [ B1]   SHRU    .S2     B16,0x10,B21      ; |99| <0,16> 
-|| [ B0]   ADD     .L2     B18,B20,B20       ; |100| <1,12> 
-|| [ B0]   MPY32   .M2X    B18,A7,B17:B16    ; |99| <1,12> 
-||         ADDAW   .D2     B4,B6,B4          ; |99| <3,4> 
-||         XOR     .D1     1,A4,A5           ; |97| <3,4> 
-||         SHL     .S1     A3,2,A3           ; |99| <3,4> 
-||         CMPLT   .L1     A18,0,A4          ; |97| <4,0> 
-||         MPY32   .M1     A17,A18,A3        ; |99| <4,0> 
-
-   [ B1]   SHL     .S1X    B17,0x10,A6       ; |99| <0,17> 
-||         MVD     .M2     B0,B9             ; |97| <2,9> Split a long life
-||         ADD     .S2     B19,B4,B5         ; |99| <3,5> 
-||         ADDAW   .D1     A3,A9,A3          ; |99| <3,5> 
-||         CMPLT   .L2X    A18,B8,B22        ; |97| <4,1>  ^ 
-
-   [ B1]   OR      .L1X    A6,B21,A5         ; |99| <0,18> 
-|| [ A0]   BDEC    .S1     $C$L31,A0         ; |95| <1,14> 
-||         ADD     .L2     1,B7,B7           ; |95| <3,6> 
-||         AND     .S2X    B4,A5,B2          ; |97| <3,6> 
-||         ADD     .D1     A16,A3,A3         ; |99| <3,6> 
-||         MVD     .M2     B22,B4            ; |97| <4,2> Split a long life
-
-	.dwpsn	file "dsp_fixed.c",line 102,column 0,is_stmt
-
-   [ B1]   ADD     .L1     A5,A8,A8          ; |99| <0,19> 
-||         MV      .L2     B9,B1             ; |97| <1,15> Split a long life
-||         ROTL    .M2     B2,0,B0           ; |97| <3,7> Split a long life
-|| [ B2]   LDW     .D1T1   *A3,A7            ; |99| <3,7> 
-|| [ B2]   LDW     .D2T2   *B5,B18           ; |99| <3,7> 
-||         SHL     .S2     B7,2,B4           ; |99| <4,3> 
-||         ADD     .S1     1,A18,A18         ; |95| <4,3>  ^ 
-
-$C$DW$L$_gaussian_smooth$33$E:
-;** --------------------------------------------------------------------------*
-$C$L32:    ; PIPED LOOP EPILOG
-;          EXCLUSIVE CPU CYCLES: 6
-
-           MV      .L1     A17,A10
-||         MV      .S1     A9,A12
-||         STW     .D2T1   A16,*+SP(12)
-|| [ B1]   SHRU    .S2     B16,0x10,B21      ; |99| (E) <2,16> 
-|| [ B0]   ADD     .L2     B18,B20,B20       ; |100| (E) <3,12> 
-|| [ B0]   MPY32   .M2X    B18,A7,B17:B16    ; |99| (E) <3,12> 
-
-           MV      .L2     B8,B12
-||         MV      .S2     B6,B13
-|| [ B1]   SHL     .S1X    B17,0x10,A6       ; |99| (E) <2,17> 
-||         MVD     .M2     B0,B4             ; |97| (E) <4,9> Split a long life
-
-   [ B1]   OR      .L1X    A6,B21,A5         ; |99| (E) <2,18> 
-
-   [ B1]   ADD     .L1     A5,A8,A8          ; |99| (E) <2,19> 
-||         MV      .L2     B9,B1             ; |97| (E) <3,15> Split a long life
-
-   [ B1]   SHRU    .S2     B16,0x10,B21      ; |99| (E) <3,16> 
-|| [ B0]   ADD     .L2     B18,B20,B20       ; |100| (E) <4,12> 
-|| [ B0]   MPY32   .M2X    B18,A7,B17:B16    ; |99| (E) <4,12> 
-
-           MV      .L2     B4,B2             ; |97| (E) <4,15> Split a long life
-|| [ B1]   SHL     .S1X    B17,0x10,A6       ; |99| (E) <3,17> 
-
-;** --------------------------------------------------------------------------*
-$C$DW$L$_gaussian_smooth$35$B:
+$C$L32:    ; PIPED LOOP KERNEL
+$C$DW$L$_gaussian_smooth$32$B:
+	.dwpsn	file "dsp_fixed.c",line 92,column 0,is_stmt
 ;          EXCLUSIVE CPU CYCLES: 7
-   [ B1]   OR      .L1X    A6,B21,A5         ; |99| (E) <3,18> 
-   [ B1]   ADD     .L1     A5,A8,A8          ; |99| (E) <3,19> 
-   [ B2]   SHRU    .S2     B16,0x10,B21      ; |99| (E) <4,16> 
-   [ B2]   SHL     .S1X    B17,0x10,A6       ; |99| (E) <4,17> 
-   [ B2]   OR      .L1X    A6,B21,A5         ; |99| (E) <4,18> 
-   [ B2]   ADD     .L1     A5,A8,A8          ; |99| (E) <4,19> 
 
-           MV      .L1     A8,A11
-||         MVKL    .S1     __divlli,A3       ; |91| 
+           ADD     .L2     2,B7,B7           ; |91| <1,9> 
+|| [ B0]   LDW     .D2T2   *+B5(4),B26       ; |95| <1,9> 
+|| [ B0]   LDW     .D1T1   *A3,A5            ; |95| <1,9> 
+||         SHL     .S2     B6,2,B25          ; |95| <2,2> 
+||         ADD     .L1     1,A16,A3          ; |95| <2,2> 
+
+   [ A2]   BDEC    .S1     $C$L32,A2         ; |91| <0,17> 
+||         CMPGT   .L2X    A16,-2,B27        ; |91| <2,3>  ^ 
+||         SHL     .S2     B7,2,B5           ; |95| <2,3> 
+||         MPY32   .M1     A8,A3,A3          ; |95| <2,3> 
+
+   [!A0]   SHL     .S1X    B19,0x10,A5       ; |95| <0,18> 
+|| [ B1]   SHRU    .S2     B16,0x10,B24      ; |95| <0,18> 
+|| [!A1]   MPY32   .M2X    B20,A4,B19:B18    ; |95| <1,11> 
+||         ADDAW   .D2     B5,B6,B5          ; |95| <2,4> 
+||         ADDAW   .D1     A9,A3,A3          ; |95| <2,4> 
+
+   [!A0]   SHRU    .S2     B18,0x10,B25      ; |95| <0,19> 
+|| [ B1]   SHL     .S1X    B17,0x10,A4       ; |95| <0,19> 
+||         MVD     .M1     A1,A0             ; |93| <1,12> Split a long life
+||         MVD     .M2     B0,B1             ; |91| <1,12> Split a long life
+||         CMPLT   .L1     A16,0,A1          ; |93| <2,5> 
+||         ADDAW   .D2     B25,B7,B28        ; |95| <2,5> 
+||         ADD     .L2     B21,B5,B5         ; |95| <2,5> 
+||         ADD     .D1     A7,A3,A3          ; |95| <2,5> 
+
+   [ B1]   OR      .S1X    A4,B24,A4         ; |95| <0,20> 
+|| [!A0]   OR      .L2X    A5,B25,B5         ; |95| <0,20> 
+||         MVD     .M2     B20,B4            ; |95| <1,13> Split a long life
+||         ADD     .L1     2,A16,A16         ; |91| <2,6>  ^ 
+|| [!A1]   LDW     .D2T2   *B5,B20           ; |95| <2,6> 
+|| [!A1]   LDW     .D1T1   *A3,A4            ; |95| <2,6> 
+
+   [ B1]   ADDU    .L1     A4,A6,A5:A4       ; |95| <0,21>  ^ 
+|| [!A0]   ADDU    .L2     B5,B22,B25:B24    ; |95| <0,21>  ^ 
+|| [ B0]   MPY32   .M2X    B26,A5,B17:B16    ; |95| <1,14> 
+||         MV      .S2     B27,B0            ; |91| <2,7> Split a long life
+||         ADD     .D2     B21,B28,B5        ; |95| <2,7> 
+||         ADDAW   .D1     A9,A3,A3          ; |95| <2,7> 
+||         MPY32   .M1     A8,A16,A3         ; |95| <3,0> 
+
+	.dwpsn	file "dsp_fixed.c",line 98,column 0,is_stmt
+
+   [ B1]   ADD     .L2     B23,B9,B9         ; |96| <0,22> 
+|| [!A0]   ADD     .S2     B4,B8,B8          ; |96| <0,22> 
+|| [!A0]   MV      .D2     B24,B22           ; |95| <0,22>  ^ 
+|| [ B1]   MV      .S1     A4,A6             ; |95| <0,22>  ^ 
+||         MVD     .M2     B26,B23           ; |95| <1,15> Split a long life
+||         ADD     .L1     A7,A3,A3          ; |95| <2,8> 
+
+$C$DW$L$_gaussian_smooth$32$E:
+;** --------------------------------------------------------------------------*
+$C$L33:    ; PIPED LOOP EPILOG
+;          EXCLUSIVE CPU CYCLES: 7
+
+           MV      .L2     B6,B11
+||         MV      .L1     A9,A11
+||         MV      .S1     A8,A10
+||         ADD     .S2     2,B7,B7           ; |91| (E) <3,9> 
+|| [ B0]   LDW     .D2T2   *+B5(4),B26       ; |95| (E) <3,9> 
+|| [ B0]   LDW     .D1T1   *A3,A5            ; |95| (E) <3,9> 
+
+           STW     .D2T1   A7,*+SP(16)
+
+   [!A0]   SHL     .S1X    B19,0x10,A5       ; |95| (E) <2,18> 
+|| [ B1]   SHRU    .S2     B16,0x10,B24      ; |95| (E) <2,18> 
+|| [!A1]   MPY32   .M2X    B20,A4,B19:B18    ; |95| (E) <3,11> 
+
+   [!A0]   SHRU    .S2     B18,0x10,B25      ; |95| (E) <2,19> 
+|| [ B1]   SHL     .S1X    B17,0x10,A4       ; |95| (E) <2,19> 
+||         MVD     .M1     A1,A0             ; |93| (E) <3,12> Split a long life
+||         MVD     .M2     B0,B1             ; |91| (E) <3,12> Split a long life
+
+   [ B1]   OR      .L1X    A4,B24,A4         ; |95| (E) <2,20> 
+|| [!A0]   OR      .L2X    A5,B25,B5         ; |95| (E) <2,20> 
+||         MVD     .M2     B20,B4            ; |95| (E) <3,13> Split a long life
+
+   [ B1]   ADDU    .L1     A4,A6,A5:A4       ; |95| (E) <2,21>  ^ 
+|| [!A0]   ADDU    .L2     B5,B22,B25:B24    ; |95| (E) <2,21>  ^ 
+|| [ B0]   MPY32   .M2X    B26,A5,B17:B16    ; |95| (E) <3,14> 
+
+   [ B1]   ADD     .L2     B23,B9,B9         ; |96| (E) <2,22> 
+|| [!A0]   ADD     .S2     B4,B8,B8          ; |96| (E) <2,22> 
+|| [!A0]   MV      .D2     B24,B22           ; |95| (E) <2,22>  ^ 
+|| [ B1]   MV      .L1     A4,A6             ; |95| (E) <2,22>  ^ 
+||         MVD     .M2     B26,B23           ; |95| (E) <3,15> Split a long life
+
+;** --------------------------------------------------------------------------*
+$C$DW$L$_gaussian_smooth$34$B:
+;          EXCLUSIVE CPU CYCLES: 8
+   [!A0]   SHL     .S1X    B19,0x10,A5       ; |95| (E) <3,18> 
+   [!A0]   SHRU    .S2     B18,0x10,B25      ; |95| (E) <3,19> 
+   [ B1]   SHRU    .S2     B16,0x10,B24      ; |95| (E) <3,18> 
+
+   [ B1]   SHL     .S1X    B17,0x10,A4       ; |95| (E) <3,19> 
+|| [!A0]   OR      .L2X    A5,B25,B5         ; |95| (E) <3,20> 
+
+   [ B1]   OR      .L1X    A4,B24,A4         ; |95| (E) <3,20> 
+|| [!A0]   ADDU    .L2     B5,B22,B25:B24    ; |95| (E) <3,21>  ^ 
+
+   [ B1]   ADDU    .L1     A4,A6,A5:A4       ; |95| (E) <3,21>  ^ 
+|| [!A0]   MV      .L2     B24,B22           ; |95| (E) <3,22>  ^ 
+||         B       .S1     $C$L36
+
+   [ B1]   MV      .L1     A4,A6             ; |95| (E) <3,22>  ^ 
+|| [ B1]   ADD     .L2     B23,B9,B9         ; |96| (E) <3,22> 
+|| [!A0]   ADD     .S2     B4,B8,B8          ; |96| (E) <3,22> 
+
+           ADD     .L1X    A6,B22,A14
+||         ADD     .L2     B9,B8,B4
 ||         RINT                              ; interrupts on
 
-$C$DW$L$_gaussian_smooth$35$E:
-;** --------------------------------------------------------------------------*
-$C$L33:    
-$C$DW$L$_gaussian_smooth$36$B:
-;          EXCLUSIVE CPU CYCLES: 3
-           MVKH    .S1     __divlli,A3       ; |91| 
-           NOP             1
-$C$DW$68	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$68, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$68, DW_AT_name("__divlli")
-	.dwattr $C$DW$68, DW_AT_TI_call
-           CALL    .S2X    A3                ; |91| 
-$C$DW$L$_gaussian_smooth$36$E:
+$C$DW$L$_gaussian_smooth$34$E:
 ;** --------------------------------------------------------------------------*
 $C$L34:    
+$C$DW$L$_gaussian_smooth$35$B:
+;          EXCLUSIVE CPU CYCLES: 3
+;**  	-----------------------    dot = I$7+I$8;
+;**  	-----------------------    goto g30;
+           MVKL    .S1     __divlli,A3       ; |85| 
+           MVKH    .S1     __divlli,A3       ; |85| 
+           NOP             1
+           ; BRANCH OCCURS {$C$L36}  
+$C$DW$L$_gaussian_smooth$35$E:
+;** --------------------------------------------------------------------------*
+$C$L35:    
+$C$DW$L$_gaussian_smooth$36$B:
+;**	-----------------------g29:
+;** 87	-----------------------    sum = 0;
+;** 88	-----------------------    dot = 0;
+$C$DW$L$_gaussian_smooth$36$E:
+;** --------------------------------------------------------------------------*
 $C$DW$L$_gaussian_smooth$37$B:
-;          EXCLUSIVE CPU CYCLES: 5
-;**	-----------------------g23:
-;** 91	-----------------------    *U$136 = (int)((long long)dot*(long long)(int)(K$122/(long long)sum)>>16)+K$129>>16;
-;** 91	-----------------------    U$136 += H$17;
-;** 91	-----------------------    ++r;
-;** 91	-----------------------    if ( L$5 = L$5-1 ) goto g18;
-           SHR     .S2     B20,31,B5         ; |91| 
-           MV      .L2     B20,B4            ; |91| 
-           ZERO    .L1     A4
-           MVK     .S1     0x5a,A5
-           ADDKPC  .S2     $C$RL19,B3,0      ; |91| 
-$C$RL19:   ; CALL OCCURS {__divlli} {0}      ; |91| 
+;          EXCLUSIVE CPU CYCLES: 2
+           MVKL    .S1     __divlli,A3       ; |85| 
+           MVKH    .S1     __divlli,A3       ; |85| 
 $C$DW$L$_gaussian_smooth$37$E:
 ;** --------------------------------------------------------------------------*
+$C$L36:    
 $C$DW$L$_gaussian_smooth$38$B:
-;          EXCLUSIVE CPU CYCLES: 11
+;          EXCLUSIVE CPU CYCLES: 7
+;**	-----------------------g30:
+;** 85	-----------------------    *U$163 = (int)((long long)dot*(long long)(int)(K$154/(long long)sum)>>16)+K$161;
+;** 85	-----------------------    U$163 += H$11;
+;** 85	-----------------------    ++r;
+;** 85	-----------------------    if ( L$5 = L$5-1 ) goto g21;
+           NOP             1
+$C$DW$66	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$66, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$66, DW_AT_name("__divlli")
+	.dwattr $C$DW$66, DW_AT_TI_call
+           CALL    .S2X    A3                ; |85| 
+           NOP             3
+           SHR     .S2     B4,31,B5          ; |85| 
 
-           MPY32   .M1     A4,A11,A5:A4      ; |91| 
-||         SUB     .L1X    B10,1,A0          ; |91| 
+           ADDKPC  .S2     $C$RL18,B3,0      ; |85| 
+||         MVK     .S1     0x5a,A5
+||         ZERO    .L1     A4
+
+$C$RL18:   ; CALL OCCURS {__divlli} {0}      ; |85| 
+$C$DW$L$_gaussian_smooth$38$E:
+;** --------------------------------------------------------------------------*
+$C$DW$L$_gaussian_smooth$39$B:
+;          EXCLUSIVE CPU CYCLES: 10
+
+           MPY32   .M1     A4,A14,A5:A4      ; |85| 
+||         SUB     .L1X    B12,1,A0          ; |85| 
 ||         ZERO    .S1     A31
-||         ADD     .D1     1,A13,A13         ; |91| 
-||         SUB     .L2     B10,1,B10         ; |91| 
+||         ADD     .D1     1,A12,A12         ; |85| 
+||         SUB     .L2     B12,1,B12         ; |85| 
 
-   [ A0]   MV      .S2     B11,B7            ; |93| 
-|| [ A0]   CMPGT   .L2     B11,B13,B0        ; |95| 
-|| [ A0]   ZERO    .D2     B20               ; |94| 
-|| [ A0]   ZERO    .L1     A11               ; |94| 
+   [!A0]   ZERO    .S2     B0                ; nullify predicate
+|| [ A0]   CMPGT   .L2     B13,B11,B0        ; |91| 
+|| [ A0]   MV      .D2     B13,B7            ; |87| 
 
-   [!B0]   LDW     .D2T2   *+SP(8),B19
-|| [ A0]   MV      .L2     B0,B2             ; guard predicate rewrite
+   [!B0]   LDW     .D2T2   *+SP(8),B21
+|| [!B0]   ZERO    .L1     A6
+|| [!B0]   ZERO    .L2     B8
+|| [!B0]   ZERO    .S2     B9
 
-   [!B0]   ADD     .L1X    B7,A13,A18
-|| [!A0]   ZERO    .L2     B0                ; nullify predicate
+   [!B0]   ADD     .L1X    B7,A12,A16
+|| [!B0]   ZERO    .L2     B22
 
-           SHRU    .S1     A4,0x10,A3        ; |91| 
+   [ A0]   B       .S1     $C$L28            ; |85| 
+           SHL     .S2X    A5,0x10,B4        ; |85| 
+           SHRU    .S1     A4,0x10,A3        ; |85| 
 
-   [ A0]   BNOP    .S1     $C$L27,1          ; |91| 
-||         SHL     .S2X    A5,0x10,B4        ; |91| 
-
-           OR      .L1X    B4,A3,A4          ; |91| 
+           OR      .L1X    B4,A3,A4          ; |85| 
 ||         SET     .S1     A31,0xf,0xf,A3
 || [ A0]   MVK     .L2     1,B4
 
-           ADD     .L1     A3,A4,A3          ; |91| 
-|| [ A0]   ADDAH   .D2     B4,B13,B1
+   [ B0]   B       .S1     $C$L35            ; |91| 
+||         ADD     .L1     A3,A4,A4          ; |85| 
+|| [ A0]   ADDAH   .D2     B4,B11,B4
 
-   [ B0]   B       .S2     $C$L34            ; |95| 
-||         SHR     .S1     A3,16,A3          ; |91| 
+	.dwpsn	file "dsp_fixed.c",line 103,column 0,is_stmt
 
-	.dwpsn	file "dsp_fixed.c",line 105,column 0,is_stmt
+           STW     .D1T1   A4,*A13           ; |85| 
+||         ADD     .L1X    B10,A13,A13       ; |85| 
 
-           STH     .D1T1   A3,*A14           ; |91| 
-||         ADD     .L1     A15,A14,A14       ; |91| 
-|| [ A0]   MVKL    .S1     __divlli,A3       ; |91| 
-
-           ; BRANCHCC OCCURS {$C$L27}        ; |91| 
-$C$DW$L$_gaussian_smooth$38$E:
-;** --------------------------------------------------------------------------*
-$C$L35:    
-$C$DW$L$_gaussian_smooth$39$B:
-;          EXCLUSIVE CPU CYCLES: 12
-;**	-----------------------g24:
-;** 89	-----------------------    ++c;
-;** 89	-----------------------    if ( L$4 = L$4-1 ) goto g16;
-
-           LDW     .D2T2   *+SP(20),B4
-||         CMPGT   .L2     B12,0,B0          ; |91| 
-||         ADD     .L1     1,A12,A12         ; |89| 
-
-           NOP             4
-
-           SUB     .L1X    B4,1,A0           ; |89| 
-||         SUB     .L2     B4,1,B4           ; |89| 
-
-   [!A0]   MVK     .L2     0x1,B0            ; nullify predicate
-|| [ A0]   B       .S1     $C$L26            ; |89| 
-|| [ A0]   LDW     .D2T1   *+SP(16),A3
-||         MV      .L1     A0,A1             ; guard predicate rewrite
-|| [ A0]   MV      .D1X    B0,A0             ; guard predicate rewrite
-
-   [!B0]   B       .S1     $C$L35            ; |91| 
-|| [ B0]   NEG     .L2     B13,B11
-|| [ B0]   ZERO    .L1     A13               ; |91| 
-|| [ B0]   MV      .S2     B12,B10           ; |93| 
-||         STW     .D2T2   B4,*+SP(20)       ; |89| 
-
-   [ A0]   MV      .S2     B11,B7            ; |93| 
-|| [ A1]   CMPGT   .L2     B11,B13,B0        ; |95| 
-
-	.dwpsn	file "dsp_fixed.c",line 106,column 0,is_stmt
-           NOP             3
-           ; BRANCHCC OCCURS {$C$L26}        ; |89| 
+           ; BRANCHCC OCCURS {$C$L28}        ; |85| 
 $C$DW$L$_gaussian_smooth$39$E:
 ;** --------------------------------------------------------------------------*
-$C$L36:    
+$C$L37:    
+$C$DW$L$_gaussian_smooth$40$B:
+;          EXCLUSIVE CPU CYCLES: 12
+;**	-----------------------g31:
+;** 81	-----------------------    ++c;
+;** 81	-----------------------    if ( L$4 = L$4-1 ) goto g19;
+           LDW     .D2T2   *+SP(20),B4
+           ADD     .L1     1,A15,A15         ; |81| 
+           NOP             3
+
+           SUB     .L1X    B4,1,A0           ; |81| 
+||         SUB     .L2     B4,1,B4           ; |81| 
+
+   [ A0]   B       .S1     $C$L27            ; |81| 
+||         STW     .D2T2   B4,*+SP(20)       ; |81| 
+
+           LDW     .D2T2   *+SP(12),B4
+   [ A0]   MVKL    .S1     _buf,A3
+   [ A0]   MVKH    .S1     _buf,A3
+	.dwpsn	file "dsp_fixed.c",line 104,column 0,is_stmt
+           NOP             2
+           ; BRANCHCC OCCURS {$C$L27}        ; |81| 
+$C$DW$L$_gaussian_smooth$40$E:
+;** --------------------------------------------------------------------------*
+$C$L38:    
 ;          EXCLUSIVE CPU CYCLES: 8
-;**	-----------------------g25:
-;** 112	-----------------------    free((void *)tempim);
-;** 113	-----------------------    free(*&kernel);
-;** 115	-----------------------    return smoothedim;
-           MVKL    .S2     _free,B4          ; |112| 
-           MVKH    .S2     _free,B4          ; |112| 
-$C$DW$69	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$69, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$69, DW_AT_name("_free")
-	.dwattr $C$DW$69, DW_AT_TI_call
-           CALL    .S2     B4                ; |112| 
-           LDW     .D2T1   *+SP(12),A4       ; |112| 
-           ADDKPC  .S2     $C$RL20,B3,3      ; |112| 
-$C$RL20:   ; CALL OCCURS {_free} {0}         ; |112| 
+;**	-----------------------g32:
+;** 107	-----------------------    free((void *)tempim);
+;** 108	-----------------------    free(*&kernel);
+;**  	-----------------------    return;
+           MVKL    .S2     _free,B4          ; |107| 
+           MVKH    .S2     _free,B4          ; |107| 
+$C$DW$67	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$67, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$67, DW_AT_name("_free")
+	.dwattr $C$DW$67, DW_AT_TI_call
+           CALL    .S2     B4                ; |107| 
+           LDW     .D2T1   *+SP(16),A4       ; |107| 
+           ADDKPC  .S2     $C$RL19,B3,3      ; |107| 
+$C$RL19:   ; CALL OCCURS {_free} {0}         ; |107| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 9
-           MVKL    .S1     _free,A3          ; |113| 
-           MVKH    .S1     _free,A3          ; |113| 
-           LDW     .D2T1   *+SP(8),A4        ; |113| 
-$C$DW$70	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$70, DW_AT_low_pc(0x00)
-	.dwattr $C$DW$70, DW_AT_name("_free")
-	.dwattr $C$DW$70, DW_AT_TI_call
-           CALL    .S2X    A3                ; |113| 
-           ADDKPC  .S2     $C$RL21,B3,4      ; |113| 
-$C$RL21:   ; CALL OCCURS {_free} {0}         ; |113| 
+           MVKL    .S1     _free,A3          ; |108| 
+           MVKH    .S1     _free,A3          ; |108| 
+           LDW     .D2T1   *+SP(8),A4        ; |108| 
+$C$DW$68	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$68, DW_AT_low_pc(0x00)
+	.dwattr $C$DW$68, DW_AT_name("_free")
+	.dwattr $C$DW$68, DW_AT_TI_call
+           CALL    .S2X    A3                ; |108| 
+           ADDKPC  .S2     $C$RL20,B3,4      ; |108| 
+$C$RL20:   ; CALL OCCURS {_free} {0}         ; |108| 
 ;** --------------------------------------------------------------------------*
-;          EXCLUSIVE CPU CYCLES: 12
-           LDW     .D2T1   *+SP(16),A4       ; |113| 
-           LDW     .D2T2   *++SP(32),B3      ; |117| 
-           LDDW    .D2T1   *++SP,A13:A12     ; |117| 
-           LDDW    .D2T1   *++SP,A15:A14     ; |117| 
-           LDDW    .D2T2   *++SP,B11:B10     ; |117| 
-           LDDW    .D2T2   *++SP,B13:B12     ; |117| 
-$C$DW$71	.dwtag  DW_TAG_TI_branch
-	.dwattr $C$DW$71, DW_AT_low_pc(0x04)
-	.dwattr $C$DW$71, DW_AT_TI_return
+;          EXCLUSIVE CPU CYCLES: 11
+           LDW     .D2T2   *++SP(32),B3      ; |110| 
+           LDDW    .D2T1   *++SP,A13:A12     ; |110| 
+           LDDW    .D2T1   *++SP,A15:A14     ; |110| 
+           LDDW    .D2T2   *++SP,B11:B10     ; |110| 
+           LDDW    .D2T2   *++SP,B13:B12     ; |110| 
+$C$DW$69	.dwtag  DW_TAG_TI_branch
+	.dwattr $C$DW$69, DW_AT_low_pc(0x04)
+	.dwattr $C$DW$69, DW_AT_TI_return
 
-           LDW     .D2T1   *++SP(8),A10      ; |117| 
-||         RET     .S2     B3                ; |117| 
+           LDW     .D2T1   *++SP(8),A10      ; |110| 
+||         RET     .S2     B3                ; |110| 
 
-           LDW     .D2T1   *++SP(8),A11      ; |117| 
+           LDW     .D2T1   *++SP(8),A11      ; |110| 
            NOP             4
-           ; BRANCH OCCURS {B3}              ; |117| 
-;** --------------------------------------------------------------------------*
-$C$L37:    
-;          EXCLUSIVE CPU CYCLES: 2
-;**	-----------------------g26:
-;** 62	-----------------------    exit(1);
-;***	; the preceding call never returns
-;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
-           ADDKPC  .S2     $C$RL22,B3,1      ; |62| 
-$C$RL22:   ; CALL OCCURS {_exit} {0}         ; |62| 
-;*----------------------------------------------------------------------------*
-;*   SOFTWARE PIPELINE INFORMATION
-;*      Disqualified loop: Bad loop structure
-;*----------------------------------------------------------------------------*
-$C$L38:    
-$C$DW$L$_gaussian_smooth$44$B:
-;          EXCLUSIVE CPU CYCLES: 6
-;**	-----------------------g27:
-;** 62	-----------------------    goto g27;
-           BNOP    .S1     $C$L38,5          ; |62| 
-           ; BRANCH OCCURS {$C$L38}          ; |62| 
-$C$DW$L$_gaussian_smooth$44$E:
+           ; BRANCH OCCURS {B3}              ; |110| 
 ;** --------------------------------------------------------------------------*
 $C$L39:    
-;          EXCLUSIVE CPU CYCLES: 3
-;**	-----------------------g28:
-;** 61	-----------------------    exit(1);
+;          EXCLUSIVE CPU CYCLES: 2
+;**	-----------------------g33:
+;** 49	-----------------------    exit(1);
 ;***	; the preceding call never returns
 ;**  	-----------------------    #pragma LOOP_FLAGS(4096u)
-           MVK     .L1     0x1,A4            ; |61| 
-           ADDKPC  .S2     $C$RL23,B3,1      ; |61| 
-$C$RL23:   ; CALL OCCURS {_exit} {0}         ; |61| 
+           ADDKPC  .S2     $C$RL21,B3,1      ; |49| 
+$C$RL21:   ; CALL OCCURS {_exit} {0}         ; |49| 
 ;*----------------------------------------------------------------------------*
 ;*   SOFTWARE PIPELINE INFORMATION
 ;*      Disqualified loop: Bad loop structure
 ;*----------------------------------------------------------------------------*
 $C$L40:    
-$C$DW$L$_gaussian_smooth$46$B:
+$C$DW$L$_gaussian_smooth$45$B:
 ;          EXCLUSIVE CPU CYCLES: 6
-;**	-----------------------g29:
-;** 61	-----------------------    goto g29;
-	.dwpsn	file "dsp_fixed.c",line 117,column 1,is_stmt
-           BNOP    .S1     $C$L40,5          ; |61| 
-           ; BRANCH OCCURS {$C$L40}          ; |61| 
-$C$DW$L$_gaussian_smooth$46$E:
+;**	-----------------------g34:
+;** 49	-----------------------    goto g34;
+	.dwpsn	file "dsp_fixed.c",line 110,column 1,is_stmt
+           BNOP    .S1     $C$L40,5          ; |49| 
+           ; BRANCH OCCURS {$C$L40}          ; |49| 
+$C$DW$L$_gaussian_smooth$45$E:
+
+$C$DW$70	.dwtag  DW_TAG_TI_loop
+	.dwattr $C$DW$70, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L40:1:1433429572")
+	.dwattr $C$DW$70, DW_AT_TI_begin_file("dsp_fixed.c")
+	.dwattr $C$DW$70, DW_AT_TI_begin_line(0x31)
+	.dwattr $C$DW$70, DW_AT_TI_end_line(0x6e)
+$C$DW$71	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$71, DW_AT_low_pc($C$DW$L$_gaussian_smooth$45$B)
+	.dwattr $C$DW$71, DW_AT_high_pc($C$DW$L$_gaussian_smooth$45$E)
+	.dwendtag $C$DW$70
+
 
 $C$DW$72	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$72, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L40:1:1433365554")
+	.dwattr $C$DW$72, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L27:1:1433429572")
 	.dwattr $C$DW$72, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$72, DW_AT_TI_begin_line(0x3d)
-	.dwattr $C$DW$72, DW_AT_TI_end_line(0x75)
+	.dwattr $C$DW$72, DW_AT_TI_begin_line(0x51)
+	.dwattr $C$DW$72, DW_AT_TI_end_line(0x68)
 $C$DW$73	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$73, DW_AT_low_pc($C$DW$L$_gaussian_smooth$46$B)
-	.dwattr $C$DW$73, DW_AT_high_pc($C$DW$L$_gaussian_smooth$46$E)
-	.dwendtag $C$DW$72
-
-
-$C$DW$74	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$74, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L38:1:1433365554")
-	.dwattr $C$DW$74, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$74, DW_AT_TI_begin_line(0x3e)
-	.dwattr $C$DW$74, DW_AT_TI_end_line(0x3e)
+	.dwattr $C$DW$73, DW_AT_low_pc($C$DW$L$_gaussian_smooth$24$B)
+	.dwattr $C$DW$73, DW_AT_high_pc($C$DW$L$_gaussian_smooth$24$E)
+$C$DW$74	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$74, DW_AT_low_pc($C$DW$L$_gaussian_smooth$25$B)
+	.dwattr $C$DW$74, DW_AT_high_pc($C$DW$L$_gaussian_smooth$25$E)
 $C$DW$75	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$75, DW_AT_low_pc($C$DW$L$_gaussian_smooth$44$B)
-	.dwattr $C$DW$75, DW_AT_high_pc($C$DW$L$_gaussian_smooth$44$E)
-	.dwendtag $C$DW$74
-
+	.dwattr $C$DW$75, DW_AT_low_pc($C$DW$L$_gaussian_smooth$40$B)
+	.dwattr $C$DW$75, DW_AT_high_pc($C$DW$L$_gaussian_smooth$40$E)
 
 $C$DW$76	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$76, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L26:1:1433365554")
+	.dwattr $C$DW$76, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L28:2:1433429572")
 	.dwattr $C$DW$76, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$76, DW_AT_TI_begin_line(0x59)
-	.dwattr $C$DW$76, DW_AT_TI_end_line(0x6a)
+	.dwattr $C$DW$76, DW_AT_TI_begin_line(0x55)
+	.dwattr $C$DW$76, DW_AT_TI_end_line(0x67)
 $C$DW$77	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$77, DW_AT_low_pc($C$DW$L$_gaussian_smooth$25$B)
-	.dwattr $C$DW$77, DW_AT_high_pc($C$DW$L$_gaussian_smooth$25$E)
+	.dwattr $C$DW$77, DW_AT_low_pc($C$DW$L$_gaussian_smooth$26$B)
+	.dwattr $C$DW$77, DW_AT_high_pc($C$DW$L$_gaussian_smooth$26$E)
 $C$DW$78	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$78, DW_AT_low_pc($C$DW$L$_gaussian_smooth$26$B)
-	.dwattr $C$DW$78, DW_AT_high_pc($C$DW$L$_gaussian_smooth$26$E)
+	.dwattr $C$DW$78, DW_AT_low_pc($C$DW$L$_gaussian_smooth$36$B)
+	.dwattr $C$DW$78, DW_AT_high_pc($C$DW$L$_gaussian_smooth$36$E)
 $C$DW$79	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$79, DW_AT_low_pc($C$DW$L$_gaussian_smooth$39$B)
-	.dwattr $C$DW$79, DW_AT_high_pc($C$DW$L$_gaussian_smooth$39$E)
-
-$C$DW$80	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$80, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L27:2:1433365554")
-	.dwattr $C$DW$80, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$80, DW_AT_TI_begin_line(0x5b)
-	.dwattr $C$DW$80, DW_AT_TI_end_line(0x69)
+	.dwattr $C$DW$79, DW_AT_low_pc($C$DW$L$_gaussian_smooth$30$B)
+	.dwattr $C$DW$79, DW_AT_high_pc($C$DW$L$_gaussian_smooth$30$E)
+$C$DW$80	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$80, DW_AT_low_pc($C$DW$L$_gaussian_smooth$27$B)
+	.dwattr $C$DW$80, DW_AT_high_pc($C$DW$L$_gaussian_smooth$27$E)
 $C$DW$81	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$81, DW_AT_low_pc($C$DW$L$_gaussian_smooth$27$B)
-	.dwattr $C$DW$81, DW_AT_high_pc($C$DW$L$_gaussian_smooth$27$E)
+	.dwattr $C$DW$81, DW_AT_low_pc($C$DW$L$_gaussian_smooth$29$B)
+	.dwattr $C$DW$81, DW_AT_high_pc($C$DW$L$_gaussian_smooth$29$E)
 $C$DW$82	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$82, DW_AT_low_pc($C$DW$L$_gaussian_smooth$31$B)
-	.dwattr $C$DW$82, DW_AT_high_pc($C$DW$L$_gaussian_smooth$31$E)
+	.dwattr $C$DW$82, DW_AT_low_pc($C$DW$L$_gaussian_smooth$34$B)
+	.dwattr $C$DW$82, DW_AT_high_pc($C$DW$L$_gaussian_smooth$34$E)
 $C$DW$83	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$83, DW_AT_low_pc($C$DW$L$_gaussian_smooth$28$B)
-	.dwattr $C$DW$83, DW_AT_high_pc($C$DW$L$_gaussian_smooth$28$E)
+	.dwattr $C$DW$83, DW_AT_low_pc($C$DW$L$_gaussian_smooth$35$B)
+	.dwattr $C$DW$83, DW_AT_high_pc($C$DW$L$_gaussian_smooth$35$E)
 $C$DW$84	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$84, DW_AT_low_pc($C$DW$L$_gaussian_smooth$30$B)
-	.dwattr $C$DW$84, DW_AT_high_pc($C$DW$L$_gaussian_smooth$30$E)
+	.dwattr $C$DW$84, DW_AT_low_pc($C$DW$L$_gaussian_smooth$37$B)
+	.dwattr $C$DW$84, DW_AT_high_pc($C$DW$L$_gaussian_smooth$37$E)
 $C$DW$85	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$85, DW_AT_low_pc($C$DW$L$_gaussian_smooth$35$B)
-	.dwattr $C$DW$85, DW_AT_high_pc($C$DW$L$_gaussian_smooth$35$E)
+	.dwattr $C$DW$85, DW_AT_low_pc($C$DW$L$_gaussian_smooth$38$B)
+	.dwattr $C$DW$85, DW_AT_high_pc($C$DW$L$_gaussian_smooth$38$E)
 $C$DW$86	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$86, DW_AT_low_pc($C$DW$L$_gaussian_smooth$36$B)
-	.dwattr $C$DW$86, DW_AT_high_pc($C$DW$L$_gaussian_smooth$36$E)
-$C$DW$87	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$87, DW_AT_low_pc($C$DW$L$_gaussian_smooth$37$B)
-	.dwattr $C$DW$87, DW_AT_high_pc($C$DW$L$_gaussian_smooth$37$E)
+	.dwattr $C$DW$86, DW_AT_low_pc($C$DW$L$_gaussian_smooth$39$B)
+	.dwattr $C$DW$86, DW_AT_high_pc($C$DW$L$_gaussian_smooth$39$E)
+
+$C$DW$87	.dwtag  DW_TAG_TI_loop
+	.dwattr $C$DW$87, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L32:3:1433429572")
+	.dwattr $C$DW$87, DW_AT_TI_begin_file("dsp_fixed.c")
+	.dwattr $C$DW$87, DW_AT_TI_begin_line(0x5b)
+	.dwattr $C$DW$87, DW_AT_TI_end_line(0x62)
 $C$DW$88	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$88, DW_AT_low_pc($C$DW$L$_gaussian_smooth$38$B)
-	.dwattr $C$DW$88, DW_AT_high_pc($C$DW$L$_gaussian_smooth$38$E)
+	.dwattr $C$DW$88, DW_AT_low_pc($C$DW$L$_gaussian_smooth$32$B)
+	.dwattr $C$DW$88, DW_AT_high_pc($C$DW$L$_gaussian_smooth$32$E)
+	.dwendtag $C$DW$87
+
 
 $C$DW$89	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$89, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L31:3:1433365554")
+	.dwattr $C$DW$89, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L29:3:1433429572")
 	.dwattr $C$DW$89, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$89, DW_AT_TI_begin_line(0x5f)
-	.dwattr $C$DW$89, DW_AT_TI_end_line(0x66)
+	.dwattr $C$DW$89, DW_AT_TI_begin_line(0x5b)
+	.dwattr $C$DW$89, DW_AT_TI_end_line(0x62)
 $C$DW$90	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$90, DW_AT_low_pc($C$DW$L$_gaussian_smooth$33$B)
-	.dwattr $C$DW$90, DW_AT_high_pc($C$DW$L$_gaussian_smooth$33$E)
+	.dwattr $C$DW$90, DW_AT_low_pc($C$DW$L$_gaussian_smooth$28$B)
+	.dwattr $C$DW$90, DW_AT_high_pc($C$DW$L$_gaussian_smooth$28$E)
 	.dwendtag $C$DW$89
-
-
-$C$DW$91	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$91, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L28:3:1433365554")
-	.dwattr $C$DW$91, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$91, DW_AT_TI_begin_line(0x5f)
-	.dwattr $C$DW$91, DW_AT_TI_end_line(0x66)
-$C$DW$92	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$92, DW_AT_low_pc($C$DW$L$_gaussian_smooth$29$B)
-	.dwattr $C$DW$92, DW_AT_high_pc($C$DW$L$_gaussian_smooth$29$E)
-	.dwendtag $C$DW$91
-
-	.dwendtag $C$DW$80
 
 	.dwendtag $C$DW$76
 
+	.dwendtag $C$DW$72
 
-$C$DW$93	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$93, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L15:1:1433365554")
-	.dwattr $C$DW$93, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$93, DW_AT_TI_begin_line(0x41)
-	.dwattr $C$DW$93, DW_AT_TI_end_line(0x53)
+
+$C$DW$91	.dwtag  DW_TAG_TI_loop
+	.dwattr $C$DW$91, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L15:1:1433429572")
+	.dwattr $C$DW$91, DW_AT_TI_begin_file("dsp_fixed.c")
+	.dwattr $C$DW$91, DW_AT_TI_begin_line(0x37)
+	.dwattr $C$DW$91, DW_AT_TI_end_line(0x4c)
+$C$DW$92	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$92, DW_AT_low_pc($C$DW$L$_gaussian_smooth$6$B)
+	.dwattr $C$DW$92, DW_AT_high_pc($C$DW$L$_gaussian_smooth$6$E)
+$C$DW$93	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$93, DW_AT_low_pc($C$DW$L$_gaussian_smooth$7$B)
+	.dwattr $C$DW$93, DW_AT_high_pc($C$DW$L$_gaussian_smooth$7$E)
 $C$DW$94	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$94, DW_AT_low_pc($C$DW$L$_gaussian_smooth$8$B)
-	.dwattr $C$DW$94, DW_AT_high_pc($C$DW$L$_gaussian_smooth$8$E)
-$C$DW$95	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$95, DW_AT_low_pc($C$DW$L$_gaussian_smooth$9$B)
-	.dwattr $C$DW$95, DW_AT_high_pc($C$DW$L$_gaussian_smooth$9$E)
-$C$DW$96	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$96, DW_AT_low_pc($C$DW$L$_gaussian_smooth$22$B)
-	.dwattr $C$DW$96, DW_AT_high_pc($C$DW$L$_gaussian_smooth$22$E)
+	.dwattr $C$DW$94, DW_AT_low_pc($C$DW$L$_gaussian_smooth$22$B)
+	.dwattr $C$DW$94, DW_AT_high_pc($C$DW$L$_gaussian_smooth$22$E)
 
-$C$DW$97	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$97, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L16:2:1433365554")
-	.dwattr $C$DW$97, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$97, DW_AT_TI_begin_line(0x43)
-	.dwattr $C$DW$97, DW_AT_TI_end_line(0x52)
+$C$DW$95	.dwtag  DW_TAG_TI_loop
+	.dwattr $C$DW$95, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L16:2:1433429572")
+	.dwattr $C$DW$95, DW_AT_TI_begin_file("dsp_fixed.c")
+	.dwattr $C$DW$95, DW_AT_TI_begin_line(0x3b)
+	.dwattr $C$DW$95, DW_AT_TI_end_line(0x4b)
+$C$DW$96	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$96, DW_AT_low_pc($C$DW$L$_gaussian_smooth$8$B)
+	.dwattr $C$DW$96, DW_AT_high_pc($C$DW$L$_gaussian_smooth$8$E)
+$C$DW$97	.dwtag  DW_TAG_TI_loop_range
+	.dwattr $C$DW$97, DW_AT_low_pc($C$DW$L$_gaussian_smooth$18$B)
+	.dwattr $C$DW$97, DW_AT_high_pc($C$DW$L$_gaussian_smooth$18$E)
 $C$DW$98	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$98, DW_AT_low_pc($C$DW$L$_gaussian_smooth$10$B)
-	.dwattr $C$DW$98, DW_AT_high_pc($C$DW$L$_gaussian_smooth$10$E)
+	.dwattr $C$DW$98, DW_AT_low_pc($C$DW$L$_gaussian_smooth$12$B)
+	.dwattr $C$DW$98, DW_AT_high_pc($C$DW$L$_gaussian_smooth$12$E)
 $C$DW$99	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$99, DW_AT_low_pc($C$DW$L$_gaussian_smooth$14$B)
-	.dwattr $C$DW$99, DW_AT_high_pc($C$DW$L$_gaussian_smooth$14$E)
+	.dwattr $C$DW$99, DW_AT_low_pc($C$DW$L$_gaussian_smooth$9$B)
+	.dwattr $C$DW$99, DW_AT_high_pc($C$DW$L$_gaussian_smooth$9$E)
 $C$DW$100	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$100, DW_AT_low_pc($C$DW$L$_gaussian_smooth$11$B)
 	.dwattr $C$DW$100, DW_AT_high_pc($C$DW$L$_gaussian_smooth$11$E)
 $C$DW$101	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$101, DW_AT_low_pc($C$DW$L$_gaussian_smooth$13$B)
-	.dwattr $C$DW$101, DW_AT_high_pc($C$DW$L$_gaussian_smooth$13$E)
+	.dwattr $C$DW$101, DW_AT_low_pc($C$DW$L$_gaussian_smooth$16$B)
+	.dwattr $C$DW$101, DW_AT_high_pc($C$DW$L$_gaussian_smooth$16$E)
 $C$DW$102	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$102, DW_AT_low_pc($C$DW$L$_gaussian_smooth$18$B)
-	.dwattr $C$DW$102, DW_AT_high_pc($C$DW$L$_gaussian_smooth$18$E)
+	.dwattr $C$DW$102, DW_AT_low_pc($C$DW$L$_gaussian_smooth$17$B)
+	.dwattr $C$DW$102, DW_AT_high_pc($C$DW$L$_gaussian_smooth$17$E)
 $C$DW$103	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$103, DW_AT_low_pc($C$DW$L$_gaussian_smooth$19$B)
 	.dwattr $C$DW$103, DW_AT_high_pc($C$DW$L$_gaussian_smooth$19$E)
@@ -2625,34 +2832,34 @@ $C$DW$105	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$105, DW_AT_high_pc($C$DW$L$_gaussian_smooth$21$E)
 
 $C$DW$106	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$106, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L20:3:1433365554")
+	.dwattr $C$DW$106, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L20:3:1433429572")
 	.dwattr $C$DW$106, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$106, DW_AT_TI_begin_line(0x47)
-	.dwattr $C$DW$106, DW_AT_TI_end_line(0x4f)
+	.dwattr $C$DW$106, DW_AT_TI_begin_line(0x41)
+	.dwattr $C$DW$106, DW_AT_TI_end_line(0x48)
 $C$DW$107	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$107, DW_AT_low_pc($C$DW$L$_gaussian_smooth$16$B)
-	.dwattr $C$DW$107, DW_AT_high_pc($C$DW$L$_gaussian_smooth$16$E)
+	.dwattr $C$DW$107, DW_AT_low_pc($C$DW$L$_gaussian_smooth$14$B)
+	.dwattr $C$DW$107, DW_AT_high_pc($C$DW$L$_gaussian_smooth$14$E)
 	.dwendtag $C$DW$106
 
 
 $C$DW$108	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$108, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L17:3:1433365554")
+	.dwattr $C$DW$108, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L17:3:1433429572")
 	.dwattr $C$DW$108, DW_AT_TI_begin_file("dsp_fixed.c")
-	.dwattr $C$DW$108, DW_AT_TI_begin_line(0x47)
-	.dwattr $C$DW$108, DW_AT_TI_end_line(0x4f)
+	.dwattr $C$DW$108, DW_AT_TI_begin_line(0x41)
+	.dwattr $C$DW$108, DW_AT_TI_end_line(0x48)
 $C$DW$109	.dwtag  DW_TAG_TI_loop_range
-	.dwattr $C$DW$109, DW_AT_low_pc($C$DW$L$_gaussian_smooth$12$B)
-	.dwattr $C$DW$109, DW_AT_high_pc($C$DW$L$_gaussian_smooth$12$E)
+	.dwattr $C$DW$109, DW_AT_low_pc($C$DW$L$_gaussian_smooth$10$B)
+	.dwattr $C$DW$109, DW_AT_high_pc($C$DW$L$_gaussian_smooth$10$E)
 	.dwendtag $C$DW$108
 
-	.dwendtag $C$DW$97
+	.dwendtag $C$DW$95
 
-	.dwendtag $C$DW$93
+	.dwendtag $C$DW$91
 
-	.dwattr $C$DW$56, DW_AT_TI_end_file("dsp_fixed.c")
-	.dwattr $C$DW$56, DW_AT_TI_end_line(0x75)
-	.dwattr $C$DW$56, DW_AT_TI_end_column(0x01)
-	.dwendtag $C$DW$56
+	.dwattr $C$DW$57, DW_AT_TI_end_file("dsp_fixed.c")
+	.dwattr $C$DW$57, DW_AT_TI_end_line(0x6e)
+	.dwattr $C$DW$57, DW_AT_TI_end_column(0x01)
+	.dwendtag $C$DW$57
 
 ;; Inlined function references:
 ;; [  0] fixedpt_mul
@@ -2666,6 +2873,7 @@ $C$DW$109	.dwtag  DW_TAG_TI_loop_range
 	.global	_malloc
 	.global	_free
 	.global	_exit
+	.global	_buf
 	.global	__cmpd
 	.global	__addd
 	.global	__fixdi
@@ -2689,9 +2897,6 @@ $C$DW$T$6	.dwtag  DW_TAG_base_type
 	.dwattr $C$DW$T$6, DW_AT_encoding(DW_ATE_unsigned_char)
 	.dwattr $C$DW$T$6, DW_AT_name("unsigned char")
 	.dwattr $C$DW$T$6, DW_AT_byte_size(0x01)
-$C$DW$T$34	.dwtag  DW_TAG_pointer_type
-	.dwattr $C$DW$T$34, DW_AT_type(*$C$DW$T$6)
-	.dwattr $C$DW$T$34, DW_AT_address_class(0x20)
 $C$DW$T$7	.dwtag  DW_TAG_base_type
 	.dwattr $C$DW$T$7, DW_AT_encoding(DW_ATE_signed_char)
 	.dwattr $C$DW$T$7, DW_AT_name("wchar_t")
@@ -2700,9 +2905,6 @@ $C$DW$T$8	.dwtag  DW_TAG_base_type
 	.dwattr $C$DW$T$8, DW_AT_encoding(DW_ATE_signed)
 	.dwattr $C$DW$T$8, DW_AT_name("short")
 	.dwattr $C$DW$T$8, DW_AT_byte_size(0x02)
-$C$DW$T$36	.dwtag  DW_TAG_pointer_type
-	.dwattr $C$DW$T$36, DW_AT_type(*$C$DW$T$8)
-	.dwattr $C$DW$T$36, DW_AT_address_class(0x20)
 $C$DW$T$9	.dwtag  DW_TAG_base_type
 	.dwattr $C$DW$T$9, DW_AT_encoding(DW_ATE_unsigned)
 	.dwattr $C$DW$T$9, DW_AT_name("unsigned short")
@@ -2720,23 +2922,23 @@ $C$DW$T$28	.dwtag  DW_TAG_typedef, DW_AT_name("fixedpt")
 $C$DW$T$29	.dwtag  DW_TAG_pointer_type
 	.dwattr $C$DW$T$29, DW_AT_type(*$C$DW$T$28)
 	.dwattr $C$DW$T$29, DW_AT_address_class(0x20)
-$C$DW$T$30	.dwtag  DW_TAG_pointer_type
-	.dwattr $C$DW$T$30, DW_AT_type(*$C$DW$T$29)
-	.dwattr $C$DW$T$30, DW_AT_address_class(0x20)
-$C$DW$T$41	.dwtag  DW_TAG_const_type
-	.dwattr $C$DW$T$41, DW_AT_type(*$C$DW$T$28)
+$C$DW$T$31	.dwtag  DW_TAG_pointer_type
+	.dwattr $C$DW$T$31, DW_AT_type(*$C$DW$T$29)
+	.dwattr $C$DW$T$31, DW_AT_address_class(0x20)
+$C$DW$T$39	.dwtag  DW_TAG_const_type
+	.dwattr $C$DW$T$39, DW_AT_type(*$C$DW$T$28)
 
-$C$DW$T$42	.dwtag  DW_TAG_array_type
-	.dwattr $C$DW$T$42, DW_AT_type(*$C$DW$T$41)
-	.dwattr $C$DW$T$42, DW_AT_language(DW_LANG_C)
-	.dwattr $C$DW$T$42, DW_AT_byte_size(0x14)
+$C$DW$T$40	.dwtag  DW_TAG_array_type
+	.dwattr $C$DW$T$40, DW_AT_type(*$C$DW$T$39)
+	.dwattr $C$DW$T$40, DW_AT_language(DW_LANG_C)
+	.dwattr $C$DW$T$40, DW_AT_byte_size(0x14)
 $C$DW$110	.dwtag  DW_TAG_subrange_type
 	.dwattr $C$DW$110, DW_AT_upper_bound(0x04)
-	.dwendtag $C$DW$T$42
+	.dwendtag $C$DW$T$40
 
-$C$DW$T$31	.dwtag  DW_TAG_pointer_type
-	.dwattr $C$DW$T$31, DW_AT_type(*$C$DW$T$10)
-	.dwattr $C$DW$T$31, DW_AT_address_class(0x20)
+$C$DW$T$32	.dwtag  DW_TAG_pointer_type
+	.dwattr $C$DW$T$32, DW_AT_type(*$C$DW$T$10)
+	.dwattr $C$DW$T$32, DW_AT_address_class(0x20)
 $C$DW$T$11	.dwtag  DW_TAG_base_type
 	.dwattr $C$DW$T$11, DW_AT_encoding(DW_ATE_unsigned)
 	.dwattr $C$DW$T$11, DW_AT_name("unsigned int")
@@ -2760,12 +2962,12 @@ $C$DW$T$14	.dwtag  DW_TAG_base_type
 	.dwattr $C$DW$T$14, DW_AT_encoding(DW_ATE_signed)
 	.dwattr $C$DW$T$14, DW_AT_name("long long")
 	.dwattr $C$DW$T$14, DW_AT_byte_size(0x08)
-$C$DW$T$53	.dwtag  DW_TAG_typedef, DW_AT_name("int64_t")
-	.dwattr $C$DW$T$53, DW_AT_type(*$C$DW$T$14)
-	.dwattr $C$DW$T$53, DW_AT_language(DW_LANG_C)
-$C$DW$T$54	.dwtag  DW_TAG_typedef, DW_AT_name("fixedptd")
-	.dwattr $C$DW$T$54, DW_AT_type(*$C$DW$T$53)
-	.dwattr $C$DW$T$54, DW_AT_language(DW_LANG_C)
+$C$DW$T$51	.dwtag  DW_TAG_typedef, DW_AT_name("int64_t")
+	.dwattr $C$DW$T$51, DW_AT_type(*$C$DW$T$14)
+	.dwattr $C$DW$T$51, DW_AT_language(DW_LANG_C)
+$C$DW$T$52	.dwtag  DW_TAG_typedef, DW_AT_name("fixedptd")
+	.dwattr $C$DW$T$52, DW_AT_type(*$C$DW$T$51)
+	.dwattr $C$DW$T$52, DW_AT_language(DW_LANG_C)
 $C$DW$T$15	.dwtag  DW_TAG_base_type
 	.dwattr $C$DW$T$15, DW_AT_encoding(DW_ATE_unsigned)
 	.dwattr $C$DW$T$15, DW_AT_name("unsigned long long")
@@ -2778,9 +2980,9 @@ $C$DW$T$17	.dwtag  DW_TAG_base_type
 	.dwattr $C$DW$T$17, DW_AT_encoding(DW_ATE_float)
 	.dwattr $C$DW$T$17, DW_AT_name("double")
 	.dwattr $C$DW$T$17, DW_AT_byte_size(0x08)
-$C$DW$T$55	.dwtag  DW_TAG_pointer_type
-	.dwattr $C$DW$T$55, DW_AT_type(*$C$DW$T$17)
-	.dwattr $C$DW$T$55, DW_AT_address_class(0x20)
+$C$DW$T$53	.dwtag  DW_TAG_pointer_type
+	.dwattr $C$DW$T$53, DW_AT_type(*$C$DW$T$17)
+	.dwattr $C$DW$T$53, DW_AT_address_class(0x20)
 $C$DW$T$18	.dwtag  DW_TAG_base_type
 	.dwattr $C$DW$T$18, DW_AT_encoding(DW_ATE_float)
 	.dwattr $C$DW$T$18, DW_AT_name("long double")
