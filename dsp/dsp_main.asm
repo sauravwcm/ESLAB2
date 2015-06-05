@@ -1,8 +1,8 @@
 ;******************************************************************************
 ;* TMS320C6x C/C++ Codegen                                       Unix v6.1.17 *
-;* Date/Time created: Thu Jun  4 16:52:52 2015                                *
+;* Date/Time created: Fri Jun  5 03:43:28 2015                                *
 ;******************************************************************************
-	.compiler_opts --c64p_l1d_workaround=default --disable:=sploop --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
+	.compiler_opts --c64p_l1d_workaround=default --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
 
 ;******************************************************************************
 ;* GLOBAL FILE PARAMETERS                                                     *
@@ -104,7 +104,7 @@ $C$DW$15	.dwtag  DW_TAG_variable, DW_AT_name("MPCSXFER_NumIterations")
 	.dwattr $C$DW$15, DW_AT_location[DW_OP_addr _MPCSXFER_NumIterations]
 	.dwattr $C$DW$15, DW_AT_type(*$C$DW$T$34)
 	.dwattr $C$DW$15, DW_AT_external
-;	/data/usr/local/share/c6000/bin/opt6x /tmp/03561Zfjo5q /tmp/03561jrkFVY 
+;	/data/usr/local/share/c6000/bin/opt6x /tmp/10120QJFxw0 /tmp/10120QlFffH 
 	.sect	".text"
 	.clink
 	.global	_main
@@ -128,6 +128,9 @@ $C$DW$18	.dwtag  DW_TAG_formal_parameter, DW_AT_name("argv")
 	.dwattr $C$DW$18, DW_AT_TI_symbol_name("_argv")
 	.dwattr $C$DW$18, DW_AT_type(*$C$DW$T$40)
 	.dwattr $C$DW$18, DW_AT_location[DW_OP_reg20]
+;----------------------------------------------------------------------
+; 306 | Void main (Int argc, Char *argv [])                                    
+;----------------------------------------------------------------------
 
 ;******************************************************************************
 ;* FUNCTION NAME: main                                                        *
@@ -147,25 +150,34 @@ $C$DW$18	.dwtag  DW_TAG_formal_parameter, DW_AT_name("argv")
 _main:
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 9
-;** 310	-----------------------    DSPLINK_init();
-;** 313	-----------------------    MPCSXFER_BufferSize = (atoi(*argv)+127)/128<<7;
-;** 316	-----------------------    TSK_create(&Task, NULL, 0);
-;**  	-----------------------    return;
+	.dwpsn	file "dsp_main.c",line 310,column 5,is_stmt
+;----------------------------------------------------------------------
+; 310 | DSPLINK_init () ;                                                      
+;----------------------------------------------------------------------
            MVKL    .S1     _DSPLINK_init,A3  ; |310| 
            MVKH    .S1     _DSPLINK_init,A3  ; |310| 
+	.dwpsn	file "dsp_main.c",line 307,column 1,is_stmt
            STW     .D2T2   B11,*SP--(16)     ; |307| 
+	.dwpsn	file "dsp_main.c",line 310,column 5,is_stmt
 $C$DW$19	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$19, DW_AT_low_pc(0x00)
 	.dwattr $C$DW$19, DW_AT_name("_DSPLINK_init")
 	.dwattr $C$DW$19, DW_AT_TI_call
            CALL    .S2X    A3                ; |310| 
+	.dwpsn	file "dsp_main.c",line 307,column 1,is_stmt
            MV      .L2     B3,B11            ; |307| 
            STW     .D2T2   B10,*+SP(12)      ; |307| 
            MV      .L2     B4,B10            ; |307| 
+	.dwpsn	file "dsp_main.c",line 310,column 5,is_stmt
            ADDKPC  .S2     $C$RL0,B3,1       ; |310| 
 $C$RL0:    ; CALL OCCURS {_DSPLINK_init} {0}  ; |310| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 18
+	.dwpsn	file "dsp_main.c",line 313,column 5,is_stmt
+;----------------------------------------------------------------------
+; 313 | MPCSXFER_BufferSize = DSPLINK_ALIGN (atoi (argv[0]), DSPLINK_BUF_ALIGN)
+;     |  ;                                                                     
+;----------------------------------------------------------------------
            MVKL    .S1     _atoi,A3          ; |313| 
            MVKH    .S1     _atoi,A3          ; |313| 
            LDW     .D2T1   *B10,A4           ; |313| 
@@ -210,9 +222,14 @@ $C$DW$21	.dwtag  DW_TAG_TI_branch
 ||         MVKH    .S1     _Task,A4          ; |316| 
 ||         ADDKPC  .S2     $C$RL2,B3,0       ; |316| 
 
+	.dwpsn	file "dsp_main.c",line 316,column 5,is_stmt
+;----------------------------------------------------------------------
+; 316 | TSK_create (Task, NULL, 0) ;                                           
+;----------------------------------------------------------------------
 $C$RL2:    ; CALL OCCURS {_TSK_create} {0}   ; |316| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 7
+	.dwpsn	file "dsp_main.c",line 317,column 1,is_stmt
            MV      .L2     B11,B3            ; |317| 
 $C$DW$22	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$22, DW_AT_low_pc(0x00)
@@ -222,7 +239,6 @@ $C$DW$22	.dwtag  DW_TAG_TI_branch
 ||         LDW     .D2T2   *+SP(12),B10      ; |317| 
 
            LDW     .D2T2   *++SP(16),B11     ; |317| 
-	.dwpsn	file "dsp_main.c",line 317,column 1,is_stmt
            NOP             4
            ; BRANCH OCCURS {B3}              ; |317| 
 	.dwattr $C$DW$16, DW_AT_TI_end_file("dsp_main.c")
@@ -244,6 +260,9 @@ $C$DW$23	.dwtag  DW_TAG_subprogram, DW_AT_name("Task")
 	.dwattr $C$DW$23, DW_AT_frame_base[DW_OP_breg31 8]
 	.dwattr $C$DW$23, DW_AT_TI_skeletal
 	.dwpsn	file "dsp_main.c",line 329,column 1,is_stmt,address _Task
+;----------------------------------------------------------------------
+; 328 | static Int Task ()                                                     
+;----------------------------------------------------------------------
 
 ;******************************************************************************
 ;* FUNCTION NAME: Task                                                        *
@@ -260,8 +279,15 @@ $C$DW$23	.dwtag  DW_TAG_subprogram, DW_AT_name("Task")
 ;******************************************************************************
 _Task:
 ;** --------------------------------------------------------------------------*
+;----------------------------------------------------------------------
+; 330 | Int status = SYS_OK ;                                                  
+; 331 | Task_TransferInfo * info ;                                             
+;----------------------------------------------------------------------
 ;          EXCLUSIVE CPU CYCLES: 8
-;** 334	-----------------------    if ( Task_create(&info) ) goto g3;
+	.dwpsn	file "dsp_main.c",line 334,column 5,is_stmt
+;----------------------------------------------------------------------
+; 334 | status = Task_create (&info) ;                                         
+;----------------------------------------------------------------------
            MVKL    .S2     _Task_create,B4   ; |334| 
            MVKH    .S2     _Task_create,B4   ; |334| 
 $C$DW$24	.dwtag  DW_TAG_TI_branch
@@ -269,7 +295,15 @@ $C$DW$24	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$24, DW_AT_name("_Task_create")
 	.dwattr $C$DW$24, DW_AT_TI_call
            CALL    .S2     B4                ; |334| 
+	.dwpsn	file "dsp_main.c",line 329,column 1,is_stmt
            STW     .D2T2   B3,*SP--(8)       ; |329| 
+	.dwpsn	file "dsp_main.c",line 334,column 5,is_stmt
+;----------------------------------------------------------------------
+; 337 | if (status == SYS_OK)                                                  
+; 339 |     status = Task_execute (info) ;                                     
+; 340 |     if (status != SYS_OK)                                              
+; 342 |         SET_FAILURE_REASON (status) ;                                  
+;----------------------------------------------------------------------
            ADDKPC  .S2     $C$RL3,B3,2       ; |334| 
            ADD     .L1X    4,SP,A4           ; |334| 
 $C$RL3:    ; CALL OCCURS {_Task_create} {0}  ; |334| 
@@ -287,23 +321,35 @@ $C$RL3:    ; CALL OCCURS {_Task_create} {0}  ; |334|
    [ A0]   MVKH    .S2     _Task_delete,B4   ; |347| 
 || [ A0]   B       .S1     $C$L1             ; |334| 
 
+	.dwpsn	file "dsp_main.c",line 347,column 5,is_stmt
+;----------------------------------------------------------------------
+; 347 | status = Task_delete (info) ;                                          
+;----------------------------------------------------------------------
 $C$DW$25	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$25, DW_AT_low_pc(0x00)
 	.dwattr $C$DW$25, DW_AT_name("_Task_delete")
 	.dwattr $C$DW$25, DW_AT_TI_call
    [ A0]   CALL    .S2     B4                ; |347| 
+	.dwpsn	file "dsp_main.c",line 339,column 9,is_stmt
 $C$DW$26	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$26, DW_AT_low_pc(0x00)
 	.dwattr $C$DW$26, DW_AT_name("_Task_execute")
 	.dwattr $C$DW$26, DW_AT_TI_call
    [!A0]   CALL    .S2X    A3                ; |339| 
            NOP             3
+	.dwpsn	file "dsp_main.c",line 334,column 5,is_stmt
            ; BRANCHCC OCCURS {$C$L1}         ; |334| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 9
-;** 339	-----------------------    Task_execute(info);
+	.dwpsn	file "dsp_main.c",line 339,column 9,is_stmt
            ADDKPC  .S2     $C$RL4,B3,1       ; |339| 
 $C$RL4:    ; CALL OCCURS {_Task_execute} {0}  ; |339| 
+	.dwpsn	file "dsp_main.c",line 347,column 5,is_stmt
+;----------------------------------------------------------------------
+; 348 | if (status != SYS_OK)                                                  
+; 350 |     SET_FAILURE_REASON (status) ;                                      
+; 353 | return status ;                                                        
+;----------------------------------------------------------------------
            MVKL    .S2     _Task_delete,B4   ; |347| 
            MVKH    .S2     _Task_delete,B4   ; |347| 
 $C$DW$27	.dwtag  DW_TAG_TI_branch
@@ -313,19 +359,18 @@ $C$DW$27	.dwtag  DW_TAG_TI_branch
            CALL    .S2     B4                ; |347| 
            LDW     .D2T1   *+SP(4),A4        ; |347| 
            NOP             3
+	.dwpsn	file "dsp_main.c",line 334,column 5,is_stmt
 ;** --------------------------------------------------------------------------*
 $C$L1:    
 ;          EXCLUSIVE CPU CYCLES: 1
-;**	-----------------------g3:
-;** 347	-----------------------    status = Task_delete(info);
-;** 353	-----------------------    return status;
+	.dwpsn	file "dsp_main.c",line 347,column 5,is_stmt
            ADDKPC  .S2     $C$RL5,B3,0       ; |347| 
 $C$RL5:    ; CALL OCCURS {_Task_delete} {0}  ; |347| 
 ;** --------------------------------------------------------------------------*
 ;          EXCLUSIVE CPU CYCLES: 11
+	.dwpsn	file "dsp_main.c",line 354,column 1,is_stmt
            LDW     .D2T2   *++SP(8),B3       ; |354| 
            NOP             4
-	.dwpsn	file "dsp_main.c",line 354,column 1,is_stmt
 $C$DW$28	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$28, DW_AT_low_pc(0x00)
 	.dwattr $C$DW$28, DW_AT_TI_return

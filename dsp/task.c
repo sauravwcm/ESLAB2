@@ -25,16 +25,18 @@ void notify_gpp(int ID);
 
 #define VERBOSE 0
 
-#define PART 85     // SHOULD NOT BE GREATER THAN 60 (DSP MEMORY CONSTRAINTS).
+#define MAX_CHUNK 100
+#define PART 160     // SHOULD NOT BE GREATER THAN 100 (DSP MEMORY CONSTRAINTS).
 
 // Fixed point Arithmetic
 #define FIXEDPT_WBITS   16
 #include "fixedptc.h"
 #define FIXED fixedpt
+
 FIXED * buf;
 int length;
 //short int * gaussian_smooth(unsigned char *image, int rows, int cols);
-void gaussian_smooth(FIXED *image, int rows, int cols);
+void gaussian_smooth(FIXED *image, int rows, int cols, FIXED * smoothedim);
 
 extern Uint16 MPCSXFER_BufferSize;
 
@@ -116,20 +118,31 @@ Int Task_create (Task_TransferInfo ** infoPtr)
 
 Int Task_execute (Task_TransferInfo * info)
 {
-   
+	int size, cols = 320;
+	
+   	FIXED * smoothedim = (FIXED*) malloc(sizeof(FIXED)*PART*cols);
     //wait for semaphore
 	SEM_pend (&(info->notifySemObj), SYS_FOREVER);
-
 	//invalidate cache
     BCACHE_inv ((Ptr)buf, length, TRUE) ;
+    
     //call the functionality to be performed by dsp
-    gaussian_smooth(buf, PART, 320);
-
-    BCACHE_wbAll();
+    gaussian_smooth(buf, MAX_CHUNK, cols, smoothedim);
+    gaussian_smooth(buf + (MAX_CHUNK*cols), PART - MAX_CHUNK, cols, smoothedim + (MAX_CHUNK*cols));
+/*
+	if (PART > MAX_CHUNK)
+	{
+		rows = MAX_CHUNK;
+    	gaussian_smooth(buf, rows, cols, smoothedim);
+		gaussian_smooth(
+	}
+*/	
+	BCACHE_wb((Ptr)smoothedim, PART*cols, TRUE);
+    //BCACHE_wbAll();
    
 	//notify that we are done
     NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
-
+	free(smoothedim);
     return SYS_OK;
 }
 

@@ -25,7 +25,7 @@ PROJNAME := pool_notify
 #   CSRCS are for C-source files, ASRCS for asm and BIOSTCF is the BIOS TCF file
 #   ----------------------------------------------------------------------------
 DEBUG :=
-CFLAGS := -I$(BASE_BSL)/dsp/include -DP__ROFILE -s -mw
+CFLAGS := -I$(BASE_BSL)/dsp/include -DP__ROFILE
 LDFLAGS := -i$(BASE_BSL)/dsp/lib
 CSRCS := task.c pool_notify_config.c dsp_main.c dsp_fixed.c
 ASRCS :=
@@ -62,7 +62,7 @@ BFLAGS := -Dconfig.importPath="$(BASE_SABIOS)/packages; \
 #   All common compiler and linker flags
 #   ----------------------------------------------------------------------------
 #ALL_CFLAGS := -q -pdr -pdv -pden -ml3 -mv6400+ --disable:sploop $(CFLAGS)
-ALL_CFLAGS := -q -pdr -pdv -pden -ml3 -mv6400+ $(CFLAGS)
+ALL_CFLAGS := -q -pdr -pdv -pden -ml3 -mv6400+ -ss -k -mw $(CFLAGS)
 ALL_LDFLAGS := -z -c -q -x $(LDFLAGS)
 
 #   ----------------------------------------------------------------------------
