@@ -1,6 +1,6 @@
 ;******************************************************************************
 ;* TMS320C6x C/C++ Codegen                                       Unix v6.1.17 *
-;* Date/Time created: Fri Jun  5 03:43:29 2015                                *
+;* Date/Time created: Fri Jun  5 14:07:24 2015                                *
 ;******************************************************************************
 	.compiler_opts --c64p_l1d_workaround=default --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
 
@@ -86,7 +86,7 @@ $C$DW$10	.dwtag  DW_TAG_variable, DW_AT_name("$P$T0$1")
 	.dwattr $C$DW$10, DW_AT_TI_symbol_name("_$P$T0$1")
 	.dwattr $C$DW$10, DW_AT_type(*$C$DW$T$40)
 	.dwattr $C$DW$10, DW_AT_location[DW_OP_addr _$P$T0$1]
-;	/data/usr/local/share/c6000/bin/opt6x /tmp/10127jfM189 /tmp/10127Lqynda 
+;	/data/usr/local/share/c6000/bin/opt6x /tmp/02689T8cMPn /tmp/02689fNCO3L 
 	.sect	".text"
 	.clink
 	.global	_make_gaussian_kernel
@@ -1054,7 +1054,7 @@ $C$DW$33	.dwtag  DW_TAG_TI_branch
            ; BRANCH OCCURS {B3}              ; |298| 
 
 $C$DW$34	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$34, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L12:1:1433468609")
+	.dwattr $C$DW$34, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L12:1:1433506044")
 	.dwattr $C$DW$34, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$34, DW_AT_TI_begin_line(0x115)
 	.dwattr $C$DW$34, DW_AT_TI_end_line(0x11f)
@@ -1065,7 +1065,7 @@ $C$DW$35	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$36	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$36, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L10:1:1433468609")
+	.dwattr $C$DW$36, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L10:1:1433506044")
 	.dwattr $C$DW$36, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$36, DW_AT_TI_begin_line(0x129)
 	.dwattr $C$DW$36, DW_AT_TI_end_line(0x129)
@@ -1079,7 +1079,7 @@ $C$DW$38	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$39	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$39, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L2:1:1433468609")
+	.dwattr $C$DW$39, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L2:1:1433506044")
 	.dwattr $C$DW$39, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$39, DW_AT_TI_begin_line(0x121)
 	.dwattr $C$DW$39, DW_AT_TI_end_line(0x127)
@@ -1115,7 +1115,7 @@ $C$DW$49	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$49, DW_AT_high_pc($C$DW$L$_make_gaussian_kernel$26$E)
 
 $C$DW$50	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$50, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L5:2:1433468609")
+	.dwattr $C$DW$50, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L5:2:1433506044")
 	.dwattr $C$DW$50, DW_AT_TI_begin_file("fixedptc.h")
 	.dwattr $C$DW$50, DW_AT_TI_begin_line(0xf6)
 	.dwattr $C$DW$50, DW_AT_TI_end_line(0xf9)
@@ -1126,7 +1126,7 @@ $C$DW$51	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$52	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$52, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L7:2:1433468609")
+	.dwattr $C$DW$52, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L7:2:1433506044")
 	.dwattr $C$DW$52, DW_AT_TI_begin_file("fixedptc.h")
 	.dwattr $C$DW$52, DW_AT_TI_begin_line(0xfe)
 	.dwattr $C$DW$52, DW_AT_TI_end_line(0xff)
@@ -3238,7 +3238,7 @@ $C$DW$L$_gaussian_smooth$60$B:
 $C$DW$L$_gaussian_smooth$60$E:
 
 $C$DW$70	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$70, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L53:1:1433468609")
+	.dwattr $C$DW$70, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L53:1:1433506044")
 	.dwattr $C$DW$70, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$70, DW_AT_TI_begin_line(0x32)
 	.dwattr $C$DW$70, DW_AT_TI_end_line(0x111)
@@ -3249,7 +3249,7 @@ $C$DW$71	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$72	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$72, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L33:1:1433468609")
+	.dwattr $C$DW$72, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L33:1:1433506044")
 	.dwattr $C$DW$72, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$72, DW_AT_TI_begin_line(0xcc)
 	.dwattr $C$DW$72, DW_AT_TI_end_line(0x10b)
@@ -3276,7 +3276,7 @@ $C$DW$79	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$79, DW_AT_high_pc($C$DW$L$_gaussian_smooth$55$E)
 
 $C$DW$80	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$80, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L34:2:1433468609")
+	.dwattr $C$DW$80, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L34:2:1433506044")
 	.dwattr $C$DW$80, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$80, DW_AT_TI_begin_line(0xce)
 	.dwattr $C$DW$80, DW_AT_TI_end_line(0xdc)
@@ -3288,7 +3288,7 @@ $C$DW$82	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$82, DW_AT_high_pc($C$DW$L$_gaussian_smooth$37$E)
 
 $C$DW$83	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$83, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L36:3:1433468609")
+	.dwattr $C$DW$83, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L36:3:1433506044")
 	.dwattr $C$DW$83, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$83, DW_AT_TI_begin_line(0xd2)
 	.dwattr $C$DW$83, DW_AT_TI_end_line(0xda)
@@ -3301,7 +3301,7 @@ $C$DW$84	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$85	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$85, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L39:2:1433468609")
+	.dwattr $C$DW$85, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L39:2:1433506044")
 	.dwattr $C$DW$85, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$85, DW_AT_TI_begin_line(0xe3)
 	.dwattr $C$DW$85, DW_AT_TI_end_line(0xf5)
@@ -3319,7 +3319,7 @@ $C$DW$89	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$89, DW_AT_high_pc($C$DW$L$_gaussian_smooth$46$E)
 
 $C$DW$90	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$90, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L41:3:1433468609")
+	.dwattr $C$DW$90, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L41:3:1433506044")
 	.dwattr $C$DW$90, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$90, DW_AT_TI_begin_line(0xe7)
 	.dwattr $C$DW$90, DW_AT_TI_end_line(0xef)
@@ -3332,7 +3332,7 @@ $C$DW$91	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$92	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$92, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L45:2:1433468609")
+	.dwattr $C$DW$92, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L45:2:1433506044")
 	.dwattr $C$DW$92, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$92, DW_AT_TI_begin_line(0xf8)
 	.dwattr $C$DW$92, DW_AT_TI_end_line(0x10a)
@@ -3347,7 +3347,7 @@ $C$DW$95	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$95, DW_AT_high_pc($C$DW$L$_gaussian_smooth$54$E)
 
 $C$DW$96	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$96, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L47:3:1433468609")
+	.dwattr $C$DW$96, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L47:3:1433506044")
 	.dwattr $C$DW$96, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$96, DW_AT_TI_begin_line(0xfc)
 	.dwattr $C$DW$96, DW_AT_TI_end_line(0x104)
@@ -3362,7 +3362,7 @@ $C$DW$97	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$98	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$98, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L14:1:1433468609")
+	.dwattr $C$DW$98, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L14:1:1433506044")
 	.dwattr $C$DW$98, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$98, DW_AT_TI_begin_line(0x73)
 	.dwattr $C$DW$98, DW_AT_TI_end_line(0xad)
@@ -3386,7 +3386,7 @@ $C$DW$104	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$104, DW_AT_high_pc($C$DW$L$_gaussian_smooth$28$E)
 
 $C$DW$105	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$105, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L15:2:1433468609")
+	.dwattr $C$DW$105, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L15:2:1433506044")
 	.dwattr $C$DW$105, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$105, DW_AT_TI_begin_line(0x75)
 	.dwattr $C$DW$105, DW_AT_TI_end_line(0x83)
@@ -3398,7 +3398,7 @@ $C$DW$107	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$107, DW_AT_high_pc($C$DW$L$_gaussian_smooth$12$E)
 
 $C$DW$108	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$108, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L17:3:1433468609")
+	.dwattr $C$DW$108, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L17:3:1433506044")
 	.dwattr $C$DW$108, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$108, DW_AT_TI_begin_line(0x79)
 	.dwattr $C$DW$108, DW_AT_TI_end_line(0x81)
@@ -3411,7 +3411,7 @@ $C$DW$109	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$110	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$110, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L20:2:1433468609")
+	.dwattr $C$DW$110, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L20:2:1433506044")
 	.dwattr $C$DW$110, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$110, DW_AT_TI_begin_line(0x87)
 	.dwattr $C$DW$110, DW_AT_TI_end_line(0x97)
@@ -3426,7 +3426,7 @@ $C$DW$113	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$113, DW_AT_high_pc($C$DW$L$_gaussian_smooth$19$E)
 
 $C$DW$114	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$114, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L22:3:1433468609")
+	.dwattr $C$DW$114, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L22:3:1433506044")
 	.dwattr $C$DW$114, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$114, DW_AT_TI_begin_line(0x8a)
 	.dwattr $C$DW$114, DW_AT_TI_end_line(0x93)
@@ -3439,7 +3439,7 @@ $C$DW$115	.dwtag  DW_TAG_TI_loop_range
 
 
 $C$DW$116	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$116, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L26:2:1433468609")
+	.dwattr $C$DW$116, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L26:2:1433506044")
 	.dwattr $C$DW$116, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$116, DW_AT_TI_begin_line(0x9a)
 	.dwattr $C$DW$116, DW_AT_TI_end_line(0xab)
@@ -3454,7 +3454,7 @@ $C$DW$119	.dwtag  DW_TAG_TI_loop_range
 	.dwattr $C$DW$119, DW_AT_high_pc($C$DW$L$_gaussian_smooth$27$E)
 
 $C$DW$120	.dwtag  DW_TAG_TI_loop
-	.dwattr $C$DW$120, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L28:3:1433468609")
+	.dwattr $C$DW$120, DW_AT_name("/home/ubuntu/ESLAB2/dsp/dsp_fixed.asm:$C$L28:3:1433506044")
 	.dwattr $C$DW$120, DW_AT_TI_begin_file("dsp_fixed.c")
 	.dwattr $C$DW$120, DW_AT_TI_begin_line(0x9e)
 	.dwattr $C$DW$120, DW_AT_TI_end_line(0xa7)
