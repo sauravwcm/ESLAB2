@@ -1,6 +1,6 @@
 #include<stdlib.h>
 #include<stdio.h>
-
+#include "cannyHeaders.h"
 #include <semaphore.h>
 /*  ----------------------------------- DSP/BIOS Link                   */
 #include <dsplink.h>
@@ -14,11 +14,8 @@
 #include <loaderdefs.h>
 #endif
 
-
 /*  ----------------------------------- Application Header              */
 #include <pool_notify.h>
-//#include <pool_notify_os.h>
-
 
 #if defined (__cplusplus)
 extern "C" {
@@ -109,7 +106,7 @@ STATIC Uint32  pool_notify_NumIterations ;
  *  ============================================================================
  */
  //short int * pool_notify_DataBuf = NULL;
-unsigned char * pool_notify_DataBuf = NULL ;
+FIXED * pool_notify_DataBuf = NULL ;
 
 /** ============================================================================
  *  @func   pool_notify_Notify
@@ -402,7 +399,7 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
 	//Load image into pool buffer
     for (i = 0; i < rows*cols; i++)
     {
-        pool_notify_DataBuf[i] = image[i];
+        pool_notify_DataBuf[i] = INT2FX(image[i]);
     }
 
 	#if defined(DSP)
@@ -418,7 +415,8 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
   */  
   
   	// Start DSP execution
-    NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,1);
+    notify_dsp(processorId, cols);
+    //NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,1);
 
 	// Start ARM execution
 	/****************************************************************************
@@ -432,7 +430,6 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
         dirfilename = composedfname;
     }
     canny(image, rows, cols, sigma, tlow, thigh, &edge, dirfilename);
-
 
     /****************************************************************************
     * Write out the edge image to a file.
@@ -457,7 +454,6 @@ NORMAL_API DSP_STATUS pool_notify_Execute (IN Uint32 numIterations, Uint8 proces
 
    return status ;
 }
-
 
 /** ============================================================================
  *  @func   pool_notify_Delete
@@ -675,6 +671,15 @@ void sync() {
     printf("Semaphore posted.\n");
 }
 
+
+/*------------------------------------------------------------
+        NOTIFY TO DSP FUNCTION
+-------------------------------------------------------------- */
+
+void notify_dsp( Uint8 processorId, int x)
+{
+    NOTIFY_notify (processorId,pool_notify_IPS_ID,pool_notify_IPS_EVENTNO,x);
+}
 
 #if defined (__cplusplus)
 }

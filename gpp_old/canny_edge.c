@@ -52,30 +52,32 @@
 *                     defined in radians counterclockwise from the x direction.
 *                     (Mike Heath)
 *******************************************************************************/
+#include "cannyHeaders.h"
 
 #define VERBOSE 0
 #define BOOSTBLURFACTOR 90.0
-#define PART 60                     //PART cannot be less than 7
-extern unsigned char * pool_notify_DataBuf;
+#define PART 150                     // 7<= PART <=180
+extern FIXED * pool_notify_DataBuf;
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#include "arm_neon.h"
+#include <arm_neon.h>
 
-#include "cannyHeaders.h"
+
 
 
 // approximative quadword float inverse square root
-static inline float32x4_t invsqrtv(float32x4_t x) {
+static inline float32x4_t invsqrtv(float32x4_t x)
+{
     float32x4_t sqrt_reciprocal = vrsqrteq_f32(x);
-    
     return vrsqrtsq_f32(x * sqrt_reciprocal, sqrt_reciprocal) * sqrt_reciprocal;
 }
         
 // approximative quadword float square root
-static inline float32x4_t sqrtv(float32x4_t x) {
+static inline float32x4_t sqrtv(float32x4_t x)
+{
     return x * invsqrtv(x);
 }
 
@@ -109,7 +111,6 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
     if(VERBOSE) printf("Computing the X and Y first derivatives.\n");
     derrivative_x_y(smoothedim, rows, cols, &delta_x, &delta_y);
     
-    //printf("derrivative_x_y computed.\t"); timeCheck();
     /****************************************************************************
     * This option to write out the direction of the edge gradient was added
     * to make the information available for computing an edge quality figure
@@ -149,8 +150,9 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
     }
 
     if(VERBOSE) printf("Computing the magnitude of the gradient.\n");
+
     magnitude_x_y(delta_x, delta_y, rows, cols, magnitude);
-    //printf("magnitude_x_y computed.\t"); timeCheck();
+
     /****************************************************************************
     * Perform non-maximal suppression.
     ****************************************************************************/
@@ -162,7 +164,6 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
     }
     non_max_supp(magnitude, delta_x, delta_y, rows, cols, nms);
     
-    //printf("non_max_supp computed\t"); timeCheck();
     /****************************************************************************
     * Use hysteresis to mark the edge pixels.
     ****************************************************************************/
@@ -173,8 +174,7 @@ void canny(unsigned char *image, int rows, int cols, float sigma,
         exit(1);
     }
     apply_hysteresis(magnitude, nms, rows, cols, tlow, thigh, *edge);
-    //timeCheck();
-    //printf("apply_hysteresis computed.\t"); timeCheck();
+    
     /****************************************************************************
     * Free all of the memory that we allocated except for the edge image that
     * is still being used to store out result.
@@ -400,9 +400,9 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     /****************************************************************************
     * Blur in the x - direction.
     ****************************************************************************/
-    //timeCheck();
+
     if(VERBOSE) printf("   Bluring the image in the X-direction.\n");
-    for(r=0+PART; r<rows; r++)   //PART number of rows smoothed on DSP
+    for(r=0+PART-center; r<rows; r++)   //PART number of rows smoothed on DSP
     {
         for (c = 0; c < center; c++)
         {
@@ -419,7 +419,6 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
             tempim[r*cols+c] = dot/sum;
         }
 
-    
         for(c=center; c<cols-center; c++)
         {
             dot = 0.0;   
@@ -457,6 +456,7 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
             } 
             tempim[r*cols+c] = dot;
         }
+
         for (c = cols-center; c < cols; c++)
         {
             dot = 0.0;
@@ -479,11 +479,9 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
     if(VERBOSE) printf("   Bluring the image in the Y-direction.\n");
     for(c=0; c<cols; c++)
     {
-        
         for(r=0+PART; r<rows-center; r++)
         {
             dot = 0.0;
-               
             for(rr=(-center); rr<=center; rr+=4)  
             {                
                 im[0]= tempim[(r+rr)*cols+c];   
@@ -518,6 +516,7 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
             } 
             smoothedim[r*cols+c] = (short int)(dot*BOOSTBLURFACTOR + 0.5);
         }
+
         for (r = rows-center; r < rows; r++)
         {
             dot = 0.0;
@@ -536,10 +535,17 @@ short int* gaussian_smooth(unsigned char *image, int rows, int cols, float sigma
 
     free(tempim);
     free(kernel);
-    //printf("ARM smoothedim created\t"); timeCheck();
+    printf("Gaussian smooth done on ARM \t"); timeCheck();
     sync();															// Wait for DSP
+    printf("buf[24] : %d \n",pool_notify_DataBuf[24]);
+    printf("buf[25] : %d \n",pool_notify_DataBuf[25]);
+    printf("buf[26] : %d \n",pool_notify_DataBuf[26]);
+    printf("buf[27] : %d \n",pool_notify_DataBuf[27]);
+
+    printf("buf[24] after conversion : %f \n",FX2FLOAT(pool_notify_DataBuf[24]));
+
     comb_smoothedim(smoothedim, cols);								// Combine smoothedim created by DSP and ARM
-    //printf("DSP done. Complete smoothedim created.\t"); timeCheck();
+    printf("smoothedim[24] : %d\n", smoothedim[24]);
     return smoothedim;
 }
 
@@ -548,9 +554,10 @@ void comb_smoothedim(short int * smoothedim, int cols)
 	int i;
 	for (i = 0; i < (PART*320); i++)
     {
-      smoothedim[i]=pool_notify_DataBuf[2*i]+(pool_notify_DataBuf[2*i +1] << 8);
+        smoothedim[i] = (short int)FX2INT(pool_notify_DataBuf[i]);
     }
 }
+
 /*******************************************************************************
 * PROCEDURE: make_gaussian_kernel
 * PURPOSE: Create a one dimensional gaussian kernel.

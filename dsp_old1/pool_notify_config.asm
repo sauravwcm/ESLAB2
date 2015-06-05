@@ -1,6 +1,6 @@
 ;******************************************************************************
 ;* TMS320C6x C/C++ Codegen                                       Unix v6.1.17 *
-;* Date/Time created: Thu Jun  4 17:01:20 2015                                *
+;* Date/Time created: Fri Jun  5 17:56:34 2015                                *
 ;******************************************************************************
 	.compiler_opts --c64p_l1d_workaround=default --disable:=sploop --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
 
@@ -31,7 +31,7 @@ $C$DW$CU	.dwtag  DW_TAG_compile_unit
 	.dwattr $C$DW$CU, DW_AT_name("pool_notify_config.c")
 	.dwattr $C$DW$CU, DW_AT_producer("TMS320C6x C/C++ Codegen Unix v6.1.17 Copyright (c) 1996-2010 Texas Instruments Incorporated")
 	.dwattr $C$DW$CU, DW_AT_TI_version(0x01)
-	.dwattr $C$DW$CU, DW_AT_comp_dir("/home/ubuntu/esLAB/mod_pool_notify/dsp")
+	.dwattr $C$DW$CU, DW_AT_comp_dir("/home/ubuntu/esLAB/mod_pool_notify/dsp_old1")
 ;*****************************************************************************
 ;* CINIT RECORDS                                                             *
 ;*****************************************************************************
@@ -92,7 +92,7 @@ $C$DW$5	.dwtag  DW_TAG_variable, DW_AT_name("POOL_config")
 	.dwattr $C$DW$5, DW_AT_location[DW_OP_addr _POOL_config]
 	.dwattr $C$DW$5, DW_AT_type(*$C$DW$T$55)
 	.dwattr $C$DW$5, DW_AT_external
-;	/data/usr/local/share/c6000/bin/opt6x /tmp/05337f8TlRi /tmp/05337dMJHfA 
+;	/data/usr/local/share/c6000/bin/opt6x /tmp/12540AQc8gK /tmp/125406e49uU 
 ;*****************************************************************************
 ;* UNDEFINED EXTERNAL REFERENCES                                             *
 ;*****************************************************************************

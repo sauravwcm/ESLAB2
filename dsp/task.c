@@ -25,7 +25,7 @@ void notify_gpp(int ID);
 
 #define VERBOSE 0
 
-#define PART 60     // SHOULD NOT BE GREATER THAN 60 (DSP MEMORY CONSTRAINTS).
+#define PART 10     // SHOULD NOT BE GREATER THAN 60 (DSP MEMORY CONSTRAINTS).
 
 // Fixed point Arithmetic
 #define FIXEDPT_WBITS   16

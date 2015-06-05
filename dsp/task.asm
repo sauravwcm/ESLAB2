@@ -1,6 +1,6 @@
 ;******************************************************************************
 ;* TMS320C6x C/C++ Codegen                                       Unix v6.1.17 *
-;* Date/Time created: Thu Jun  4 23:55:55 2015                                *
+;* Date/Time created: Fri Jun  5 13:48:08 2015                                *
 ;******************************************************************************
 	.compiler_opts --c64p_l1d_workaround=default --endian=little --hll_source=on --mem_model:code=far --mem_model:const=data --mem_model:data=far --predefine_memory_model_macros --quiet --silicon_version=6500 --symdebug:skeletal 
 
@@ -209,7 +209,7 @@ $C$DW$46	.dwtag  DW_TAG_variable, DW_AT_name("MPCSXFER_BufferSize")
 	.dwattr $C$DW$46, DW_AT_declaration
 	.dwattr $C$DW$46, DW_AT_external
 _count$1:	.usect	".far",4,4
-;	/data/usr/local/share/c6000/bin/opt6x /tmp/12817Q4eIeC /tmp/12817WZFDnw 
+;	/data/usr/local/share/c6000/bin/opt6x /tmp/03204UJ5WJc /tmp/032040M7kTh 
 	.sect	".text"
 	.clink
 	.global	_notify_gpp
@@ -391,35 +391,34 @@ $C$DW$56	.dwtag  DW_TAG_formal_parameter, DW_AT_name("info")
 ;******************************************************************************
 _Task_execute:
 ;** --------------------------------------------------------------------------*
-;          EXCLUSIVE CPU CYCLES: 8
+;          EXCLUSIVE CPU CYCLES: 9
 ;** 121	-----------------------    SEM_pend((struct _SEM_Obj *)info+4, 0xffffffffu);
 ;** 124	-----------------------    BCACHE_inv(*&buf, (unsigned)length, 1u);
-;** 126	-----------------------    gaussian_smooth(buf, 60, 320);
+;** 126	-----------------------    gaussian_smooth(buf, 10, 320);
 ;** 128	-----------------------    BCACHE_wbAll();
 ;** 131	-----------------------    NOTIFY_notify(1u, 0u, 5u, 0u);
 ;** 133	-----------------------    return 0;
-           MVKL    .S2     _SEM_pend,B5      ; |121| 
-           MVKH    .S2     _SEM_pend,B5      ; |121| 
+           MVKL    .S1     _SEM_pend,A3      ; |121| 
+           MVKH    .S1     _SEM_pend,A3      ; |121| 
+           STW     .D2T1   A11,*SP--(8)      ; |118| 
 $C$DW$57	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$57, DW_AT_low_pc(0x00)
 	.dwattr $C$DW$57, DW_AT_name("_SEM_pend")
 	.dwattr $C$DW$57, DW_AT_TI_call
-           CALL    .S2     B5                ; |121| 
-           STW     .D2T1   A11,*SP--(8)      ; |118| 
+           CALL    .S2X    A3                ; |121| 
            STW     .D2T1   A10,*+SP(4)       ; |118| 
            MV      .L1X    B3,A11            ; |118| 
-           ADDKPC  .S2     $C$RL2,B3,0       ; |121| 
+           ADDKPC  .S2     $C$RL2,B3,1       ; |121| 
 
            ADD     .L1     4,A4,A4           ; |121| 
 ||         MVK     .L2     0xffffffff,B4     ; |121| 
 
 $C$RL2:    ; CALL OCCURS {_SEM_pend} {0}     ; |121| 
 ;** --------------------------------------------------------------------------*
-;          EXCLUSIVE CPU CYCLES: 35
-           MVKL    .S1     _BCACHE_inv,A3    ; |124| 
-
-           MVKH    .S1     _BCACHE_inv,A3    ; |124| 
-||         MVKL    .S2     _length,B4
+;          EXCLUSIVE CPU CYCLES: 36
+           MVKL    .S2     _BCACHE_inv,B5    ; |124| 
+           MVKL    .S2     _length,B4
+           MVKH    .S2     _BCACHE_inv,B5    ; |124| 
 
            MVKL    .S1     _buf,A10
 ||         MVKH    .S2     _length,B4
@@ -429,7 +428,7 @@ $C$DW$58	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$58, DW_AT_name("_BCACHE_inv")
 	.dwattr $C$DW$58, DW_AT_TI_call
 
-           CALL    .S2X    A3                ; |124| 
+           CALL    .S2     B5                ; |124| 
 ||         MVKH    .S1     _buf,A10
 
            LDW     .D1T1   *A10,A4           ; |124| 
@@ -446,9 +445,11 @@ $C$DW$59	.dwtag  DW_TAG_TI_branch
 	.dwattr $C$DW$59, DW_AT_name("_gaussian_smooth")
 	.dwattr $C$DW$59, DW_AT_TI_call
            CALL    .S2X    A3                ; |126| 
-           MVK     .S2     0x3c,B4           ; |126| 
-           ADDKPC  .S2     $C$RL4,B3,2       ; |126| 
-           MVK     .S1     0x140,A6          ; |126| 
+           ADDKPC  .S2     $C$RL4,B3,3       ; |126| 
+
+           MVK     .L2     0xa,B4            ; |126| 
+||         MVK     .S1     0x140,A6          ; |126| 
+
 $C$RL4:    ; CALL OCCURS {_gaussian_smooth} {0}  ; |126| 
            MVKL    .S1     _BCACHE_wbAll,A3  ; |128| 
            MVKH    .S1     _BCACHE_wbAll,A3  ; |128| 

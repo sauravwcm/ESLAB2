@@ -70,7 +70,7 @@
 
 #define VERBOSE 0
 #define BOOSTBLURFACTOR 90.0
-#define PART 60
+#define PART 10
 extern FIXED * pool_notify_DataBuf;
 #include <arm_neon.h>
 #include <stdio.h>

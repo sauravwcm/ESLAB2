@@ -23,15 +23,21 @@
 
 #define VERBOSE 0
 
-#define PART 60     // SHOULD NOT BE GREATER THAN 60 (DSP MEMORY CONSTRAINTS).
+#define PART 150     // 7 <= PART <= 180
+#define MAX_ROWS 90   // MAXIMUM CHUNK OF MEMEORY THAT CAN BE ALLOCATED IN ONE GO.
+
 
 // Fixed point Arithmetic
 #define FIXEDPT_WBITS   16
 #include "fixedptc.h"
 #define FIXED fixedpt
 
-short int * gaussian_smooth(unsigned char *image, int rows, int cols);
+FIXED * buf;
+int length, cols;
 
+
+void gaussian_smooth(FIXED *image, int rows, int cols);
+void display_on_gpp(int id);
 
 extern Uint16 MPCSXFER_BufferSize ;
 
@@ -114,46 +120,53 @@ Int Task_create (Task_TransferInfo ** infoPtr)
     return status ;
 }
 
-unsigned char * buf;
-int length;
 
+/*
 void canny_dsp()
 { 
   unsigned int i=0;
   float sigma=2.5;
-  unsigned char * image;
-  short int *smoothedim_dsp;
-  long long start;
+  FIXED * image;
+  FIXED *smoothedim_dsp;
 
   image = buf;
   smoothedim_dsp = gaussian_smooth(image, PART, 320);
 
   for (i = 0; i < (PART*320); i++)
   {
-    buf[2*i]= (0x00ff) & smoothedim_dsp[i];
-    buf[2*i +1]= (0x00ff) & (smoothedim_dsp[i] >>8);
+      buf[i] = smoothedim_dsp[i];
   }
+  free(smoothedim_dsp);
+}
+*/
+
+
+void display_on_gpp(int id)
+{
+  NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)id);
 }
 
-Int Task_execute (Task_TransferInfo * info)
-{
-    unsigned int i;
 
-   
+Int Task_execute (Task_TransferInfo * info)
+{ 
     //wait for semaphore
 	SEM_pend (&(info->notifySemObj), SYS_FOREVER);
 
 	//invalidate cache
-    BCACHE_inv ((Ptr)buf, length, TRUE) ;
-    canny_dsp();
-    BCACHE_wbAll();
+  BCACHE_inv ((Ptr)buf, length, TRUE) ;
 
-	//call the functionality to be performed by dsp
+  gaussian_smooth(buf, MAX_ROWS, cols);
+  gaussian_smooth((buf + (MAX_ROWS*cols)), (PART - MAX_ROWS), cols);
+
+  display_on_gpp(buf[24]);
+  display_on_gpp(buf[25]);
+  BCACHE_wbAll();
+  //BCACHE_wb((Ptr)smoothedim, PART*cols, TRUE);
    
 	//notify that we are done
-    NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
+  NOTIFY_notify(ID_GPP,MPCSXFER_IPS_ID,MPCSXFER_IPS_EVENTNO,(Uint32)0);
 
-	  return SYS_OK;
+	return SYS_OK;
 }
 
 Int Task_delete (Task_TransferInfo * info)
@@ -188,10 +201,13 @@ static Void Task_notify (Uint32 eventNo, Ptr arg, Ptr info)
 
     count++;
     if (count==1) {
-        buf =(unsigned char *)info ;
+        buf =(FIXED *)info ;
     }
     if (count==2) {
         length = (int)info;
+    }
+    if (count==3) {
+        cols = (int)info;
     }
 
     SEM_post(&(mpcsInfo->notifySemObj));

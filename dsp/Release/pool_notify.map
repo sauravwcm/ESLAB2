@@ -1,7 +1,7 @@
 ******************************************************************************
                TMS320C6x Linker Unix v6.1.17                   
 ******************************************************************************
->> Linked Thu Jun  4 23:55:57 2015
+>> Linked Fri Jun  5 13:48:10 2015
 
 OUTPUT FILE NAME:   <Release/pool_notify.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 87e2f7c0
@@ -1267,8 +1267,8 @@ ffffffff   _RESET_VECTOR
 87e2bca0   _TSK_setup
 87e2c8e4   _TSK_startup
 87e2fc54   _TSK_timerSem
-87e26d84   _Task_create
-87e26d24   _Task_delete
+87e26d8c   _Task_create
+87e26d28   _Task_delete
 87e26c78   _Task_execute
 87e2d6a0   _UTL_doAbort
 87e2d780   _UTL_doError
@@ -1990,8 +1990,8 @@ address    name
 87e26bb4   _MPCS_exit
 87e26c20   _notify_gpp
 87e26c78   _Task_execute
-87e26d24   _Task_delete
-87e26d84   _Task_create
+87e26d28   _Task_delete
+87e26d8c   _Task_create
 87e26f00   __divull
 87e27160   __addd
 87e273a0   __frcaddd
